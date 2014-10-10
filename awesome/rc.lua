@@ -45,7 +45,7 @@ end
 run_once("/usr/bin/xscreensaver -no-splash &")
 run_once("xss-lock -- xscreensaver-command -lock &")
 run_once("mpd &")
-run_once("dropboxd")
+run_once("dropboxd &")
 -- }}}
 
 -- {{{ Variable definitions

@@ -77,3 +77,5 @@ bindkey "\e[A" up-line-or-beginning-search
 bindkey "\e[B" down-line-or-beginning-search
 
 function say { mplayer -really-quiet "http://translate.google.com/translate_tts?tl=en&q=$1"; }
+
+ping() { grc --colour=auto /usr/bin/ping "$@" }

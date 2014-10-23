@@ -45,7 +45,7 @@ COMPLETION_WAITING_DOTS="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git archlinux catimg common-aliases dircycle encode64 git-extras nyan systemd web-search wd)
+plugins=(alias-tips archlinux catimg common-aliases dircycle encode64 git git-extras nyan sudo systemd web-search wd zsh-256color zsh-dwim zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 

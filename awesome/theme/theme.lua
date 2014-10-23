@@ -1,38 +1,43 @@
+-- {{{ Main
 theme                               = {}
-
 theme.confdir                       = os.getenv("HOME") .. "/.config/awesome/theme/"
 theme.wallpaper                     = theme.confdir .. "/wall.png"
+-- }}}
 
+
+-- {{{ Fonts
 theme.font                          = "Tamsyn 10.5"
-theme.taglist_font					= "Entypo Social 21"
-theme.menu_bg_normal                = "#000000"
-theme.menu_bg_focus                 = "#000000"
-theme.bg_normal                     = "#242424"
-theme.bg_focus                      = "#202020"
-theme.bg_urgent                     = "#000000"
+theme.taglist_font                  = "Entypo Social 21"
+-- }}}
+
+
+-- {{{ Colors
 theme.fg_normal                     = "#FFFFFF"
 theme.fg_focus                      = "#0099CC"
 theme.fg_urgent                     = "#af1d18"
-theme.fg_minimize                   = "#ffffff"
-theme.fg_black                      = "#424242"
-theme.fg_red                        = "#ce5666"
-theme.fg_green                      = "#3dd37c"
-theme.fg_yellow                     = "#f1c40f"
-theme.fg_blue                       = "#3498db"
-theme.fg_magenta                    = "#9b59b6"
-theme.fg_cyan                       = "#1abc9c"
-theme.fg_white                      = "#bdc3c7"
-theme.fg_blu                        = "#2980b9"
+
+theme.bg_normal                     = "#242424"
+theme.bg_focus                      = "#1A1A1A"
+theme.bg_urgent                     = "#000000"
+
+--theme.fg_minimize                   = "#ffffff"
+--theme.fg_black                      = "#424242"
+--theme.fg_red                        = "#ce5666"
+--theme.fg_green                      = "#3dd37c"
+--theme.fg_yellow                     = "#f1c40f"
+--theme.fg_blue                       = "#3498db"
+--theme.fg_magenta                    = "#9b59b6"
+--theme.fg_cyan                       = "#1abc9c"
+--theme.fg_white                      = "#bdc3c7"
+--theme.fg_blu                        = "#2980b9"
+-- }}}
+
+-- {{{ Borders
 theme.border_width                  = "1"
 theme.border_normal                 = "#1c2022"
 theme.border_focus                  = "#606060"
 theme.border_marked                 = "#3ca4d8"
-theme.menu_width                    = "110"
-theme.menu_border_width             = "0"
-theme.menu_fg_normal                = "#aaaaaa"
-theme.menu_fg_focus                 = "#ff8c00"
-theme.menu_bg_normal                = "#050505dd"
-theme.menu_bg_focus                 = "#050505dd"
+-- }}}
 
 theme.menu_submenu_icon             = theme.confdir .. "/icons/submenu.png"
 theme.widget_temp                   = theme.confdir .. "/icons/temp.png"

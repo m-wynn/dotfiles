@@ -45,3 +45,5 @@ URxvt.iso14755:	false
 URxvt.iso14755_52:	false
 URxvt.keysym.C-C:	perl:clipboard:copy
 URxvt.keysym.C-V:	perl:clipboard:paste
+
+URxvt.urgentOnBell: True

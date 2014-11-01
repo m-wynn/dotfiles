@@ -43,7 +43,7 @@ function run_once(cmd)
 end
 
 run_once("/usr/bin/xscreensaver -no-splash &")
-run_once("xss-lock -- xscreensaver-command -lock &")
+run_once("xrdb ~/.Xresources &")
 run_once("mpd &")
 run_once("dropboxd &")
 -- }}}
@@ -58,7 +58,7 @@ beautiful.init(os.getenv("HOME") .. "/.config/awesome/theme/theme.lua")
 -- common
 modkey     = "Mod4"
 altkey     = "Mod1"
-terminal   = "roxterm" or "gnome-terminal" or "xterm"
+terminal   = "urxvt-tabbed" or "gnome-terminal" or "xterm"
 editor     = os.getenv("EDITOR") or "nano" or "vim"
 editor_cmd = terminal .. " -e " .. editor
 

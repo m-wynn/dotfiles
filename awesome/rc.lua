@@ -8,7 +8,6 @@ local beautiful = require("beautiful")
 local naughty   = require("naughty")
 local lain      = require("lain")
 local vicious   = require("vicious")
-local revelation= require("revelation")
 -- }}}
 
 -- {{{ Error handling
@@ -58,7 +57,7 @@ beautiful.init(os.getenv("HOME") .. "/.config/awesome/theme/theme.lua")
 -- common
 modkey     = "Mod4"
 altkey     = "Mod1"
-terminal   = "urxvt-tabbed" or "gnome-terminal" or "xterm"
+terminal   = "urxvt" or "gnome-terminal" or "xterm"
 editor     = os.getenv("EDITOR") or "nano" or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -98,7 +97,7 @@ end
 -- }}}
 
 -- {{{ Freedesktop Menu
-require("freedesktop/freedesktop")
+--require("freedesktop/freedesktop")
 -- }}}
 
 -- {{{ Wibox
@@ -357,7 +356,6 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "Left",   awful.tag.viewprev       ),
     awful.key({ modkey }, "Right",  awful.tag.viewnext       ),
     awful.key({ modkey }, "Escape", awful.tag.history.restore),
-    awful.key({modkey}, "e", revelation),
     -- Default client focus
     awful.key({ altkey }, "k",
         function ()
@@ -657,6 +655,7 @@ function scandir(directory, filter)
 end
 
 -- }}}
+
 
 -- configuration - edit to your liking
 wp_index = 1

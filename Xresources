@@ -33,7 +33,7 @@ URxvt*scrollTtyOutput:	false
 URxvt*scrollWithBuffer:	true
 URxvt*scrollTtyKeypress:	true
 URxvt.perl-lib:	/usr/lib/urxvt/perl/
-URxvt.perl-ext-common:	default,matcher,clipboard,tabbedex
+URxvt.perl-ext-common:	default,matcher,clipboard
 URxvt.url-launcher:	/usr/bin/firefox-nightly
 URxvt.matcher.button:	1
 URxvt.colorUL:	#4682B4
@@ -46,13 +46,13 @@ URxvt.iso14755_52:	false
 URxvt.keysym.C-C:	perl:clipboard:copy
 URxvt.keysym.C-V:	perl:clipboard:paste
 
-URxvt.tabbed.new-button: true
-URXvt.tabbed.reopen-on-close: yes
-URxvt.tabbed.autohide: true
+!URxvt.tabbed.new-button: true
+!URXvt.tabbed.reopen-on-close: yes
+!URxvt.tabbed.autohide: true
 
-URxvt.keysym.Control-t: perl:tabbedex:new_tab
-URxvt.keysym.Control-Tab: perl:tabbedex:next_tab
-URxvt.keysym.Control-Shift-Tab: perl:tabbedex:prev_tab
+!URxvt.keysym.Control-t: perl:tabbedex:new_tab
+!URxvt.keysym.Control-Tab: perl:tabbedex:next_tab
+!URxvt.keysym.Control-Shift-Tab: perl:tabbedex:prev_tab
 
 URxvt.urgentOnBell: true
 URxvt.visualBell:   true

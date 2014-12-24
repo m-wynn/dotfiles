@@ -1,9 +1,3 @@
-# change prefix to Ctrl-a (like in gnu-screen)
-unbind C-b
-set-option -g prefix C-a
-bind-key C-a send-prefix
-
-
 # shell
 set -g default-command /bin/zsh
 set -g default-shell /bin/zsh

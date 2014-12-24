@@ -39,8 +39,8 @@ bind Right next-window
 bind Left previous-window
 bind t new-window
 bind Up command-prompt "rename-window %%"
-bind-key Left swap-window -t -1
-bind-key Right swap-window -t +1
+bind-key C-Left swap-window -t -1
+bind-key C-Right swap-window -t +1
 
 # with mouse (click on pretty little boxes)
 set -g mouse-select-window on

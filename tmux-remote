@@ -34,7 +34,13 @@ set -g history-limit 10000
 set-option -ga terminal-override ',rxvt-uni*:XT:Ms=\E]52;%p1%s;%p2%s\007'
 set-window-option -g mode-mouse on
 
-
+# super easy tab switching (with prefix)
+bind Right next-window
+bind Left previous-window
+bind t new-window
+bind Up command-prompt "rename-window %%"
+bind-key Left swap-window -t -1
+bind-key Right swap-window -t +1
 
 # with mouse (click on pretty little boxes)
 set -g mouse-select-window on
@@ -113,7 +119,7 @@ bind -t vi-copy 'Bspace' halfpage-up
 
 # Info on right (or maybe left)
 set -g status-right-length 60
-set -g status-right ' #[fg=brightyellow]#(sensors -f| grep Physical | cut -d+ -f2 | cut -d. -f1)° #[fg=colour7]| #[fg=brightyellow]#(acpi -b | cut -d" " -f4 | cut -d"%" -f1)% #[fg=colour7]| #[fg=brightred]#(cut -d " " -f 1-3 /proc/loadavg)'
+set -g status-right ' #[fg=brightred]#(cut -d " " -f 1-3 /proc/loadavg)'
 
 
 # loud or quiet?

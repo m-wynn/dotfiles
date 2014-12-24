@@ -34,6 +34,8 @@ bind -n S-Right next-window
 bind -n S-Left previous-window
 bind -n C-t new-window
 bind -n S-Up command-prompt "rename-window %%"
+bind-key -n C-Left swap-window -t -1
+bind-key -n C-Right swap-window -t +1
 
 # with mouse (click on pretty little boxes)
 set -g mouse-select-window on
@@ -44,10 +46,6 @@ bind h split-window -h
 unbind '"'
 bind v split-window -v
 
-
-# windows ^W w 
-unbind ^W
-bind -n ^W list-windows
 
 # colon :
 bind : command-prompt

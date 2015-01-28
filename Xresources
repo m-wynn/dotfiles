@@ -8,24 +8,44 @@ URxvt.transparent:	true
 URxvt.shading:	10
 URxvt.blurRadius:	10
 URxvt.fading:	10
-urxvt*foreground:	#ffffff
-urxvt*background:	#292429
-urxvt*color0:	#000000
-urxvt*color1:	#C10000
-urxvt*color2:	#00C100
-urxvt*color3:	#C1C100
-urxvt*color4:	#0000C1
-urxvt*color5:	#C100C1
-urxvt*color6:	#00C1C1
-urxvt*color7:	#C1C1C1
-urxvt*color8:	#646464
-urxvt*color9:	#f05050
-urxvt*color10:	#49DC49
-urxvt*color11:	#B8B81E
-urxvt*color12:	#5555FF
-urxvt*color13:	#E64CE6
-urxvt*color14:	#00C8C8
-urxvt*color15:	#a020f0
+! special
+*.foreground:   #ffffff
+*.background:   #151515
+*.cursorColor:  #ffffff
+
+! black
+*.color0:       #151515
+*.color8:       #505050
+
+! red
+*.color1:       #e53935
+*.color9:       #ef5350
+
+! green
+*.color2:       #43a047
+*.color10:      #66bb6a
+
+! yellow
+*.color3:       #fdd835
+*.color11:      #ffee58
+
+! blue
+*.color4:       #1976d2
+*.color12:      #42a5f5
+
+! magenta
+*.color5:       #8e24aa
+*.color13:      #ab47bc
+
+! cyan
+*.color6:       #00acc1
+*.color14:      #26c6da
+
+! white
+*.color7:       #eeeeee
+*.color15:      #fafafa
+
+
 urxvt*transparent:	true
 urxvt*font:	xft:Liberation\ Mono:size=11
 URxvt.scrollstyle:	rxvt
@@ -35,8 +55,8 @@ URxvt*scrollTtyKeypress:	true
 URxvt.perl-lib:	/usr/lib/urxvt/perl/
 URxvt.perl-ext-common:	default,matcher,clipboard
 URxvt.url-launcher:	/usr/bin/firefox-nightly
-URxvt.matcher.button:	1
-URxvt.colorUL:	#4682B4
+URxvt.matcher.button: 1
+URxvt.colorUL:	#42a5f5
 URxvt.keysym.C-Up:	perl:font-size:increase
 URxvt.keysym.C-Down:	perl:font-size:decrease
 URxvt.keysym.C-S-Up:	perl:font-size:incglobal

@@ -41,7 +41,7 @@ function run_once(cmd)
   awful.util.spawn_with_shell("pgrep -u $USER -x " .. findme .. " > /dev/null || (" .. cmd .. ")")
 end
 
-run_once("/usr/bin/xscreensaver -no-splash &")
+run_once('~/bin/lockScreen.sh')
 run_once("xrdb ~/.Xresources &")
 run_once("mpd &")
 run_once("dropboxd &")
@@ -106,7 +106,7 @@ markup      = lain.util.markup
 
 -- Textclock
 clockicon = wibox.widget.imagebox(beautiful.widget_clock)
-mytextclock = awful.widget.textclock(markup("#3498db", "%a, %m.%d. ") .. markup("#de5e1e", " %H:%M "))
+mytextclock = awful.widget.textclock(markup("#1976d2", "%a, %m.%d. ") .. markup("#e53935", " %H:%M "))
 
 -- Calendar
 lain.widgets.calendar:attach(mytextclock, { font_size = 9 })
@@ -211,7 +211,7 @@ volumewidget = lain.widgets.alsa({
         else
             volume_now.level = volume_now.level .. "% "
         end
-        widget:set_markup(markup("#3b9bdc", volume_now.level))
+        widget:set_markup(markup("#1976d2", volume_now.level))
     end
 })
 
@@ -223,8 +223,8 @@ netupicon = wibox.widget.imagebox(beautiful.widget_netup)
 --netupicon.align = "middle"
 netupinfo = lain.widgets.net({
     settings = function()
-        widget:set_markup(markup("#e74c3c", net_now.sent .. " "))
-        netdowninfo:set_markup(markup("#2ecc71", net_now.received .. " "))
+        widget:set_markup(markup("#e53935", net_now.sent .. " "))
+        netdowninfo:set_markup(markup("#43a047", net_now.received .. " "))
     end
 })
 
@@ -368,26 +368,6 @@ globalkeys = awful.util.table.join(
             if client.focus then client.focus:raise() end
         end),
 
-    awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
-    awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),
-    awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1)      end),
-    awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1)      end),
-    awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1)         end),
-    awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1)         end),
-    awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end),
-    awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
-    awful.key({ modkey, "Shift"   }, "j",     function () awful.client.swap.byidx(  1)    end),
-    awful.key({ modkey, "Shift"   }, "k",     function () awful.client.swap.byidx( -1)    end),
-    awful.key({ modkey, "Control" }, "j",     function () awful.screen.focus_relative( 1) end),
-    awful.key({ modkey, "Control" }, "k",     function () awful.screen.focus_relative(-1) end),
-    awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
-    awful.key({ modkey,           }, "Tab",
-        function ()
-            awful.client.focus.history.previous()
-            if client.focus then
-                client.focus:raise()
-            end
-        end),
 
     -- Show Menu
     awful.key({ modkey }, "w",
@@ -430,7 +410,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "q",      awesome.quit),
 
     -- Widgets popups
-    awful.key({ altkey,           }, "c",      function () lain.widgets.calendar:show(7) end),
+    awful.key({ modkey,           }, "c",      function () lain.widgets.calendar:show(7) end),
 
     -- ALSA volume control
     awful.key({ }, "XF86AudioRaiseVolume",
@@ -458,7 +438,8 @@ globalkeys = awful.util.table.join(
 
     awful.key({ "Control", altkey }, "l",
         function ()
-            awful.util.spawn("xscreensaver-command --lock", false)
+            awful.util.spawn("sync")
+             awful.util.spawn("xautolock -locknow")
         end),
 
     -- Copy to clipboard
@@ -545,26 +526,21 @@ awful.rules.rules = {
                      keys = clientkeys,
                      buttons = clientbuttons,
                      size_hints_honor = false } },
-    { rule = { class = "URxvt" },
-          properties = { opacity = 0.99 } },
 
     { rule = { class = "MPlayer" },
           properties = { floating = true } },
 
-    { rule = { class = "Terminator" },
-          properties = { floating = true } },
+    { rule = { class = "GMPC" },
+          properties = { tag = tags[1][4], switchtotag = true } },
 
-    { rule = { class = "UX" },
+    { rule = { class = "Nightly" },
           properties = { tag = tags[1][1], switchtotag = true } },
 
-    { rule = { class = "Thunar" },
-          properties = { tag = tags[1][4], switchtotag = true } },
+    { rule = { class = "Nemo" },
+          properties = { tag = tags[1][3], switchtotag = true } },
 
     { rule = { class = "Subl3" },
           properties = { tag = tags[1][3], switchtotag = true } },
-
-    { rule = { class = "Engrampa" },
-          properties = { tag = tags[1][4], switchtotag = true } },
 
     { rule = { instance = "plugin-container" },
           properties = { tag = tags[1][1], switchtotag = true, floating = true } },

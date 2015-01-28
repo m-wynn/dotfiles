@@ -13,8 +13,8 @@ theme.taglist_font                  = "Entypo Social 21"
 
 -- {{{ Colors
 theme.fg_normal                     = "#FFFFFF"
-theme.fg_focus                      = "#0099CC"
-theme.fg_urgent                     = "#af1d18"
+theme.fg_focus                      = "#1976d2"
+theme.fg_urgent                     = "#e53935"
 
 theme.bg_normal                     = "#242424"
 theme.bg_focus                      = "#1A1A1A"
@@ -36,7 +36,7 @@ theme.bg_urgent                     = "#000000"
 theme.border_width                  = "1"
 theme.border_normal                 = "#1c2022"
 theme.border_focus                  = "#606060"
-theme.border_marked                 = "#3ca4d8"
+theme.border_marked                 = "#42a5f5"
 -- }}}
 
 theme.menu_submenu_icon             = theme.confdir .. "/icons/submenu.png"

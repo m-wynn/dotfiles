@@ -1,5 +1,9 @@
 source /usr/share/zsh/scripts/antigen/antigen.zsh
 
+export HISTSIZE=1000000000
+export SAVEHIST=$HISTSIZE
+setopt EXTENDED_HISTORY
+
 # Load the oh-my-zsh's library.
 antigen use oh-my-zsh
 

@@ -1,3 +1,7 @@
+
+#Only remote stuff
+if-shell '[ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]' 'unbind C-b; set-option -g prefix C-a; bind-key C-a send-prefix'
+
 # shell
 set -g default-command /bin/zsh
 set -g default-shell /bin/zsh
@@ -28,14 +32,14 @@ set -g history-limit 10000
 set-option -ga terminal-override ',rxvt-uni*:XT:Ms=\E]52;%p1%s;%p2%s\007'
 set-window-option -g mode-mouse on
 
+# super easy tab switching using Shift-[direction]
+if-shell '[ -z "$SSH_CLIENT" ] && [ -z "$SSH_TTY" ]' 'bind -n S-Right next-window; bind -n S-Left previous-window; bind -n C-t new-window; bind -n S-Up command-prompt "rename-window %%"; bind-key -n C-Left swap-window -t -1; bind-key -n C-Left swap-window -t -1; bind-key -n C-Right swap-window -t +1'
 
-# super easy tab switching
-bind -n S-Right next-window
-bind -n S-Left previous-window
-bind -n C-t new-window
-bind -n S-Up command-prompt "rename-window %%"
-bind-key -n C-Left swap-window -t -1
-bind-key -n C-Right swap-window -t +1
+# super easy tab switching using Alt-[direction]
+if-shell '[ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] && [ "$HOSTNAME" != "carbon" ]' 'bind -n M-Right next-window; bind -n M-Left previous-window; bind -n M-t new-window; bind -n M-Up command-prompt "rename-window %%"; bind-key -n C-M-Left swap-window -t -1; bind-key -n C-M-Right swap-window -t +1'
+
+#Not so easy tab switching with Prefix-[direction]
+if-shell '[ "$HOSTNAME" = "carbon" ]' 'bind Right next-window; bind Left previous-window; bind t new-window; bind Up command-prompt "rename-window %%"; bind-key -n C-Left swap-window -t -1; bind-key C-Right swap-window -t +1'
 
 # with mouse (click on pretty little boxes)
 set -g mouse-select-window on
@@ -70,6 +74,7 @@ set -g status-utf8 on
 set -g status-justify left
 set -g status-bg default
 set -g status-fg colour12
+set -g status-position top 
 
 # refresh 'status-left' and 'status-right' more often
 set -g status-interval 2
@@ -96,8 +101,6 @@ setw -g window-status-attr reverse
 # Use Xterm keys (mainly for C-left/right)
 set -gw xterm-keys on
 
-set -g status-position top 
-set -g status-justify left
 set -g status-left-length 0
 set -g status-left ''
 
@@ -112,14 +115,15 @@ bind -t vi-copy 'y' copy-selection
 bind -t vi-copy 'Space' halfpage-down
 bind -t vi-copy 'Bspace' halfpage-up
 
-# Info on right (or maybe left)
+# Info on right
 set -g status-right-length 60
-set -g status-right ' #[fg=brightyellow]#(sensors -f| grep Physical | cut -d+ -f2 | cut -d. -f1)° #[fg=colour7]| #[fg=brightyellow]#(acpi -b | cut -d" " -f4 | cut -d"%" -f1)% #[fg=colour7]| #[fg=brightred]#(cut -d " " -f 1-3 /proc/loadavg)'
+set -g status-right ' #[fg=brightyellow]#(sensors -f| grep Physical | cut -d+ -f2 | cut -d. -f1)° #[fg=colour7]| #[fg=brightred]#(cut -d " " -f 1-3 /proc/loadavg)'
 
+if-shell '[ "$HOSTNAME" = "carbon" ] ' 'set -g status-right ""; set -g status-right-length 0; set -g status off'
 
 # loud or quiet?
 set-option -g visual-activity off
-set-option -g visual-bell on
+set-option -g visual-bell off
 set-option -g visual-content off
 set-option -g visual-silence off
 set-window-option -g monitor-activity on

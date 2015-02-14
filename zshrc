@@ -6,6 +6,11 @@ export HISTSIZE=1000000000
 export SAVEHIST=$HISTSIZE
 setopt EXTENDED_HISTORY
 
+export PATH=$PATH:~/bin
+export NO_AT_BRIDGE=1
+export DISABLE_AUTO_TITLE=true
+export EDITOR=vim
+
 # Load the oh-my-zsh's library.
 antigen use oh-my-zsh
 

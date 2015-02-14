@@ -47,9 +47,8 @@ URxvt.fading:	10
 
 
 urxvt*transparent:	true
-urxvt*font:	xft:Liberation\ Mono:size=11
-URxvt.scrollstyle:	rxvt
-URxvt*scrollTtyOutput:	false
+urxvt*font:	xft:Liberation\ Mono:size=10
+URxvt*scrollBar: false
 URxvt*scrollWithBuffer:	true
 URxvt*scrollTtyKeypress:	true
 URxvt.perl-lib:	/usr/lib/urxvt/perl/

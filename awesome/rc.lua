@@ -41,7 +41,7 @@ function run_once(cmd)
   awful.util.spawn_with_shell("pgrep -u $USER -x " .. findme .. " > /dev/null || (" .. cmd .. ")")
 end
 
-run_once('~/bin/lockScreen.sh')
+run_once("~/bin/lockScreen.sh")
 run_once("xrdb ~/.Xresources &")
 run_once("mpd &")
 run_once("dropboxd &")
@@ -60,6 +60,18 @@ altkey     = "Mod1"
 terminal   = "urxvt" or "gnome-terminal" or "xterm"
 editor     = os.getenv("EDITOR") or "nano" or "vim"
 editor_cmd = terminal .. " -e " .. editor
+
+myawesomemenu = {
+   { "manual", terminal .. " -e man awesome" },
+   { "edit config", terminal .. " -e nano ~/.config/awesome/rc.lua" },
+   { "restart", awesome.restart },
+   { "quit", awesome.quit }
+}
+
+mymainmenu = awful.menu.new({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
+                                        { "open terminal", terminal }
+                                      }
+                            })
 
 local layouts = {
     awful.layout.suit.tile,
@@ -394,8 +406,8 @@ globalkeys = awful.util.table.join(
                 client.focus:raise()
             end
         end),
-    awful.key({ altkey, "Shift"   }, "l",      function () awful.tag.incmwfact( 0.05)     end),
-    awful.key({ altkey, "Shift"   }, "h",      function () awful.tag.incmwfact(-0.05)     end),
+    awful.key({ modkey,   }, "l",      function () awful.tag.incmwfact( 0.05)     end),
+    awful.key({ modkey,   }, "h",      function () awful.tag.incmwfact(-0.05)     end),
     awful.key({ modkey, "Shift"   }, "l",      function () awful.tag.incnmaster(-1)       end),
     awful.key({ modkey, "Shift"   }, "h",      function () awful.tag.incnmaster( 1)       end),
     awful.key({ modkey, "Control" }, "l",      function () awful.tag.incncol(-1)          end),
@@ -433,9 +445,7 @@ globalkeys = awful.util.table.join(
     awful.key({ }, "XF86AudioPrev", function () awful.util.spawn("mpc prev") end),
     awful.key({ }, "XF86MonBrightnessDown", function () awful.util.spawn("xbacklight -dec 10") end),
     awful.key({ }, "XF86MonBrightnessUp", function () awful.util.spawn("xbacklight -inc 10") end),
-
-
-
+    awful.key({ modkey,     }, "Print", function () awful.util.spawn("upload -s") end),
     awful.key({ "Control", altkey }, "l",
         function ()
             awful.util.spawn("sync")
@@ -544,9 +554,6 @@ awful.rules.rules = {
 
     { rule = { instance = "plugin-container" },
           properties = { tag = tags[1][1], switchtotag = true, floating = true } },
-
-	  { rule = { class = "Gimp" },
-     	    properties = { tag = tags[1][6] } },
 
     { rule = { class = "Gimp", role = "gimp-image-window" },
           properties = { maximized_horizontal = true,

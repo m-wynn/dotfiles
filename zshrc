@@ -51,7 +51,7 @@ antigen theme bira
 # Tell antigen that you're done.
 antigen apply
 
-function say { mplayer -really-quiet "http://translate.google.com/translate_tts?tl=en&q=$1"; }
+#say() { mplayer -really-quiet "http://translate.google.com/translate_tts?tl=en&q=$1"; }
 
 ping() { grc --colour=auto /usr/bin/ping "$@" }
 

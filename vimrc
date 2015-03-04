@@ -1,5 +1,6 @@
 set nocompatible
 filetype plugin on
+filetype indent on
 syntax on
 
 call plug#begin('~/.vim/plugged')
@@ -12,6 +13,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-fugitive'
     Plug 'kien/ctrlp.vim'
     Plug 'vim-latex/vim-latex'
+    Plug 'ap/vim-css-color'
+    Plug de'longw/nginx.vim'
 call plug#end()
 
 
@@ -41,6 +44,24 @@ set showmatch
 " Autoindentation.
 set autoindent
 " Syntax always on, please.
+set backspace=eol,start,indent
+
+" Ignore case when searching
+set ignorecase
+
+" When searching try to be smart about cases 
+set smartcase
+
+" Highlight search results
+set hlsearch
+
+" Makes search act like search in modern browsers
+set incsearch
+
+set number
+set mouse=a
+" Allow saving of files as sudo when I forgot to start vim using sudo.
+cmap w!! w !sudo tee > /dev/null %
 
 colorscheme elflord
 

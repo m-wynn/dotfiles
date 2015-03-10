@@ -14,7 +14,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'kien/ctrlp.vim'
     Plug 'vim-latex/vim-latex'
     Plug 'ap/vim-css-color'
-    Plug de'longw/nginx.vim'
 call plug#end()
 
 

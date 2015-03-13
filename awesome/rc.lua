@@ -44,7 +44,7 @@ end
 run_once("~/bin/lockScreen.sh")
 run_once("xrdb ~/.Xresources &")
 run_once("mpd &")
-run_once("dropbox &")
+run_once("QT_STYLE_OVERRIDE=gtk ~/.dropbox-dist/dropboxd")
 -- }}}
 
 -- {{{ Variable definitions

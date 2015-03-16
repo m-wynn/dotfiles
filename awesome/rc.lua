@@ -555,6 +555,9 @@ awful.rules.rules = {
     { rule = { instance = "plugin-container" },
           properties = { tag = tags[1][1], switchtotag = true, floating = true } },
 
+     { rule = { instance = "TeamViewer.exe" },
+           properties = { floating = true } },
+
     { rule = { class = "Gimp", role = "gimp-image-window" },
           properties = { maximized_horizontal = true,
                          maximized_vertical = true } },

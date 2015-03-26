@@ -16,6 +16,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'ap/vim-css-color'
 call plug#end()
 
+"" tabs
+set tabstop=4 softtabstop=0 noexpandtab shiftwidth=4
 
 "" phpqa tools
 let g:phpqa_messdetector_ruleset = "~/.vim/rulesets.xml"
@@ -68,6 +70,8 @@ colorscheme elflord
 let g:Tex_DefaultTargetFormat = 'pdf'
 set grepprg=grep\ -nH\ $*
 let g:tex_flavor='latex'
+let g:Imap_UsePlaceHolders = 0
+let g:Imap_FreezeImap=1
 
 "" php.vim overrides
 function! PhpSyntaxOverride()

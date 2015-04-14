@@ -1,4 +1,4 @@
-setopt appendhistory extendedglob nomatch
+setopt inc_append_history extendedglob nomatch share_history
 
 source /usr/share/zsh/scripts/antigen/antigen.zsh
 
@@ -6,7 +6,7 @@ export HISTSIZE=1000000000
 export SAVEHIST=$HISTSIZE
 setopt EXTENDED_HISTORY
 
-export PATH=$PATH:~/bin
+export PATH=$PATH:~/bin:/root/.gem/ruby/2.2.0/bin
 export NO_AT_BRIDGE=1
 export DISABLE_AUTO_TITLE=true
 export EDITOR=vim

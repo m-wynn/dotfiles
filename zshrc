@@ -59,3 +59,6 @@ ping() { grc --colour=auto /usr/bin/ping "$@" }
 #Press Ctrl-Alt-Shift + direction to skip word by word
 bindkey "^[[1;4C" forward-word
 bindkey "^[[1;4D" backward-word
+
+alias less="less -R"
+alias grep="grep --color=always"

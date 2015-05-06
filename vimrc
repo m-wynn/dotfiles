@@ -42,24 +42,24 @@ set undofile
 
 " set show matching parenthesis
 set showmatch
+
 " Autoindentation.
 set autoindent
-" Syntax always on, please.
+" Allow backspacing over line breaks, start of insert action, and autoindentation
 set backspace=eol,start,indent
 
 " Ignore case when searching
 set ignorecase
-
 " When searching try to be smart about cases 
 set smartcase
-
 " Highlight search results
 set hlsearch
-
 " Makes search act like search in modern browsers
 set incsearch
 
+" Show line numbers
 set number
+
 set mouse=a
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %

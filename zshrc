@@ -49,11 +49,17 @@ case $(lsb_release -i | cut -d: -f2 | tr -d '\t') in
         ;;
 esac
 
-# Load the theme.
-antigen theme bira
+# Powerline theme settings
+POWERLINE_RIGHT_A="exit-status"
+POWERLINE_NO_BLANK_LINE="true"
+POWERLINE_DETECT_SSH="true"
 
+# Load the theme.
+antigen theme jeremyFreeAgent/oh-my-zsh-powerline-theme powerline
 # Tell antigen that you're done.
 antigen apply
+
+
 
 say() { mplayer -really-quiet "http://translate.google.com/translate_tts?tl=en&q=$1"; }
 

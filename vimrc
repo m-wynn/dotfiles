@@ -58,7 +58,6 @@ call plug#begin('~/.vim/plugged')
 	Plug 'ap/vim-css-color'						" Sets the background to your color. #ff0000 < that is white on red
 	Plug 'bling/vim-airline'					" Informative tabline/status bar for vim
 	Plug 'chase/vim-ansible-yaml'				" Syntax highlighting for ansible yaml files.  It knows if you're in an ansible folder.
-	Plug 'edkolev/tmuxline.vim'					" Generate tmux powerline things that match vim.
 	Plug 'ervandew/supertab'					" Make the tab key do tab completion.  Or any other key, for that matter.  Customizable
 	Plug 'joonty/vdebug', { 'for': 'php' }		" Interfaces with debuggers.  Needs some configuration soon
 	Plug 'joonty/vim-phpqa'						" PHP code checking stuff.	It's messdetector is frustrating, but other features prevent errors

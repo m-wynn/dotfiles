@@ -47,11 +47,11 @@ URxvt.fading:	10
 
 
 urxvt*transparent:	true
-urxvt*font:	xft:Liberation Mono:size=10, \
-	xft:WenQuanYi Bitmap Song:size=10, \
+urxvt*font:	xft:Liberation Mono for Powerline:pixelsize=12, \
+	xft:WenQuanYi Bitmap Song:pixelsize=12, \
 	xft:FreeSerif:style=Regular, \
 	xft:Unifont, \
-	xft:Noto Sans Kannada:style=Regular:pixelsize=14, \
+	xft:Noto Sans Kannada:style=Regular:pixelsize=12, \
 	xft:Symbola:pixelsize=9, \
 	-misc-fixed-medium-r-normal--18-120-100-100-c-90-iso10646-1
 URxvt*scrollBar: false

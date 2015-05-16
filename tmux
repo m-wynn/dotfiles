@@ -6,29 +6,22 @@ if-shell '[ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]' 'unbind C-b; set-option -g 
 set -g default-command /bin/zsh
 set -g default-shell /bin/zsh
 
-
 # start with window 1 (instead of 0)
 set -g base-index 1
-
 
 # start with pane 1
 set -g pane-base-index 1
 
-
 # screen mode
 set -g default-terminal "screen-256color"
-
 
 # source config file
 bind r source-file ~/.tmux.conf
 
-
 # history ( scrollback buffer )
 set -g history-limit 10000
 
-
 # allow terminal scrolling
-
 set-option -ga terminal-override ',rxvt-uni*:XT:Ms=\E]52;%p1%s;%p2%s\007'
 set-window-option -g mode-mouse on
 
@@ -56,8 +49,8 @@ bind : command-prompt
 
 # panes
 set -g mouse-select-pane on
-set -g pane-border-fg black
-set -g pane-active-border-fg brightred
+set -g pane-border-fg "colour238"
+set -g pane-active-border-fg "colour190"
 
 # resize panes with mouse (drag borders)
 set -g mouse-select-pane on
@@ -70,10 +63,11 @@ set-option -s escape-time 0
 set-option -g display-time 4000
 
 # status line
+set -g status on
 set -g status-utf8 on
-set -g status-justify left
-set -g status-bg default
-set -g status-fg colour12
+set -g status-justify "left"
+set -g status-bg "colour234"
+set -g status-fg "default"
 set -g status-position top 
 
 # refresh 'status-left' and 'status-right' more often
@@ -81,10 +75,10 @@ set -g status-interval 2
 
 
 # messaging
-set -g message-fg black
-set -g message-bg yellow
-set -g message-command-fg blue
-set -g message-command-bg black
+set -g message-fg "colour255"
+set -g message-bg "colour238"
+set -g message-command-fg "colour255"
+set -g message-command-bg "colour238"
 
 
 #window mode
@@ -93,16 +87,30 @@ setw -g mode-fg colour0
 
 
 # window status
-setw -g window-status-current-format "#[fg=red]#[bg=white] #W "
-setw -g window-status-format "#[bg=white]#[fg=blue] #W "
+setw -g window-status-current-format "#[fg=colour234,bg=red,nobold,nounderscore,noitalics]#[fg=white,bg=red] #I #[fg=white,bg=red] #W #[fg=red,bg=colour234,nobold,nounderscore,noitalics]"
+setw -g window-status-format "#[fg=colour85,bg=colour234] #I #[fg=colour85,bg=colour234] #W "
 setw -g window-status-current-attr dim
-setw -g window-status-attr reverse
+setw -g window-status-attr none				#reverse
+setw -g window-status-fg "colour85"
+setw -g window-status-bg "colour234"
+setw -g window-status-separator ""
+setw -g window-status-activity-attr "none"
+setw -g window-status-activity-fg "colour190"
+setw -g window-status-activity-bg "colour234"
+
+# Info on right
+set -g status-right-length "100"
+set -g status-right-attr "none"
+set -g status-attr "none"
+set -g status-right '#[fg=colour238,bg=colour234,nobold,nounderscore,noitalics]#[fg=colour255,bg=colour238] #(sensors -f| grep Physical | cut -d+ -f2 | cut -d. -f1)°  #(cut -d " " -f 1-3 /proc/loadavg) #[fg=colour190,bg=colour238,nobold,nounderscore,noitalics]#[fg=colour17,bg=colour190] #h '
+if-shell '[ "$HOSTNAME" = "carbon" ] ' 'set -g status-right ""; set -g status-right-length 0; set -g status off'
 
 # Use Xterm keys (mainly for C-left/right)
 set -gw xterm-keys on
 
-set -g status-left-length 0
-set -g status-left ''
+set -g status-left-length "100"
+set -g status-left "#[fg=colour17,bg=colour190] #S #[fg=colour190,bg=colour234,nobold,nounderscore,noitalics]"
+set -g status-left-attr "none"
 
 # vim like bindings
 bind V send-keys "0v\$"
@@ -115,19 +123,12 @@ bind -t vi-copy 'y' copy-selection
 bind -t vi-copy 'Space' halfpage-down
 bind -t vi-copy 'Bspace' halfpage-up
 
-# Info on right
-set -g status-right-length 60
-set -g status-right ' #[fg=brightyellow]#(sensors -f| grep Physical | cut -d+ -f2 | cut -d. -f1)° #[fg=colour7]| #[fg=brightred]#(cut -d " " -f 1-3 /proc/loadavg)'
-
-if-shell '[ "$HOSTNAME" = "carbon" ] ' 'set -g status-right ""; set -g status-right-length 0; set -g status off'
 
 # loud or quiet?
 set-option -g visual-activity off
 set-option -g visual-bell off
-set-option -g visual-content off
 set-option -g visual-silence off
 set-window-option -g monitor-activity on
-set-window-option -g monitor-content on
 
 # listen to alerts from all windows
 set -g bell-action any
@@ -140,3 +141,4 @@ bind , previous-layout
 
 # don't resize unless the other terminal is actually watching as well
 setw -g aggressive-resize on
+

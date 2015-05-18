@@ -414,10 +414,6 @@ globalkeys = awful.util.table.join(
 	awful.key({ modkey }, "Right",	awful.tag.viewnext		 ),
 	awful.key({ modkey }, "Escape", awful.tag.history.restore),
 
-	-- Non-empty tag browsing
-	awful.key({ altkey }, "Left", function () lain.util.tag_view_nonempty(-1) end),
-	awful.key({ altkey }, "Right", function () lain.util.tag_view_nonempty(1) end),
-
 	-- Default client focus
 	awful.key({ altkey }, "k",
 		function ()
@@ -441,12 +437,12 @@ globalkeys = awful.util.table.join(
 			awful.client.focus.bydirection("up")
 			if client.focus then client.focus:raise() end
 		end),
-	awful.key({ modkey }, "h",
+	awful.key({ altkey, "Shift" }, "h",
 		function()
 			awful.client.focus.bydirection("left")
 			if client.focus then client.focus:raise() end
 		end),
-	awful.key({ modkey }, "l",
+	awful.key({ altkey, "Shift" }, "l",
 		function()
 			awful.client.focus.bydirection("right")
 			if client.focus then client.focus:raise() end
@@ -476,8 +472,8 @@ globalkeys = awful.util.table.join(
 				client.focus:raise()
 			end
 		end),
-	awful.key({ altkey, "Shift"   }, "l",	   function () awful.tag.incmwfact( 0.05)	  end),
-	awful.key({ altkey, "Shift"   }, "h",	   function () awful.tag.incmwfact(-0.05)	  end),
+	awful.key({ modkey            }, "l",	   function () awful.tag.incmwfact( 0.05)	  end),
+	awful.key({ modkey            }, "h",	   function () awful.tag.incmwfact(-0.05)	  end),
 	awful.key({ modkey, "Shift"   }, "l",	   function () awful.tag.incnmaster(-1)		  end),
 	awful.key({ modkey, "Shift"   }, "h",	   function () awful.tag.incnmaster( 1)		  end),
 	awful.key({ modkey, "Control" }, "l",	   function () awful.tag.incncol(-1)		  end),

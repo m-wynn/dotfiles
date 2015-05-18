@@ -15,6 +15,7 @@ local beautiful = require("beautiful")
 local naughty   = require("naughty")
 local drop      = require("scratch")
 local lain      = require("lain")
+local vicious	= require("vicious")
 -- }}}
 
 -- {{{ Error handling
@@ -50,6 +51,11 @@ end
 
 run_once("urxvtd")
 run_once("unclutter -root")
+run_once("~/bin/lockScreen.sh")
+run_once("xrdb ~/.Xresources &")
+run_once("mpd &")
+run_once("QT_STYLE_OVERRIDE=gtk ~/.dropbox-dist/dropboxd")
+
 -- }}}
 
 -- {{{ Variable definitions
@@ -63,31 +69,38 @@ beautiful.init(os.getenv("HOME") .. "/.config/awesome/theme/theme.lua")
 modkey     = "Mod4"
 altkey     = "Mod1"
 terminal   = "urxvtc" or "xterm"
-editor     = os.getenv("EDITOR") or "nano" or "vi"
+editor     = os.getenv("EDITOR") or "vim" or "vi"
 editor_cmd = terminal .. " -e " .. editor
 
 -- user defined
-browser    = "dwb"
-browser2   = "iron"
+browser    = "firefox-nightly"
+browser2   = "chromium"
 gui_editor = "gvim"
 graphics   = "gimp"
-mail       = terminal .. " -e mutt "
 iptraf     = terminal .. " -g 180x54-20+34 -e sudo iptraf-ng -i all "
 musicplr   = terminal .. " -g 130x34-320+16 -e ncmpcpp "
 
 local layouts = {
-    awful.layout.suit.floating,
     awful.layout.suit.tile,
+    awful.layout.suit.floating,
+    awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
+    awful.layout.suit.tile.top,
     awful.layout.suit.fair,
     awful.layout.suit.fair.horizontal,
+    awful.layout.suit.spiral,
+    awful.layout.suit.spiral.dwindle,
+    awful.layout.suit.max,
+    awful.layout.suit.max.fullscreen,
+    awful.layout.suit.magnifier
 }
+
 -- }}}
 
 -- {{{ Tags
 tags = {
-   names = { "1", "2", "3", "4", "5"},
-   layout = { layouts[1], layouts[2], layouts[3], layouts[1], layouts[4] }
+   names = { "💻", "", "📁", "🎵", "🎬", "", "" },
+   layout = { layouts[1], layouts[1], layouts[1], layouts[1], layouts[1], layouts[1], layouts[1] }
 }
 
 for s = 1, screen.count() do
@@ -163,20 +176,32 @@ mpdwidget = lain.widgets.mpd({
 })
 
 -- MEM
+
+-- Initialize widget
+memwidget = awful.widget.progressbar()
+-- Progressbar properties
+memwidget:set_width(8)
+memwidget:set_height(10)
+memwidget:set_vertical(true)
+memwidget:set_background_color("#494B4F")
+memwidget:set_border_color(nil)
+memwidget:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = { {0, "#5E5Fe6"}, {0.5, "#48b1ff"}, 
+                    {1, "#5F56c6"}}})
+-- Register widget
+vicious.register(memwidget, vicious.widgets.mem, "$1", 13)
 memicon = wibox.widget.imagebox(beautiful.widget_mem)
-memwidget = lain.widgets.mem({
-    settings = function()
-        widget:set_text(" " .. mem_now.used .. "MB ")
-    end
-})
 
 -- CPU
 cpuicon = wibox.widget.imagebox(beautiful.widget_cpu)
-cpuwidget = lain.widgets.cpu({
-    settings = function()
-        widget:set_text(" " .. cpu_now.usage .. "% ")
-    end
-})
+-- Initialize widget
+cpuwidget = awful.widget.graph()
+-- Graph properties
+cpuwidget:set_width(50)
+cpuwidget:set_background_color("#494B4F")
+cpuwidget:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = { {0, "#FF5656"}, {0.5, "#88A175"}, 
+                    {1, "#AECF96" }}})
+-- Register widget
+vicious.register(cpuwidget, vicious.widgets.cpu, "$1")
 
 -- Coretemp
 tempicon = wibox.widget.imagebox(beautiful.widget_temp)
@@ -351,10 +376,10 @@ for s = 1, screen.count() do
     right_layout_add(mpdicon, mpdwidget)
     right_layout_add(volicon, volumewidget)
     --right_layout_add(mailicon, mailwidget)
-    right_layout_add(memicon, memwidget)
-    right_layout_add(cpuicon, cpuwidget)
-    right_layout_add(tempicon, tempwidget)
-    right_layout_add(fsicon, fswidget)
+    right_layout_add(memicon, memwidget, cpuwidget)
+    --right_layout_add(cpuicon, cpuwidget)
+    --right_layout_add(tempicon, tempwidget)
+    --right_layout_add(fsicon, fswidget)
     right_layout_add(baticon, batwidget)
     right_layout_add(neticon,netwidget)
     right_layout_add(mytextclock, spr)

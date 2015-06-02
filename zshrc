@@ -24,10 +24,10 @@ antigen bundle web-search   # Google from the command line
 
 # External Bundles
 antigen bundle adolfoabegg/browse-commit                # Open latest commit in browser
-antigen bundle caarlos0/zsh-open-pr						# Open a pull request right there
-antigen bundle caarlos0/zsh-add-upstream				# Add upstream remote to git like `add-upstream username`
-antigen bundle horosgrisa/mysql-colorize				# Colorize MySQL plugins
-antigen bundle marzocchi/zsh-notify						# Notifications for non-zero exits or long commands
+antigen bundle caarlos0/zsh-open-pr			# Open a pull request right there
+antigen bundle caarlos0/zsh-add-upstream		# Add upstream remote to git like `add-upstream username`
+antigen bundle horosgrisa/mysql-colorize		# Colorize MySQL plugins
+antigen bundle marzocchi/zsh-notify			# Notifications for non-zero exits or long commands
 antigen bundle skx/sysadmin-util                        # So many scripts
 antigen-bundle Tarrasch/zsh-bd                          # Back up to directory name
 antigen-bundle Tarrasch/zsh-colors                      # So many colors "echo I am red | red" or "red hi"
@@ -37,16 +37,26 @@ antigen bundle walesmd/caniuse.plugin.zsh               # CanIUse `caniuse webgl
 antigen bundle zsh-users/zsh-completions src            # Tons and tons of completions
 antigen bundle zsh-users/zsh-syntax-highlighting        # Pretty colors
 
-#Distro-specific bundles
-case $(lsb_release -i | cut -d: -f2 | tr -d '\t') in
-    Arch)
-        antigen bundle archlinux    # Pacman autocompletes
-        antigen bundle systemd      # Systemctl autocompletes and auto sudo
-        source /usr/share/doc/pkgfile/command-not-found.zsh
-        ;;
-    Ubuntu)
-        antigen bundle debian       #apt
-        ;;
+# OS-specific bundles
+case $(uname -s) in
+	Darwin)
+		# When I use a mac regularly, I'll put something here
+		;;
+	Linux)
+		if [ -x /usr/bin/pacman ]; then		# Arch
+        		antigen bundle archlinux	# Pacman autocompletes
+        		source /usr/share/doc/pkgfile/command-not-found.zsh
+		elif [ -x /usr/bin/yum ]; then		# CentOS
+			antigen bundle yum		# Yum aliases
+		elif [ -x /usr/bin/apt-get ]; then	# Debian or Ubuntu
+        		antigen bundle debian		# Apt
+		fi
+		pgrep systemd >/dev/null && \
+			antigen bundle systemd		# Systemctl autocompletes and auto sudo
+		;;
+    	OpenBSD)
+		# We totally need pkg_add plugins...
+        	;;
 esac
 
 # Powerline theme settings
@@ -72,4 +82,4 @@ bindkey "^[[1;4C" forward-word
 bindkey "^[[1;4D" backward-word
 
 alias less="less -R"
-alias grep="grep --color=always"
+alias grep="grep --color=always"			# Just watch this break things

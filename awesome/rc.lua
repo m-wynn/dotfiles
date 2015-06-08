@@ -181,9 +181,9 @@ mpdwidget = lain.widgets.mpd({
 memwidget = awful.widget.progressbar()
 -- Progressbar properties
 memwidget:set_width(8)
-memwidget:set_height(10)
+memwidget:set_height(18)
 memwidget:set_vertical(true)
-memwidget:set_background_color("#494B4F")
+memwidget:set_background_color(beautiful.bg_focus)
 memwidget:set_border_color(nil)
 memwidget:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = { {0, "#5E5Fe6"}, {0.5, "#48b1ff"}, 
 					{1, "#5F56c6"}}})
@@ -197,7 +197,8 @@ cpuicon = wibox.widget.imagebox(beautiful.widget_cpu)
 cpuwidget = awful.widget.graph()
 -- Graph properties
 cpuwidget:set_width(50)
-cpuwidget:set_background_color("#494B4F")
+cpuwidget:set_height(18)
+cpuwidget:set_background_color(beautiful.bg_focus)
 cpuwidget:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = { {0, "#FF5656"}, {0.5, "#88A175"}, 
 					{1, "#AECF96" }}})
 -- Register widget

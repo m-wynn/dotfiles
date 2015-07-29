@@ -18,6 +18,7 @@ local lain		= require("lain")
 local vicious	= require("vicious")
 -- }}}
 
+--[[
 -- {{{ Error handling
 if awesome.startup_errors then
 	naughty.notify({ preset = naughty.config.presets.critical,
@@ -38,7 +39,7 @@ do
 	end)
 end
 -- }}}
-
+--]]
 -- {{{ Autostart applications
 function run_once(cmd)
 	findme = cmd
@@ -132,35 +133,14 @@ mytextclock = awful.widget.textclock(" %a %d %b  %H:%M")
 -- calendar
 lain.widgets.calendar:attach(mytextclock, { font_size = 10 })
 
--- Mail IMAP check
-mailicon = wibox.widget.imagebox(beautiful.widget_mail)
-mailicon:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn(mail) end)))
---[[ commented because it needs to be set before use
-mailwidget = lain.widgets.imap({
-			       timeout  = 180,
-			       server	 = "server",
-			       mail	 = "mail",
-			       password = "keyring get mail",
-			       settings = function()
-				       if mailcount > 0 then
-					       widget:set_text(" " .. mailcount .. " ")
-					       mailicon:set_image(beautiful.widget_mail_on)
-				       else
-					       widget:set_text("")
-					       mailicon:set_image(beautiful.widget_mail)
-				       end
-			       end
-		       })
-]]
-
 -- MPD
 mpdicon = wibox.widget.imagebox(beautiful.widget_music)
 mpdicon:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn_with_shell(musicplr) end)))
 mpdwidget = lain.widgets.mpd({
 			     settings = function()
 				     if mpd_now.state == "play" then
-					     artist = " " .. mpd_now.artist .. " "
-					     title  = mpd_now.title	.. " "
+					     artist = " " .. string.sub(mpd_now.artist, 1, 12).. " "
+					     title  = string.sub(mpd_now.title, 1, 25)	.. " "
 					     mpdicon:set_image(beautiful.widget_music_on)
 				     elseif mpd_now.state == "pause" then
 					     artist = " mpd "
@@ -398,7 +378,7 @@ end
 
 -- {{{ Mouse Bindings
 root.buttons(awful.util.table.join(
---	awful.button({ }, 3, function () mymainmenu:toggle() end),
+	--	awful.button({ }, 3, function () mymainmenu:toggle() end),
 	awful.button({ }, 4, awful.tag.viewnext),
 	awful.button({ }, 5, awful.tag.viewprev)
 	))
@@ -450,10 +430,10 @@ globalkeys = awful.util.table.join(
 				   end),
 
 	-- Show Menu
---	awful.key({ modkey }, "w",
---	   function ()
---		   mymainmenu:show({ keygrabber = true })
---	   end),
+	--	awful.key({ modkey }, "w",
+	--	   function ()
+	--		   mymainmenu:show({ keygrabber = true })
+	--	   end),
 
 	-- Show/Hide Wibox
 	awful.key({ modkey }, "b", function ()
@@ -537,7 +517,7 @@ globalkeys = awful.util.table.join(
 	awful.key({ }, "XF86MonBrightnessUp", function () awful.util.spawn("xbacklight -inc 10") end),
 
 	-- Lockscreen
-	
+
 	awful.key({ "Control", altkey }, "l",
 	   function ()
 		   awful.util.spawn("sync")
@@ -645,16 +625,7 @@ awful.rules.rules = {
 	keys = clientkeys,
 	buttons = clientbuttons,
 	size_hints_honor = false } },
-	{ rule = { class = "URxvt" },
-	properties = { opacity = 0.99 } },
-
-	{ rule = { class = "MPlayer" },
-	properties = { floating = true } },
-
-	{ rule = { class = "Dwb" },
-	properties = { tag = tags[1][1] } },
-
-	{ rule = { class = "Iron" },
+	{ rule = { class = "Firefox" },
 	properties = { tag = tags[1][1] } },
 
 	{ rule = { instance = "plugin-container" },
@@ -662,6 +633,15 @@ awful.rules.rules = {
 
 	{ rule = { class = "Gimp" },
 	properties = { tag = tags[1][4] } },
+
+	{ rule = { class = "Skype" },
+	properties = { tag = tags[1][2] } },
+
+	{ rule = { class = "Hipchat" },
+	properties = { tag = tags[1][2] } },
+
+	{ rule = { class = "Nemo" },
+	properties = { tag = tags[1][3] } },
 
 	{ rule = { class = "Gimp", role = "gimp-image-window" },
 	properties = { maximized_horizontal = true,

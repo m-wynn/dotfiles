@@ -81,5 +81,5 @@ gpr() {	  git push origin HEAD && open-pr "$*"  }	# Push and open a PR like that
 bindkey "^[[1;4C" forward-word
 bindkey "^[[1;4D" backward-word
 
-alias less="less -R"
 alias grep="grep --color=always"			# Just watch this break things
+export LESS="-R"

@@ -129,7 +129,9 @@ separators = lain.util.separators
 -- Textclock
 clockicon = wibox.widget.imagebox(beautiful.widget_clock)
 mytextclock = awful.widget.textclock(" %a %d %b  %H:%M")
-
+myclock = wibox.widget.background()
+myclock:set_widget(mytextclock)
+myclock:set_bg(beautiful.fg_blue)
 -- calendar
 lain.widgets.calendar:attach(mytextclock, { font_size = 10 })
 
@@ -201,23 +203,31 @@ fswidget = lain.widgets.fs({
 		   })
 
 -- Battery
-baticon = wibox.widget.imagebox(beautiful.widget_battery)
-batwidget = lain.widgets.bat({
+baticon_text = wibox.widget.imagebox(beautiful.widget_battery)
+batwidget_text = lain.widgets.bat({
 			     settings = function()
 				     if bat_now.perc == "N/A" then
 					     widget:set_markup(" AC ")
-					     baticon:set_image(beautiful.widget_ac)
+					     baticon_text:set_image(beautiful.widget_ac)
 					     return
 				     elseif tonumber(bat_now.perc) <= 5 then
-					     baticon:set_image(beautiful.widget_battery_empty)
+					     baticon_text:set_image(beautiful.widget_battery_empty)
 				     elseif tonumber(bat_now.perc) <= 15 then
-					     baticon:set_image(beautiful.widget_battery_low)
+					     baticon_text:set_image(beautiful.widget_battery_low)
 				     else
-					     baticon:set_image(beautiful.widget_battery)
+					     baticon_text:set_image(beautiful.widget_battery)
 				     end
 				     widget:set_markup(" " .. bat_now.perc .. "% ")
 			     end
 		     })
+
+baticon = wibox.widget.background()
+baticon:set_widget(baticon_text)
+baticon:set_bg(beautiful.fg_green)
+
+batwidget = wibox.widget.background()
+batwidget:set_widget(batwidget_text)
+batwidget:set_bg(beautiful.fg_green)
 
 -- ALSA volume
 volicon = wibox.widget.imagebox(beautiful.widget_vol)
@@ -238,23 +248,48 @@ volumewidget = lain.widgets.alsa({
 			 })
 
 -- Net
-neticon = wibox.widget.imagebox(beautiful.widget_net)
-neticon:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn_with_shell(iptraf) end)))
-netwidget = lain.widgets.net({
+neticon_text = wibox.widget.imagebox(beautiful.widget_net)
+neticon_text:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn_with_shell(iptraf) end)))
+netwidget_text = lain.widgets.net({
 			     settings = function()
 				     widget:set_markup(markup("#7AC82E", " " .. net_now.received)
 			   .. " " ..
 			   markup("#46A8C3", " " .. net_now.sent .. " "))
 			     end
 		     })
+netwidget = wibox.widget.background()
+netwidget:set_widget(netwidget_text)
+netwidget:set_bg(beautiful.fg_red)
+
+neticon = wibox.widget.background()
+neticon:set_widget(neticon_text)
+neticon:set_bg(beautiful.fg_red)
 
 -- Separators
 spr = wibox.widget.textbox(' ')
+
+sprRed_text = wibox.widget.textbox(' ')
+local sprRed = wibox.widget.background()
+sprRed:set_widget(sprRed_text)
+sprRed:set_bg(beautiful.fg_red)
+
+local sprBlue = wibox.widget.background()
+sprBlue:set_widget(spr)
+sprBlue:set_bg(beautiful.fg_blue)
+
 arrl = wibox.widget.imagebox()
 arrl:set_image(beautiful.arrl)
-arrl_dl = separators.arrow_left(beautiful.bg_focus, "alpha") 
-arrl_ld = separators.arrow_left("alpha", beautiful.bg_focus) 
+arrl_fr = separators.arrow_left(beautiful.bg_focus, beautiful.fg_red) 
+arrl_rf = separators.arrow_left(beautiful.fg_red, beautiful.bg_focus) 
 
+
+arrl_by = separators.arrow_left(beautiful.fg_blue, beautiful.fg_yellow) 
+
+arrl_gr = separators.arrow_left(beautiful.fg_green, beautiful.fg_red) 
+arrl_fg = separators.arrow_left(beautiful.bg_focus, beautiful.fg_green) 
+
+arrl_rb = separators.arrow_left(beautiful.fg_red, beautiful.fg_blue) 
+arrl_bf = separators.arrow_left(beautiful.fg_blue, beautiful.bg_focus) 
 -- Create a wibox for each screen and add it
 mywibox = {}
 mypromptbox = {}
@@ -315,7 +350,9 @@ for s = 1, screen.count() do
 		awful.button({ }, 3, function () awful.layout.inc(layouts, -1) end),
 		awful.button({ }, 4, function () awful.layout.inc(layouts, 1) end),
 		awful.button({ }, 5, function () awful.layout.inc(layouts, -1) end)))
-
+	layoutwidget = wibox.widget.background()
+	layoutwidget:set_widget(mylayoutbox[s])
+	layoutwidget:set_bg(beautiful.fg_yellow)
 	-- Create a taglist widget
 	mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all, mytaglist.buttons)
 
@@ -331,18 +368,18 @@ for s = 1, screen.count() do
 	left_layout:add(mytaglist[s])
 	left_layout:add(mypromptbox[s])
 	left_layout:add(spr)
-
+	
 	-- Widgets that are aligned to the upper right
 	local right_layout_toggle = true
 	local function right_layout_add (...)  
 		local arg = {...}
 		if right_layout_toggle then
-			right_layout:add(arrl_ld)
+--			right_layout:add(arrl_ld)
 			for i, n in pairs(arg) do
 				right_layout:add(wibox.widget.background(n ,beautiful.bg_focus))
 			end
 		else
-			right_layout:add(arrl_dl)
+--			right_layout:add(arrl_dl)
 			for i, n in pairs(arg) do
 				right_layout:add(n)
 			end
@@ -361,10 +398,14 @@ for s = 1, screen.count() do
 	--right_layout_add(cpuicon, cpuwidget)
 	--right_layout_add(tempicon, tempwidget)
 	--right_layout_add(fsicon, fswidget)
+	right_layout_add(arrl_fg)
 	right_layout_add(baticon, batwidget)
+	right_layout_add(arrl_gr)
 	right_layout_add(neticon,netwidget)
-	right_layout_add(mytextclock, spr)
-	right_layout_add(mylayoutbox[s])
+	right_layout_add(arrl_rb)
+	right_layout_add(myclock, sprBlue)
+	right_layout_add(arrl_by)
+	right_layout_add(layoutwidget)
 
 	-- Now bring it all together (with the tasklist in the middle)
 	local layout = wibox.layout.align.horizontal()

@@ -51,11 +51,9 @@ function run_once(cmd)
 end
 
 run_once("urxvtd")
-run_once("unclutter -root")
-run_once("~/bin/lockScreen.sh")
+run_once("xscreensaver &")
 run_once("xrdb ~/.Xresources &")
-run_once("mpd &")
-run_once("QT_STYLE_OVERRIDE=gtk ~/.dropbox-dist/dropboxd")
+-- run_once("QT_STYLE_OVERRIDE=gtk ~/.dropbox-dist/dropboxd")
 
 -- }}}
 
@@ -521,7 +519,7 @@ globalkeys = awful.util.table.join(
 	awful.key({ "Control", altkey }, "l",
 	   function ()
 		   awful.util.spawn("sync")
-		   awful.util.spawn("xautolock -locknow")
+		   awful.util.spawn("xscreensaver-command --lock")
 	   end),
 
 	-- User programs

@@ -3,11 +3,12 @@ Xft.lcdfilter:	lcddefault
 Xft.hintstyle:	hintfull
 Xft.hinting:	1
 Xft.antialias:	1
-Xft.rgba:	rgb
+Xft.rgba:	none
 URxvt.transparent:	true
 URxvt.shading:	10
 URxvt.blurRadius:	10
 URxvt.fading:	10
+!URxvt*letterSpace: -3
 ! special
 *.foreground:   #ffffff
 *.background:   #151515
@@ -47,19 +48,19 @@ URxvt.fading:	10
 
 
 urxvt*transparent:	true
-urxvt*font: xft:Liberation Mono for Powerline:pixelsize=13, \
-	xft:DejaVu Sans Mono: pixelsize=13, \
-	xft:WenQuanYi Bitmap Song:pixelsize=12, \
+urxvt*font: xft:Liberation Mono for Powerline:size=10, \
+	xft:DejaVu Sans Mono: size=10, \
+	xft:WenQuanYi Bitmap Song:pixelsize=14, \
 	xft:FreeSerif:style=Regular, \
-	xft:Unifont:pixelsize=7, \ \
-	xft:Noto Sans Kannada:style=Regular:pixelsize=12, \
+	xft:Unifont:pixelsize=5, \ \
+	xft:Noto Sans Kannada:style=Regular:pixelsize=14, \
 	xft:Symbola:pixelsize=7, \
 	-misc-fixed-medium-r-normal--18-120-100-100-c-90-iso10646-1
 URxvt*scrollBar: false
 URxvt*scrollWithBuffer:	true
 URxvt*scrollTtyKeypress:	true
-URxvt.perl-lib:	/usr/lib/urxvt/perl/
-URxvt.perl-ext-common:	default,matcher,clipboard
+URxvt.perl-lib:	/home/m_wynn/lib/urxvt/perls/
+URxvt.perl-ext-common:	clipboard
 URxvt.url-launcher:	/usr/bin/firefox-nightly
 URxvt.matcher.button: 1
 URxvt.colorUL:	#42a5f5

@@ -1,6 +1,6 @@
 setopt inc_append_history extendedglob nomatch share_history
 
-source /usr/share/zsh/scripts/antigen/antigen.zsh
+source ~/.antigen/antigen.zsh
 
 export HISTSIZE=1000000000
 export SAVEHIST=$HISTSIZE
@@ -11,6 +11,7 @@ export NO_AT_BRIDGE=1
 export DISABLE_AUTO_TITLE=true
 export EDITOR=vim
 
+export LANG=en_US.UTF-8
 # Load the oh-my-zsh's library.
 antigen use oh-my-zsh
 
@@ -73,7 +74,6 @@ antigen apply
 
 say() { mplayer -really-quiet "http://translate.google.com/translate_tts?tl=en&q=$1"; }
 
-ping() { grc --colour=auto /usr/bin/ping "$@" }
 
 gpr() {	  git push origin HEAD && open-pr "$*"  }	# Push and open a PR like that!
 
@@ -83,3 +83,15 @@ bindkey "^[[1;4D" backward-word
 
 alias less="less -R"
 alias grep="grep --color=always"			# Just watch this break things
+
+man() {
+    env LESS_TERMCAP_mb=$'\E[01;31m' \
+    LESS_TERMCAP_md=$'\E[01;38;5;74m' \
+    LESS_TERMCAP_me=$'\E[0m' \
+    LESS_TERMCAP_se=$'\E[0m' \
+    LESS_TERMCAP_so=$'\E[38;5;246m' \
+    LESS_TERMCAP_ue=$'\E[0m' \
+    LESS_TERMCAP_us=$'\E[04;38;5;146m' \
+    man "$@"
+}
+

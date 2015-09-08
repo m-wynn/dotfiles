@@ -56,13 +56,23 @@ set wrapmargin=0
 colorscheme elflord
 "hi Normal ctermbg=none					" Use this if you have a colorscheme that breaks terminal transparency
 
+"" euclio/vim-markdown-composer -- define BuildComposer
+function! BuildComposer(info)
+  if a:info.status != 'unchanged' || a:info.force
+    !cargo build --release
+    UpdateRemotePlugins
+  endif
+endfunction
+
 "" Plugins using Vim Plug https://github.com/junegunn/vim-plug
 
 call plug#begin('~/.vim/plugged')
 	Plug 'ap/vim-css-color'				" Sets the background to your color. #ff0000 < that is white on red
+	Plug 'benekastah/neomake'			" Make for all kinds of things.  Can take advantage of Neovims asyncronity
 	Plug 'bling/vim-airline'			" Informative tabline/status bar for vim
 	Plug 'chase/vim-ansible-yaml'			" Syntax highlighting for ansible yaml files.  It knows if you're in an ansible folder.
 	Plug 'ervandew/supertab'			" Make the tab key do tab completion.  Or any other key, for that matter.  Customizable
+	Plug 'euclio/vim-markdown-composer',	{ 'do': function('BuildComposer') }		" Adds asyncronous markdown previous (neovim pls)
 	Plug 'joonty/vdebug', { 'for': 'php' }		" Interfaces with debuggers.  Needs some configuration soon
 	Plug 'joonty/vim-phpqa'				" PHP code checking stuff.	Its messdetector is frustrating, but other features prevent errors
 "	Plug 'kien/ctrlp.vim'				" Fuzzy file finder that I'll never remember to use
@@ -72,6 +82,8 @@ call plug#begin('~/.vim/plugged')
 	Plug 'StanAngeloff/php.vim'			" Newer PHP syntax highlighting that's a pain to actually get working, I think
 	Plug 'tpope/vim-fugitive'			" Git plugin for like, :Gstatus
 	Plug 'vim-latex/vim-latex'			" Such a powerful thing for LaTeX
+	Plug 'xolox/vim-misc'				" Miscellaneous stuff, required for vim-notes
+	Plug 'xolox/vim-notes'				" Notes in Vim!
 call plug#end()
 
 "" bling/vim-airline
@@ -83,6 +95,7 @@ let g:airline#extensions#tabline#enabled = 1		" Tablinify the tabbar
 "" ervandew/supertab --  changes to let us use tab again
 let g:SuperTabMappingForward = '<c-p>'
 let g:SuperTabMappingBackward = '<s-c-p>'
+
 
 "" joonty/vim-phpqa -- Define the ruleset (which you have to pick yourself), autorun, and more
 let g:phpqa_messdetector_ruleset = "~/.vim/rulesets.xml"
@@ -119,4 +132,4 @@ let g:tex_flavor='latex'
 let g:Imap_UsePlaceHolders = 0		"Set this if you ever EVER are going to use '()'
 let g:Imap_FreezeImap=1
 
-
+let g:notes_directories = ['~/Dropbox/Fall15/notes']

@@ -50,12 +50,13 @@ function run_once(cmd)
 	awful.util.spawn_with_shell("pgrep -u $USER -x " .. findme .. " > /dev/null || (" .. cmd .. ")")
 end
 
-run_once("urxvtd")
-run_once("unclutter -root")
-run_once("~/bin/lockScreen.sh")
+run_once("urxvtd &")
+run_once("unclutter -root &")
+run_once("~/bin/lockScreen.sh &")
 run_once("xrdb ~/.Xresources &")
 run_once("mpd &")
-run_once("QT_STYLE_OVERRIDE=gtk ~/.dropbox-dist/dropboxd")
+run_once("QT_STYLE_OVERRIDE=gtk ~/.dropbox-dist/dropboxd &")
+run_once("compton --backend glx --paint-on-overlay --glx-no-stencil --vsync opengl-swc --unredir-if-possible &")
 
 -- }}}
 

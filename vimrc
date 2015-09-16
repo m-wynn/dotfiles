@@ -79,6 +79,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'joonty/vim-phpqa'				" PHP code checking stuff.	Its messdetector is frustrating, but other features prevent errors
 "	Plug 'kien/ctrlp.vim'				" Fuzzy file finder that I'll never remember to use
 "	Plug 'scrooloose/nerdtree'			" An only slightly confusing file-browser in a tree
+	Plug 'severin-lemaignan/vim-minimap'		" Cool looking minimap like sublime
 	Plug '/scrooloose/syntastic'			" All the syntax checking ever
 	Plug 'shawncplus/phpcomplete.vim'		" Lots of completions and ctag-jumping stuff for PHP.  Pretty cool, check readme for ctags
 	Plug 'StanAngeloff/php.vim'			" Newer PHP syntax highlighting that's a pain to actually get working, I think

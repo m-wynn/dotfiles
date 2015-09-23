@@ -60,7 +60,8 @@ case $(uname -s) in
 esac
 
 # Powerline theme settings
-POWERLINE_RIGHT_A="exit-status"
+#POWERLINE_RIGHT_A="exit-status"
+POWERLINE_DISABLE_RPROMPT="true"
 POWERLINE_NO_BLANK_LINE="true"
 POWERLINE_DETECT_SSH="true"
 

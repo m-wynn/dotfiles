@@ -21,7 +21,6 @@ root: ~/
 windows:
   - carbon: mosh carbon -- tmux a -d
   - squares: mosh squares -- tmux a -d
-  - devy: mosh devy -- tmux a -d
   - droplet: mosh droplet -- tmux a -d
   - local: zsh
 

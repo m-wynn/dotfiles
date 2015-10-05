@@ -1,6 +1,20 @@
 setopt inc_append_history extendedglob nomatch share_history
 
-source ~/.antigen/antigen.zsh
+# Source Antigen, wherever it may be.  Otherwise, offer to download it.
+if [ -f /usr/share/zsh/scripts/antigen/antigen.zsh ]; then
+	source /usr/share/zsh/scripts/antigen/antigen.zsh
+else
+	if [ ! -f ~/.antigen/antigen.zsh ]; then
+		vared -p 'Would you like to install antigen? (Y/N): ' -c choice 
+		if [[ $choice = y* || $choice = Y* ]]; then
+			mkdir -p ~/.antigen
+			curl -L https://raw.githubusercontent.com/zsh-users/antigen/master/antigen.zsh > ~/.antigen/antigen.zsh
+		else
+			echo "Things will fail."
+		fi
+	fi
+	source ~/.antigen/antigen.zsh
+fi
 
 export HISTSIZE=1000000000
 export SAVEHIST=$HISTSIZE
@@ -61,9 +75,14 @@ case $(uname -s) in
 esac
 
 # Powerline theme settings
-POWERLINE_RIGHT_A="exit-status"
+#POWERLINE_RIGHT_A="exit-status"
+POWERLINE_DISABLE_RPROMPT="true"
 POWERLINE_NO_BLANK_LINE="true"
 POWERLINE_DETECT_SSH="true"
+
+#ZSH Colorful stuff
+
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern root)
 
 # Load the theme.
 antigen theme jeremyFreeAgent/oh-my-zsh-powerline-theme powerline
@@ -82,7 +101,6 @@ bindkey "^[[1;4C" forward-word
 bindkey "^[[1;4D" backward-word
 
 alias grep="grep --color=always"			# Just watch this break things
-<<<<<<< HEAD
 
 man() {
     env LESS_TERMCAP_mb=$'\E[01;31m' \
@@ -95,6 +113,13 @@ man() {
     man "$@"
 }
 
-=======
 export LESS="-R"
->>>>>>> 86a5a069f371a66bdbf442e17a6ddce70c55fd14
+
+GRC=`which grc`
+if [ "$TERM" != dumb ] && [ -n GRC ]
+then
+  alias colorize="$GRC -es --colour=auto"
+	for c in as c++ configure cvs df diff dig esperanto gas gcc g++ ld ldapadd ldapauth ldapdelete ldapmodify ldapmodrdn ldappassd ldapsearch ldapwhoami last make mount netstat ping php ps proftpd traceroute wdiff; do
+		alias ${c}="colorize ${c}"
+	done
+fi

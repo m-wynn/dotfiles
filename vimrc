@@ -1,6 +1,8 @@
 "" Lose the annoyances of vi
 set nocompatible
 
+set clipboard+=unnamedplus
+
 "" Load plugins and indentation for specific filetypes
 filetype plugin indent on
 
@@ -76,14 +78,18 @@ call plug#begin('~/.vim/plugged')
 	Plug 'joonty/vdebug', { 'for': 'php' }		" Interfaces with debuggers.  Needs some configuration soon
 	Plug 'joonty/vim-phpqa'				" PHP code checking stuff.	Its messdetector is frustrating, but other features prevent errors
 "	Plug 'kien/ctrlp.vim'				" Fuzzy file finder that I'll never remember to use
-	Plug 'scrooloose/nerdtree'			" An only slightly confusing file-browser in a tree
+"	Plug 'scrooloose/nerdtree'			" An only slightly confusing file-browser in a tree
+	Plug 'severin-lemaignan/vim-minimap'		" Cool looking minimap like sublime
 	Plug '/scrooloose/syntastic'			" All the syntax checking ever
 	Plug 'shawncplus/phpcomplete.vim'		" Lots of completions and ctag-jumping stuff for PHP.  Pretty cool, check readme for ctags
 	Plug 'StanAngeloff/php.vim'			" Newer PHP syntax highlighting that's a pain to actually get working, I think
+	Plug 'Townk/vim-autoclose'			" Automagically closes parentheses and such.
 	Plug 'tpope/vim-fugitive'			" Git plugin for like, :Gstatus
 	Plug 'vim-latex/vim-latex'			" Such a powerful thing for LaTeX
+	Plug 'vim-scripts/auctex.vim'			" Better Vim syntax highlighting
 	Plug 'xolox/vim-misc'				" Miscellaneous stuff, required for vim-notes
 	Plug 'xolox/vim-notes'				" Notes in Vim!
+	Plug 'xuhdev/vim-latex-live-preview'		" Live LaTeX previews.  Worth a try!
 call plug#end()
 
 "" bling/vim-airline
@@ -104,12 +110,13 @@ let g:phpqa_codesniffer_autorun = 0
 let g:phpqa_messdetector_autorun = 0
 
 "" kien/ctrlp.vim -- Map it to ctrl-p
-let g:ctrlp_map = '<c-p>'		" Watch collision with supertab.  I have this plugin disabled
+"let g:ctrlp_map = '<c-p>'		" Watch collision with supertab.  I have this plugin disabled
 
 "" scrooloose/nerdtree -- Start nerdtree on startup
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 
 
@@ -133,3 +140,6 @@ let g:Imap_UsePlaceHolders = 0		"Set this if you ever EVER are going to use '()'
 let g:Imap_FreezeImap=1
 
 let g:notes_directories = ['~/Dropbox/Fall15/notes']
+
+autocmd Filetype tex setl updatetime=1
+

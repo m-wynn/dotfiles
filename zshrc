@@ -65,6 +65,10 @@ POWERLINE_DISABLE_RPROMPT="true"
 POWERLINE_NO_BLANK_LINE="true"
 POWERLINE_DETECT_SSH="true"
 
+#ZSH Colorful stuff
+
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern root)
+
 # Load the theme.
 antigen theme jeremyFreeAgent/oh-my-zsh-powerline-theme powerline
 # Tell antigen that you're done.
@@ -74,7 +78,6 @@ antigen apply
 
 say() { mplayer -really-quiet "http://translate.google.com/translate_tts?tl=en&q=$1"; }
 
-ping() { grc --colour=auto /usr/bin/ping "$@" }
 
 gpr() {	  git push origin HEAD && open-pr "$*"  }	# Push and open a PR like that!
 
@@ -84,3 +87,12 @@ bindkey "^[[1;4D" backward-word
 
 alias grep="grep --color=always"			# Just watch this break things
 export LESS="-R"
+
+GRC=`which grc`
+if [ "$TERM" != dumb ] && [ -n GRC ]
+then
+  alias colorize="$GRC -es --colour=auto"
+	for c in as c++ configure cvs df diff dig esperanto gas gcc g++ ld ldapadd ldapauth ldapdelete ldapmodify ldapmodrdn ldappassd ldapsearch ldapwhoami last make mount netstat ping php ps proftpd traceroute wdiff; do
+		alias ${c}="colorize ${c}"
+	done
+fi

@@ -83,8 +83,10 @@ call plug#begin('~/.vim/plugged')
 	Plug '/scrooloose/syntastic'			" All the syntax checking ever
 	Plug 'shawncplus/phpcomplete.vim'		" Lots of completions and ctag-jumping stuff for PHP.  Pretty cool, check readme for ctags
 	Plug 'StanAngeloff/php.vim'			" Newer PHP syntax highlighting that's a pain to actually get working, I think
+	Plug 'Townk/vim-autoclose'			" Automagically closes parentheses and such.
 	Plug 'tpope/vim-fugitive'			" Git plugin for like, :Gstatus
 	Plug 'vim-latex/vim-latex'			" Such a powerful thing for LaTeX
+	Plug 'vim-scripts/auctex.vim'			" Better Vim syntax highlighting
 	Plug 'xolox/vim-misc'				" Miscellaneous stuff, required for vim-notes
 	Plug 'xolox/vim-notes'				" Notes in Vim!
 	Plug 'xuhdev/vim-latex-live-preview'		" Live LaTeX previews.  Worth a try!

@@ -115,10 +115,9 @@ man() {
 
 export LESS="-R"
 
-GRC=`which grc`
 if [ "$TERM" != dumb ] && [ -n GRC ]
 then
-  alias colorize="$GRC -es --colour=auto"
+  alias colorize="grc -es --colour=auto"
 	for c in as c++ configure cvs df diff dig esperanto gas gcc g++ ld ldapadd ldapauth ldapdelete ldapmodify ldapmodrdn ldappassd ldapsearch ldapwhoami last make mount netstat ping php ps proftpd traceroute wdiff; do
 		alias ${c}="colorize ${c}"
 	done

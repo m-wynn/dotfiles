@@ -523,6 +523,7 @@ globalkeys = awful.util.table.join(
 	   function ()
 		   awful.util.spawn("sync")
 		   awful.util.spawn("xscreensaver-command --lock")
+		   awful.util.spawn("xautolock -locknow")
 	   end),
 
 	-- User programs

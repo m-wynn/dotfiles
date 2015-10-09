@@ -1,0 +1,48 @@
+#MPD SETTINGS
+mpd_host = "localhost"
+mpd_port = "6600"
+mpd_music_dir = "home/matthew/Music"
+mpd_connection_timeout = "5"
+mpd_crossfade_time = "2"
+
+#VISUALIZER SETTINGS
+visualizer_fifo_path = "/tmp/mpd.fifo"
+visualizer_output_name = "my_fifo"
+visualizer_sync_interval = "60" 
+visualizer_in_stereo = "no"
+visualizer_type = "ellipse" 
+visualizer_look = ●▮
+visualizer_color = white, cyan, blue, green, yellow, red
+
+#UI SETTINGS
+
+playlist_disable_highlight_delay = "0"  
+playlist_display_mode = "columns"  
+browser_display_mode = "columns"  
+incremental_seeking = "yes"  
+autocenter_mode = "yes"  
+header_visibility = "yes"  
+statusbar_visibility = "yes"  
+user_interface = "alternative"
+
+color1 = "blue"  
+color2 = "cyan"  
+active_column_color = "cyan"  
+active_window_border = "blue"  
+
+progressbar_look = "─╼ "
+#progressbar_look = "█ "
+titles_visibility = "yes"
+discard_colors_if_item_is_selected = "no"
+clock_display_seconds="no"
+display_bitrate="yes"
+empty_tag_marker="--"
+playlist+shorten_total_times="yes"
+locked_screen_width_part = "60"
+search_engine_display_mode = "columns" 
+
+
+#LYRICS
+fetch_lyrics_for_current_song_in_background = "yes"
+store_lyrics_in_song_dir = "yes"
+follow_now_playing_lyrics = "yes"

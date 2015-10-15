@@ -59,7 +59,7 @@ urxvt*font: xft:Liberation Mono for Powerline:size=10, \
 URxvt*scrollBar: false
 URxvt*scrollWithBuffer:	true
 URxvt*scrollTtyKeypress:	true
-URxvt.perl-lib:	~/lib/urxvt/perls/
+URxvt.perl-lib:	$HOME/lib/urxvt/perls/
 URxvt.perl-ext-common:	default,matcher,clipboard
 URxvt.url-launcher:	/usr/bin/firefox-nightly
 URxvt.matcher.button: 1

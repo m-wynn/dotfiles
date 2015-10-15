@@ -1,7 +1,7 @@
 --[[
 
-	 Powerarrow Darker Awesome WM config 2.0 
-	 github.com/copycat-killer				 
+	 Powerarrow Darker Awesome WM config 2.0
+	 github.com/copycat-killer
 
 	 --]]
 
@@ -166,7 +166,7 @@ memwidget:set_height(18)
 memwidget:set_vertical(true)
 memwidget:set_background_color(beautiful.bg_focus)
 memwidget:set_border_color(nil)
-memwidget:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = { {0, "#5E5Fe6"}, {0.5, "#48b1ff"}, 
+memwidget:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = { {0, "#5E5Fe6"}, {0.5, "#48b1ff"},
 		    {1, "#5F56c6"}}})
 -- Register widget
 vicious.register(memwidget, vicious.widgets.mem, "$1", 13)
@@ -180,7 +180,7 @@ cpuwidget = awful.widget.graph()
 cpuwidget:set_width(50)
 cpuwidget:set_height(18)
 cpuwidget:set_background_color(beautiful.bg_focus)
-cpuwidget:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = { {0, "#FF5656"}, {0.5, "#88A175"}, 
+cpuwidget:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = { {0, "#FF5656"}, {0.5, "#88A175"},
 		    {1, "#AECF96" }}})
 -- Register widget
 vicious.register(cpuwidget, vicious.widgets.cpu, "$1")
@@ -253,8 +253,8 @@ netwidget = lain.widgets.net({
 spr = wibox.widget.textbox(' ')
 arrl = wibox.widget.imagebox()
 arrl:set_image(beautiful.arrl)
-arrl_dl = separators.arrow_left(beautiful.bg_focus, "alpha") 
-arrl_ld = separators.arrow_left("alpha", beautiful.bg_focus) 
+arrl_dl = separators.arrow_left(beautiful.bg_focus, "alpha")
+arrl_ld = separators.arrow_left("alpha", beautiful.bg_focus)
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -335,7 +335,7 @@ for s = 1, screen.count() do
 
 	-- Widgets that are aligned to the upper right
 	local right_layout_toggle = true
-	local function right_layout_add (...)  
+	local function right_layout_add (...)
 		local arg = {...}
 		if right_layout_toggle then
 			right_layout:add(arrl_ld)
@@ -746,7 +746,7 @@ end
 function scandir(directory, filter)
 	local i, t, popen = 0, {}, io.popen
 	if not filter then
-		filter = function(s) return true 
+		filter = function(s) return true
 		end
 	end
 	print(filter)

@@ -5,7 +5,7 @@ if [ -f /usr/share/zsh/scripts/antigen/antigen.zsh ]; then
 	source /usr/share/zsh/scripts/antigen/antigen.zsh
 else
 	if [ ! -f ~/.antigen/antigen.zsh ]; then
-		vared -p 'Would you like to install antigen? (Y/N): ' -c choice 
+		vared -p 'Would you like to install antigen? (Y/N): ' -c choice
 		if [[ $choice = y* || $choice = Y* ]]; then
 			mkdir -p ~/.antigen
 			curl -L https://raw.githubusercontent.com/zsh-users/antigen/master/antigen.zsh > ~/.antigen/antigen.zsh
@@ -20,7 +20,7 @@ export HISTSIZE=1000000000
 export SAVEHIST=$HISTSIZE
 setopt EXTENDED_HISTORY
 
-export PATH=$PATH:~/bin:/root/.gem/ruby/2.2.0/bin
+export PATH=$PATH:~/bin:/root/.gem/ruby/2.2.0/bin:/home/matthew/.gem/ruby/2.2.0/bin
 export NO_AT_BRIDGE=1
 export DISABLE_AUTO_TITLE=true
 export EDITOR=vim

@@ -27,6 +27,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'Valloric/YouCompleteMe'			" Many autocomplete.  Requires additional setup!
 	Plug 'vim-latex/vim-latex'			" Such a powerful thing for LaTeX
 	Plug 'vim-scripts/auctex.vim'			" Better Vim syntax highlighting
+	Plug 'wlangstroth/vim-racket'			" Racket stuff
 	Plug 'xolox/vim-misc'				" Miscellaneous stuff, required for vim-notes
 	Plug 'xolox/vim-notes'				" Notes in Vim!
 	Plug 'xuhdev/vim-latex-live-preview'		" Live LaTeX previews.  Worth a try!
@@ -131,6 +132,7 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
+let g:syntastic_tex_checkers = ['lacheck']
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
@@ -159,3 +161,7 @@ let g:notes_directories = ['~/Dropbox/Fall15/notes']
 
 "" Eclim
 let g:EclimCompletionMethod = 'omnifunc'
+
+
+autocmd FileType racket set tabstop=2|set shiftwidth=2|set expandtab
+autocmd FileType haskell set tabstop=2|set shiftwidth=2|set expandtab

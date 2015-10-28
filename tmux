@@ -1,4 +1,3 @@
-
 #Only remote stuff
 if-shell '[ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]' 'unbind C-b; set-option -g prefix C-a; bind-key C-a send-prefix'
 
@@ -23,7 +22,10 @@ set -g history-limit 10000
 
 # allow terminal scrolling
 set-option -ga terminal-override ',rxvt-uni*:XT:Ms=\E]52;%p1%s;%p2%s\007'
-set-window-option -g mode-mouse on
+set-option -g -q mouse on
+bind-key -T root PPage if-shell -F "#{alternate_on}" "send-keys PPage" "copy-mode -e; send-keys PPage"
+bind-key -t vi-copy PPage page-up
+bind-key -t vi-copy NPage page-down
 
 # super easy tab switching using Shift-[direction]
 if-shell '[ -z "$SSH_CLIENT" ] && [ -z "$SSH_TTY" ]' 'bind -n S-Right next-window; bind -n S-Left previous-window; bind -n C-t new-window; bind -n S-Up command-prompt "rename-window %%"; bind-key -n C-Left swap-window -t -1; bind-key -n C-Left swap-window -t -1; bind-key -n C-Right swap-window -t +1'
@@ -33,9 +35,6 @@ if-shell '[ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] && [ "$HOSTNAME" != "carbon"
 
 #Not so easy tab switching with Prefix-[direction]
 if-shell '[ "$HOSTNAME" = "carbon" ]' 'bind Right next-window; bind Left previous-window; bind t new-window; bind Up command-prompt "rename-window %%"; bind-key -n C-Left swap-window -t -1; bind-key C-Right swap-window -t +1'
-
-# with mouse (click on pretty little boxes)
-set -g mouse-select-window on
 
 # splitting
 unbind %
@@ -48,13 +47,8 @@ bind v split-window -v
 bind : command-prompt
 
 # panes
-set -g mouse-select-pane on
 set -g pane-border-fg "colour238"
 set -g pane-active-border-fg "colour190"
-
-# resize panes with mouse (drag borders)
-set -g mouse-select-pane on
-set -g mouse-resize-pane on
 
 # address vim mode switching delay
 set-option -s escape-time 0
@@ -68,7 +62,7 @@ set -g status-utf8 on
 set -g status-justify "left"
 set -g status-bg "colour234"
 set -g status-fg "default"
-set -g status-position top 
+set -g status-position top
 
 # refresh 'status-left' and 'status-right' more often
 set -g status-interval 2

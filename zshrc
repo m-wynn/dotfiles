@@ -114,7 +114,7 @@ man() {
 }
 
 export LESS="-R"
-
+GRC=`which grc`
 if [ "$TERM" != dumb ] && [ -n GRC ]
 then
   alias colorize="grc -es --colour=auto"
@@ -122,3 +122,20 @@ then
 		alias ${c}="colorize ${c}"
 	done
 fi
+# The following lines were added by compinstall
+
+zstyle ':completion:*' completer _expand _complete _ignored _approximate
+zstyle ':completion:*' expand prefix suffix
+zstyle ':completion:*' file-sort access
+zstyle ':completion:*' ignore-parents parent .. directory
+zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' list-prompt '%SAt %p: Hit TAB for more, or the character to insert%s'
+zstyle ':completion:*' list-suffixes true
+zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'r:|[._-]=** r:|=**' 'l:|=* r:|=*'
+zstyle ':completion:*' menu select=1
+zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
+zstyle :compinstall filename '/home/matthew/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall

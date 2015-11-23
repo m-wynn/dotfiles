@@ -19,7 +19,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'joonty/vdebug', { 'for': 'php' }		" Interfaces with debuggers.  Needs some configuration soon
 	Plug 'markcornick/vim-vagrant'			" Vagrant support
 	Plug 'ntpeters/vim-better-whitespace'		" Easily strip whitespace
-	Plug 'scrooloose/syntastic'			" All the syntax checking ever
+	"Plug 'scrooloose/syntastic'			" All the syntax checking ever
 	Plug 'shawncplus/phpcomplete.vim'		" Lots of completions and ctag-jumping stuff for PHP.  Pretty cool, check readme for ctags
 	Plug 'StanAngeloff/php.vim'			" Newer PHP syntax highlighting that's a pain to actually get working, I think
 	Plug 'Townk/vim-autoclose'			" Automagically closes parentheses and such.
@@ -165,3 +165,5 @@ let g:EclimCompletionMethod = 'omnifunc'
 
 autocmd FileType racket set tabstop=2|set shiftwidth=2|set expandtab
 autocmd FileType haskell set tabstop=2|set shiftwidth=2|set expandtab
+
+autocmd! BufWritePost * Neomake

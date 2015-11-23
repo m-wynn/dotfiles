@@ -1,0 +1,36 @@
+# Heavily borrowed from phy1729
+[alias]
+	br = branch
+	cm = commit
+	cmm = commit --no-edit
+	co = checkout
+	fe = fetch --all -p
+	fixup = commit --amend -C HEAD
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	lga = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all
+	ll = !git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all --since=\"$(git show -s --pretty=format:'%cd' master~3 2>/dev/null || git log --format="format:%cd" --reverse | head -n 1)\"
+	pop = stash pop
+	rev = diff --staged -M
+	review = diff --staged
+	save = commit -m'savepoint'
+	st = status -sb
+[color]
+	ui = true
+[core]
+	editor = vim
+	filemode = false
+[diff]
+	tool = vimdiff
+[github]
+	user = m-wynn
+[merge]
+	tool = vimdiff
+[pretty]
+	colorful-oneline = format:%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset
+[push]
+	default = simple
+[rerere]
+	enabled=true
+[user]
+	email = m-wynn@live.com
+	name = Matthew Wynn

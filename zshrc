@@ -1,6 +1,4 @@
-setopt inc_append_history extendedglob nomatch share_history
-
-# Source Antigen, wherever it may be.  Otherwise, offer to download it.
+# Source Zgen, wherever it may be.  Otherwise, offer to download it.
 if [ -f /usr/share/zsh/scripts/zgen/zgen.zsh ]; then
 	source /usr/share/zsh/scripts/zgen/zgen.zsh
 else
@@ -17,16 +15,42 @@ else
 fi
 ZGEN_RESET_ON_CHANGE=(${HOME}/.zshrc ${HOME}/.zshrc.local)
 
+# Handy Variables
+
+# History tweaks
 export HISTSIZE=1000000000
 export SAVEHIST=$HISTSIZE
-setopt EXTENDED_HISTORY
+setopt inc_append_history		# Append every command to $HISTFILE immediately
+setopt share_history			# Always import new commands from $HISTFILE
+setopt extended_history			# Save additional info to $HISTFILE
+setopt hist_ignore_space		# Ignore history beginning with a space
 
+# Allow new features, i.e. ^ which negates the pattern following it, ls <100-200>.txt, **/, and more
+setopt extendedglob
+
+#If pattern for filename generation has no matches, print an error.
+setopt nomatch
+
+# Include ruby in Path
 export PATH=$PATH:~/bin:/root/.gem/ruby/2.2.0/bin:/home/matthew/.gem/ruby/2.2.0/bin
-export NO_AT_BRIDGE=1
+
+# Disable changing the window title
 export DISABLE_AUTO_TITLE=true
+
+# Use VIM
 export EDITOR=vim
 
+# Use UTF-8
 export LANG=en_US.UTF-8
+
+# Give some stats if a process takes a while
+export REPORTTIME=10
+TIMEFMT="%U user %S system %P cpu %*Es total"
+
+# Bullet-train theme variables
+BULLETTRAIN_PROMPT_SEPARATE_LINE=false
+BULLETTRAIN_PROMPT_ADD_NEWLINE=false
+BULLETTRAIN_IS_SSH_CLIENT=true
 
 if ! zgen saved; then
 	echo "Creating a zgen save"
@@ -35,27 +59,34 @@ if ! zgen saved; then
 	zgen oh-my-zsh
 
 	# Oh-my-zsh Bundles
-	zgen oh-my-zsh plugins/docker       # Docker autocompletes
-	zgen oh-my-zsh plugins/encode64     # Encode and decode 64-bit
-	zgen oh-my-zsh plugins/sudo         # Press Esc twice for sudo
-	zgen oh-my-zsh plugins/tmux         # Auto launch tmux
-	zgen oh-my-zsh plugins/wd           # Warp directories
-	zgen oh-my-zsh plugins/web-search   # Google from the command line
+	zgen oh-my-zsh plugins/colored-man-pages	# Colorizes man pages
+	zgen oh-my-zsh plugins/docker			# Docker autocompletes
+	zgen oh-my-zsh plugins/encode64			# Encode and decode 64-bit
+	zgen oh-my-zsh plugins/rsync			# Rsync commands, like `rsync-copy`
+	zgen oh-my-zsh plugins/sudo			# Press Esc twice for sudo
+	zgen oh-my-zsh plugins/tmux			# Auto launch tmux
+	zgen oh-my-zsh plugins/wd			# Warp directories
+	zgen oh-my-zsh plugins/web-search		# Google from the command line
 
 	# External Bundles
-	zgen load adolfoabegg/browse-commit                # Open latest commit in browser
+	zgen load adolfoabegg/browse-commit		# Open latest commit in browser
 	zgen load caarlos0/zsh-open-pr			# Open a pull request right there
 	zgen load caarlos0/zsh-add-upstream		# Add upstream remote to git like `add-upstream username`
+	zgen load chrissicool/zsh-256color		# Encourage 256 color mode
 	zgen load horosgrisa/mysql-colorize		# Colorize MySQL plugins
 	zgen load marzocchi/zsh-notify			# Notifications for non-zero exits or long commands
-	zgen load skx/sysadmin-util                        # So many scripts
-	zgen load Tarrasch/zsh-bd                          # Back up to directory name
-	zgen load Tarrasch/zsh-colors                      # So many colors "echo I am red | red" or "red hi"
-	#zgen load unixorn/autoupdate-antigen.zshplugin     # Auto update [every week]
-	zgen load voronkovich/gitignore.plugin.zsh         # Add a .gitignore based on a template
-	zgen load walesmd/caniuse.plugin.zsh               # CanIUse `caniuse webgl`
-	zgen load zsh-users/zsh-completions src            # Tons and tons of completions
-	zgen load zsh-users/zsh-syntax-highlighting        # Pretty colors
+	zgen load peterhurford/git-it-on.zsh		# Github things, like `gitit branches all`
+	zgen load rimraf/k				# Prettier version of l, with git support
+	zgen load RobSis/zsh-completion-generator	# Attempt to add autocompletion for non-completed things `gencom program`
+	zgen load skx/sysadmin-util			# So many scripts
+	zgen load Tarrasch/zsh-bd			# Back up to directory name
+	zgen load Tarrasch/zsh-colors			# So many colors "echo I am red | red" or "red hi"
+	zgen load unixorn/autoupdate-zgen		# Automagic updates every week (by default)
+	zgen load unixorn/jpb.zshplugin			# Handy plugins, like `ansi2html` or `wifi-signal-strenth`
+	zgen load voronkovich/gitignore.plugin.zsh	# Add a .gitignore based on a template
+	zgen load walesmd/caniuse.plugin.zsh		# CanIUse `caniuse webgl`
+	zgen load zsh-users/zsh-completions src		# Tons and tons of completions
+	zgen load zsh-users/zsh-syntax-highlighting	# Pretty colors
 
 	# OS-specific bundles
 	case $(uname -s) in
@@ -63,12 +94,12 @@ if ! zgen saved; then
 			# When I use a mac regularly, I'll put something here
 			;;
 		Linux)
-			if [ -x /usr/bin/pacman ]; then		# Arch
+			if [ -x /usr/bin/pacman ]; then			# Arch
 				zgen oh-my-zsh plugins/archlinux	# Pacman autocompletes
 				source /usr/share/doc/pkgfile/command-not-found.zsh
-			elif [ -x /usr/bin/yum ]; then		# CentOS
+			elif [ -x /usr/bin/yum ]; then			# CentOS
 				zgen oh-my-zsh plugins/yum		# Yum aliases
-			elif [ -x /usr/bin/apt-get ]; then	# Debian or Ubuntu
+			elif [ -x /usr/bin/apt-get ]; then		# Debian or Ubuntu
 				zgen oh-my-zsh plugins/debian		# Apt
 			fi
 			pgrep systemd >/dev/null && \
@@ -79,18 +110,11 @@ if ! zgen saved; then
 			;;
 	esac
 
-	# Powerline theme settings
-	#POWERLINE_RIGHT_A="exit-status"
-	POWERLINE_DISABLE_RPROMPT="true"
-	POWERLINE_NO_BLANK_LINE="true"
-	POWERLINE_DETECT_SSH="true"
-
-	#ZSH Colorful stuff
-
-	ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern root)
 
 	# Load the theme.
-	zgen load jeremyFreeAgent/oh-my-zsh-powerline-theme powerline
+	zgen load caiogondim/bullet-train-oh-my-zsh-theme bullet-train
+
+
 	# Tell zgen that you're done.
 	zgen save
 fi
@@ -101,22 +125,16 @@ say() { mplayer -really-quiet "http://translate.google.com/translate_tts?tl=en&q
 
 gpr() {	  git push origin HEAD && open-pr "$*"  }	# Push and open a PR like that!
 
+
+#ZSH Colorful stuff
+
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern root)
+
 #Press Ctrl-Alt-Shift + direction to skip word by word
 bindkey "^[[1;4C" forward-word
 bindkey "^[[1;4D" backward-word
 
 alias grep="grep --color=always"			# Just watch this break things
-
-man() {
-	env LESS_TERMCAP_mb=$'\E[01;31m' \
-		LESS_TERMCAP_md=$'\E[01;38;5;74m' \
-		LESS_TERMCAP_me=$'\E[0m' \
-		LESS_TERMCAP_se=$'\E[0m' \
-		LESS_TERMCAP_so=$'\E[38;5;246m' \
-		LESS_TERMCAP_ue=$'\E[0m' \
-		LESS_TERMCAP_us=$'\E[04;38;5;146m' \
-		man "$@"
-}
 
 export LESS="-R"
 GRC=`which grc`
@@ -130,6 +148,7 @@ fi
 # The following lines were added by compinstall
 
 zstyle ':completion:*' completer _expand _complete _ignored _approximate
+zstyle ':completion:*' use-cache on						# Enable completion caching layer
 zstyle ':completion:*' expand prefix suffix
 zstyle ':completion:*' file-sort access
 zstyle ':completion:*' ignore-parents parent .. directory

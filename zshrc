@@ -50,7 +50,14 @@ TIMEFMT="%U user %S system %P cpu %*Es total"
 # Bullet-train theme variables
 BULLETTRAIN_PROMPT_SEPARATE_LINE=false
 BULLETTRAIN_PROMPT_ADD_NEWLINE=false
-BULLETTRAIN_IS_SSH_CLIENT=true
+BULLETTRAIN_CONTEXT_SHOW=true
+BULLETTRAIN_TIME_SHOW=false
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+	BULLETTRAIN_CONTEXT_BG=red;
+else
+	BULLETTRAIN_CONTEXT_BG=green;
+	BULLETTRAIN_CONTEXT_FG=black;
+fi
 
 if ! zgen saved; then
 	echo "Creating a zgen save"

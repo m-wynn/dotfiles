@@ -1,3 +1,16 @@
+# Bullet-train theme variables
+BULLETTRAIN_PROMPT_SEPARATE_LINE=false
+BULLETTRAIN_PROMPT_ADD_NEWLINE=false
+BULLETTRAIN_CONTEXT_SHOW=true
+BULLETTRAIN_TIME_SHOW=false
+
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+	BULLETTRAIN_CONTEXT_BG=red;
+else
+	BULLETTRAIN_CONTEXT_BG=green;
+	BULLETTRAIN_CONTEXT_FG=black;
+fi
+
 # Source Zgen, wherever it may be.  Otherwise, offer to download it.
 if [ -f /usr/share/zsh/scripts/zgen/zgen.zsh ]; then
 	source /usr/share/zsh/scripts/zgen/zgen.zsh
@@ -47,17 +60,6 @@ export LANG=en_US.UTF-8
 export REPORTTIME=10
 TIMEFMT="%U user %S system %P cpu %*Es total"
 
-# Bullet-train theme variables
-BULLETTRAIN_PROMPT_SEPARATE_LINE=false
-BULLETTRAIN_PROMPT_ADD_NEWLINE=false
-BULLETTRAIN_CONTEXT_SHOW=true
-BULLETTRAIN_TIME_SHOW=false
-if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-	BULLETTRAIN_CONTEXT_BG=red;
-else
-	BULLETTRAIN_CONTEXT_BG=green;
-	BULLETTRAIN_CONTEXT_FG=black;
-fi
 
 if ! zgen saved; then
 	echo "Creating a zgen save"

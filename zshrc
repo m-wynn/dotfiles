@@ -11,6 +11,9 @@ else
 	BULLETTRAIN_CONTEXT_FG=black;
 fi
 
+#ZSH Colorful stuff
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern root)
+
 # Source Zgen, wherever it may be.  Otherwise, offer to download it.
 if [ -f /usr/share/zsh/scripts/zgen/zgen.zsh ]; then
 	source /usr/share/zsh/scripts/zgen/zgen.zsh
@@ -26,7 +29,7 @@ else
 	fi
 	source ~/.zgen/zgen.zsh
 fi
-ZGEN_RESET_ON_CHANGE=(${HOME}/.zshrc ${HOME}/.zshrc.local)
+ZGEN_RESET_ON_CHANGE=(${HOME}/.zshrc)
 
 # Handy Variables
 
@@ -135,9 +138,6 @@ say() { mplayer -really-quiet "http://translate.google.com/translate_tts?tl=en&q
 gpr() {	  git push origin HEAD && open-pr "$*"  }	# Push and open a PR like that!
 
 
-#ZSH Colorful stuff
-
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern root)
 
 #Press Ctrl-Alt-Shift + direction to skip word by word
 bindkey "^[[1;4C" forward-word

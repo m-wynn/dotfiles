@@ -33,6 +33,9 @@ ZGEN_RESET_ON_CHANGE=(${HOME}/.zshrc)
 
 # Handy Variables
 
+# Vim mode
+bindkey -v
+
 # History tweaks
 export HISTSIZE=1000000000
 export SAVEHIST=$HISTSIZE

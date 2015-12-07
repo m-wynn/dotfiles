@@ -19,7 +19,6 @@ call plug#begin('~/.vim/plugged')
 	Plug 'joonty/vdebug', { 'for': 'php' }		" Interfaces with debuggers.  Needs some configuration soon
 	Plug 'markcornick/vim-vagrant'			" Vagrant support
 	Plug 'ntpeters/vim-better-whitespace'		" Easily strip whitespace
-	"Plug 'scrooloose/syntastic'			" All the syntax checking ever
 	Plug 'shawncplus/phpcomplete.vim'		" Lots of completions and ctag-jumping stuff for PHP.  Pretty cool, check readme for ctags
 	Plug 'StanAngeloff/php.vim'			" Newer PHP syntax highlighting that's a pain to actually get working, I think
 	Plug 'Townk/vim-autoclose'			" Automagically closes parentheses and such.
@@ -30,7 +29,6 @@ call plug#begin('~/.vim/plugged')
 	Plug 'wlangstroth/vim-racket'			" Racket stuff
 	Plug 'xolox/vim-misc'				" Miscellaneous stuff, required for vim-notes
 	Plug 'xolox/vim-notes'				" Notes in Vim!
-	Plug 'xuhdev/vim-latex-live-preview'		" Live LaTeX previews.  Worth a try!
 	Plug 'yegappan/mru'				" Most Recently Used Files
 call plug#end()
 
@@ -126,17 +124,6 @@ let g:SuperTabMappingBackward = '<s-c-p>'
 "" ntpters/vim-better-whitespace -- Automagically strip on save
 autocmd BufWritePre * StripWhitespace
 "let g:better_whitespace_filetypes_blacklist+=['<filetype1>', '<filetype2>', '<etc>']
-
-"" scrooloose/syntastic -- When to check
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_tex_checkers = ['lacheck']
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
 
 "" StanAngeloff/php.vim -- Overrides that should be removed or expanded later
 function! PhpSyntaxOverride()

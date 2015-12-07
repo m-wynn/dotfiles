@@ -480,17 +480,17 @@ globalkeys = awful.util.table.join(
 	-- ALSA volume control
 	awful.key({ }, "XF86AudioRaiseVolume",
 	   function ()
-		   os.execute(string.format("amixer -c %s set %s 1+", volumewidget.card, volumewidget.channel))
+		   os.execute("amixer set Master 1%+")
 		   volumewidget.update()
 	   end),
 	awful.key({ }, "XF86AudioLowerVolume",
 		   function ()
-			   os.execute(string.format("amixer -c %s set %s 1-", volumewidget.card, volumewidget.channel))
+			   os.execute("amixer set Master 1%-")
 			   volumewidget.update()
 		   end),
 	awful.key({ }, "XF86AudioMute",
 			   function ()
-				   os.execute(string.format("amixer -q set Master playback toggle", volumewidget.card, volumewidget.channel))
+				   os.execute(string.format("amixer -q set %s playback toggle", volumewidget.channel))
 				   --os.execute(string.format("amixer set %s toggle", volumewidget.channel))
 				   volumewidget.update()
 			   end),
@@ -522,9 +522,9 @@ globalkeys = awful.util.table.join(
 
 	awful.key({ "Control", altkey }, "l",
 	   function ()
-		   awful.util.spawn("sync")
-		   awful.util.spawn("xscreensaver-command --lock")
 		   awful.util.spawn("xautolock -locknow")
+		   awful.util.spawn("xscreensaver-command --lock")
+		   awful.util.spawn("sync")
 	   end),
 
 	-- User programs

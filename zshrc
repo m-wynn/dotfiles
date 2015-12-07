@@ -35,7 +35,11 @@ ZGEN_RESET_ON_CHANGE=(${HOME}/.zshrc)
 
 # Vim mode
 bindkey -v
+
+# Vim mode is cool, but changes some things.
 bindkey '^R' history-incremental-search-backward
+bindkey "${terminfo[khome]}" beginning-of-line
+bindkey "${terminfo[kend]}" end-of-line
 
 # History tweaks
 export HISTSIZE=1000000000

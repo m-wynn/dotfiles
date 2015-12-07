@@ -35,6 +35,7 @@ ZGEN_RESET_ON_CHANGE=(${HOME}/.zshrc)
 
 # Vim mode
 bindkey -v
+bindkey '^R' history-incremental-search-backward
 
 # History tweaks
 export HISTSIZE=1000000000

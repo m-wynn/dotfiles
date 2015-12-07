@@ -56,11 +56,14 @@ urxvt*font: xft:Liberation Mono for Powerline:size=10, \
 	xft:Noto Sans Kannada:style=Regular:pixelsize=14, \
 	xft:Symbola:pixelsize=7, \
 	-misc-fixed-medium-r-normal--18-120-100-100-c-90-iso10646-1
+URxvt.boldFont:xft:DejaVu Sans Mono:style=Bold:pixelsize=13
+URxvt.italicFont:xft:DejaVu Sans Mono:style=Oblique:pixelsize=13
+URxvt.boldItalicFont:xft:DejaVu Sans Mono:style=Bold Oblique:pixelsize=13
 URxvt*scrollBar: false
 URxvt*scrollWithBuffer:	true
 URxvt*scrollTtyKeypress:	true
-URxvt.perl-lib:	$HOME/lib/urxvt/perls/
-URxvt.perl-ext-common:	default,matcher,clipboard
+URxvt.perl-lib:	$HOME/.local/lib/urxvt/perls/
+URxvt.perl-ext-common:	default,matcher,clipboard,resize-font
 URxvt.url-launcher:	/usr/bin/firefox-nightly
 URxvt.matcher.button: 1
 URxvt.colorUL:	#42a5f5
@@ -83,3 +86,7 @@ URxvt.keysym.C-V:	perl:clipboard:paste
 
 URxvt.urgentOnBell: true
 URxvt.visualBell:   true
+URxvt*termName: rxvt-unicode
+URxvt.resize-font.smaller: C-Down
+URxvt.resize-font.bigger: C-Up
+

@@ -12,6 +12,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'ap/vim-css-color'				" Sets the background to your color. #ff0000 < that is white on red
 	Plug 'benekastah/neomake'			" Make for all kinds of things.  Can take advantage of Neovims asyncronity
 	Plug 'bling/vim-airline'			" Informative tabline/status bar for vim
+	Plug 'cazador481/fakeclip.neovim'		" * and + map to the X clipboard if X is running.  & maps to tmux if it's running.
 	Plug 'chase/vim-ansible-yaml'			" Syntax highlighting for ansible yaml files.  It knows if you're in an ansible folder.
 	Plug 'danro/rename.vim'				" Rename file :rename[!] {newname}
 	Plug 'ervandew/supertab'			" Make the tab key do tab completion.  Or any other key, for that matter.  Customizable
@@ -20,10 +21,11 @@ call plug#begin('~/.vim/plugged')
 	Plug 'markcornick/vim-vagrant'			" Vagrant support
 	Plug 'ntpeters/vim-better-whitespace'		" Easily strip whitespace
 	Plug 'shawncplus/phpcomplete.vim'		" Lots of completions and ctag-jumping stuff for PHP.  Pretty cool, check readme for ctags
+	Plug 'Shougo/deoplete.nvim'			" Completion
 	Plug 'StanAngeloff/php.vim'			" Newer PHP syntax highlighting that's a pain to actually get working, I think
 	Plug 'Townk/vim-autoclose'			" Automagically closes parentheses and such.
 	Plug 'tpope/vim-fugitive'			" Git plugin for like, :Gstatus
-	Plug 'Valloric/YouCompleteMe'			" Many autocomplete.  Requires additional setup!
+"	Plug 'Valloric/YouCompleteMe'			" Many autocomplete.  Requires additional setup!
 	Plug 'vim-latex/vim-latex'			" Such a powerful thing for LaTeX
 	Plug 'vim-scripts/auctex.vim'			" Better Vim syntax highlighting
 	Plug 'wlangstroth/vim-racket'			" Racket stuff
@@ -31,7 +33,6 @@ call plug#begin('~/.vim/plugged')
 	Plug 'xolox/vim-notes'				" Notes in Vim!
 	Plug 'yegappan/mru'				" Most Recently Used Files
 call plug#end()
-
 
 "" Lose the annoyances of vi
 set nocompatible
@@ -56,6 +57,7 @@ set undodir=~/.vim/undo
 set undofile
 
 " Colors!
+"let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let g:airline_theme = 'dark'
 set background=dark
 colorscheme elflord
@@ -93,7 +95,6 @@ function! NumberToggle()
 endfunc
 
 nnoremap <C-n> :call NumberToggle()<cr>
-
 
 " Make the mouse useful
 set mouse=a
@@ -154,3 +155,6 @@ autocmd FileType racket set tabstop=2|set shiftwidth=2|set expandtab
 autocmd FileType haskell set tabstop=2|set shiftwidth=2|set expandtab
 
 autocmd! BufWritePost * Neomake
+
+
+let g:deoplete#enable_at_startup = 1

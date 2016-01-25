@@ -145,7 +145,14 @@ say() { mplayer -really-quiet "http://translate.google.com/translate_tts?tl=en&q
 
 gpr() {	  git push origin HEAD && open-pr "$*"  }	# Push and open a PR like that!
 
-
+# SSH agent
+. ssh-find-agent.sh
+ssh-find-agent -a
+if [ -z "$SSH_AUTH_SOCK" ]
+then
+   eval $(ssh-agent) > /dev/null
+   ssh-add -l >/dev/null || alias ssh='ssh-add -l >/dev/null || ssh-add && unalias ssh; ssh'
+fi
 
 #Press Ctrl-Alt-Shift + direction to skip word by word
 bindkey "^[[1;4C" forward-word

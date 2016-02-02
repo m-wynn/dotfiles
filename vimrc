@@ -24,6 +24,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'StanAngeloff/php.vim'			" Newer PHP syntax highlighting that's a pain to actually get working, I think
 	Plug 'Townk/vim-autoclose'			" Automagically closes parentheses and such.
 	Plug 'tpope/vim-fugitive'			" Git plugin for like, :Gstatus
+	Plug 'tpope/vim-unimpaired'			" Add lots of handy mappings
 	Plug 'vim-airline/vim-airline'			" Informative tabline/status bar for vim
 	Plug 'vim-airline/vim-airline-themes'		" Themes for Airline
 	Plug 'vim-latex/vim-latex'			" Such a powerful thing for LaTeX

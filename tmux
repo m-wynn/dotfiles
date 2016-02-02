@@ -47,8 +47,8 @@ bind v split-window -v
 bind : command-prompt
 
 # panes
-set -g pane-border-fg "colour238"
-set -g pane-active-border-fg "colour190"
+set -g pane-border-fg "colour8"
+set -g pane-active-border-fg "colour10"
 
 # address vim mode switching delay
 set-option -s escape-time 0
@@ -60,7 +60,7 @@ set-option -g display-time 4000
 set -g status on
 set -g status-utf8 on
 set -g status-justify "left"
-set -g status-bg "colour234"
+set -g status-bg "black"
 set -g status-fg "default"
 set -g status-position top
 
@@ -69,9 +69,9 @@ set -g status-interval 2
 
 
 # messaging
-set -g message-fg "colour255"
-set -g message-bg "colour238"
-set -g message-command-fg "colour255"
+set -g message-fg "colour15"
+set -g message-bg "colour8"
+set -g message-command-fg "colour15"
 set -g message-command-bg "colour238"
 
 
@@ -81,29 +81,29 @@ setw -g mode-fg colour0
 
 
 # window status
-setw -g window-status-current-format "#[fg=colour234,bg=red,nobold,nounderscore,noitalics]#[fg=white,bg=red] #I #[fg=white,bg=red] #W #[fg=red,bg=colour234,nobold,nounderscore,noitalics]"
-setw -g window-status-format "#[fg=colour85,bg=colour234] #I #[fg=colour85,bg=colour234] #W "
+setw -g window-status-current-format "#[fg=black,bg=colour9,nobold,nounderscore,noitalics]#[fg=black,bg=colour9] #I #[fg=black,bg=colour9] #W #[fg=colour9,bg=black,nobold,nounderscore,noitalics]"
+setw -g window-status-format "#[fg=colour255,bg=black] #I #[fg=colour255,bg=black] #W "
 setw -g window-status-current-attr dim
 setw -g window-status-attr none				#reverse
-setw -g window-status-fg "colour85"
-setw -g window-status-bg "colour234"
+setw -g window-status-fg "colour255"
+setw -g window-status-bg "black"
 setw -g window-status-separator ""
 setw -g window-status-activity-attr "none"
-setw -g window-status-activity-fg "colour190"
-setw -g window-status-activity-bg "colour234"
+setw -g window-status-activity-fg "colour10"
+setw -g window-status-activity-bg "black"
 
 # Info on right
 set -g status-right-length "100"
 set -g status-right-attr "none"
 set -g status-attr "none"
-set -g status-right '#[fg=colour238,bg=colour234,nobold,nounderscore,noitalics]#[fg=colour255,bg=colour238] #(sensors -f| grep Physical | cut -d+ -f2 | cut -d. -f1)°  #(cut -d " " -f 1-3 /proc/loadavg) #[fg=colour190,bg=colour238,nobold,nounderscore,noitalics]#[fg=colour17,bg=colour190] #h '
+set -g status-right '#[fg=colour8,bg=black,nobold,nounderscore,noitalics]#[fg=colour15,bg=colour8] #(sensors -f| grep Physical | cut -d+ -f2 | cut -d. -f1)°  #(cut -d " " -f 1-3 /proc/loadavg) #[fg=colour3,bg=colour8,nobold,nounderscore,noitalics]#[fg=black,bg=colour3] #h '
 if-shell '[ "$HOSTNAME" = "carbon" ] ' 'set -g status-right ""; set -g status-right-length 0; set -g status off'
 
 # Use Xterm keys (mainly for C-left/right)
 set -gw xterm-keys on
 
 set -g status-left-length "100"
-set -g status-left "#[fg=colour17,bg=colour190] #S #[fg=colour190,bg=colour234,nobold,nounderscore,noitalics]"
+set -g status-left "#[fg=colour22,bg=colour10] #S #[fg=colour10,bg=black,nobold,nounderscore,noitalics]"
 set -g status-left-attr "none"
 
 # vim like bindings

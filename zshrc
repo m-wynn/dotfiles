@@ -3,12 +3,16 @@ BULLETTRAIN_PROMPT_SEPARATE_LINE=false
 BULLETTRAIN_PROMPT_ADD_NEWLINE=false
 BULLETTRAIN_CONTEXT_SHOW=true
 BULLETTRAIN_TIME_SHOW=false
+BULLETTRAIN_DIR_FG='15'
+BULLETTRAIN_GIT_BG='15'
+BULLETTRAIN_CONTEXT_FG=black;
+BULLETTRAIN_EXEC_TIME_SHOW=true
+BULLETTRAIN_STATUS_FG='15'
 
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-	BULLETTRAIN_CONTEXT_BG=red;
+	BULLETTRAIN_CONTEXT_BG=9;
 else
-	BULLETTRAIN_CONTEXT_BG=green;
-	BULLETTRAIN_CONTEXT_FG=black;
+	BULLETTRAIN_CONTEXT_BG=10;
 fi
 
 #ZSH Colorful stuff
@@ -66,11 +70,6 @@ export EDITOR=vim
 
 # Use UTF-8
 export LANG=en_US.UTF-8
-
-# Give some stats if a process takes a while
-export REPORTTIME=10
-TIMEFMT="%U user %S system %P cpu %*Es total"
-
 
 if ! zgen saved; then
 	echo "Creating a zgen save"

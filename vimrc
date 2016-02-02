@@ -11,7 +11,6 @@ endfunction
 call plug#begin('~/.vim/plugged')
 	Plug 'ap/vim-css-color'				" Sets the background to your color. #ff0000 < that is white on red
 	Plug 'benekastah/neomake'			" Make for all kinds of things.  Can take advantage of Neovims asyncronity
-	Plug 'bling/vim-airline'			" Informative tabline/status bar for vim
 	Plug 'cazador481/fakeclip.neovim'		" * and + map to the X clipboard if X is running.  & maps to tmux if it's running.
 	Plug 'chase/vim-ansible-yaml'			" Syntax highlighting for ansible yaml files.  It knows if you're in an ansible folder.
 	Plug 'danro/rename.vim'				" Rename file :rename[!] {newname}
@@ -25,10 +24,12 @@ call plug#begin('~/.vim/plugged')
 	Plug 'StanAngeloff/php.vim'			" Newer PHP syntax highlighting that's a pain to actually get working, I think
 	Plug 'Townk/vim-autoclose'			" Automagically closes parentheses and such.
 	Plug 'tpope/vim-fugitive'			" Git plugin for like, :Gstatus
-"	Plug 'Valloric/YouCompleteMe'			" Many autocomplete.  Requires additional setup!
+	Plug 'vim-airline/vim-airline'			" Informative tabline/status bar for vim
+	Plug 'vim-airline/vim-airline-themes'		" Themes for Airline
 	Plug 'vim-latex/vim-latex'			" Such a powerful thing for LaTeX
 	Plug 'vim-scripts/auctex.vim'			" Better Vim syntax highlighting
 	Plug 'wlangstroth/vim-racket'			" Racket stuff
+	Plug 'w0ng/vim-hybrid'				" Colors!
 	Plug 'xolox/vim-misc'				" Miscellaneous stuff, required for vim-notes
 	Plug 'xolox/vim-notes'				" Notes in Vim!
 	Plug 'yegappan/mru'				" Most Recently Used Files
@@ -57,10 +58,11 @@ set undodir=~/.vim/undo
 set undofile
 
 " Colors!
-"let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-let g:airline_theme = 'dark'
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+let g:hybrid_custom_term_colors = 1
 set background=dark
-colorscheme elflord
+colorscheme hybrid
+let g:airline_theme = 'hybridline'
 hi Normal ctermbg=none					" Use this if you have a colorscheme that breaks terminal transparency
 
 " Show matching parenthesis

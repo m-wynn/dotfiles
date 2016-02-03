@@ -24,7 +24,7 @@ if awesome.startup_errors then
 		title = "Oops, there were errors during startup!",
 		text = awesome.startup_errors })
 end
-
+--[[
 do
 	local in_error = false
 	awesome.connect_signal("debug::error", function (err)
@@ -37,6 +37,7 @@ do
 		in_error = false
 	end)
 end
+--]]
 -- }}}
 
 -- {{{ Autostart applications

@@ -13,12 +13,11 @@ require("awful.autofocus")
 local wibox		= require("wibox")
 local beautiful = require("beautiful")
 local naughty	= require("naughty")
-local drop		= require("scratch")
 local lain		= require("lain")
 local vicious	= require("vicious")
 -- }}}
 
---[[
+
 -- {{{ Error handling
 if awesome.startup_errors then
 	naughty.notify({ preset = naughty.config.presets.critical,
@@ -39,7 +38,7 @@ do
 	end)
 end
 -- }}}
---]]
+
 -- {{{ Autostart applications
 function run_once(cmd)
 	findme = cmd
@@ -469,9 +468,6 @@ globalkeys = awful.util.table.join(
 	awful.key({ modkey,			  }, "Return", function () awful.util.spawn(terminal) end),
 	awful.key({ modkey, "Control" }, "r",	   awesome.restart),
 	awful.key({ modkey, "Shift"   }, "q",	   awesome.quit),
-
-	-- Dropdown terminal
-	awful.key({ modkey,			  }, "z",	   function () drop(terminal) end),
 
 	-- Widgets popups
 	awful.key({ altkey,			  }, "c",	   function () lain.widgets.calendar:show(7) end),

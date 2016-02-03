@@ -4,3 +4,9 @@
 [submodule "ssh-find-agent"]
 	path = ssh-find-agent
 	url = git@github.com:wwalker/ssh-find-agent.git
+[submodule "awesome/lain"]
+	path = awesome/lain
+	url = git@github.com:copycat-killer/lain.git
+[submodule "awesome/vicious"]
+	path = awesome/vicious
+	url = http://git.sysphere.org/vicious

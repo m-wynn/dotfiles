@@ -14,9 +14,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'cazador481/fakeclip.neovim'		" * and + map to the X clipboard if X is running.  & maps to tmux if it's running.
 	Plug 'chase/vim-ansible-yaml'			" Syntax highlighting for ansible yaml files.  It knows if you're in an ansible folder.
 	Plug 'danro/rename.vim'				" Rename file :rename[!] {newname}
-	Plug 'ervandew/supertab'			" Make the tab key do tab completion.  Or any other key, for that matter.  Customizable
 	Plug 'euclio/vim-markdown-composer',	{ 'do': function('BuildComposer') }		" Adds asyncronous markdown previous (neovim pls)
-	Plug 'joonty/vdebug', { 'for': 'php' }		" Interfaces with debuggers.  Needs some configuration soon
 	Plug 'markcornick/vim-vagrant'			" Vagrant support
 	Plug 'ntpeters/vim-better-whitespace'		" Easily strip whitespace
 	Plug 'shawncplus/phpcomplete.vim'		" Lots of completions and ctag-jumping stuff for PHP.  Pretty cool, check readme for ctags
@@ -103,31 +101,35 @@ nnoremap <C-n> :call NumberToggle()<cr>
 set mouse=a
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
-cmap w!! w !sudo tee > /dev/null %
+cmap w!! w !sudo tee > /dev/null %'
 
 "Word wrapping is fine, just don't insert newlines, please.
 set wrap linebreak nolist
 set textwidth=0
 set wrapmargin=0
 
+" File-specific settings
+autocmd FileType racket set tabstop=2|set shiftwidth=2|set expandtab
+autocmd FileType haskell set tabstop=2|set shiftwidth=2|set expandtab
+
+
 """""""""""""""""""
 " Plugin-Specific "
 "    Settings     "
 """""""""""""""""""
 
-"" bling/vim-airline
-set laststatus=2					" Always show the status
-set noshowmode						" Don't show the mode below the statusline, we're taking care of that in vim-airline
-let g:airline_powerline_fonts = 1			" Use powerline symbols
-let g:airline#extensions#tabline#enabled = 1		" Tablinify the tabbar
+"" benekastah/neomake -- Asyncronous checking
+autocmd! BufWritePost * Neomake				" Run Neomake on every write
 
-"" ervandew/supertab --  changes to let us use tab again
-let g:SuperTabMappingForward = '<c-p>'
-let g:SuperTabMappingBackward = '<s-c-p>'
+"" chase/vim-ansible-yaml -- Ansible-specific syntax highlighting
+let g:ansible_options = {'documentation_mapping': '<C-K>'}	"Ctrl-k for documentation
 
 "" ntpters/vim-better-whitespace -- Automagically strip on save
 autocmd BufWritePre * StripWhitespace
 "let g:better_whitespace_filetypes_blacklist+=['<filetype1>', '<filetype2>', '<etc>']
+
+"" Shougo/deoplete.nvim -- Completion
+let g:deoplete#enable_at_startup = 1
 
 "" StanAngeloff/php.vim -- Overrides that should be removed or expanded later
 function! PhpSyntaxOverride()
@@ -140,6 +142,15 @@ augroup phpSyntaxOverride
   autocmd FileType php call PhpSyntaxOverride()
 augroup END
 
+"" tpope/vim-fugitive -- All the gits
+autocmd BufReadPost fugitive://* set bufhidden=delete	" Delete old git-object buffers when traversing the dag
+
+"" vim-airline/vim-airline
+set laststatus=2					" Always show the status
+set noshowmode						" Don't show the mode below the statusline, we're taking care of that in vim-airline
+let g:airline_powerline_fonts = 1			" Use powerline symbols
+let g:airline#extensions#tabline#enabled = 1		" Tablinify the tabbar
+
 
 "" vim-latex/vim-latex -- LaTex stuff
 let g:Tex_DefaultTargetFormat = 'pdf'
@@ -148,16 +159,6 @@ let g:tex_flavor='latex'
 let g:Imap_UsePlaceHolders = 0		"Set this if you ever EVER are going to use '()'
 let g:Imap_FreezeImap=1
 
+"" xolox/vim-notes
 let g:notes_directories = ['~/Dropbox/Fall15/notes']
 
-"" Eclim
-let g:EclimCompletionMethod = 'omnifunc'
-
-
-autocmd FileType racket set tabstop=2|set shiftwidth=2|set expandtab
-autocmd FileType haskell set tabstop=2|set shiftwidth=2|set expandtab
-
-autocmd! BufWritePost * Neomake
-
-
-let g:deoplete#enable_at_startup = 1

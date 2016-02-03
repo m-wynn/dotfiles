@@ -151,7 +151,7 @@ mpdwidget = lain.widgets.mpd({
 					     mpdicon:set_image(beautiful.widget_music)
 				     end
 
-				     widget:set_markup(markup("#EA6F81", artist) .. title)
+				     widget:set_markup(markup(beautiful.bg_red, artist) .. title)
 			     end
 		     })
 
@@ -165,8 +165,8 @@ memwidget:set_height(18)
 memwidget:set_vertical(true)
 memwidget:set_background_color(beautiful.bg_focus)
 memwidget:set_border_color(nil)
-memwidget:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = { {0, "#5E5Fe6"}, {0.5, "#48b1ff"},
-		    {1, "#5F56c6"}}})
+memwidget:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = { {0, beautiful.fg_blue}, {0.5, beautiful.bg_blue},
+		    {1, beautiful.fg_magenta}}})
 -- Register widget
 vicious.register(memwidget, vicious.widgets.mem, "$1", 13)
 memicon = wibox.widget.imagebox(beautiful.widget_mem)
@@ -179,8 +179,8 @@ cpuwidget = awful.widget.graph()
 cpuwidget:set_width(50)
 cpuwidget:set_height(18)
 cpuwidget:set_background_color(beautiful.bg_focus)
-cpuwidget:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = { {0, "#FF5656"}, {0.5, "#88A175"},
-		    {1, "#AECF96" }}})
+cpuwidget:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = { {0, beautiful.fg_red}, {0.5, beautiful.fg_green},
+		    {1, beautiful.bg_green}}})
 -- Register widget
 vicious.register(cpuwidget, vicious.widgets.cpu, "$1")
 
@@ -243,9 +243,9 @@ neticon = wibox.widget.imagebox(beautiful.widget_net)
 neticon:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn_with_shell(iptraf) end)))
 netwidget = lain.widgets.net({
 			     settings = function()
-				     widget:set_markup(markup("#7AC82E", " " .. net_now.received)
+				     widget:set_markup(markup(beautiful.bg_green, " " .. net_now.received)
 			   .. " " ..
-			   markup("#46A8C3", " " .. net_now.sent .. " "))
+			   markup(beautiful.bg_blue, " " .. net_now.sent .. " "))
 			     end
 		     })
 

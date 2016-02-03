@@ -1,8 +1,8 @@
 --[[
-						 
-	 Powerarrow Darker Awesome WM config 2.0 
-	 github.com/copycat-killer		 
-						 
+
+	 Powerarrow Darker Awesome WM config 2.0
+	 github.com/copycat-killer
+
 --]]
 
 theme					= {}
@@ -12,21 +12,21 @@ theme.wallpaper				= themes_dir .. "/wall.png"
 
 theme.font				= "Tamsyn 10.5"
 theme.taglist_font			= "Entypo Social 21"
-theme.fg_normal				= "#FFFFFF"
-theme.fg_focus				= "#1976D2"
-theme.fg_urgent				= "#E53935"
-theme.bg_normal				= "#242424"
-theme.bg_focus				= "#1A1A1A"
-theme.bg_urgent				= "#000000"
+theme.fg_normal				= "#C5C8C6"
+theme.fg_focus				= "#85678F"
+theme.fg_urgent				= "#A54242"
+theme.bg_normal				= "#373b41"
+theme.bg_focus				= "#282a2e"
+theme.bg_urgent				= "#1d1f21"
 theme.border_width			= "1"
 theme.border_normal			= "#1c2022"
 theme.border_focus			= "#606060"
-theme.border_marked			= "#42A5F5"
-theme.titlebar_bg_focus			= "#FFFFFF"
-theme.titlebar_bg_normal		= "#FFFFFF"
-theme.taglist_fg_focus			= "#1976D2"
-theme.tasklist_bg_focus			= "#1A1A1A"
-theme.tasklist_fg_focus			= "#1976D2"
+theme.border_marked			= "#85678F"
+theme.titlebar_bg_focus			= "#C5C8C6"
+theme.titlebar_bg_normal		= "#C5C8C6"
+theme.taglist_fg_focus			= "#85678F"
+theme.tasklist_bg_focus			= "#282a2e"
+theme.tasklist_fg_focus			= "#85678F"
 theme.textbox_widget_margin_top		= 1
 theme.notify_fg				= theme.fg_normal
 theme.notify_bg				= theme.bg_normal
@@ -37,15 +37,23 @@ theme.mouse_finder_color		= "#CC9393"
 theme.menu_height			= "16"
 theme.menu_width			= "140"
 
-theme.fg_black				= "#424242"
-theme.fg_red				= "#ce5666"
-theme.fg_green				= "#3dd37c"
-theme.fg_yellow				= "#f1c40f"
-theme.fg_blue				= "#3498db"
-theme.fg_magenta			= "#9b59b6"
-theme.fg_cyan				= "#1abc9c"
-theme.fg_white				= "#bdc3c7"
-theme.fg_blue				= "#2980b9"
+theme.fg_black				= "#282a2e"
+theme.fg_red				= "#a54242"
+theme.fg_green				= "#8c9440"
+theme.fg_yellow				= "#de935f"
+theme.fg_blue				= "#5f819d"
+theme.fg_magenta			= "#85678f"
+theme.fg_cyan				= "#5e8d87"
+theme.fg_white				= "#707880"
+
+theme.bg_black				= "#373b41"
+theme.bg_red				= "#cc6666"
+theme.bg_green				= "#b5bd68"
+theme.bg_yellow				= "#f0c674"
+theme.bg_blue				= "#81a2be"
+theme.bg_magenta			= "#b294bb"
+theme.bg_cyan				= "#8abeb7"
+theme.bg_white				= "#c5c8c6"
 
 theme.submenu_icon			= themes_dir .. "/icons/submenu.png"
 theme.taglist_squares_sel		= themes_dir .. "/icons/square_sel.png"

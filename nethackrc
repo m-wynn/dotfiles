@@ -1,0 +1,18 @@
+# === OPTIONS ===
+# character
+OPTIONS=role:Valkyrie
+OPTIONS=race:Human
+OPTIONS=align:lawful
+# appearance
+OPTIONS=color
+OPTIONS=showexp,showscore,time
+OPTIONS=hilite_pile
+BOULDER=79
+# automatic things
+OPTIONS=autodig,autopickup,autoquiver,pushweapon
+AUTOPICKUP_EXCEPTION=">*chest*"
+# other controls
+OPTIONS=clicklook
+OPTIONS=disclose:+i+a+v+g+c+o
+# names
+OPTIONS=catname:Dino,dogname:Sheila,

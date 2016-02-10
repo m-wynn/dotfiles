@@ -15,6 +15,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'chase/vim-ansible-yaml'			" Syntax highlighting for ansible yaml files.  It knows if you're in an ansible folder.
 	Plug 'danro/rename.vim'				" Rename file :rename[!] {newname}
 	Plug 'euclio/vim-markdown-composer',	{ 'do': function('BuildComposer') }		" Adds asyncronous markdown previous (neovim pls)
+	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }	"Fuzzy searching
 	Plug 'markcornick/vim-vagrant'			" Vagrant support
 	Plug 'ntpeters/vim-better-whitespace'		" Easily strip whitespace
 	Plug 'shawncplus/phpcomplete.vim'		" Lots of completions and ctag-jumping stuff for PHP.  Pretty cool, check readme for ctags
@@ -34,8 +35,13 @@ call plug#begin('~/.vim/plugged')
 	Plug 'yegappan/mru'				" Most Recently Used Files
 call plug#end()
 
+""""""""""""""
+"   General  "
+"     Vim    "
+""""""""""""""
+
 "" Lose the annoyances of vi
-set nocompatible
+set nocompatible		" This is generally considered useless
 
 "" Load plugins and indentation for specific filetypes
 filetype plugin indent on
@@ -46,9 +52,6 @@ syntax on
 "" title in the titlebar.  A bit weird
 set titlestring=VIM:\ %-5.10t\ %a%r%m titlelen=15
 set title
-
-"" tabs
-set tabstop=8 softtabstop=0 noexpandtab shiftwidth=8
 
 "" Put temps somewhere else
 set dir=~/.vim/swaps
@@ -70,6 +73,11 @@ set showmatch
 " Autoindentation.
 set autoindent
 
+"" tabs
+set tabstop=8 softtabstop=0 noexpandtab shiftwidth=8
+set shiftround		" Indents to the next multiple of shiftwidth
+
+
 " Allow backspacing over line breaks, start of insert action, and autoindentation
 set backspace=eol,start,indent
 
@@ -81,6 +89,8 @@ set smartcase
 set hlsearch
 " Makes search act like search in modern browsers
 set incsearch
+" Wrap scan around end-of-file
+set wrapscan
 
 " Show line numbers
 set number

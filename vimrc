@@ -111,7 +111,7 @@ nnoremap <C-n> :call NumberToggle()<cr>
 set mouse=a
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
-cmap w!! w !sudo tee > /dev/null %'
+cmap w!! w !sudo tee > /dev/null %
 
 "Word wrapping is fine, just don't insert newlines, please.
 set wrap linebreak nolist

@@ -56,7 +56,7 @@ run_once("~/bin/lockScreen.sh &")
 run_once("xrdb ~/.Xresources &")
 run_once("mpd &")
 run_once("QT_STYLE_OVERRIDE=gtk ~/.dropbox-dist/dropboxd &")
-run_once("compton --backend glx --paint-on-overlay --glx-no-stencil --vsync opengl-swc --unredir-if-possible &")
+run_once("compton --backend glx --paint-on-overlay --glx-no-stencil --vsync opengl-swc --unredir-if-possible --no-fading-openclose &")
 
 -- }}}
 
@@ -519,7 +519,7 @@ globalkeys = awful.util.table.join(
 
 	awful.key({ "Control", altkey }, "l",
 	   function ()
-		   awful.util.spawn("xautolock -locknow")
+		   awful.util.spawn("~/bin/i3blur.sh &")
 		   awful.util.spawn("xscreensaver-command --lock")
 		   awful.util.spawn("sync")
 	   end),

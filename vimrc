@@ -17,6 +17,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'euclio/vim-markdown-composer',	{ 'do': function('BuildComposer') }		" Adds asyncronous markdown previous (neovim pls)
 	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }	"Fuzzy searching
 	Plug 'markcornick/vim-vagrant'			" Vagrant support
+	Plug 'nhooyr/neoman.vim' 			" Man pages in vim
 	Plug 'ntpeters/vim-better-whitespace'		" Easily strip whitespace
 	Plug 'shawncplus/phpcomplete.vim'		" Lots of completions and ctag-jumping stuff for PHP.  Pretty cool, check readme for ctags
 	Plug 'Shougo/deoplete.nvim'			" Completion
@@ -60,7 +61,7 @@ set undodir=~/.vim/undo
 set undofile
 
 " Colors!
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+"let $NVIM_TUI_ENABLE_TRUE_COLOR=0
 let g:hybrid_custom_term_colors = 1
 set background=dark
 colorscheme hybrid
@@ -171,4 +172,3 @@ let g:Imap_FreezeImap=1
 
 "" xolox/vim-notes
 let g:notes_directories = ['~/Dropbox/Fall15/notes']
-

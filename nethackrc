@@ -10,7 +10,7 @@ OPTIONS=hilite_pile
 BOULDER=79
 # automatic things
 OPTIONS=autodig,autopickup,autoquiver,pushweapon
-AUTOPICKUP_EXCEPTION=">*chest*"
+AUTOPICKUP_EXCEPTION=">chest"
 # other controls
 OPTIONS=clicklook
 OPTIONS=disclose:+i+a+v+g+c+o

@@ -38,8 +38,8 @@ URxvt.fading:	10
 *color7: #707880
 *color15: #C5C8C6
 
-urxvt*transparent:	true
-urxvt*font: xft:Liberation Mono for Powerline:size=10, \
+URxvt*transparent:	true
+URxvt*font: xft:Liberation Mono for Powerline:size=10, \
 	xft:DejaVu Sans Mono: size=10, \
 	xft:WenQuanYi Bitmap Song:pixelsize=14, \
 	xft:FreeSerif:style=Regular, \
@@ -47,9 +47,9 @@ urxvt*font: xft:Liberation Mono for Powerline:size=10, \
 	xft:Noto Sans Kannada:style=Regular:pixelsize=14, \
 	xft:Symbola:pixelsize=7, \
 	-misc-fixed-medium-r-normal--18-120-100-100-c-90-iso10646-1
-URxvt.boldFont:xft:DejaVu Sans Mono:style=Bold:pixelsize=13
-URxvt.italicFont:xft:DejaVu Sans Mono:style=Oblique:pixelsize=13
-URxvt.boldItalicFont:xft:DejaVu Sans Mono:style=Bold Oblique:pixelsize=13
+URxvt.boldFont:xft:Liberation Mono:style=Bold:pixelsize=13
+URxvt.italicFont:xft:Liberation Mono:style=Oblique:pixelsize=13
+URxvt.boldItalicFont:xft:Liberation Mono:style=Bold Oblique:pixelsize=13
 URxvt*scrollBar: false
 URxvt*scrollWithBuffer:	true
 URxvt*scrollTtyKeypress:	true

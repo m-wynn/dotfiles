@@ -9,6 +9,7 @@ endfunction
 "" Plugins using Vim Plug https://github.com/junegunn/vim-plug
 
 call plug#begin('~/.vim/plugged')
+	Plug 'amirh/HTML-AutoCloseTag'			" Auto close html tags
 	Plug 'ap/vim-css-color'				" Sets the background to your color. #ff0000 < that is white on red
 	Plug 'benekastah/neomake'			" Make for all kinds of things.  Can take advantage of Neovims asyncronity
 	Plug 'cazador481/fakeclip.neovim'		" * and + map to the X clipboard if X is running.  & maps to tmux if it's running.

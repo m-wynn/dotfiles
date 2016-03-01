@@ -50,9 +50,9 @@ URxvt*font: xft:Liberation Mono for Powerline:size=10, \
 URxvt.boldFont:xft:Liberation Mono:style=Bold:pixelsize=13
 URxvt.italicFont:xft:Liberation Mono:style=Oblique:pixelsize=13
 URxvt.boldItalicFont:xft:Liberation Mono:style=Bold Oblique:pixelsize=13
-URxvt*scrollBar: false
-URxvt*scrollWithBuffer:	true
-URxvt*scrollTtyKeypress:	true
+URxvt.scrollBar: false
+URxvt.scrollWithBuffer:	true
+URxvt.scrollTtyKeypress:	true
 URxvt.perl-lib:	~/.local/lib/urxvt/perls/
 URxvt.perl-ext-common:	default,matcher,clipboard,resize-font
 URxvt.url-launcher:	/usr/bin/firefox-nightly
@@ -73,7 +73,7 @@ URxvt.keysym.C-V:	perl:clipboard:paste
 
 URxvt.urgentOnBell: true
 URxvt.visualBell:   true
-URxvt*termName: rxvt-unicode
+URxvt.termName: rxvt-unicode
 URxvt.resize-font.smaller: C-minus
 URxvt.resize-font.bigger: C-plus
 URxvt.resize-font.reset: C-equal

@@ -160,6 +160,8 @@ bindkey "^[[1;4D" backward-word
 
 alias grep="grep --color=always"			# Just watch this break things
 
+alias vim="emacs"
+
 export LESS="-R"
 GRC=`which grc`
 if [ "$TERM" != dumb ] && [ -n GRC ]

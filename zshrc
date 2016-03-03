@@ -66,7 +66,7 @@ export PATH=$PATH:~/bin:/root/.gem/ruby/2.2.0/bin:/home/matthew/.gem/ruby/2.2.0/
 export DISABLE_AUTO_TITLE=true
 
 # Use VIM
-export EDITOR=vim
+export EDITOR=emacs
 
 # Use UTF-8
 export LANG=en_US.UTF-8

@@ -66,7 +66,7 @@ export PATH=$PATH:~/bin:/root/.gem/ruby/2.2.0/bin:/home/matthew/.gem/ruby/2.2.0/
 export DISABLE_AUTO_TITLE=true
 
 # Use VIM
-export EDITOR=emacs
+export EDITOR=vim
 
 # Use UTF-8
 export LANG=en_US.UTF-8
@@ -159,8 +159,6 @@ bindkey "^[[1;4C" forward-word
 bindkey "^[[1;4D" backward-word
 
 alias grep="grep --color=always"			# Just watch this break things
-
-alias vim="emacs"
 
 export LESS="-R"
 GRC=`which grc`

@@ -56,9 +56,9 @@ set titlestring=VIM:\ %-5.10t\ %a%r%m titlelen=15
 set title
 
 "" Put temps somewhere else
-set dir=~/.vim/swaps
-set backupdir=~/.vim/backups
-set undodir=~/.vim/undo
+set dir=~/.vim/swaps//
+set backupdir=~/.vim/backups//
+set undodir=~/.vim/undo//
 set undofile
 
 " Colors!

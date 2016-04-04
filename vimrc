@@ -10,31 +10,33 @@ endfunction
 
 call plug#begin('~/.vim/plugged')
 	Plug 'amirh/HTML-AutoCloseTag'			" Auto close html tags
-	Plug 'ap/vim-css-color'				" Sets the background to your color. #ff0000 < that is white on red
-	Plug 'benekastah/neomake'			" Make for all kinds of things.  Can take advantage of Neovims asyncronity
+	Plug 'ap/vim-css-color'			    	" Sets the background to your color. #ff0000 < that is white on red
+	Plug 'benekastah/neomake'		    	" Make for all kinds of things.  Can take advantage of Neovims asyncronity
 	Plug 'cazador481/fakeclip.neovim'		" * and + map to the X clipboard if X is running.  & maps to tmux if it's running.
+    Plug 'cespare/vim-toml'                 " Toml support
 	Plug 'chase/vim-ansible-yaml'			" Syntax highlighting for ansible yaml files.  It knows if you're in an ansible folder.
-	Plug 'danro/rename.vim'				" Rename file :rename[!] {newname}
+	Plug 'danro/rename.vim'			    	" Rename file :rename[!] {newname}
 	Plug 'euclio/vim-markdown-composer',	{ 'do': function('BuildComposer') }		" Adds asyncronous markdown previous (neovim pls)
 	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }	"Fuzzy searching
 	Plug 'markcornick/vim-vagrant'			" Vagrant support
-	Plug 'nhooyr/neoman.vim' 			" Man pages in vim
-	Plug 'ntpeters/vim-better-whitespace'		" Easily strip whitespace
+	Plug 'nhooyr/neoman.vim' 		    	" Man pages in vim
+	Plug 'ntpeters/vim-better-whitespace'	" Easily strip whitespace
+	Plug 'rust-lang/rust.vim'		    	" Rust Stuff
 	Plug 'shawncplus/phpcomplete.vim'		" Lots of completions and ctag-jumping stuff for PHP.  Pretty cool, check readme for ctags
-	Plug 'Shougo/deoplete.nvim'			" Completion
-	Plug 'StanAngeloff/php.vim'			" Newer PHP syntax highlighting that's a pain to actually get working, I think
-	Plug 'Townk/vim-autoclose'			" Automagically closes parentheses and such.
-	Plug 'tpope/vim-fugitive'			" Git plugin for like, :Gstatus
-	Plug 'tpope/vim-unimpaired'			" Add lots of handy mappings
+	Plug 'Shougo/deoplete.nvim'		    	" Completion
+	Plug 'StanAngeloff/php.vim'		    	" Newer PHP syntax highlighting that's a pain to actually get working, I think
+	Plug 'Townk/vim-autoclose'		    	" Automagically closes parentheses and such.
+	Plug 'tpope/vim-fugitive'		    	" Git plugin for like, :Gstatus
+	Plug 'tpope/vim-unimpaired'		    	" Add lots of handy mappings
 	Plug 'vim-airline/vim-airline'			" Informative tabline/status bar for vim
-	Plug 'vim-airline/vim-airline-themes'		" Themes for Airline
-	Plug 'vim-latex/vim-latex'			" Such a powerful thing for LaTeX
+	Plug 'vim-airline/vim-airline-themes'  	" Themes for Airline
+	Plug 'vim-latex/vim-latex'			    " Such a powerful thing for LaTeX
 	Plug 'vim-scripts/auctex.vim'			" Better Vim syntax highlighting
 	Plug 'wlangstroth/vim-racket'			" Racket stuff
-	Plug 'w0ng/vim-hybrid'				" Colors!
-	Plug 'xolox/vim-misc'				" Miscellaneous stuff, required for vim-notes
-	Plug 'xolox/vim-notes'				" Notes in Vim!
-	Plug 'yegappan/mru'				" Most Recently Used Files
+	Plug 'w0ng/vim-hybrid'		    		" Colors!
+	Plug 'xolox/vim-misc'		    		" Miscellaneous stuff, required for vim-notes
+	Plug 'xolox/vim-notes'			    	" Notes in Vim!
+	Plug 'yegappan/mru'				        " Most Recently Used Files
 call plug#end()
 
 """"""""""""""
@@ -67,7 +69,8 @@ let g:hybrid_custom_term_colors = 1
 set background=dark
 colorscheme hybrid
 let g:airline_theme = 'hybridline'
-hi Normal ctermbg=none					" Use this if you have a colorscheme that breaks terminal transparency
+" Use this if you have a colorscheme that breaks terminal transparency
+hi Normal ctermbg=none
 
 " Show matching parenthesis
 set showmatch
@@ -76,7 +79,7 @@ set showmatch
 set autoindent
 
 "" tabs
-set tabstop=8 softtabstop=0 noexpandtab shiftwidth=8
+set tabstop=4 softtabstop=0 expandtab shiftwidth=4
 set shiftround		" Indents to the next multiple of shiftwidth
 
 
@@ -114,6 +117,9 @@ set mouse=a
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
+
+" Allow switching buffers without saving
+set hidden
 
 "Word wrapping is fine, just don't insert newlines, please.
 set wrap linebreak nolist

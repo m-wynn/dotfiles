@@ -57,6 +57,8 @@ URxvt.perl-lib:	~/.local/lib/urxvt/perls/
 URxvt.perl-ext-common:	default,matcher,clipboard,resize-font
 URxvt.url-launcher:	/usr/bin/firefox-nightly
 URxvt.matcher.button: 1
+URxvt.keysym.C-Delete:    perl:matcher:last
+URxvt.keysym.M-Delete:    perl:matcher:list
 URxvt.colorUL:	#42a5f5
 URxvt.iso14755:	false
 URxvt.iso14755_52:	false
@@ -78,3 +80,4 @@ URxvt.resize-font.smaller: C-minus
 URxvt.resize-font.bigger: C-plus
 URxvt.resize-font.reset: C-equal
 URxvt.resize-font.show: C-question
+

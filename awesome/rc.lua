@@ -54,6 +54,7 @@ run_once("urxvtd &")
 run_once("unclutter -root &")
 run_once("~/bin/lockScreen.sh &")
 run_once("xrdb ~/.Xresources &")
+run_once("xmodmap ~/.Xmodmap &")
 run_once("mpd &")
 run_once("QT_STYLE_OVERRIDE=gtk ~/.dropbox-dist/dropboxd &")
 run_once("compton --backend glx --paint-on-overlay --glx-no-stencil --vsync opengl-swc --unredir-if-possible --no-fading-openclose &")
@@ -517,7 +518,7 @@ globalkeys = awful.util.table.join(
 
 	-- Lockscreen
 
-	awful.key({ "Control", altkey }, "l",
+	awful.key({ altkey, "Control" }, "l",
 	   function ()
 		   awful.util.spawn("~/bin/i3blur.sh &")
 		   awful.util.spawn("xscreensaver-command --lock")

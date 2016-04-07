@@ -35,16 +35,6 @@ else
 fi
 ZGEN_RESET_ON_CHANGE=(${HOME}/.zshrc)
 
-# Handy Variables
-
-# Vim mode
-bindkey -v
-
-# Vim mode is cool, but changes some things.
-bindkey '^R' history-incremental-search-backward
-bindkey "${terminfo[khome]}" beginning-of-line
-bindkey "${terminfo[kend]}" end-of-line
-
 # History tweaks
 export HISTSIZE=1000000000
 export SAVEHIST=$HISTSIZE
@@ -81,11 +71,13 @@ if ! zgen saved; then
 	zgen oh-my-zsh plugins/colored-man-pages	# Colorizes man pages
 	zgen oh-my-zsh plugins/docker			# Docker autocompletes
 	zgen oh-my-zsh plugins/encode64			# Encode and decode 64-bit
+	zgen oh-my-zsh plugins/pass
 	zgen oh-my-zsh plugins/rsync			# Rsync commands, like `rsync-copy`
 	zgen oh-my-zsh plugins/sudo			# Press Esc twice for sudo
 	zgen oh-my-zsh plugins/tmux			# Auto launch tmux
 	zgen oh-my-zsh plugins/wd			# Warp directories
 	zgen oh-my-zsh plugins/web-search		# Google from the command line
+	zgen oh-my-zsh plugins/vi-mode
 
 	# External Bundles
 	zgen load adolfoabegg/browse-commit		# Open latest commit in browser
@@ -109,9 +101,6 @@ if ! zgen saved; then
 
 	# OS-specific bundles
 	case $(uname -s) in
-		Darwin)
-			# When I use a mac regularly, I'll put something here
-			;;
 		Linux)
 			if [ -x /usr/bin/pacman ]; then			# Arch
 				zgen oh-my-zsh plugins/archlinux	# Pacman autocompletes
@@ -154,20 +143,26 @@ gpr() {	  git push origin HEAD && open-pr "$*"  }	# Push and open a PR like that
 #   ssh-add -l >/dev/null || alias ssh='ssh-add -l >/dev/null || ssh-add && unalias ssh; ssh'
 #fi
 
-#Press Ctrl-Alt-Shift + direction to skip word by word
-bindkey "^[[1;4C" forward-word
-bindkey "^[[1;4D" backward-word
-
 alias grep="grep --color=always"			# Just watch this break things
 
 export LESS="-R"
-GRC=`which grc`
-if [ "$TERM" != dumb ] && [ -n GRC ]
-then
-	alias colorize="grc -es --colour=auto"
-	for c in as c++ configure cvs df diff dig esperanto gas gcc g++ ld ldapadd ldapauth ldapdelete ldapmodify ldapmodrdn ldappassd ldapsearch ldapwhoami last make mount netstat ping php ps proftpd traceroute wdiff; do
-		alias ${c}="colorize ${c}"
-	done
+
+if [[ "$TERM" != dumb ]] && (( $+commands[grc] )) ; then
+  # Prevent grc aliases from overriding zsh completions.
+  setopt COMPLETE_ALIASES
+
+  # Supported commands
+  cmds=(c++ cc configure cvs df diff dig gcc g++ ifconfig last ld ldap ldapadd ldapauth ldapdelete ldapmodify ldapmodrdn ldappassd ldapsearch ldapwhoami ls make mount mtr netstat ping ping6 ps traceroute traceroute6 wdiff );
+
+  # Set alias for available commands.
+  for cmd in $cmds ; do
+    if (( $+commands[$cmd] )) ; then
+      alias $cmd="grc --colour=auto $cmd"
+    fi
+  done
+
+  # Clean up variables
+  unset cmds cmd
 fi
 
 #nman stuff

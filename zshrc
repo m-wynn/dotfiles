@@ -6,7 +6,6 @@ BULLETTRAIN_TIME_SHOW=false
 BULLETTRAIN_DIR_FG='15'
 BULLETTRAIN_GIT_BG='15'
 BULLETTRAIN_CONTEXT_FG=black;
-BULLETTRAIN_EXEC_TIME_SHOW=true
 BULLETTRAIN_STATUS_FG='15'
 
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
@@ -127,6 +126,7 @@ if ! zgen saved; then
 	zgen save
 fi
 
+bindkey '^R' history-incremental-search-backward
 
 say() { mplayer -really-quiet "http://translate.google.com/translate_tts?tl=en&q=$1"; }
 
@@ -152,7 +152,7 @@ if [[ "$TERM" != dumb ]] && (( $+commands[grc] )) ; then
   setopt COMPLETE_ALIASES
 
   # Supported commands
-  cmds=(c++ cc configure cvs df diff dig gcc g++ ifconfig last ld ldap ldapadd ldapauth ldapdelete ldapmodify ldapmodrdn ldappassd ldapsearch ldapwhoami ls make mount mtr netstat ping ping6 ps traceroute traceroute6 wdiff );
+  cmds=(c++ cc configure cvs df diff dig gcc g++ ifconfig last ld ldap ldapadd ldapauth ldapdelete ldapmodify ldapmodrdn ldappassd ldapsearch ldapwhoami make mount mtr netstat ping ping6 ps traceroute traceroute6 wdiff );
 
   # Set alias for available commands.
   for cmd in $cmds ; do

@@ -6,16 +6,14 @@ call plug#begin('~/.vim/plugged')
 	Plug 'ap/vim-css-color'								" Sets the background to your color. #ff0000 < that is white on red
 	Plug 'benekastah/neomake'							" Make for all kinds of things.  Can take advantage of Neovims asyncronity
 	Plug 'cazador481/fakeclip.neovim'					" * and + map to the X clipboard if X is running.  & maps to tmux if it's running.
-	Plug 'cespare/vim-toml'								" Toml support
 	Plug 'danro/rename.vim'								" Rename file :rename[!] {newname}
 	Plug 'markcornick/vim-vagrant'						" Vagrant support
 	Plug 'nhooyr/neoman.vim'							" Man pages in vim
 	Plug 'ntpeters/vim-better-whitespace'				" Easily strip whitespace
 	Plug 'pearofducks/ansible-vim', {'for': 'ansible'}	" Ansible stuff
-	Plug 'rust-lang/rust.vim'							" Rust Stuff
 	Plug 'shawncplus/phpcomplete.vim'					" Lots of completions and ctag-jumping stuff for PHP.  Pretty cool, check readme for ctags
+	Plug 'sheerun/vim-polyglot'							" Support for sooo many languages
 	Plug 'Shougo/deoplete.nvim'							" Completion
-	Plug 'StanAngeloff/php.vim'							" Newer PHP syntax highlighting that's a pain to actually get working, I think
 	Plug 'Townk/vim-autoclose'							" Automagically closes parentheses and such.
 	Plug 'tpope/vim-commentary'							" Comment things easily
 	Plug 'tpope/vim-fugitive'							" Git plugin for like, :Gstatus
@@ -26,8 +24,6 @@ call plug#begin('~/.vim/plugged')
 	Plug 'vim-airline/vim-airline'						" Informative tabline/status bar for vim
 	Plug 'vim-airline/vim-airline-themes'				" Themes for Airline
 	Plug 'vim-latex/vim-latex'							" Such a powerful thing for LaTeX
-	Plug 'vim-scripts/auctex.vim'						" Better Vim syntax highlighting
-	Plug 'wlangstroth/vim-racket'						" Racket stuff
 	Plug 'w0ng/vim-hybrid'								" Colors!
 	Plug 'xolox/vim-misc'								" Miscellaneous stuff, required for vim-notes
 	Plug 'xolox/vim-notes'								" Notes in Vim!
@@ -141,17 +137,6 @@ autocmd BufWritePre * StripWhitespace
 
 "" Shougo/deoplete.nvim -- Completion
 let g:deoplete#enable_at_startup = 1
-
-"" StanAngeloff/php.vim -- Overrides that should be removed or expanded later
-function! PhpSyntaxOverride()
-	hi! def link phpDocTags  phpDefine
-	hi! def link phpDocParam phpType
-endfunction
-
-augroup phpSyntaxOverride
-	autocmd!
-	autocmd FileType php call PhpSyntaxOverride()
-augroup END
 
 "" tpope/vim-fugitive -- All the gits
 autocmd BufReadPost fugitive://* set bufhidden=delete	" Delete old git-object buffers when traversing the dag

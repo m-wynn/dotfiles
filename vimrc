@@ -1,47 +1,43 @@
-"" euclio/vim-markdown-composer -- define BuildComposer
-function! BuildComposer(info)
-  if a:info.status != 'unchanged' || a:info.force
-    !cargo build --release
-    UpdateRemotePlugins
-  endif
-endfunction
-
 "" Plugins using Vim Plug https://github.com/junegunn/vim-plug
 
 call plug#begin('~/.vim/plugged')
-	Plug 'amirh/HTML-AutoCloseTag'			" Auto close html tags
-	Plug 'ap/vim-css-color'			    	" Sets the background to your color. #ff0000 < that is white on red
-	Plug 'benekastah/neomake'		    	" Make for all kinds of things.  Can take advantage of Neovims asyncronity
-	Plug 'cazador481/fakeclip.neovim'		" * and + map to the X clipboard if X is running.  & maps to tmux if it's running.
-    Plug 'cespare/vim-toml'                 " Toml support
-	Plug 'chase/vim-ansible-yaml'			" Syntax highlighting for ansible yaml files.  It knows if you're in an ansible folder.
-	Plug 'danro/rename.vim'			    	" Rename file :rename[!] {newname}
-	Plug 'euclio/vim-markdown-composer',	{ 'do': function('BuildComposer') }		" Adds asyncronous markdown previous (neovim pls)
-	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }	"Fuzzy searching
-	Plug 'markcornick/vim-vagrant'			" Vagrant support
-	Plug 'nhooyr/neoman.vim' 		    	" Man pages in vim
-	Plug 'ntpeters/vim-better-whitespace'	" Easily strip whitespace
-	Plug 'rust-lang/rust.vim'		    	" Rust Stuff
-	Plug 'shawncplus/phpcomplete.vim'		" Lots of completions and ctag-jumping stuff for PHP.  Pretty cool, check readme for ctags
-	Plug 'Shougo/deoplete.nvim'		    	" Completion
-	Plug 'StanAngeloff/php.vim'		    	" Newer PHP syntax highlighting that's a pain to actually get working, I think
-	Plug 'Townk/vim-autoclose'		    	" Automagically closes parentheses and such.
-	Plug 'tpope/vim-fugitive'		    	" Git plugin for like, :Gstatus
-	Plug 'tpope/vim-unimpaired'		    	" Add lots of handy mappings
-	Plug 'vim-airline/vim-airline'			" Informative tabline/status bar for vim
-	Plug 'vim-airline/vim-airline-themes'  	" Themes for Airline
-	Plug 'vim-latex/vim-latex'			    " Such a powerful thing for LaTeX
-	Plug 'vim-scripts/auctex.vim'			" Better Vim syntax highlighting
-	Plug 'wlangstroth/vim-racket'			" Racket stuff
-	Plug 'w0ng/vim-hybrid'		    		" Colors!
-	Plug 'xolox/vim-misc'		    		" Miscellaneous stuff, required for vim-notes
-	Plug 'xolox/vim-notes'			    	" Notes in Vim!
-	Plug 'yegappan/mru'				        " Most Recently Used Files
+	Plug 'amirh/HTML-AutoCloseTag', {'for': 'html'}		" Auto close html tags
+	Plug 'AndrewRadev/splitjoin.vim'					" Splitting and joining lines and blocks
+	Plug 'ap/vim-css-color'								" Sets the background to your color. #ff0000 < that is white on red
+	Plug 'benekastah/neomake'							" Make for all kinds of things.  Can take advantage of Neovims asyncronity
+	Plug 'cazador481/fakeclip.neovim'					" * and + map to the X clipboard if X is running.  & maps to tmux if it's running.
+	Plug 'cespare/vim-toml'								" Toml support
+	Plug 'danro/rename.vim'								" Rename file :rename[!] {newname}
+	Plug 'markcornick/vim-vagrant'						" Vagrant support
+	Plug 'nhooyr/neoman.vim'							" Man pages in vim
+	Plug 'ntpeters/vim-better-whitespace'				" Easily strip whitespace
+	Plug 'pearofducks/ansible-vim', {'for': 'ansible'}	" Ansible stuff
+	Plug 'rust-lang/rust.vim'							" Rust Stuff
+	Plug 'shawncplus/phpcomplete.vim'					" Lots of completions and ctag-jumping stuff for PHP.  Pretty cool, check readme for ctags
+	Plug 'Shougo/deoplete.nvim'							" Completion
+	Plug 'StanAngeloff/php.vim'							" Newer PHP syntax highlighting that's a pain to actually get working, I think
+	Plug 'Townk/vim-autoclose'							" Automagically closes parentheses and such.
+	Plug 'tpope/vim-commentary'							" Comment things easily
+	Plug 'tpope/vim-fugitive'							" Git plugin for like, :Gstatus
+	Plug 'tpope/vim-ragtag'								" More tag mappings
+	Plug 'tpope/vim-sleuth'								" Figure out tabs based on the file
+	Plug 'tpope/vim-surround'							" Change the surrounding stuff
+	Plug 'tpope/vim-unimpaired'							" Add lots of handy mappings
+	Plug 'vim-airline/vim-airline'						" Informative tabline/status bar for vim
+	Plug 'vim-airline/vim-airline-themes'				" Themes for Airline
+	Plug 'vim-latex/vim-latex'							" Such a powerful thing for LaTeX
+	Plug 'vim-scripts/auctex.vim'						" Better Vim syntax highlighting
+	Plug 'wlangstroth/vim-racket'						" Racket stuff
+	Plug 'w0ng/vim-hybrid'								" Colors!
+	Plug 'xolox/vim-misc'								" Miscellaneous stuff, required for vim-notes
+	Plug 'xolox/vim-notes'								" Notes in Vim!
+	Plug 'yegappan/mru'									" Most Recently Used Files
+	Plug 'zchee/deoplete-jedi', {'for': 'python'}		" Python completion
 call plug#end()
 
 """"""""""""""
-"   General  "
-"     Vim    "
+"	General  "
+"	  Vim	 "
 """"""""""""""
 
 "" Lose the annoyances of vi
@@ -79,7 +75,7 @@ set showmatch
 set autoindent
 
 "" tabs
-set tabstop=4 softtabstop=0 expandtab shiftwidth=4
+set tabstop=4 softtabstop=0 noexpandtab shiftwidth=4
 set shiftround		" Indents to the next multiple of shiftwidth
 
 
@@ -103,11 +99,11 @@ autocmd InsertEnter * :set norelativenumber
 autocmd InsertLeave * :set relativenumber
 
 function! NumberToggle()
-  if(&relativenumber == 1)
-    set norelativenumber
-  else
-    set relativenumber
-  endif
+	if(&relativenumber == 1)
+		set norelativenumber
+	else
+		set relativenumber
+	endif
 endfunc
 
 nnoremap <C-n> :call NumberToggle()<cr>
@@ -133,14 +129,11 @@ autocmd FileType haskell set tabstop=2|set shiftwidth=2|set expandtab
 
 """""""""""""""""""
 " Plugin-Specific "
-"    Settings     "
+"	 Settings	  "
 """""""""""""""""""
 
 "" benekastah/neomake -- Asyncronous checking
 autocmd! BufWritePost * Neomake				" Run Neomake on every write
-
-"" chase/vim-ansible-yaml -- Ansible-specific syntax highlighting
-let g:ansible_options = {'documentation_mapping': '<C-K>'}	"Ctrl-k for documentation
 
 "" ntpters/vim-better-whitespace -- Automagically strip on save
 autocmd BufWritePre * StripWhitespace
@@ -151,13 +144,13 @@ let g:deoplete#enable_at_startup = 1
 
 "" StanAngeloff/php.vim -- Overrides that should be removed or expanded later
 function! PhpSyntaxOverride()
-  hi! def link phpDocTags  phpDefine
-  hi! def link phpDocParam phpType
+	hi! def link phpDocTags  phpDefine
+	hi! def link phpDocParam phpType
 endfunction
 
 augroup phpSyntaxOverride
-  autocmd!
-  autocmd FileType php call PhpSyntaxOverride()
+	autocmd!
+	autocmd FileType php call PhpSyntaxOverride()
 augroup END
 
 "" tpope/vim-fugitive -- All the gits

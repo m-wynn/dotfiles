@@ -52,7 +52,7 @@ end
 
 run_once("urxvtd &")
 run_once("unclutter -root &")
-run_once("~/bin/lockScreen.sh &")
+--run_once("~/bin/lockScreen.sh &")
 run_once("xrdb ~/.Xresources &")
 run_once("xmodmap ~/.Xmodmap &")
 run_once("mpd &")
@@ -78,7 +78,7 @@ editor_cmd = terminal .. " -e " .. editor
 -- user defined
 browser    = "firefox-nightly"
 browser2   = "chromium"
-gui_editor = "gvim"
+gui_editor = "gedit"
 graphics   = "gimp"
 iptraf	   = terminal .. " -g 180x54-20+34 -e sudo iptraf-ng -i all "
 musicplr   = terminal .. " -g 130x34-320+16 -e ncmpcpp "
@@ -520,9 +520,7 @@ globalkeys = awful.util.table.join(
 
 	awful.key({ altkey, "Control" }, "l",
 	   function ()
-		   awful.util.spawn("~/bin/i3blur.sh &")
-		   awful.util.spawn("xscreensaver-command --lock")
-		   awful.util.spawn("sync")
+		   awful.util.spawn(os.getenv("HOME") .. "/bin/i3blur.sh &")
 	   end),
 
 	-- User programs
@@ -638,7 +636,7 @@ awful.rules.rules = {
 	{ rule = { class = "Skype" },
 	properties = { tag = tags[1][2] } },
 
-	{ rule = { class = "Hipchat" },
+	{ rule = { class = "HipChat" },
 	properties = { tag = tags[1][2] } },
 
 	{ rule = { class = "Nemo" },

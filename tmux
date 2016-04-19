@@ -28,10 +28,10 @@ bind-key -t vi-copy PPage page-up
 bind-key -t vi-copy NPage page-down
 
 # super easy tab switching using Shift-[direction]
-if-shell '[ -z "$SSH_CLIENT" ] && [ -z "$SSH_TTY" ]' 'bind -n S-Right next-window; bind -n S-Left previous-window; bind -n C-t new-window; bind -n S-Up command-prompt "rename-window %%"; bind-key -n C-Left swap-window -t -1; bind-key -n C-Left swap-window -t -1; bind-key -n C-Right swap-window -t +1'
+if-shell '[ -z "$SSH_CLIENT" ] && [ -z "$SSH_TTY" ]' 'bind -n S-Right next-window; bind -n S-Left previous-window; bind -n C-t new-window -c "#{pane_current_path}"; bind -n S-Up command-prompt "rename-window %%"; bind-key -n C-Left swap-window -t -1; bind-key -n C-Left swap-window -t -1; bind-key -n C-Right swap-window -t +1'
 
 # super easy tab switching using Alt-[direction]
-if-shell '[ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] && [ "$HOSTNAME" != "carbon" ]' 'bind -n M-Right next-window; bind -n M-Left previous-window; bind -n M-t new-window; bind -n M-Up command-prompt "rename-window %%"; bind-key -n C-M-Left swap-window -t -1; bind-key -n C-M-Right swap-window -t +1'
+if-shell '[ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] && [ "$HOSTNAME" != "carbon" ]' 'bind -n M-Right next-window; bind -n M-Left previous-window; bind -n M-t new-window "#{pane_current_path}"; bind -n M-Up command-prompt "rename-window %%"; bind-key -n C-M-Left swap-window -t -1; bind-key -n C-M-Right swap-window -t +1'
 
 #Not so easy tab switching with Prefix-[direction]
 if-shell '[ "$HOSTNAME" = "carbon" ]' 'bind Right next-window; bind Left previous-window; bind t new-window; bind Up command-prompt "rename-window %%"; bind-key -n C-Left swap-window -t -1; bind-key C-Right swap-window -t +1'
@@ -58,7 +58,6 @@ set-option -g display-time 4000
 
 # status line
 set -g status on
-set -g status-utf8 on
 set -g status-justify "left"
 set -g status-bg "black"
 set -g status-fg "default"

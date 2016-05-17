@@ -7,9 +7,9 @@ set pgp_decode_command    = "gpg2 --status-fd=2 %?p?--passphrase-fd 0? --no-verb
 # Command used to decrypt an encypted message
 set pgp_decrypt_command   = "gpg2 --status-fd=2 %?p?--passphrase-fd 0? --no-verbose --quiet --batch --output - %f"
 # Used to encrypt a body without signing it
-set pgp_encrypt_only_command  = "pgpewrap gpg2 --batch --quiet --no-verbose --output - --encrypt --textmode --armor --always-trust --encrypt-to 0xCDE632EA -- -r %r -- %f"
+set pgp_encrypt_only_command  = "pgpewrap gpg2 --batch --quiet --no-verbose --output - --encrypt --textmode --armor --always-trust --encrypt-to 0x30604CA4 -- -r %r -- %f"
 # USed to both sign and encrypt body
-set pgp_encrypt_sign_command  = "pgpewrap gpg2 %?p?--passphrase-fd 0? --batch --quiet --no-verbose --textmode --output - --encrypt --sign %?a?-u %a? --armor --always-trust --encrypt-to 0xCDE632EA -- -r %r -- %f"
+set pgp_encrypt_sign_command  = "pgpewrap gpg2 %?p?--passphrase-fd 0? --batch --quiet --no-verbose --textmode --output - --encrypt --sign %?a?-u %a? --armor --always-trust --encrypt-to 0x30604CA4 -- -r %r -- %f"
 # set pgp_entry_format      = [string]
 # Export a public key from user's key ring
 set pgp_export_command    = "gpg2 --no-verbose --export --armor %r"

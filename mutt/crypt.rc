@@ -1,0 +1,17 @@
+# Configuration options for crypt* settings.
+
+# set crypt_autoencrypt     = no    # Do not always attempt to encrypt outgoing msgs
+# set crypt_autopgp     = yes   # Allow mutt to automatically control PGP
+  set crypt_autosign        = no    # Automatically sign all outgoing messages
+# set crypt_autosmime       = yes   # Allow mutt to automatically control S/MIME
+  set crypt_confirmhook     = no    # Don't prompt for confirmation of keys
+    # Enable/disable encryption based on availability of all recipient keys
+# set crypt_opportunistic_encrypt = no
+  set crypt_replyencrypt    = yes   # Encrypt replies to encrypted messages
+  set crypt_replysign       = yes   # Sign replies to signed signed messages
+  set crypt_replysignencrypted  = yes   # Encrypt and sign replies to encrypted msgs
+# set crypt_timestamp       = yes   # Time stamp lines surrounding PGP output
+  set crypt_verify_sig      = yes   # Automatically verify sign of opened messages
+# set crypt_use_gpgme       = no    # Don't use GPGME backends
+# set crypt_use_pka     = no    # Don't use PKA during signature verification
+# set crypt_verify_sig = yes # Always attempt to verify signatures

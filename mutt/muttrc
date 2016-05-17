@@ -1,0 +1,204 @@
+set abort_unmodified    = yes           # Automatically abort unedited replies
+set alias_file          = $HOME/.mutt/aliases   # Where to keep aliases
+# set allow_8bit                        # Never do Q-P encoding on legal 8-bit chars
+# set arrow_cursor                      # Use '->' instead of hilighting line
+# set ascii_chars                       # Use ASCII instead of ACS chars for threads
+# set askbcc
+# set askcc
+# set attribution="On %d, %n wrote:"    # How to attribute replies
+set autoedit                            # Go immediately to editor when composing
+# set auto_tag                          # always operate on tagged messages
+# set bounce            = yes           # Don't prompt before bouncing messages
+# set charset           = "iso-8859-1"  # character set for your terminal
+# set noconfirmappend                   # Don't ask for appending to mailboxes
+# set confirmcreate                     # Prompt when creating new files
+set copy        = yes                   # Always save a copy of outgoing messages
+# set delete        = yes               # Purge deleted messages without asking
+# set delete_untag  = yes               # Untag messages when marking for deletion
+set edit_headers                        # Edit the message header when composing
+set editor      = "vim -c 'set filetype=mail' -c 'set spell spelllang=en'"
+# set fast_reply                        # Skip initial prompts when replying
+# set fcc_attach                        # Keep attachments in copies of sent messages?
+set folder      = "$HOME/.mail"            # Directory of new folder
+set folder_format   = "%2C %t %N %F %2l %-8.8u %-8.8g %8s %d %f"
+#set force_name                         # fcc by recipient, create if mailbox nonexistent
+# set forward_decode                    # weed and MIME decode forwaded messages
+# set forward_format    = "[%a: %s]"    # Subject to use when forwarding messages
+# set forward_quote                     # Quote the header and body of forward msgs
+# set index_format      = "%4C %Z %{%m/%d} [%2N] %-15.15F (%4c) %s"
+# set index_format      = "%4C %Z %{%m/%d} %-15.15F (%4c) %s" # format of the index
+# set hdrs                              # Include `my_hdr' lines in outgoing messages
+# set header                            # Include message header when replying
+set help              = no            # Show the help lines
+# set history=20                        # Number of lines of history to remember
+# set hostname="mutt.org"               # My DNS domain
+set include                           # Always include messages when replying
+set indent_string     = "> "          # how to quote replied text
+# set keep_flagged      = no            # Move from spool when marked as flag
+# set locale            = "C"           # Locale to use for printing time
+# set mailcap_path      = "$HOME/.mailcap:/usr/local/share/mailcap"
+# set mail_check        = 10            # how often to poll for new mail (seconds)
+set nomark_old                        # Don't mark messages as old; new/read is enough
+set markers           = no            # No '+' for lines that wrap
+# set mbox          = +mbox             # Where to store read messages
+set mbox_type         = Maildir       # Needed for maildir format
+# set menu_scroll                       # No implicit next-page/prev-page
+# set metoo                         # Remove my address when replying
+set mime_forward                      # Use message/rfc822 type to forward messages
+set move            = yes               # Don't ask about moving messages, just do it
+#set pager           = less              # Location of an external pager
+# set pager_context     = 3             # No. of lines of context to give when scrolling
+# set pager_format      = "-%S- %-20.20f %s"# Format of the pager status bar
+# set pager_index_lines = 6             # How many index lines to show in the pager
+# set pager_stop                        # Don't move to the next message on next-page
+# set pgp_strict_enc                    # Use Q-P encoding when needed for PGP
+# set postponed         = +postponed    # mailbox to store postponed messages in
+# set post_indent_string= '---end quoted text---'
+# set print             = ask-yes       # ask me if I really want to print messages
+# set print_command     = /bin/false    # how to print things (I like to save trees)
+set noprompt_after                    # Don't ask for command after pager exits
+set quit                              # No further input after wanting to quit
+# set quote_regexp      = "^ *[a-zA-Z]*[>:#}]"  # how to catch quoted text
+set read_inc          = 25            # Increment to show progress when reading mailbox
+# set recall                            # Prompt to recall postponed messages
+# set record            = +outbox       # Default location to save outgoing mail
+set reply_to                          # Always use reply-to if present
+set reply_regexp      = "^(re:[ \t]*)+"   # How to identify replies in the subject:
+# set resolve                           # Move to next message when action is performed
+set reverse_alias                     # Attempt to look up my names for people
+set reverse_name                      # Use my address as appears in reply-to message
+set nosave_empty                      # Remove files when no messages are left
+# set save_name                         # Save outgoing messages by recipient
+set sendmail_wait     = 0             # Wait for msmtp to return
+# set shell             = "/bin/zsh"    # Used for shell escapes, default is user's default
+# set signature         = "$HOME/.signature"    # File which contains my signature
+set smart_wrap
+set sort                = threads       # Primary sorting method
+set sort_aux            = reverse-date-received         # how to sort subthreads
+set sort_aux            = last-date     # Date of the last message in thread
+set sort_browser        = reverse-date  # How to sort files in the dir browser
+set spoolfile           = "$HOME/.mail/com.matthewwynn.matthew/inbox"  # where my new mail is located
+# set status_format     = "-%r-Mutt: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?  %l]---(%s)-%>-(%P)---"
+# set status_on_top                     # some people prefer the status bar on top
+# set strict_threads                    # don't thread by subject
+set text_flowed       = yes           # Wrap lines for better viewing in other clients
+# set tilde                             # virtual lines to pad blank lines in the pager
+set timeout           = 3             # Idle time before scanning (seconds)
+	set tmpdir            = $HOME/.mutt/tmp   # where to store temp files
+# set to_chars=" +TCF"
+# set use_8bitmime                      # enable the -B8BITMIME sendmail flag
+# set nouse_domain                      # don't qualify local addresses with $domain
+# set use_from                          # always generate the `From:' header field
+# set implicit_autoview=yes             # pager shows parts having a mailcap viewer
+# set pgp_verify_sig=no                 # don't automatically verify message signatures
+# set nowait_key                        # prompt when a pipe returns normal status
+# set write_inc=25                      # show progress while writing mailboxes
+
+# Source account configurations
+	folder-hook "com.matthewwynn.matthew" "source $HOME/.mutt/accounts/com.matthewwynn.matthew.rc"
+	source $HOME/.mutt/accounts/com.matthewwynn.matthew.rc    # Default account
+
+# Source external files
+	source $HOME/.mutt/pgp.rc               # PGP configuration
+	source $HOME/.mutt/crypt.rc             # Cryptographics configuration
+	source $HOME/.mutt/headers.rc           # Configure header display
+	source $HOME/.mutt/keybindings.rc       # Configure key bindings
+	source $HOME/.mutt/colors.rc            # Colors!
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+# Specify default filename when saving messages
+#
+#   save-hook [!]<pattern> <mailbox>
+#
+# <mailbox> is provided as default when saving messages from <pattern>
+
+# save-hook mutt- =mutt-mail
+# save-hook aol\\.com$ +spam
+	save-hook ^judge +diplomacy
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+# Multiple spool mailboxes
+#
+#   mbox-hook [!]<pattern> <mbox-mailbox>
+#
+# Read mail in <pattern> is moved to <mbox-mailbox> when <pattern> is
+# closed.
+
+#mbox-hook =mutt-users.in =mutt-users
+#mbox-hook +TEST +inbox
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+# Change settings based on mailbox
+#
+#   folder-hook [!]<pattern> <command>
+#
+# <command> is executed when opening a mailbox matching <pattern>
+
+#folder-hook .      'set sort=date-sent'
+#folder-hook mutt   'set index_format="%4C %Z %02m/%02N %-20.20F (%4l) %s"'
+#folder-hook =mutt  my_hdr Revolution: \#9 # real comment
+
+#folder-hook .      'set reply_regexp="^re:[ \t]*"'
+
+# this mailing list prepends "[WM]" to all non reply subjects, so set
+# $reply_regexp to ignore it
+# Warning: May break threads for other people.
+#folder-hook +wmaker    'set reply_regexp="^(re:[ \t]*)?\[WM\][ \t]*"'
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+# Aliases
+#
+#   alias <name> <address> [ , <address> ... ]
+
+#alias exam "\# to annoy michael" <user@host>
+	alias me Matthew Wynn <matthew@matthewwynn.com> # me!
+	alias mutt-dev Mutt Development List <mutt-dev@mutt.org> # power users
+	alias mutt-users Mutt User List <mutt-users@mutt.org>
+	alias mutt-announce Mutt Announcement List <mutt-announce@mutt.org>
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+# Mailboxes to watch for new mail
+#
+#   mailboxes <path1> [ <path2> ... ]
+#
+
+#mailboxes ! +mutt-dev +mutt-users +open-pgp +wmaker +hurricane +vim +ietf \
+#   +drums
+#mailboxes `echo $HOME/mail/*`
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+# Identify mailing lists I subscribe to
+#
+#   lists <list-name> [ <list-name> ... ]
+
+#lists ^mutt-dev@mutt\\.org$ ^mutt-users@mutt\\.org$
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+# Automatically use entries from $HOME/.mailcap to view these MIME types
+#
+#   auto_view <type> [ <type> ... ]
+
+#auto_view application/x-gunzip
+#auto_view application/x-gzip
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+# Scoring
+#
+#   score <pattern> <value>
+#
+# 9999 and -9999 are special values which cause processing of hooks to stop
+# at that entry.  If you prefix the score with an equal sign (=), the score
+# is assigned to the message and processing stops.
+
+# score '$HOMEf ^me@cs\.hmc\.edu$' 1000
+# score '$HOMEt mutt | $HOMEc mutt' =500
+# score '$HOMEf aol\.com$' -9999
+

@@ -1,0 +1,20 @@
+IMAPAccount com.matthewwynn.matthew
+	Host imap.gmail.com
+	User matthew@matthewwynn.com
+	PassCmd "pass Email/apppass"
+	SSLType IMAPS
+	SSLVersions TLSv1.2
+
+IMAPStore remote-com.matthewwynn.matthew
+	Account com.matthewwynn.matthew
+
+MaildirStore local-com.matthewwynn.matthew
+	Path ~/.mail/com.matthewwynn.matthew/
+	Inbox ~/.mail/com.matthewwynn.matthew/inbox
+
+Channel com.matthewwynn.matthew
+	Master :remote-com.matthewwynn.matthew:
+	Slave :local-com.matthewwynn.matthew:
+	Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Starred" "[Gmail]/All Mail"
+	Create Both
+	SyncState *

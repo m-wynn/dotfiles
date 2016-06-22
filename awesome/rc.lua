@@ -50,14 +50,17 @@ function run_once(cmd)
 	awful.util.spawn_with_shell("pgrep -u $USER -x " .. findme .. " > /dev/null || (" .. cmd .. ")")
 end
 
-run_once("urxvtd &")
-run_once("unclutter -root &")
---run_once("~/bin/lockScreen.sh &")
+run_once("~/.screenlayout/2monitor.sh &")
+run_once("compton --backend glx --paint-on-overlay --glx-no-stencil --vsync opengl-swc --unredir-if-possible --no-fading-openclose &")
 run_once("xrdb ~/.Xresources &")
 run_once("xmodmap ~/.Xmodmap &")
+run_once("urxvtd &")
+run_once("unclutter -root &")
 run_once("mpd &")
-run_once("QT_STYLE_OVERRIDE=gtk ~/.dropbox-dist/dropboxd &")
-run_once("compton --backend glx --paint-on-overlay --glx-no-stencil --vsync opengl-swc --unredir-if-possible --no-fading-openclose &")
+run_once("firefox &")
+run_once("hipchat4 &")
+run_once("pidgin &")
+run_once("urxvt &")
 
 -- }}}
 
@@ -641,6 +644,12 @@ awful.rules.rules = {
 
 	{ rule = { class = "Nemo" },
 	properties = { tag = tags[1][3] } },
+
+	{ rule = { class = "Pidgin" },
+	properties = { tag = tags[2][2] } },
+
+	{ rule = { class = "URxvt" },
+	properties = { tag = tags[2][1] } },
 
 	{ rule = { class = "Gimp", role = "gimp-image-window" },
 	properties = { maximized_horizontal = true,

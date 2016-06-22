@@ -14,6 +14,10 @@ call plug#begin('~/.vim/plugged')
 	Plug 'shawncplus/phpcomplete.vim'					" Lots of completions and ctag-jumping stuff for PHP.  Pretty cool, check readme for ctags
 	Plug 'sheerun/vim-polyglot'							" Support for sooo many languages
 	Plug 'Shougo/deoplete.nvim'							" Completion
+	Plug 'Shougo/echodoc.vim'							" Completion
+	Plug 'Shougo/neoinclude.vim'						" Completion
+	Plug 'Shougo/neopairs.vim'							" Completion
+	Plug 'tmhedberg/SimpylFold'							" Python folding
 	Plug 'Townk/vim-autoclose'							" Automagically closes parentheses and such.
 	Plug 'tpope/vim-commentary'							" Comment things easily
 	Plug 'tpope/vim-fugitive'							" Git plugin for like, :Gstatus
@@ -25,10 +29,12 @@ call plug#begin('~/.vim/plugged')
 	Plug 'vim-airline/vim-airline-themes'				" Themes for Airline
 	Plug 'vim-latex/vim-latex'							" Such a powerful thing for LaTeX
 	Plug 'w0ng/vim-hybrid'								" Colors!
+	Plug 'welle/tmux-complete.vim'
 	Plug 'xolox/vim-misc'								" Miscellaneous stuff, required for vim-notes
 	Plug 'xolox/vim-notes'								" Notes in Vim!
 	Plug 'yegappan/mru'									" Most Recently Used Files
 	Plug 'zchee/deoplete-jedi', {'for': 'python'}		" Python completion
+	Plug 'docker/docker' , {'rtp': '/contrib/syntax/vim/'} " Docker syntax
 call plug#end()
 
 """"""""""""""
@@ -132,7 +138,7 @@ autocmd FileType haskell set tabstop=2|set shiftwidth=2|set expandtab
 autocmd! BufWritePost * Neomake				" Run Neomake on every write
 
 "" ntpters/vim-better-whitespace -- Automagically strip on save
-autocmd BufWritePre * StripWhitespace
+""autocmd BufWritePre * StripWhitespace
 "let g:better_whitespace_filetypes_blacklist+=['<filetype1>', '<filetype2>', '<etc>']
 
 "" Shougo/deoplete.nvim -- Completion

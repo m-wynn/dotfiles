@@ -92,7 +92,6 @@ if ! zgen saved; then
 	zgen load Tarrasch/zsh-bd			# Back up to directory name
 	zgen load Tarrasch/zsh-colors			# So many colors "echo I am red | red" or "red hi"
 	zgen load unixorn/autoupdate-zgen		# Automagic updates every week (by default)
-	zgen load unixorn/jpb.zshplugin			# Handy plugins, like `ansi2html` or `wifi-signal-strenth`
 	zgen load voronkovich/gitignore.plugin.zsh	# Add a .gitignore based on a template
 	zgen load walesmd/caniuse.plugin.zsh		# CanIUse `caniuse webgl`
 	zgen load zsh-users/zsh-completions src		# Tons and tons of completions
@@ -133,15 +132,6 @@ say() { mplayer -really-quiet "http://translate.google.com/translate_tts?tl=en&q
 
 gpr() {	  git push origin HEAD && open-pr "$*"  }	# Push and open a PR like that!
 
-# SSH agent
-#. ssh-find-agent.sh
-#ssh-find-agent -a
-#if [ -z "$SSH_AUTH_SOCK" ]
-#then
-#   echo "No Sock"
-#   eval $(ssh-agent) > /dev/null
-#   ssh-add -l >/dev/null || alias ssh='ssh-add -l >/dev/null || ssh-add && unalias ssh; ssh'
-#fi
 
 alias grep="grep --color=always"			# Just watch this break things
 

@@ -34,7 +34,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'vim-airline/vim-airline-themes'				" Themes for Airline
 	Plug 'vim-latex/vim-latex'							" Such a powerful thing for LaTeX
 	Plug 'w0ng/vim-hybrid'								" Colors!
-	Plug 'welle/tmux-complete.vim'
+	Plug 'wellle/tmux-complete.vim'
 	Plug 'xolox/vim-misc'								" Miscellaneous stuff, required for vim-notes
 	Plug 'xolox/vim-notes'								" Notes in Vim!
 	Plug 'yegappan/mru'									" Most Recently Used Files

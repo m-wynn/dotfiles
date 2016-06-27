@@ -38,9 +38,9 @@ if-shell '[ "$HOSTNAME" = "carbon" ]' 'bind Right next-window; bind Left previou
 
 # splitting
 unbind %
-bind h split-window -h
+bind h split-window -h -c "#{pane_current_path}"
 unbind '"'
-bind v split-window -v
+bind v split-window -v -c "#{pane_current_path}"
 
 
 # colon :

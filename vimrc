@@ -6,25 +6,30 @@ call plug#begin('~/.vim/plugged')
 	Plug 'ap/vim-css-color'								" Sets the background to your color. #ff0000 < that is white on red
 	Plug 'benekastah/neomake'							" Make for all kinds of things.  Can take advantage of Neovims asyncronity
 	Plug 'cazador481/fakeclip.neovim'					" * and + map to the X clipboard if X is running.  & maps to tmux if it's running.
-	Plug 'danro/rename.vim'								" Rename file :rename[!] {newname}
-	Plug 'markcornick/vim-vagrant'						" Vagrant support
-	Plug 'nhooyr/neoman.vim'							" Man pages in vim
+	Plug 'honza/vim-snippets'							" Snippits Stuff
+	Plug 'junegunn/vim-easy-align'						" Align things more easily
+	Plug 'majutsushi/tagbar'							" Display tags in a window, ordered by scope
 	Plug 'ntpeters/vim-better-whitespace'				" Easily strip whitespace
 	Plug 'pearofducks/ansible-vim', {'for': 'ansible'}	" Ansible stuff
 	Plug 'shawncplus/phpcomplete.vim'					" Lots of completions and ctag-jumping stuff for PHP.  Pretty cool, check readme for ctags
 	Plug 'sheerun/vim-polyglot'							" Support for sooo many languages
 	Plug 'Shougo/deoplete.nvim'							" Completion
-	Plug 'Shougo/echodoc.vim'							" Completion
-	Plug 'Shougo/neoinclude.vim'						" Completion
-	Plug 'Shougo/neopairs.vim'							" Completion
+	Plug 'Shougo/neoinclude.vim'						" Completion framework
+	Plug 'Shougo/neopairs.vim'							" Autoclose parentheses
 	Plug 'tmhedberg/SimpylFold'							" Python folding
+	Plug 'SirVer/ultisnips'								" Snippits
 	Plug 'Townk/vim-autoclose'							" Automagically closes parentheses and such.
-	Plug 'tpope/vim-commentary'							" Comment things easily
+	Plug 'tpope/vim-abolish'							" Smarter find-replacement, and because I can't spell
+	Plug 'tpope/vim-afterimage'							" Edit images, pdfs, and word docs in vim
+	Plug 'tpope/vim-commentary'							" Comment things easily with gc
+	Plug 'tpope/vim-eunuch'								" Handy UNIX commands like :Locate and :SudoEdit
 	Plug 'tpope/vim-fugitive'							" Git plugin for like, :Gstatus
 	Plug 'tpope/vim-ragtag'								" More tag mappings
+	Plug 'tpope/vim-repeat'								" Use . in to repeat plugin stuff
 	Plug 'tpope/vim-sleuth'								" Figure out tabs based on the file
 	Plug 'tpope/vim-surround'							" Change the surrounding stuff
 	Plug 'tpope/vim-unimpaired'							" Add lots of handy mappings
+	Plug 'tpope/vim-vinegar'							" Improve netrw
 	Plug 'vim-airline/vim-airline'						" Informative tabline/status bar for vim
 	Plug 'vim-airline/vim-airline-themes'				" Themes for Airline
 	Plug 'vim-latex/vim-latex'							" Such a powerful thing for LaTeX
@@ -128,21 +133,37 @@ set wrapmargin=0
 autocmd FileType racket set tabstop=2|set shiftwidth=2|set expandtab
 autocmd FileType haskell set tabstop=2|set shiftwidth=2|set expandtab
 
+autocmd FileType mail setlocal fo+=aw
+
 
 """""""""""""""""""
 " Plugin-Specific "
 "	 Settings	  "
 """""""""""""""""""
 
-"" benekastah/neomake -- Asyncronous checking
+"" benekastah/neomake -- Asyncronous syntax checking
 autocmd! BufWritePost * Neomake				" Run Neomake on every write
 
+"" cazador481/fakeclip.neovim
+let g:vim_fakeclip_tmux_plus=1				" Map the tmux clipboard to the + register
+
+"" junegunn/vim-easy-align
+xmap ga <Plug>(EasyAlign)|		 " Start interactive EasyAlign in visual mode (e.g. ipga)
+
+nmap ga <Plug>(EasyAlign)|		" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+
 "" ntpters/vim-better-whitespace -- Automagically strip on save
-""autocmd BufWritePre * StripWhitespace
-"let g:better_whitespace_filetypes_blacklist+=['<filetype1>', '<filetype2>', '<etc>']
+let g:better_whitespace_filetypes_blacklist=['mail', 'diff', 'gitcommit', 'unite', 'qf', 'help']
 
 "" Shougo/deoplete.nvim -- Completion
 let g:deoplete#enable_at_startup = 1
+
+"" SirVer/ultisnips -- Snippets
+let g:UltiSnipsExpandTrigger="<c-space>"		"T rigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+let g:UltiSnipsEditSplit="vertical" 			" If you want :UltiSnipsEdit to split your window.
 
 "" tpope/vim-fugitive -- All the gits
 autocmd BufReadPost fugitive://* set bufhidden=delete	" Delete old git-object buffers when traversing the dag
@@ -152,6 +173,7 @@ set laststatus=2					" Always show the status
 set noshowmode						" Don't show the mode below the statusline, we're taking care of that in vim-airline
 let g:airline_powerline_fonts = 1			" Use powerline symbols
 let g:airline#extensions#tabline#enabled = 1		" Tablinify the tabbar
+let g:airline#extensions#whitespace#mixed_indent_algo = 1	" Don't complain about C-style comments with funny indents
 
 
 "" vim-latex/vim-latex -- LaTex stuff
@@ -162,4 +184,4 @@ let g:Imap_UsePlaceHolders = 0		"Set this if you ever EVER are going to use '()'
 let g:Imap_FreezeImap=1
 
 "" xolox/vim-notes
-let g:notes_directories = ['~/Dropbox/Fall15/notes']
+let g:notes_directories = ['~/Documents/notes']

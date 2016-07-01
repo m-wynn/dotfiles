@@ -6,14 +6,18 @@ call plug#begin('~/.vim/plugged')
 	Plug 'ap/vim-css-color'								" Sets the background to your color. #ff0000 < that is white on red
 	Plug 'benekastah/neomake'							" Make for all kinds of things.  Can take advantage of Neovims asyncronity
 	Plug 'cazador481/fakeclip.neovim'					" * and + map to the X clipboard if X is running.  & maps to tmux if it's running.
+	Plug 'fweep/vim-zsh-path-completion'				" Better completion for :e and friends
 	Plug 'honza/vim-snippets'							" Snippits Stuff
 	Plug 'junegunn/vim-easy-align'						" Align things more easily
+	Plug 'Konfekt/FastFold'								" Speed up folds
 	Plug 'majutsushi/tagbar'							" Display tags in a window, ordered by scope
 	Plug 'ntpeters/vim-better-whitespace'				" Easily strip whitespace
 	Plug 'pearofducks/ansible-vim', {'for': 'ansible'}	" Ansible stuff
 	Plug 'shawncplus/phpcomplete.vim'					" Lots of completions and ctag-jumping stuff for PHP.  Pretty cool, check readme for ctags
 	Plug 'sheerun/vim-polyglot'							" Support for sooo many languages
+	Plug 'Shougo/context_filetype.vim'					" Add context filetype feature to completion
 	Plug 'Shougo/deoplete.nvim'							" Completion
+	Plug 'Shougo/echodoc.vim'							" Print documentation in autocomplete
 	Plug 'Shougo/neoinclude.vim'						" Completion framework
 	Plug 'Shougo/neopairs.vim'							" Autoclose parentheses
 	Plug 'tmhedberg/SimpylFold'							" Python folding
@@ -144,9 +148,6 @@ autocmd FileType mail setlocal fo+=aw
 "" benekastah/neomake -- Asyncronous syntax checking
 autocmd! BufWritePost * Neomake				" Run Neomake on every write
 
-"" cazador481/fakeclip.neovim
-let g:vim_fakeclip_tmux_plus=1				" Map the tmux clipboard to the + register
-
 "" junegunn/vim-easy-align
 xmap ga <Plug>(EasyAlign)|		 " Start interactive EasyAlign in visual mode (e.g. ipga)
 
@@ -159,7 +160,7 @@ let g:better_whitespace_filetypes_blacklist=['mail', 'diff', 'gitcommit', 'unite
 let g:deoplete#enable_at_startup = 1
 
 "" SirVer/ultisnips -- Snippets
-let g:UltiSnipsExpandTrigger="<c-space>"		"T rigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"		"Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
@@ -174,6 +175,7 @@ set noshowmode						" Don't show the mode below the statusline, we're taking car
 let g:airline_powerline_fonts = 1			" Use powerline symbols
 let g:airline#extensions#tabline#enabled = 1		" Tablinify the tabbar
 let g:airline#extensions#whitespace#mixed_indent_algo = 1	" Don't complain about C-style comments with funny indents
+let g:airline#extensions#tabline#buffer_nr_show = 1
 
 
 "" vim-latex/vim-latex -- LaTex stuff

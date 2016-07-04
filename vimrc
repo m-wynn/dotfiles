@@ -34,6 +34,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'vim-airline/vim-airline-themes'				" Themes for Airline
 	Plug 'vim-latex/vim-latex'							" Such a powerful thing for LaTeX
 	Plug 'w0ng/vim-hybrid'								" Colors!
+	Plug 'will133/vim-dirdiff'							" Diff and merge two directories
 	Plug 'xolox/vim-misc'								" Miscellaneous stuff, required for vim-notes
 	Plug 'xolox/vim-notes'								" Notes in Vim!
 	Plug 'yegappan/mru'									" Most Recently Used Files
@@ -180,6 +181,10 @@ set grepprg=grep\ -nH\ $*
 let g:tex_flavor='latex'
 let g:Imap_UsePlaceHolders = 0		"Set this if you ever EVER are going to use '()'
 let g:Imap_FreezeImap=1
+
+"" will133/vim-dirdiff
+let g:DirDiffAddArgs = "-w"
+let g:DirDiffEnableMappings = 1
 
 "" xolox/vim-notes
 let g:notes_directories = ['~/Documents/notes']

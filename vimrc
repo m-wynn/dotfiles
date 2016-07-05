@@ -8,6 +8,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'cazador481/fakeclip.neovim'					" * and + map to the X clipboard if X is running.  & maps to tmux if it's running.
 	Plug 'fweep/vim-zsh-path-completion'				" Better completion for :e and friends
 	Plug 'honza/vim-snippets'							" Snippits Stuff
+	Plug 'jiangmiao/auto-pairs'							" Insert or delete brackets, parens, quotes in pair
 	Plug 'junegunn/vim-easy-align'						" Align things more easily
 	Plug 'Konfekt/FastFold'								" Speed up folds
 	Plug 'majutsushi/tagbar'							" Display tags in a window, ordered by scope
@@ -22,7 +23,6 @@ call plug#begin('~/.vim/plugged')
 	Plug 'Shougo/neopairs.vim'							" Autoclose parentheses
 	Plug 'tmhedberg/SimpylFold'							" Python folding
 	Plug 'SirVer/ultisnips'								" Snippits
-	Plug 'Townk/vim-autoclose'							" Automagically closes parentheses and such.
 	Plug 'tpope/vim-abolish'							" Smarter find-replacement, and because I can't spell
 	Plug 'tpope/vim-afterimage'							" Edit images, pdfs, and word docs in vim
 	Plug 'tpope/vim-commentary'							" Comment things easily with gc
@@ -136,8 +136,10 @@ set wrapmargin=0
 " File-specific settings
 autocmd FileType racket set tabstop=2|set shiftwidth=2|set expandtab
 autocmd FileType haskell set tabstop=2|set shiftwidth=2|set expandtab
-
 autocmd FileType mail setlocal fo+=aw
+
+" Make Enter select completion without adding a new line.
+inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
 
 
 """""""""""""""""""

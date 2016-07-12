@@ -57,6 +57,7 @@ run_once("xmodmap ~/.Xmodmap &")
 run_once("urxvtd &")
 run_once("unclutter -root &")
 run_once("mpd &")
+run_once("evolution &")
 run_once("firefox &")
 run_once("hipchat4 &")
 run_once("pidgin &")
@@ -644,6 +645,9 @@ awful.rules.rules = {
 
 	{ rule = { class = "Nemo" },
 	properties = { tag = tags[1][3] } },
+
+	{ rule = { class = "Evolution" },
+	properties = { tag = tags[1][4] } },
 
 	{ rule = { class = "Pidgin" },
 	properties = { tag = tags[2][2] } },

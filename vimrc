@@ -2,6 +2,7 @@
 
 call plug#begin('~/.vim/plugged')
 	Plug 'amirh/HTML-AutoCloseTag', {'for': 'html'}		" Auto close html tags
+	Plug 'AndrewRadev/linediff.vim'					    " Diff two visual selections
 	Plug 'AndrewRadev/splitjoin.vim'					" Splitting and joining lines and blocks
 	Plug 'ap/vim-css-color'								" Sets the background to your color. #ff0000 < that is white on red
 	Plug 'benekastah/neomake'							" Make for all kinds of things.  Can take advantage of Neovims asyncronity
@@ -133,6 +134,10 @@ set wrap linebreak nolist
 set textwidth=0
 set wrapmargin=0
 
+" Split more naturally
+set splitbelow
+set splitright
+
 " File-specific settings
 autocmd FileType racket set tabstop=2|set shiftwidth=2|set expandtab
 autocmd FileType haskell set tabstop=2|set shiftwidth=2|set expandtab
@@ -140,6 +145,9 @@ autocmd FileType mail setlocal fo+=aw
 
 " Make Enter select completion without adding a new line.
 inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+
+" Don't ring the terminal bell
+set vb t_fb=
 
 
 """""""""""""""""""

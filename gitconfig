@@ -1,14 +1,16 @@
 # Heavily borrowed from phy1729
 [alias]
+	amend = commit --amend
 	br = branch
 	cm = commit
 	cmm = commit --no-edit
 	co = checkout
-	fe = fetch --all -p
+	fe = fetch --all -p --tags
 	fixup = commit --amend -C HEAD
-	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-	lga = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all
-	ll = !git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all --since=\"$(git show -s --pretty=format:'%cd' master~3 2>/dev/null || git log --format="format:%cd" --reverse | head -n 1)\"
+	fu = fetch upstream
+	lg = log --color --graph --pretty=colorful-oneline --abbrev-commit
+	lga = log --color --graph --pretty=colorful-oneline --abbrev-commit --all
+	ll = !git log --color --graph --pretty=colorful-oneline --abbrev-commit --all --since=\"$(git show -s --pretty=format:'%cd' master~3 2>/dev/null || git log --format="format:%cd" --reverse | head -n 1)\"
 	pop = stash pop
 	rev = diff --staged -M
 	review = diff --staged
@@ -37,3 +39,5 @@
 	name = Matthew Wynn
 [difftool]
 	prompt = false
+[include]
+	path = ~/.config/git/override

@@ -41,6 +41,7 @@ setopt inc_append_history		# Append every command to $HISTFILE immediately
 setopt share_history			# Always import new commands from $HISTFILE
 setopt extended_history			# Save additional info to $HISTFILE
 setopt hist_ignore_space		# Ignore history beginning with a space
+setopt NO_BEEP
 
 # Allow new features, i.e. ^ which negates the pattern following it, ls <100-200>.txt, **/, and more
 setopt extendedglob
@@ -66,36 +67,37 @@ if ! zgen saved; then
 	# Load the oh-my-zsh's library.
 	zgen oh-my-zsh
 
-	# Oh-my-zsh Bundles
-	zgen oh-my-zsh plugins/colored-man-pages	# Colorizes man pages
-	zgen oh-my-zsh plugins/docker			# Docker autocompletes
-	zgen oh-my-zsh plugins/encode64			# Encode and decode 64-bit
-	zgen oh-my-zsh plugins/pass
-	zgen oh-my-zsh plugins/rsync			# Rsync commands, like `rsync-copy`
-	zgen oh-my-zsh plugins/sudo			# Press Esc twice for sudo
-	zgen oh-my-zsh plugins/tmux			# Auto launch tmux
-	zgen oh-my-zsh plugins/wd			# Warp directories
-	zgen oh-my-zsh plugins/web-search		# Google from the command line
-	zgen oh-my-zsh plugins/vi-mode
+       # Oh-my-zsh Bundles
+	zgen oh-my-zsh plugins/colored-man-pages # Colorizes man pages
+	zgen oh-my-zsh plugins/docker            # Docker autocompletes
+	zgen oh-my-zsh plugins/encode64          # Encode and decode 64-bit
+	zgen oh-my-zsh plugins/pass              # Pass completion
+	zgen oh-my-zsh plugins/rsync             # Rsync commands, like `rsync-copy`
+	zgen oh-my-zsh plugins/sudo              # Press Esc twice for sudo
+	zgen oh-my-zsh plugins/tmux              # Auto launch tmux
+	zgen oh-my-zsh plugins/wd                # Warp directories
+	zgen oh-my-zsh plugins/web-search        # Google from the command line
+	zgen oh-my-zsh plugins/vi-mode           # Vim-like keybindings with some help
 
-	# External Bundles
-	zgen load adolfoabegg/browse-commit		# Open latest commit in browser
-	zgen load caarlos0/zsh-open-pr			# Open a pull request right there
-	zgen load caarlos0/zsh-add-upstream		# Add upstream remote to git like `add-upstream username`
-	zgen load chrissicool/zsh-256color		# Encourage 256 color mode
-	zgen load horosgrisa/mysql-colorize		# Colorize MySQL plugins
-	zgen load marzocchi/zsh-notify			# Notifications for non-zero exits or long commands
-	zgen load peterhurford/git-it-on.zsh		# Github things, like `gitit branches all`
-	zgen load rimraf/k				# Prettier version of l, with git support
-	zgen load RobSis/zsh-completion-generator	# Attempt to add autocompletion for non-completed things `gencom program`
-	zgen load skx/sysadmin-util			# So many scripts
-	zgen load Tarrasch/zsh-bd			# Back up to directory name
-	zgen load Tarrasch/zsh-colors			# So many colors "echo I am red | red" or "red hi"
-	zgen load unixorn/autoupdate-zgen		# Automagic updates every week (by default)
-	zgen load voronkovich/gitignore.plugin.zsh	# Add a .gitignore based on a template
-	zgen load walesmd/caniuse.plugin.zsh		# CanIUse `caniuse webgl`
-	zgen load zsh-users/zsh-completions src		# Tons and tons of completions
-	zgen load zsh-users/zsh-syntax-highlighting	# Pretty colors
+       # External Bundles
+	zgen load adolfoabegg/browse-commit         # Open latest commit in browser
+	zgen load caarlos0/zsh-open-pr              # Open a pull request right there
+	zgen load caarlos0/zsh-add-upstream         # Add upstream remote to git like `add-upstream username`
+	zgen load chrissicool/zsh-256color          # Encourage 256 color mode
+	zgen load chmouel/oh-my-zsh-openshift       # Openshift Completion
+	zgen load horosgrisa/mysql-colorize         # Colorize MySQL plugins
+	zgen load marzocchi/zsh-notify              # Notifications for non-zero exits or long commands
+	zgen load peterhurford/git-it-on.zsh        # Github things, like `gitit branches all`
+	zgen load rimraf/k                          # Prettier version of l, with git support
+	zgen load RobSis/zsh-completion-generator   # Attempt to add autocompletion for non-completed things `gencom program`
+	zgen load skx/sysadmin-util                 # So many scripts
+	zgen load Tarrasch/zsh-bd                   # Back up to directory name
+	zgen load Tarrasch/zsh-colors               # So many colors "echo I am red | red" or "red hi"
+	zgen load unixorn/autoupdate-zgen           # Automagic updates every week (by default)
+	zgen load voronkovich/gitignore.plugin.zsh  # Add a .gitignore based on a template
+	zgen load walesmd/caniuse.plugin.zsh        # CanIUse `caniuse webgl`
+	zgen load zsh-users/zsh-completions src     # Tons and tons of completions
+	zgen load zsh-users/zsh-syntax-highlighting # Pretty colors
 
 	# OS-specific bundles
 	case $(uname -s) in
@@ -134,6 +136,8 @@ gpr() {	  git push origin HEAD && open-pr "$*"  }	# Push and open a PR like that
 
 
 alias grep="grep --color=always"			# Just watch this break things
+
+alias ip="ip -h -c"
 
 export LESS="-R"
 

@@ -1,4 +1,6 @@
-(require 'package)
+(eval-when-compile
+  (require 'package))
+
 (setq package-enable-at-startup nil)
 
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
@@ -8,7 +10,7 @@
   (add-to-list 'package-archives
 	       ;; For important compatibility libraries like cl-lib
 	       '("gnu" . "http://elpa.gnu.org/packages/") t)
-)
+  )
 
 ;; Make sure packages archives have been downloaded
 (or (file-exists-p package-user-dir)
@@ -21,6 +23,9 @@
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
+
 (eval-when-compile
   (require 'use-package))
 
+(require 'diminish)		;; Allow removal of clutter
+(require 'bind-key)		;; Allow binding of keys

@@ -14,16 +14,25 @@
 
 (show-paren-mode t)                             ; Always highlight matching character pairs
 
+;; Transparent bg
+(defun on-after-init ()
+  (unless (display-graphic-p (selected-frame))
+    (set-face-background 'default "unspecified-bg" (selected-frame))))
+
+(add-hook 'window-setup-hook 'on-after-init)
+
 (defalias 'yes-or-no-p 'y-or-n-p); Let 'y' and 'n' suffice for yes/no
 
 
 ;; Themes and colors
+(use-package powerline
+             :ensure t
+             :config (powerline-center-evil-theme)
+             )
+
 (use-package moe-theme
              :ensure t
              :config (moe-dark)
              )
 
-(use-package powerline
-             :ensure t
-             :config (powerline-moe-theme)
-             )
+(powerline-moe-theme)

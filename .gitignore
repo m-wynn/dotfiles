@@ -2,3 +2,5 @@ mutt/tmp
 emacs.d/auto-save-list/
 emacs.d/elpa
 emacs.d/eshell
+emacs.d/history
+emacs.d/undo

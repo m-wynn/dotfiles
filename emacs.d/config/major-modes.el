@@ -15,4 +15,9 @@
   :commands (markdown-mode gfm-mode)
   :mode (("README\\.md\\'" . gfm-mode)
 	 ("\\.\\(m\\(ark\\)?down\\|md\\)'" . markdown-mode))
+  :config
+  (progn
+    (use-package markdown-preview-mode
+      :ensure t
+      :config))
   :init (setq markdown-command "multimarkdown"))

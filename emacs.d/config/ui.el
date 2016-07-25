@@ -31,6 +31,7 @@
   :init
   (setq nlinum-relative-current-symbol "")
   (setq nlinum-relative-redisplay-delay 0)
+  (setq nlinum-format "%d ")
   :config
   (nlinum-relative-setup-evil)
   (add-hook 'prog-mode-hook 'nlinum-relative-mode)

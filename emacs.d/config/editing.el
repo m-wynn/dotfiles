@@ -20,11 +20,12 @@
 ;; Syntax Checking
 
 (use-package flycheck
-  :ensure t :pin melpa
+  :ensure t
   :config
-  (progn
-    (use-package flycheck-rust
-      :ensure t :pin melpa
-      :config (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
-    (global-flycheck-mode 1)))
+  (setq flycheck-highlighting-mode 'symbols)
+  (setq flycheck-indication-mode 'left-fringe)
+  (custom-set-variables
+   '(flycheck-markdown-mdl-rules '("~MD013" "~MD029")))
+  :init
+  (global-flycheck-mode))
 

@@ -17,7 +17,7 @@
 	 ("\\.\\(m\\(ark\\)?down\\|md\\)'" . markdown-mode))
   :config
   (progn
-    (use-package markdown-preview-mode
+    (use-package flymd
       :ensure t
       :config))
   :init (setq markdown-command "multimarkdown"))

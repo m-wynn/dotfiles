@@ -50,13 +50,14 @@ setopt extendedglob
 setopt nomatch
 
 # Include ruby in Path
-export PATH=$PATH:~/bin:/root/.gem/ruby/2.2.0/bin:/home/matthew/.gem/ruby/2.2.0/bin
+export PATH=$PATH:~/bin:/root/.gem/ruby/2.3.0/bin:/home/matthew/.gem/ruby/2.3.0/bin
 
 # Disable changing the window title
 export DISABLE_AUTO_TITLE=true
 
-# Use VIM
-export EDITOR=vim
+# Use emacs
+export EDITOR=emacs
+alias vim="emacs"
 
 # Use UTF-8
 export LANG=en_US.UTF-8

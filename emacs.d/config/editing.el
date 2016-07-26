@@ -26,6 +26,9 @@
   (setq flycheck-indication-mode 'left-fringe)
   (custom-set-variables
    '(flycheck-markdown-mdl-rules '("~MD013" "~MD029")))
+  (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
   :init
   (global-flycheck-mode))
 
+;; Other
+(setq require-final-newline t)

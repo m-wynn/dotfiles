@@ -16,14 +16,12 @@
 (defalias 'yes-or-no-p 'y-or-n-p)               ; Let 'y' and 'n' suffice for yes/no
 (setq-default word-wrap t)			; Word wrap
 
+(setq show-trailing-whitespace t)
+
 ;; Transparent bg
-(defun on-after-init ()
-  (unless (display-graphic-p (selected-frame))
-    (set-face-background 'default "unspecified-bg" (selected-frame))))
-
-(add-hook 'window-setup-hook 'on-after-init)
-
-(custom-set-variables '(show-trailing-whitespace t))
+(defun on-frame-open (&optional frame)
+  (unless (display-graphic-p frame)
+    (set-face-background 'default "unspecified-bg" frame)))
 
 ;; Line Numbers
 (use-package nlinum-relative
@@ -47,10 +45,6 @@
   :ensure t
   :config (color-theme-sanityinc-tomorrow--define-theme night))
 
-;; Transparent bg
-(defun on-after-init ()
-  (unless (display-graphic-p (selected-frame))
-    (set-face-background 'default "unspecified-bg" (selected-frame))))
-
-
-(add-hook 'window-setup-hook 'on-after-init)
+(on-frame-open (selected-frame)) ; Remove background color on load-file
+(add-hook 'after-make-frame-functions 'on-frame-open) ; Remove background color on emacsclient load
+(add-hook 'window-setup-hook '(on-frame-open (selected-frame))) ; Remove background color on emacs load

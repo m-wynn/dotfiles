@@ -43,6 +43,9 @@ setopt extended_history			# Save additional info to $HISTFILE
 setopt hist_ignore_space		# Ignore history beginning with a space
 setopt NO_BEEP
 
+# Eliminate escape delay
+KEYTIMEOUT=1
+
 # Allow new features, i.e. ^ which negates the pattern following it, ls <100-200>.txt, **/, and more
 setopt extendedglob
 

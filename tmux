@@ -135,3 +135,5 @@ bind , previous-layout
 # don't resize unless the other terminal is actually watching as well
 setw -g aggressive-resize on
 
+# Don't wait for escape characters
+set -s escape-time 0

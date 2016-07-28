@@ -56,8 +56,15 @@ export PATH=$PATH:~/bin:/root/.gem/ruby/2.3.0/bin:/home/matthew/.gem/ruby/2.3.0/
 export DISABLE_AUTO_TITLE=true
 
 # Use emacs
-export EDITOR=emacs
-alias vim="emacs"
+function edit {
+	 emacsclient --alternate-editor="" -t "$@"
+}
+
+export EDITOR=edit
+export VISUAL=edit
+export ALTERNATIVE_EDITOR=emacs
+alias vim=edit
+alias :e=edit
 
 # Use UTF-8
 export LANG=en_US.UTF-8

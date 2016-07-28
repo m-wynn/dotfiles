@@ -20,7 +20,7 @@
 [color]
 	ui = true
 [core]
-	editor = emacs
+	editor = emacsclient --alternate-editor="" -t
 	filemode = false
 [diff]
 	tool = vimdiff

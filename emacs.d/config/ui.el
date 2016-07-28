@@ -45,6 +45,8 @@
   :ensure t
   :config (color-theme-sanityinc-tomorrow--define-theme night))
 
-(on-frame-open (selected-frame)) ; Remove background color on load-file
-(add-hook 'after-make-frame-functions 'on-frame-open) ; Remove background color on emacsclient load
+(dolist (frame (frame-list))
+  (on-frame-open frame))					; Remove background color on load-file
+
+(add-hook 'after-make-frame-functions 'on-frame-open)		; Remove background color on emacsclient load
 (add-hook 'window-setup-hook '(on-frame-open (selected-frame))) ; Remove background color on emacs load

@@ -1,5 +1,9 @@
 ;; Language Modes
 
+(use-package dockerfile-mode
+  :ensure t
+  :mode "\\.Dockerfile\\'")
+
 (use-package python-mode
   :ensure t
   :mode "\\.py\\'"

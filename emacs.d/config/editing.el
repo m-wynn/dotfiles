@@ -5,6 +5,8 @@
   :defer t
   :config
   (progn
+    (setq company-dabbrev-downcase 0)
+    (setq company-idle-delay .3)
     (use-package company-jedi
       :ensure t
       :config

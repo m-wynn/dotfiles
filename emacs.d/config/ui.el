@@ -35,15 +35,21 @@
   (add-hook 'prog-mode-hook 'nlinum-relative-mode)
   (add-hook 'text-mode-hook 'nlinum-relative-mode))
 
+;; Rainbows
+(use-package rainbow-mode
+  :ensure t)
+
+(use-package rainbow-delimiters
+  :ensure t)
 
 ;; Themes and colors
 (use-package powerline
   :ensure t
   :config (powerline-center-evil-theme))
 
-(use-package color-theme-sanityinc-tomorrow
+(use-package base16-theme
   :ensure t
-  :config (color-theme-sanityinc-tomorrow--define-theme night))
+  :init (load-theme 'base16-tomorrow-dark))
 
 (dolist (frame (frame-list))
   (on-frame-open frame))					; Remove background color on load-file

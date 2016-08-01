@@ -21,6 +21,10 @@
       :config))
   :init (setq markdown-command "multimarkdown"))
 
+(use-package nginx-mode
+  :ensure t
+  :mode ("/nginx/sites-\\(?:available\\|enabled\\)/" . nginx-mode))
+
 (use-package php-mode
   :ensure t
   :mode "\\.php\\'"

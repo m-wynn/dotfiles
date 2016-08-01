@@ -49,7 +49,7 @@
 
 (use-package base16-theme
   :ensure t
-  :init (load-theme 'base16-tomorrow-dark))
+  :init (load-theme 'base16-tomorrow-dark t))
 
 (dolist (frame (frame-list))
   (on-frame-open frame))					; Remove background color on load-file

@@ -33,10 +33,19 @@
     (use-package php-ext
       :ensure t)))
 
+(use-package puppet-mode
+  :ensure t
+  :mode "\\.pp\\'")
+
 (use-package python-mode
   :ensure t
   :mode "\\.py\\'"
   :interpreter "python")
+
+(use-package jedi
+  :ensure t
+  :init
+  (add-hook 'python-mode-hook 'jedi:setup))
 
 (use-package web-mode
   :ensure t

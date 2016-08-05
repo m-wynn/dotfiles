@@ -32,5 +32,18 @@
   :init
   (global-flycheck-mode))
 
+;; Folding
+(defun define-fringe-bitmap (bits &optional height width align bitmap)
+  nil)
+(add-hook 'prog-mode-hook 'hs-minor-mode)
+(use-package hideshowvis
+  :ensure t
+  :config
+  (progn
+    (hideshowvis-enable)
+    (hideshowvis-symbols)))
+
 ;; Other
 (setq require-final-newline t)
+
+(setq indent-tabs-mode nil)

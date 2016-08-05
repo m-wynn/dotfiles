@@ -1,9 +1,12 @@
+;; WIP function to emulate junegunn/vim-easy-align
+;; Very WIP
 (defun easy-align ()
   (interactive)
   (let ((BEG (region-beginning))
 	(END (region-end)))
         (align-regexp BEG END "\\(\\s-*\\)\\s-" 1 1 t)))
 
+;; Use vim keybindings!
 (use-package evil
   :ensure t
   :init
@@ -23,6 +26,4 @@
     (define-key minibuffer-local-isearch-map [escape] 'abort-recursive-edit)
 
     ;; Easy-align
-    (define-key evil-visual-state-map "ga" 'easy-align)
-    )
-  )
+    (define-key evil-visual-state-map "ga" 'easy-align)))

@@ -47,9 +47,9 @@ URxvt*font: xft:Liberation Mono for Powerline:size=10, \
 	xft:Noto Sans Kannada:style=Regular:pixelsize=14, \
 	xft:Symbola:pixelsize=7, \
 	-misc-fixed-medium-r-normal--18-120-100-100-c-90-iso10646-1
-URxvt.boldFont:xft:Liberation Mono:style=Bold:pixelsize=13
-URxvt.italicFont:xft:Liberation Mono:style=Oblique:pixelsize=13
-URxvt.boldItalicFont:xft:Liberation Mono:style=Bold Oblique:pixelsize=13
+URxvt.boldFont:xft:Liberation Mono:style=Bold:size=10
+URxvt.italicFont:xft:Liberation Mono:style=Oblique:size=10
+URxvt.boldItalicFont:xft:Liberation Mono:style=Bold Oblique:size=10
 URxvt.scrollBar: false
 URxvt.scrollWithBuffer:	true
 URxvt.scrollTtyKeypress:	true

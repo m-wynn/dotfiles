@@ -18,7 +18,7 @@
   "Name of XClip program tool.")
 
 (defvar x-select-enable-clipboard t
-    "Non-nil means cutting and pasting uses the clipboard.
+  "Non-nil means cutting and pasting uses the clipboard.
 This is in addition to, but in preference to, the primary selection.")
 
 (defvar x-last-selected-text-clipboard nil
@@ -28,15 +28,15 @@ This is in addition to, but in preference to, the primary selection.")
   "The value of the PRIMARY X selection from xclip.")
 
 (defun x-set-selection (type data)
-    "TYPE is a symbol: primary, secondary and clipboard.
+  "TYPE is a symbol: primary, secondary and clipboard.
 
 See `x-set-selection'."
-    (when (and xclip-program (getenv "DISPLAY"))
-      (let* ((process-connection-type nil)
-	     (proc (start-process "xclip" nil "xclip"
-				  "-selection" (symbol-name type))))
-	(process-send-string proc data)
-	(process-send-eof proc))))
+  (when (and xclip-program (getenv "DISPLAY"))
+    (let* ((process-connection-type nil)
+           (proc (start-process "xclip" nil "xclip"
+                                "-selection" (symbol-name type))))
+      (process-send-string proc data)
+      (process-send-eof proc))))
 
 (defun x-select-text (text &optional push)
   "See `x-select-text'."
@@ -51,30 +51,30 @@ See `x-set-selection'."
   (when (and xclip-program (getenv "DISPLAY"))
     (let (clip-text primary-text)
       (when x-select-enable-clipboard
-	(setq clip-text (shell-command-to-string "xclip -o -selection clipboard"))
-	(setq clip-text
-	      (cond ;; check clipboard selection
-	       ((or (not clip-text) (string= clip-text ""))
-		(setq x-last-selected-text-primary nil))
-	       ((eq      clip-text x-last-selected-text-clipboard) nil)
-	       ((string= clip-text x-last-selected-text-clipboard)
-		;; Record the newer string,
-		;; so subsequent calls can use the `eq' test.
-		(setq x-last-selected-text-clipboard clip-text)
-		nil)
-	       (t (setq x-last-selected-text-clipboard clip-text)))))
+        (setq clip-text (shell-command-to-string "xclip -o -selection clipboard"))
+        (setq clip-text
+              (cond ;; check clipboard selection
+               ((or (not clip-text) (string= clip-text ""))
+                (setq x-last-selected-text-primary nil))
+               ((eq      clip-text x-last-selected-text-clipboard) nil)
+               ((string= clip-text x-last-selected-text-clipboard)
+                ;; Record the newer string,
+                ;; so subsequent calls can use the `eq' test.
+                (setq x-last-selected-text-clipboard clip-text)
+                nil)
+               (t (setq x-last-selected-text-clipboard clip-text)))))
       (setq primary-text (shell-command-to-string "xclip -o"))
       (setq primary-text
-	    (cond ;; check primary selection
-	     ((or (not primary-text) (string= primary-text ""))
-	      (setq x-last-selected-text-primary nil))
-	     ((eq      primary-text x-last-selected-text-primary) nil)
-	     ((string= primary-text x-last-selected-text-primary)
-	      ;; Record the newer string,
-	      ;; so subsequent calls can use the `eq' test.
-	      (setq x-last-selected-text-primary primary-text)
-	      nil)
-	     (t (setq x-last-selected-text-primary primary-text))))
+            (cond ;; check primary selection
+             ((or (not primary-text) (string= primary-text ""))
+              (setq x-last-selected-text-primary nil))
+             ((eq      primary-text x-last-selected-text-primary) nil)
+             ((string= primary-text x-last-selected-text-primary)
+              ;; Record the newer string,
+              ;; so subsequent calls can use the `eq' test.
+              (setq x-last-selected-text-primary primary-text)
+              nil)
+             (t (setq x-last-selected-text-primary primary-text))))
       (or clip-text primary-text))))
 
 ;;;###autoload

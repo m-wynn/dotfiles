@@ -3,15 +3,15 @@
 (defun easy-align ()
   (interactive)
   (let ((BEG (region-beginning))
-	(END (region-end)))
-        (align-regexp BEG END "\\(\\s-*\\)\\s-" 1 1 t)))
+        (END (region-end)))
+    (align-regexp BEG END "\\(\\s-*\\)\\s-" 1 1 t)))
 
 ;; Use vim keybindings!
 (use-package evil
   :ensure t
   :init
   (progn
-    (setq evil-default-cursor t)	; Don't overwrite cursor color
+    (setq evil-default-cursor t)    ; Don't overwrite cursor color
     (evil-mode 1)
     )
   :config

@@ -43,7 +43,31 @@
     (hideshowvis-enable)
     (hideshowvis-symbols)))
 
+;; Spaces vs Tabs
+(setq-default indent-tabs-mode nil)
+(setq tab-width 4)
+
+(defface extra-whitespace-face
+  '((t (:background "pale green"))) "tabs")
+
+(defvar tab-keywords
+  '(("\t" . 'extra-whitespace-face)))
+
+(add-to-multiple-hooks
+ (lambda () (font-lock-add-keywords nil tab-keywords))
+ '(emacs-lisp-mode-hook
+   python-mode-hook
+   sh-mode-hook))
+
 ;; Other
 (setq require-final-newline t)
 
-(setq indent-tabs-mode nil)
+(setq show-trailing-whitespace)
+
+(use-package column-marker
+  :ensure t
+  :config
+  (add-hook 'python-mode-hook
+            '(lambda ()
+               (interactive)
+               (column-marker-l 80))))

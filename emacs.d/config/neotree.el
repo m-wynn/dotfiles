@@ -18,7 +18,7 @@
     (kbd "q")   'neotree-hide
     (kbd "l")   'neotree-enter
     (kbd "|")   (neotree-make-executor
-		 :file-fn 'neo-open-file-vertical-split)
+                 :file-fn 'neo-open-file-vertical-split)
     (kbd "-")   (neotree-make-executor
-		 :file-fn 'neo-open-file-horizontal-split)
+                 :file-fn 'neo-open-file-horizontal-split)
     ))

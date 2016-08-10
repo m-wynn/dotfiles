@@ -5,16 +5,16 @@
       initial-scratch-message nil)              ; Don't prepopulate scratch
 (menu-bar-mode -1)                              ; Disable menu bar
 (if (display-graphic-p)
-  (progn
-    (scroll-bar-mode -1)                        ; Disable scroll bar
-    (tool-bar-mode -1)                          ; Disable toolbar
-    )
+    (progn
+      (scroll-bar-mode -1)                      ; disable scroll bar
+      (tool-bar-mode -1)                        ; Disable toolbar
+      )
   )
 
 (show-paren-mode t)                             ; Always highlight matching character pairs
 
 (defalias 'yes-or-no-p 'y-or-n-p)               ; Let 'y' and 'n' suffice for yes/no
-(setq-default word-wrap t)			; Word wrap
+(setq-default word-wrap t)                      ; Word wrap
 
 (setq show-trailing-whitespace t)
 
@@ -52,7 +52,7 @@
   :init (load-theme 'base16-tomorrow-dark t))
 
 (dolist (frame (frame-list))
-  (on-frame-open frame))					; Remove background color on load-file
+  (on-frame-open frame))                                        ; Remove background color on load-file
 
-(add-hook 'after-make-frame-functions 'on-frame-open)		; Remove background color on emacsclient load
+(add-hook 'after-make-frame-functions 'on-frame-open)           ; Remove background color on emacsclient load
 (add-hook 'window-setup-hook '(on-frame-open (selected-frame))) ; Remove background color on emacs load

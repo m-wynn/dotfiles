@@ -8,8 +8,8 @@
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
 (when (< emacs-major-version 24)
   (add-to-list 'package-archives
-	       ;; For important compatibility libraries like cl-lib
-	       '("gnu" . "http://elpa.gnu.org/packages/") t)
+               ;; For important compatibility libraries like cl-lib
+               '("gnu" . "http://elpa.gnu.org/packages/") t)
   )
 
 ;; Make sure packages archives have been downloaded
@@ -27,5 +27,5 @@
 (eval-when-compile
   (require 'use-package))
 
-(require 'diminish)		;; Allow removal of clutter
-(require 'bind-key)		;; Allow binding of keys
+(require 'diminish)        ; Allow removal of clutter
+(require 'bind-key)        ; Allow binding of keys

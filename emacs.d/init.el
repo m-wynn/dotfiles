@@ -1,8 +1,12 @@
-; Load initial things
+;;; Load initial things
 
+;; Package management
 (load (expand-file-name "packages.el" user-emacs-directory))
 
-; Load everything else
+;; Emacs scripts and utilities used elsewhere
+(load (expand-file-name "elisp-utils.el" user-emacs-directory))
+
+;;; Load everything else
 (defun load-directory (directory)
   "Recursively get all `.el' files in DIRECTORY."
   (dolist (element (directory-files-and-attributes directory nil nil nil))

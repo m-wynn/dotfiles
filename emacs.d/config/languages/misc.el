@@ -13,7 +13,7 @@
   :ensure t
   :commands (markdown-mode gfm-mode)
   :mode (("README\\.md\\'" . gfm-mode)
-	 ("\\.\\(m\\(ark\\)?down\\|md\\)'" . markdown-mode))
+         ("\\.\\(m\\(ark\\)?down\\|md\\)'" . markdown-mode))
   :config
   (progn
     (use-package flymd
@@ -23,7 +23,7 @@
 
 (use-package nginx-mode
   :ensure t
-  :mode ("/nginx/sites-\\(?:available\\|enabled\\)/" . nginx-mode))
+  :mode ("/nginx/sites-\\(?:available\\|enabled\\)/"))
 
 (use-package php-mode
   :ensure t
@@ -49,10 +49,12 @@
 
 (use-package web-mode
   :ensure t
-  :mode "\\.html\\.php\\'")
+  :mode "\\.html\\(\\.php\\)?\\'")
 
 (use-package yaml-mode
   :ensure t
   :mode "\\.ya?ml\\'")
 
-
+(use-package jinja2-mode
+  :ensure t
+  :mode ("templates/")

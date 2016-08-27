@@ -57,4 +57,11 @@
 
 (use-package jinja2-mode
   :ensure t
-  :mode ("templates/")
+  :mode "templates/")
+
+(use-package ssh-config-mode
+  :ensure t
+  :mode (("/\\.ssh/config\\'"     . ssh-config-mode)
+  ("/sshd?_config\\'"      . ssh-config-mode)
+  ("/known_hosts\\'"       . ssh-known-hosts-mode)
+  ("/authorized_keys2?\\'" . ssh-authorized-keys-mode)))

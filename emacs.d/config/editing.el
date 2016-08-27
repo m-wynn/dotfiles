@@ -62,7 +62,7 @@
 ;; Other
 (setq require-final-newline t)
 
-(setq show-trailing-whitespace)
+(setq show-trailing-whitespace t)
 
 (use-package column-marker
   :ensure t

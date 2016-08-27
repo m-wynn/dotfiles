@@ -7,3 +7,8 @@
 ;; Paste to ix.io
 (use-package ix
   :ensure t)
+
+;; TRAMP
+(use-package tramp
+  :ensure t)
+  

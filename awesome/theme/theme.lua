@@ -11,7 +11,7 @@ themes_dir				= os.getenv("HOME") .. "/.config/awesome/theme"
 theme.wallpaper				= themes_dir .. "/wall.png"
 
 theme.font				= "Noto Sans 10.5"
-theme.taglist_font			= "Entypo 10.5"
+theme.taglist_font			= "Material Icons 10.5"
 theme.fg_normal				= "#C5C8C6"
 theme.fg_focus				= "#85678F"
 theme.fg_urgent				= "#A54242"

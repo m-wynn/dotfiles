@@ -23,7 +23,7 @@
 
 (use-package nginx-mode
   :ensure t
-  :mode ("/nginx/sites-\\(?:available\\|enabled\\)/"))
+  :mode "/nginx/sites-\\(?:available\\|enabled\\)/")
 
 (use-package php-mode
   :ensure t

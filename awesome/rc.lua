@@ -72,7 +72,7 @@ beautiful.init(os.getenv("HOME") .. "/.config/awesome/theme/theme.lua")
 modkey	   = "Mod4"
 altkey	   = "Mod1"
 terminal   = "urxvtc" or "xterm"
-editor	   = os.getenv("EDITOR") or "emacs" or "vim" or "vi"
+editor	   = os.getenv("EDITOR") or  "vim" or "vi" or "emacs"
 editor_cmd = terminal .. " -e " .. editor
 
 -- user defined

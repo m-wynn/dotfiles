@@ -58,18 +58,14 @@ export PATH=$PATH:~/bin:/root/.gem/ruby/2.3.0/bin:/home/matthew/.gem/ruby/2.3.0/
 # Disable changing the window title
 export DISABLE_AUTO_TITLE=true
 
-# Use emacs
-function edit {
-    emacsclient --alternate-editor="" -t "$@"
-}
+# Use vim
 
-export EDITOR=edit
-export VISUAL=edit
-export ALTERNATIVE_EDITOR=emacs
-alias vim=edit
-alias :e=edit
+export EDITOR=vim
+export VISUAL=vim
+export ALTERNATIVE_EDITOR=vi
+alias :e=vim
 
-alias :E="SUDO_EDITOR=\"emacsclient -t -a emacs\" sudoedit"
+alias :E=sudoedit
 
 
 # Use UTF-8

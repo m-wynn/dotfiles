@@ -1,51 +1,62 @@
 "" Plugins using Vim Plug https://github.com/junegunn/vim-plug
 
 call plug#begin('~/.vim/plugged')
-	Plug 'amirh/HTML-AutoCloseTag', {'for': 'html'}        " Auto close html tags
-	Plug 'AndrewRadev/linediff.vim'                        " Diff two visual selections
-	Plug 'AndrewRadev/splitjoin.vim'                       " Splitting and joining lines and blocks
-	Plug 'ap/vim-css-color'                                " Sets the background to your color. #ff0000 < that is white on red
-	Plug 'benekastah/neomake'                              " Make for all kinds of things.  Can take advantage of Neovims asyncronity
-	Plug 'cazador481/fakeclip.neovim'                      " * and + map to the X clipboard if X is running.  & maps to tmux if it's running.
-	Plug 'fweep/vim-zsh-path-completion'                   " Better completion for :e and friends
-	Plug 'honza/vim-snippets'                              " Snippits Stuff
-	Plug 'jiangmiao/auto-pairs'                            " Insert or delete brackets, parens, quotes in pair
-	Plug 'junegunn/vim-easy-align'                         " Align things more easily
-	Plug 'Konfekt/FastFold'                                " Speed up folds
-	Plug 'majutsushi/tagbar'                               " Display tags in a window, ordered by scope
-	Plug 'ntpeters/vim-better-whitespace'                  " Easily strip whitespace
-	Plug 'pearofducks/ansible-vim', {'for': 'ansible'}     " Ansible stuff
-	Plug 'shawncplus/phpcomplete.vim'                      " Lots of completions and ctag-jumping stuff for PHP.  Pretty cool, check readme for ctags
-	Plug 'sheerun/vim-polyglot'                            " Support for sooo many languages
-	Plug 'Shougo/context_filetype.vim'                     " Add context filetype feature to completion
-	Plug 'Shougo/deoplete.nvim'                            " Completion
-	Plug 'Shougo/echodoc.vim'                              " Print documentation in autocomplete
-	Plug 'Shougo/neoinclude.vim'                           " Completion framework
-	Plug 'Shougo/neopairs.vim'                             " Autoclose parentheses
-	Plug 'tmhedberg/SimpylFold'                            " Python folding
-	Plug 'SirVer/ultisnips'                                " Snippits
-	Plug 'tpope/vim-abolish'                               " Smarter find-replacement, and because I can't spell
-	Plug 'tpope/vim-afterimage'                            " Edit images, pdfs, and word docs in vim
-	Plug 'tpope/vim-commentary'                            " Comment things easily with gc
-	Plug 'tpope/vim-eunuch'                                " Handy UNIX commands like :Locate and :SudoEdit
-	Plug 'tpope/vim-fugitive'                              " Git plugin for like, :Gstatus
-	Plug 'tpope/vim-ragtag'                                " More tag mappings
-	Plug 'tpope/vim-repeat'                                " Use . in to repeat plugin stuff
-	Plug 'tpope/vim-sleuth'                                " Figure out tabs based on the file
-	Plug 'tpope/vim-surround'                              " Change the surrounding stuff
-	Plug 'tpope/vim-unimpaired'                            " Add lots of handy mappings
-	Plug 'tpope/vim-vinegar'                               " Improve netrw
-	Plug 'vim-airline/vim-airline'                         " Informative tabline/status bar for vim
-	Plug 'vim-airline/vim-airline-themes'                  " Themes for Airline
-	Plug 'vim-latex/vim-latex'                             " Such a powerful thing for LaTeX
-	Plug 'w0ng/vim-hybrid'                                 " Colors!
-	Plug 'will133/vim-dirdiff'                             " Diff and merge two directories
-	Plug 'wellle/tmux-complete.vim'                        " Completion from other tmux panes
-	Plug 'xolox/vim-misc'                                  " Miscellaneous stuff, required for vim-notes
-	Plug 'xolox/vim-notes'                                 " Notes in Vim!
-	Plug 'yegappan/mru'                                    " Most Recently Used Files
-	Plug 'zchee/deoplete-jedi', {'for': 'python'}          " Python completion
-	Plug 'docker/docker' , {'rtp': '/contrib/syntax/vim/'} " Docker syntax
+
+" Tools
+Plug 'AndrewRadev/linediff.vim'                    " Diff two visual selections
+Plug 'benekastah/neomake'                          " Make for all kinds of things.  Can take advantage of Neovims asyncronity
+Plug 'cazador481/fakeclip.neovim'                  " * and + map to the X clipboard if X is running.  & maps to tmux if it's running.
+Plug 'Konfekt/FastFold'                            " Speed up folds
+Plug 'ntpeters/vim-better-whitespace'              " Easily strip whitespace
+Plug 'tmhedberg/SimpylFold'                        " Python folding
+Plug 'tpope/vim-abolish'                           " Smarter find-replacement, and because I can't spell
+Plug 'tpope/vim-afterimage'                        " Edit images, pdfs, and word docs in vim
+Plug 'tpope/vim-eunuch'                            " Handy UNIX commands like :Locate and :SudoEdit
+Plug 'tpope/vim-fugitive'                          " Git plugin for like, :Gstatus
+Plug 'tpope/vim-repeat'                            " Use . in to repeat plugin stuff
+Plug 'tpope/vim-sleuth'                            " Figure out tabs based on the file
+Plug 'tpope/vim-unimpaired'                        " Add lots of handy mappings
+Plug 'tpope/vim-vinegar'                           " Improve netrw
+Plug 'will133/vim-dirdiff'                         " Diff and merge two directories
+Plug 'xolox/vim-misc'                              " Miscellaneous stuff, required for vim-notes
+Plug 'xolox/vim-notes'                             " Notes in Vim!
+Plug 'yegappan/mru'                                " Most Recently Used Files
+
+" Completion
+Plug 'Shougo/context_filetype.vim'                 " Add context filetype feature to completion
+Plug 'Shougo/deoplete.nvim'                        " Completion
+Plug 'Shougo/echodoc.vim'                          " Print documentation in autocomplete
+Plug 'Shougo/neoinclude.vim'                       " Completion framework
+Plug 'Shougo/neopairs.vim'                         " Autoclose parentheses after completion
+Plug 'wellle/tmux-complete.vim'                    " Completion from other tmux panes
+Plug 'zchee/deoplete-jedi', {'for': 'python'}      " Python completion
+
+" Editing
+Plug 'amirh/HTML-AutoCloseTag', {'for': 'html'}    " Auto close html tags
+Plug 'AndrewRadev/splitjoin.vim'                   " Splitting and joining lines and blocks
+Plug 'honza/vim-snippets'                          " Snippits Stuff
+Plug 'jiangmiao/auto-pairs'                        " Insert or delete brackets, parens, quotes in pair
+Plug 'junegunn/vim-easy-align'                     " Align things more easily
+Plug 'pearofducks/ansible-vim', {'for': 'ansible'} " Ansible stuff
+Plug 'shawncplus/phpcomplete.vim'                  " Lots of completions and ctag-jumping stuff for PHP.  Pretty cool, check readme for ctags
+Plug 'sheerun/vim-polyglot'                        " Support for sooo many languages
+Plug 'SirVer/ultisnips'                            " Snippits
+Plug 'tpope/vim-commentary'                        " Comment things easily with gc
+Plug 'tpope/vim-ragtag'                            " More tag mappings
+Plug 'tpope/vim-surround'                          " Change the surrounding stuff
+Plug 'vim-latex/vim-latex'                         " Such a powerful thing for LaTeX
+
+" UI
+Plug 'ap/vim-css-color'                            " Sets the background to your color. #ff0000 < that is white on red
+Plug 'vim-airline/vim-airline'                     " Informative tabline/status bar for vim
+Plug 'vim-airline/vim-airline-themes'              " Themes for Airline
+Plug 'majutsushi/tagbar'                           " Display tags in a window, ordered by scope
+Plug 'w0ng/vim-hybrid'                             " Colors!
+
+" Mail Plugins
+Plug 'chrisbra/CheckAttach'                        " Ask if you forgot to attach something
+Plug 'dbeniamine/vim-mail'                         " Contact completion, message folds, navigation, and more
+
 call plug#end()
 
 """"""""""""""
@@ -88,22 +99,20 @@ set showmatch
 set autoindent
 
 "" tabs
-set tabstop=4 softtabstop=0 noexpandtab shiftwidth=4
+set tabstop=4 softtabstop=0 expandtab shiftwidth=4
 set shiftround		" Indents to the next multiple of shiftwidth
 
 
 " Allow backspacing over line breaks, start of insert action, and autoindentation
 set backspace=eol,start,indent
 
-" Ignore case when searching
-set ignorecase
-" When searching try to be smart about cases
-set smartcase
+" Ignore case when lowercase is used in the search
+set ignorecase smartcase
 " Highlight search results
 set hlsearch
-" Makes search act like search in modern browsers
+" Move to matched string while typing the search pattern
 set incsearch
-" Wrap scan around end-of-file
+" Wrap search around end-of-file
 set wrapscan
 
 " Show line numbers
@@ -112,11 +121,11 @@ autocmd InsertEnter * :set norelativenumber
 autocmd InsertLeave * :set relativenumber
 
 function! NumberToggle()
-	if(&relativenumber == 1)
-		set norelativenumber
-	else
-		set relativenumber
-	endif
+    if(&relativenumber == 1)
+        set norelativenumber
+    else
+        set relativenumber
+    endif
 endfunc
 
 nnoremap <C-n> :call NumberToggle()<cr>
@@ -130,7 +139,7 @@ cmap w!! w !sudo tee > /dev/null %
 " Allow switching buffers without saving
 set hidden
 
-"Word wrapping is fine, just don't insert newlines, please.
+" Word wrapping is fine, just don't insert newlines, please.
 set wrap linebreak nolist
 set textwidth=0
 set wrapmargin=0
@@ -142,7 +151,6 @@ set splitright
 " File-specific settings
 autocmd FileType racket set tabstop=2|set shiftwidth=2|set expandtab
 autocmd FileType haskell set tabstop=2|set shiftwidth=2|set expandtab
-autocmd FileType mail setlocal fo+=aw
 
 " Make Enter select completion without adding a new line.
 inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"

@@ -80,4 +80,3 @@ URxvt.resize-font.smaller: C-minus
 URxvt.resize-font.bigger: C-plus
 URxvt.resize-font.reset: C-equal
 URxvt.resize-font.show: C-question
-

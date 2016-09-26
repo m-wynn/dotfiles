@@ -6,3 +6,7 @@ emacs.d/history
 emacs.d/undo
 emacs.d/backups
 emacs.d/url
+weechat/certs
+weechat/logs
+weechat/weechat.log
+weechat/xfer

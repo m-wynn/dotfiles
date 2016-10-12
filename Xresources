@@ -41,6 +41,7 @@ URxvt.fading:	10
 URxvt*transparent:	true
 URxvt*font: xft:Liberation Mono for Powerline:size=10, \
 	xft:DejaVu Sans Mono: size=10, \
+	xft:Noto Sans Mono CJK KR size=10, \
 	xft:WenQuanYi Bitmap Song:pixelsize=14, \
 	xft:FreeSerif:style=Regular, \
 	xft:Unifont:pixelsize=5, \ \

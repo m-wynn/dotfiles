@@ -36,7 +36,7 @@ set include                           # Always include messages when replying
 set indent_string     = "> "          # how to quote replied text
 # set keep_flagged      = no            # Move from spool when marked as flag
 # set locale            = "C"           # Locale to use for printing time
-# set mailcap_path      = "$HOME/.mailcap:/usr/local/share/mailcap"
+set mailcap_path      = "$HOME/.mutt/mailcap"
 # set mail_check        = 10            # how often to poll for new mail (seconds)
 set nomark_old                        # Don't mark messages as old; new/read is enough
 set markers           = no            # No '+' for lines that wrap

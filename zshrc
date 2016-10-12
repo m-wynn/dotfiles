@@ -52,8 +52,10 @@ setopt extendedglob
 #If pattern for filename generation has no matches, print an error.
 setopt nomatch
 
-# Include ruby in Path
-export PATH=$PATH:~/bin:/root/.gem/ruby/2.3.0/bin:/home/matthew/.gem/ruby/2.3.0/bin
+# Include go and ruby in Path
+export GOPATH=$HOME/.go
+
+export PATH=$PATH:~/bin:/root/.gem/ruby/2.3.0/bin:/home/matthew/.gem/ruby/2.3.0/bin:${GOPATH//://bin:}/bin
 
 # Disable changing the window title
 export DISABLE_AUTO_TITLE=true
@@ -79,12 +81,14 @@ if ! zgen saved; then
 
     # Oh-my-zsh Bundles
     zgen oh-my-zsh plugins/colored-man-pages # Colorizes man pages
+    zgen oh-my-zsh plugins/django            # Manage.py completions
     zgen oh-my-zsh plugins/docker            # Docker autocompletes
     zgen oh-my-zsh plugins/encode64          # Encode and decode 64-bit
+    zgen oh-my-zsh plugins/gitfast           # Faster git completion
     zgen oh-my-zsh plugins/pass              # Pass completion
+    zgen oh-my-zsh plugins/pip               # Pip completion
+    zgen oh-my-zsh plugins/python            # Python completion
     zgen oh-my-zsh plugins/rsync             # Rsync commands, like `rsync-copy`
-    zgen oh-my-zsh plugins/sudo              # Press Esc twice for sudo
-    zgen oh-my-zsh plugins/tmux              # Auto launch tmux
     zgen oh-my-zsh plugins/wd                # Warp directories
     zgen oh-my-zsh plugins/web-search        # Google from the command line
     zgen oh-my-zsh plugins/vi-mode           # Vim-like keybindings with some help
@@ -94,44 +98,37 @@ if ! zgen saved; then
     zgen load caarlos0/zsh-open-pr              # Open a pull request right there
     zgen load caarlos0/zsh-add-upstream         # Add upstream remote to git like `add-upstream username`
     zgen load chrissicool/zsh-256color          # Encourage 256 color mode
-    zgen load chmouel/oh-my-zsh-openshift       # Openshift Completion
-    zgen load horosgrisa/mysql-colorize         # Colorize MySQL plugins
     zgen load marzocchi/zsh-notify              # Notifications for non-zero exits or long commands
-    zgen load peterhurford/git-it-on.zsh        # Github things, like `gitit branches all`
     zgen load rimraf/k                          # Prettier version of l, with git support
-    zgen load RobSis/zsh-completion-generator   # Attempt to add autocompletion for non-completed things `gencom program`
     zgen load skx/sysadmin-util                 # So many scripts
     zgen load Tarrasch/zsh-bd                   # Back up to directory name
     zgen load Tarrasch/zsh-colors               # So many colors "echo I am red | red" or "red hi"
     zgen load unixorn/autoupdate-zgen           # Automagic updates every week (by default)
     zgen load voronkovich/gitignore.plugin.zsh  # Add a .gitignore based on a template
-    zgen load walesmd/caniuse.plugin.zsh        # CanIUse `caniuse webgl`
     zgen load zsh-users/zsh-completions src     # Tons and tons of completions
     zgen load zsh-users/zsh-syntax-highlighting # Pretty colors
 
     # OS-specific bundles
     case $(uname -s) in
         Linux)
-            if [ -x /usr/bin/pacman ]; then                        # Arch
-                zgen oh-my-zsh plugins/archlinux        # Pacman autocompletes
+            if [ -x /usr/bin/pacman ]; then      # Arch
+                zgen oh-my-zsh plugins/archlinux # Pacman autocompletes
                 source /usr/share/doc/pkgfile/command-not-found.zsh
-            elif [ -x /usr/bin/yum ]; then                        # CentOS
-                zgen oh-my-zsh plugins/yum                # Yum aliases
-            elif [ -x /usr/bin/apt-get ]; then                # Debian or Ubuntu
-                zgen oh-my-zsh plugins/debian                # Apt
+            elif [ -x /usr/bin/yum ]; then       # CentOS
+                zgen oh-my-zsh plugins/yum       # Yum aliases
+            elif [ -x /usr/bin/dnf ]; then       # New RHEL
+                zgen oh-my-zsh plugins/dnf       # DNF aliases
+            elif [ -x /usr/bin/apt-get ]; then   # Debian or Ubuntu
+                zgen oh-my-zsh plugins/debian    # Apt
             fi
             pgrep systemd >/dev/null && \
-                zgen oh-my-zsh plugins/systemd                # Systemctl autocompletes and auto sudo
-            ;;
-        OpenBSD)
-            # We totally need pkg_add plugins...
+                zgen oh-my-zsh plugins/systemd   # Systemctl autocompletes and auto sudo
             ;;
     esac
 
 
     # Load the theme.
     zgen load caiogondim/bullet-train-oh-my-zsh-theme bullet-train
-
 
     # Tell zgen that you're done.
     zgen save
@@ -141,13 +138,11 @@ bindkey '^R' history-incremental-search-backward
 
 say() { mplayer -really-quiet "http://translate.google.com/translate_tts?tl=en&q=$1"; }
 
-
-gpr() {          git push origin HEAD && open-pr "$*"  }        # Push and open a PR like that!
-
+gpr() { git push origin HEAD && open-pr "$*" }
 
 alias grep="grep --color=always"                        # Just watch this break things
 
-alias ip="ip -h -c"
+alias ip="ip -h -c"                                     # This too
 
 export LESS="-R"
 
@@ -168,41 +163,6 @@ if [[ "$TERM" != dumb ]] && (( $+commands[grc] )) ; then
     # Clean up variables
     unset cmds cmd
 fi
-
-#nman stuff
-compdef nman="man"
-compdef nman!="man"
-
-function _nman {
-    local l=$#
-    local page=(${@:1:$l-1})
-    if [[ -z "$page" ]]; then
-        echo "What manual page do you want?"
-        return
-    fi
-    local tmp=$IFS
-    IFS=$'\n' out=($(command man -w ${page[@]} 2>&1))
-    local code=$?
-    IFS=$tmp
-    if [[ ${#out[@]} > 1 ]]; then
-        echo "Too many manpages"
-        return
-    elif [[ $code != 0 ]]; then
-        echo "No manual entry for ${page[*]}"
-        return
-    fi
-    if [[ -z $NVIM_LISTEN_ADDRESS ]]; then
-        command nvim -c "${@: -1} ${page[*]}"
-    else
-        nvr --remote-send "<c-n>" -c "${@: -1} ${page[*]}"
-    fi
-}
-function nman {
-    _nman "$@" 'Nman'
-}
-function nman! {
-    _nman "$@" 'Nman!'
-}
 
 # The following lines were added by compinstall
 

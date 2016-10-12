@@ -19,8 +19,8 @@ root: ~/
 # tmux_command: byobu
 
 windows:
-  - carbon: mosh carbon -- tmux a -d
+  - carbon: mosh c -- tmux a -d
   - squares: mosh squares -- tmux a -d
-  - droplet: mosh droplet -- tmux a -d
+  - emilia: mosh emilia -- tmux a -d
   - local: zsh
 

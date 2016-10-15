@@ -10,3 +10,9 @@
 [submodule "awesome/vicious"]
 	path = awesome/vicious
 	url = http://git.sysphere.org/vicious
+[submodule "dotbot"]
+	path = dotbot
+	url = https://github.com/anishathalye/dotbot
+[submodule "dotbot-xbps"]
+	path = dotbot-xbps
+	url = https://github.com/m-wynn/dotbot-xbps

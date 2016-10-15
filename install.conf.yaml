@@ -1,0 +1,44 @@
+- defaults:
+    link:
+      relink: true
+      create: true
+    shell:
+      stdin: true
+
+- clean: ['~']
+
+- link:
+    ~/.Xresources: Xresources
+    ~/.config/awesome: awesome
+    ~/.emacs.d: emacs.d
+    ~/.gitconfig: gitconfig
+    ~/.mbsyncrc: mbsyncrc
+    ~/.config/mpv/mpv.conf: mpv.conf
+    ~/.msmtprc: msmtprc
+    ~/.mutt: mutt
+    ~/.ncmpcpp/config: ncmpcpp/config
+    ~/.nethackrc: nethackrc
+    ~/.config/nvim/init.vim: nvim/init.vim
+    ~/.config/nvim/after: nvim/after
+    ~/.vim: ~/.config/nvim
+    ~/.tmux.conf: tmux.conf
+    ~/.tmuxinator: tmuxinator
+    ~/.weechat: weechat
+    ~/.zshrc: zshrc
+
+- xbps:
+  - emacs
+  - git-all
+  - neovim
+  - python-pip
+  - python3.4-pip
+  - zsh
+  - ssr-32bit
+
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]
+  - ["mkdir -p ~/.config/nvim/{swaps,undo,backups}", Creating vim swaps, undo, and backups dirs]
+  - [sudo pip2 install neovim, Installing neovim for python2]
+  - [sudo pip3 install neovim, Installing neovim for python3]
+  - ["curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim", Downloading vim-plug]
+  - [nvim +Pluginstall +UpdateRemotePlugins +q +q, Installing vim plugins]

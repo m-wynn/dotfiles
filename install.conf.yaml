@@ -20,6 +20,7 @@
     ~/.nethackrc: nethackrc
     ~/.config/nvim/init.vim: nvim/init.vim
     ~/.config/nvim/after: nvim/after
+    ~/.config/nvim/my-snippets: nvim/my-snippets
     ~/.vim: ~/.config/nvim
     ~/.tmux.conf: tmux.conf
     ~/.tmuxinator: tmuxinator
@@ -33,7 +34,6 @@
   - python-pip
   - python3.4-pip
   - zsh
-  - ssr-32bit
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]

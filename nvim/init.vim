@@ -1,14 +1,18 @@
 "" Plugins using Vim Plug https://github.com/junegunn/vim-plug
 
+if !filereadable(expand('~/.config/nvim/autoload/plug.vim'))
+    silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+endif
+
 call plug#begin('~/.vim/plugged')
 
 " Tools
 Plug 'AndrewRadev/linediff.vim'                    " Diff two visual selections
-Plug 'benekastah/neomake'                          " Make for all kinds of things.  Can take advantage of Neovims asyncronity
+Plug 'neomake/neomake'                             " Make for all kinds of things.  Can take advantage of Neovims asyncronity
 Plug 'cazador481/fakeclip.neovim'                  " * and + map to the X clipboard if X is running.  & maps to tmux if it's running.
 Plug 'Konfekt/FastFold'                            " Speed up folds
 Plug 'ntpeters/vim-better-whitespace'              " Easily strip whitespace
-Plug 'tmhedberg/SimpylFold'                        " Python folding
+Plug 'tmhedberg/SimpylFold', {'for': 'python'}     " Python folding
 Plug 'tpope/vim-abolish'                           " Smarter find-replacement, and because I can't spell
 Plug 'tpope/vim-afterimage'                        " Edit images, pdfs, and word docs in vim
 Plug 'tpope/vim-eunuch'                            " Handy UNIX commands like :Locate and :SudoEdit
@@ -17,7 +21,6 @@ Plug 'tpope/vim-repeat'                            " Use . in to repeat plugin s
 Plug 'tpope/vim-sleuth'                            " Figure out tabs based on the file
 Plug 'tpope/vim-unimpaired'                        " Add lots of handy mappings
 Plug 'tpope/vim-vinegar'                           " Improve netrw
-Plug 'will133/vim-dirdiff'                         " Diff and merge two directories
 Plug 'xolox/vim-misc'                              " Miscellaneous stuff, required for vim-notes
 Plug 'xolox/vim-notes'                             " Notes in Vim!
 Plug 'yegappan/mru'                                " Most Recently Used Files
@@ -35,16 +38,16 @@ Plug 'zchee/deoplete-jedi', {'for': 'python'}      " Python completion
 Plug 'amirh/HTML-AutoCloseTag', {'for': 'html'}    " Auto close html tags
 Plug 'AndrewRadev/splitjoin.vim'                   " Splitting and joining lines and blocks
 Plug 'honza/vim-snippets'                          " Snippits Stuff
-Plug 'jiangmiao/auto-pairs'                        " Insert or delete brackets, parens, quotes in pair
 Plug 'junegunn/vim-easy-align'                     " Align things more easily
 Plug 'pearofducks/ansible-vim', {'for': 'ansible'} " Ansible stuff
+Plug 'rhysd/vim-grammarous'                        " Grammar checking
 Plug 'shawncplus/phpcomplete.vim'                  " Lots of completions and ctag-jumping stuff for PHP.  Pretty cool, check readme for ctags
 Plug 'sheerun/vim-polyglot'                        " Support for sooo many languages
 Plug 'SirVer/ultisnips'                            " Snippits
 Plug 'tpope/vim-commentary'                        " Comment things easily with gc
 Plug 'tpope/vim-ragtag'                            " More tag mappings
 Plug 'tpope/vim-surround'                          " Change the surrounding stuff
-Plug 'vim-latex/vim-latex'                         " Such a powerful thing for LaTeX
+Plug 'vim-latex/vim-latex', {'for': 'latex'}       " Such a powerful thing for LaTeX
 
 " UI
 Plug 'ap/vim-css-color'                            " Sets the background to your color. #ff0000 < that is white on red
@@ -59,13 +62,10 @@ Plug 'dbeniamine/vim-mail'                         " Contact completion, message
 
 call plug#end()
 
-""""""""""""""
-"	General  "
-"	  Vim	 "
-""""""""""""""
-
-"" Lose the annoyances of vi
-set nocompatible		" This is generally considered useless
+"""""""""""""""
+"   General   "
+"     Vim     "
+"""""""""""""""
 
 "" Load plugins and indentation for specific filetypes
 filetype plugin indent on
@@ -78,13 +78,16 @@ set titlestring=VIM:\ %-5.10t\ %a%r%m titlelen=15
 set title
 
 "" Put temps somewhere else
-set dir=~/.vim/swaps//
-set backupdir=~/.vim/backups//
-set undodir=~/.vim/undo//
+silent !mkdir -p ~/.config/nvim/swaps/
+silent !mkdir -p ~/.config/nvim/backups/
+silent !mkdir -p ~/.config/nvim/undo/
+
+set directory=~/.config/nvim/swaps//
+set backupdir=~/.config/nvim/backups//
+set undodir=~/.config/nvim/undo//
 set undofile
 
 " Colors!
-"let $NVIM_TUI_ENABLE_TRUE_COLOR=0
 let g:hybrid_custom_term_colors = 1
 set background=dark
 colorscheme hybrid
@@ -100,8 +103,6 @@ set autoindent
 
 "" tabs
 set tabstop=4 softtabstop=0 expandtab shiftwidth=4
-set shiftround		" Indents to the next multiple of shiftwidth
-
 
 " Allow backspacing over line breaks, start of insert action, and autoindentation
 set backspace=eol,start,indent
@@ -115,16 +116,21 @@ set incsearch
 " Wrap search around end-of-file
 set wrapscan
 
+" Completion for commands
+set wildmenu
+
 " Show line numbers
 set number
-autocmd InsertEnter * :set norelativenumber
-autocmd InsertLeave * :set relativenumber
+augroup line_numbers
+    autocmd InsertEnter * :set norelativenumber
+    autocmd InsertLeave * :set relativenumber
+augroup END
 
 function! NumberToggle()
     if(&relativenumber == 1)
-        set norelativenumber
+    set norelativenumber
     else
-        set relativenumber
+    set relativenumber
     endif
 endfunc
 
@@ -140,7 +146,7 @@ cmap w!! w !sudo tee > /dev/null %
 set hidden
 
 " Word wrapping is fine, just don't insert newlines, please.
-set wrap linebreak nolist
+set wrap linebreak list
 set textwidth=0
 set wrapmargin=0
 
@@ -148,29 +154,28 @@ set wrapmargin=0
 set splitbelow
 set splitright
 
-" File-specific settings
-autocmd FileType racket set tabstop=2|set shiftwidth=2|set expandtab
-autocmd FileType haskell set tabstop=2|set shiftwidth=2|set expandtab
-
 " Make Enter select completion without adding a new line.
 inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
 
 " Don't ring the terminal bell
-set vb t_fb=
+set visualbell t_fb=
 
 
 """""""""""""""""""
 " Plugin-Specific "
-"	 Settings	  "
+"     Settings    "
 """""""""""""""""""
 
 "" benekastah/neomake -- Asyncronous syntax checking
-autocmd! BufWritePost * Neomake				" Run Neomake on every write
+augroup neomake_on_save
+  au!
+  autocmd BufWritePost * Neomake
+augroup END
 
 "" junegunn/vim-easy-align
-xmap ga <Plug>(EasyAlign)|		 " Start interactive EasyAlign in visual mode (e.g. ipga)
+xmap ga <Plug>(EasyAlign)|         " Start interactive EasyAlign in visual mode (e.g. ipga)
 
-nmap ga <Plug>(EasyAlign)|		" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)|         " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 
 "" ntpters/vim-better-whitespace -- Automagically strip on save
 let g:better_whitespace_filetypes_blacklist=['mail', 'diff', 'gitcommit', 'unite', 'qf', 'help']
@@ -179,34 +184,32 @@ let g:better_whitespace_filetypes_blacklist=['mail', 'diff', 'gitcommit', 'unite
 let g:deoplete#enable_at_startup = 1
 
 "" SirVer/ultisnips -- Snippets
-let g:UltiSnipsExpandTrigger="<tab>"		"Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsExpandTrigger='<tab>'        "Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsJumpForwardTrigger='<c-b>'
+let g:UltiSnipsJumpBackwardTrigger='<c-z>'
 
-let g:UltiSnipsEditSplit="vertical" 			" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit='vertical'             " If you want :UltiSnipsEdit to split your window.
+set runtimepath+=~/.config/nvim/my-snippets/
 
 "" tpope/vim-fugitive -- All the gits
-autocmd BufReadPost fugitive://* set bufhidden=delete	" Delete old git-object buffers when traversing the dag
+augroup delete_fugitive_buffers
+    autocmd BufReadPost fugitive://* set bufhidden=delete    " Delete old git-object buffers when traversing the dag
+augroup END
 
 "" vim-airline/vim-airline
-set laststatus=2					" Always show the status
-set noshowmode						" Don't show the mode below the statusline, we're taking care of that in vim-airline
-let g:airline_powerline_fonts = 1			" Use powerline symbols
-let g:airline#extensions#tabline#enabled = 1		" Tablinify the tabbar
-let g:airline#extensions#whitespace#mixed_indent_algo = 1	" Don't complain about C-style comments with funny indents
+set laststatus=2                                          " Always show the status
+set noshowmode                                            " Don't show the mode below the statusline, we're taking care of that in vim-airline
+let g:airline_powerline_fonts = 1                         " Use powerline symbols
+let g:airline#extensions#tabline#enabled = 1              " Tablinify the tabbar
+let g:airline#extensions#whitespace#mixed_indent_algo = 1 " Don't complain about C-style comments with funny indents
 let g:airline#extensions#tabline#buffer_nr_show = 1
-
 
 "" vim-latex/vim-latex -- LaTex stuff
 let g:Tex_DefaultTargetFormat = 'pdf'
 set grepprg=grep\ -nH\ $*
 let g:tex_flavor='latex'
-let g:Imap_UsePlaceHolders = 0		"Set this if you ever EVER are going to use '()'
+let g:Imap_UsePlaceHolders = 0        "Set this if you ever EVER are going to use '()'
 let g:Imap_FreezeImap=1
-
-"" will133/vim-dirdiff
-let g:DirDiffAddArgs = "-w"
-let g:DirDiffEnableMappings = 1
 
 "" xolox/vim-notes
 let g:notes_directories = ['~/Documents/notes']

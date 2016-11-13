@@ -3,7 +3,7 @@
 " http://groups.google.com/group/vim_use/msg/f59e5c1adc6be2b3
 
 let d_fo = &fo
-let s:defaults = 'setlocal tw=72 ts=8 sts=4 sw=4 fo='.d_fo
+let s:defaults = 'setlocal ts=8 sts=4 sw=4 fo='.d_fo
 execute s:defaults
 let b:MailAreaDetect=1
 

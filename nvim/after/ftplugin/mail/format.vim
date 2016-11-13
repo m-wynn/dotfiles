@@ -1,9 +1,9 @@
-" Dynamically set format options, depending on where you are in a
-" mail, idea from Teemu Likonen:
+" Dynamically set format options, depending on where you are in a mail.
+" Based on this script by Teemu Likonen:
 " http://groups.google.com/group/vim_use/msg/f59e5c1adc6be2b3
 
-let d_fo = &fo
-let s:defaults = 'setlocal ts=8 sts=4 sw=4 fo='.d_fo
+let b:default_formatoptions=&formatoptions
+let s:defaults='setlocal formatoptions='.b:default_formatoptions
 execute s:defaults
 let b:MailAreaDetect=1
 
@@ -12,31 +12,27 @@ let b:MailAreaDetect=1
 "nnoremap <buffer> <LocalLeader>ma0 :call <SID>MailAreaDetect_Off()
 "    \ <bar> echo 'MailAreaDetect Off'<CR>
 
-nnoremap <buffer><silent> <F9> :call <SID>MailAreaDetect_Switch(0)<CR>
-inoremap <buffer><silent> <F9> <C-\><C-O>:call <SID>MailAreaDetect_Switch(1)<CR>
-
 function! s:MailAreaDetect_Switch(vmode)
     if b:MailAreaDetect
-	silent call <SID>MailAreaDetect_Off()
+        silent call <SID>MailAreaDetect_Off()
         let b:MailAreaDetect=0
-	echo 'MailAreaDetect Off'
+        echo 'MailAreaDetect Off'
         if a:vmode
             sleep 1
         endif
     else
-	silent call <SID>MailAreaDetect_On()
+        silent call <SID>MailAreaDetect_On()
         let b:MailAreaDetect=1
-	echo 'MailAreaDetect On'
+        echo 'MailAreaDetect On'
         if a:vmode
             sleep 1
         endif
     endif
-endfu
-
+endfunction
 
 function! s:MailAreaDetect_On()
     silent autocmd! MailAreaDetect CursorMoved,CursorMovedI
-        \ <buffer> call <SID>AreaOptions()
+                \ <buffer> call <SID>AreaOptions()
     let b:MailAreaDetect=1
 endfunction
 
@@ -55,23 +51,40 @@ function! s:AreaOptions()
     execute s:defaults
     if <SID>CheckArea('\v^From( |: ).*\n','\v^$')
         "echo 'Header'
-        setlocal fo-=a fo-=w fo-=t sts=0 sw=8 noet
-    elseif getline('.') =~ '\m^\s*>'
+        setlocal formatoptions-=a
+        setlocal formatoptions-=t
+        setlocal formatoptions-=w
+        setlocal noexpandtab
+        setlocal shiftwidth=8
+        setlocal softtabstop=0
+    elseif <SID>CheckArea('\_^>* \=-- \_$','\_^\_$')
+        "echo 'Signature'
+        setlocal formatoptions-=a
+        setlocal formatoptions-=t
+        setlocal formatoptions-=w
+        setlocal noexpandtab
+        setlocal shiftwidth=8
+        setlocal softtabstop=0
+    elseif getline('.')=~?'\_^>.*'
         "echo 'Quotation'
-        setlocal fo-=a fo-=w
+        setlocal formatoptions+=a
+        setlocal formatoptions+=w
     elseif <SID>CheckArea('\m^--- .*\n^+++ ','\v(^$|\n^-- $)')
         "echo 'Patch'
-        setlocal fo-=a fo-=w fo-=t sts=0 sw=8 noet
-    elseif <SID>CheckArea('^-- $','^$')
-        "echo 'Signature'
-        setlocal fo-=a fo-=w fo-=t sts=0 sw=8 noet
+        setlocal formatoptions-=a
+        setlocal formatoptions-=t
+        setlocal formatoptions-=w
+        setlocal noexpandtab
+        setlocal shiftwidth=8
+        setlocal softtabstop=0
     else
         "echo 'My text'
-        setlocal fo+=aw et
+        setlocal expandtab
+        setlocal formatoptions+=aw
     endif
 endfunction
 
 function! s:CheckArea(start, end)
     return (search(a:start,'bcnW')-line('.')) >
-        \ (search(a:end,'bnW')-line('.'))
+                \ (search(a:end,'bnW')-line('.'))
 endfunction

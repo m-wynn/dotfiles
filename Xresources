@@ -1,13 +1,13 @@
-Xft.autohint:	0
-Xft.lcdfilter:	lcddefault
-Xft.hintstyle:	hintfull
-Xft.hinting:	1
-Xft.antialias:	1
-Xft.rgba:	none
-URxvt.transparent:	true
-URxvt.shading:	10
-URxvt.blurRadius:	10
-URxvt.fading:	10
+Xft.autohint: 0
+Xft.lcdfilter: lcddefault
+Xft.hintstyle: hintfull
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: none
+URxvt.transparent: true
+URxvt.shading: 10
+URxvt.blurRadius: 10
+URxvt.fading: 10
 !URxvt*letterSpace: -3
 
 ! special colors
@@ -38,33 +38,33 @@ URxvt.fading:	10
 *color7: #707880
 *color15: #C5C8C6
 
-URxvt*transparent:	true
-URxvt*font: xft:Liberation Mono for Powerline:size=10, \
-	xft:DejaVu Sans Mono: size=10, \
-	xft:Noto Sans Mono CJK KR size=10, \
-	xft:WenQuanYi Bitmap Song:pixelsize=14, \
-	xft:FreeSerif:style=Regular, \
-	xft:Unifont:pixelsize=5, \ \
-	xft:Noto Sans Kannada:style=Regular:pixelsize=14, \
-	xft:Symbola:pixelsize=7, \
-	-misc-fixed-medium-r-normal--18-120-100-100-c-90-iso10646-1
+URxvt*transparent: true
+URxvt*font: xft:LiterationMonoPowerline Nerd Font:size=10, \
+    xft:DejaVu Sans Mono: size=10, \
+    xft:Noto Sans Mono CJK KR size=10, \
+    xft:WenQuanYi Bitmap Song:pixelsize=14, \
+    xft:FreeSerif:style=Regular, \
+    xft:Unifont:pixelsize=5, \ \
+    xft:Noto Sans Kannada:style=Regular:pixelsize=14, \
+    xft:Symbola:pixelsize=7, \
+    -misc-fixed-medium-r-normal--18-120-100-100-c-90-iso10646-1
 URxvt.boldFont:xft:Liberation Mono:style=Bold:size=10
 URxvt.italicFont:xft:Liberation Mono:style=Oblique:size=10
 URxvt.boldItalicFont:xft:Liberation Mono:style=Bold Oblique:size=10
 URxvt.scrollBar: false
-URxvt.scrollWithBuffer:	true
-URxvt.scrollTtyKeypress:	true
-URxvt.perl-lib:	~/.local/lib/urxvt/perls/
-URxvt.perl-ext-common:	default,matcher,clipboard,resize-font
-URxvt.url-launcher:	/usr/bin/firefox-nightly
+URxvt.scrollWithBuffer: true
+URxvt.scrollTtyKeypress: true
+URxvt.perl-lib: ~/.local/lib/urxvt/perls/
+URxvt.perl-ext-common: default,matcher,clipboard,resize-font
+URxvt.url-launcher: /usr/bin/firefox-nightly
 URxvt.matcher.button: 1
-URxvt.keysym.C-Delete:    perl:matcher:last
-URxvt.keysym.M-Delete:    perl:matcher:list
-URxvt.colorUL:	#42a5f5
-URxvt.iso14755:	false
-URxvt.iso14755_52:	false
-URxvt.keysym.C-C:	perl:clipboard:copy
-URxvt.keysym.C-V:	perl:clipboard:paste
+URxvt.keysym.C-Delete: perl:matcher:last
+URxvt.keysym.M-Delete: perl:matcher:list
+URxvt.colorUL: #42a5f5
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+URxvt.keysym.C-C: perl:clipboard:copy
+URxvt.keysym.C-V: perl:clipboard:paste
 
 !URxvt.tabbed.new-button: true
 !URXvt.tabbed.reopen-on-close: yes
@@ -75,7 +75,7 @@ URxvt.keysym.C-V:	perl:clipboard:paste
 !URxvt.keysym.Control-Shift-Tab: perl:tabbedex:prev_tab
 
 URxvt.urgentOnBell: true
-URxvt.visualBell:   true
+URxvt.visualBell: true
 URxvt.termName: rxvt-unicode
 URxvt.resize-font.smaller: C-minus
 URxvt.resize-font.bigger: C-plus

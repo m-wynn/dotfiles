@@ -59,6 +59,7 @@ Plug 'w0ng/vim-hybrid'                             " Colors!
 " Mail Plugins
 Plug 'chrisbra/CheckAttach'                        " Ask if you forgot to attach something
 Plug 'dbeniamine/vim-mail'                         " Contact completion, message folds, navigation, and more
+Plug 'https://gitlab.com/lafrenierejm/vim-format-flowed.git'
 
 call plug#end()
 
@@ -160,6 +161,8 @@ inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
 " Don't ring the terminal bell
 set visualbell t_fb=
 
+" Incsub stuff
+set inccommand=nosplit
 
 """""""""""""""""""
 " Plugin-Specific "

@@ -55,20 +55,17 @@ setopt nomatch
 # Include go and ruby in Path
 export GOPATH=$HOME/.go
 
-export PATH=$PATH:~/bin:/root/.gem/ruby/2.3.0/bin:/home/matthew/.gem/ruby/2.3.0/bin:${GOPATH//://bin:}/bin
+export PATH=$PATH:~/bin:${GOPATH//://bin:}/bin
 
 # Disable changing the window title
 export DISABLE_AUTO_TITLE=true
 
 # Use vim
-
 export EDITOR=vim
 export VISUAL=vim
 export ALTERNATIVE_EDITOR=vi
 alias :e=vim
-
 alias :E=sudoedit
-
 
 # Use UTF-8
 export LANG=en_US.UTF-8
@@ -90,15 +87,12 @@ if ! zgen saved; then
     zgen oh-my-zsh plugins/python            # Python completion
     zgen oh-my-zsh plugins/rsync             # Rsync commands, like `rsync-copy`
     zgen oh-my-zsh plugins/wd                # Warp directories
-    zgen oh-my-zsh plugins/web-search        # Google from the command line
-    zgen oh-my-zsh plugins/vi-mode           # Vim-like keybindings with some help
+    zgen oh-my-zsh plugins/vi-mode           # Vim-like keybindings with some modifications
 
     # External Bundles
-    zgen load adolfoabegg/browse-commit         # Open latest commit in browser
     zgen load caarlos0/zsh-open-pr              # Open a pull request right there
     zgen load caarlos0/zsh-add-upstream         # Add upstream remote to git like `add-upstream username`
     zgen load chrissicool/zsh-256color          # Encourage 256 color mode
-    zgen load marzocchi/zsh-notify              # Notifications for non-zero exits or long commands
     zgen load rimraf/k                          # Prettier version of l, with git support
     zgen load skx/sysadmin-util                 # So many scripts
     zgen load Tarrasch/zsh-bd                   # Back up to directory name
@@ -125,7 +119,6 @@ if ! zgen saved; then
                 zgen oh-my-zsh plugins/systemd   # Systemctl autocompletes and auto sudo
             ;;
     esac
-
 
     # Load the theme.
     zgen load caiogondim/bullet-train-oh-my-zsh-theme bullet-train
@@ -182,5 +175,3 @@ zstyle :compinstall filename '/home/matthew/.zshrc'
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
-
-#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

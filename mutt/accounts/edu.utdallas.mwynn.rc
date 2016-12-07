@@ -1,0 +1,7 @@
+set record    = "+edu.utdallas.mwynn/Sent Items" # Directory for sent messages
+set from      = "mwynn@utdallas.edu"             # Address for 'from' field
+set mbox      = "+edu.utdallas.mwynn/inbox"      # Directory for saved messages
+set postponed = "+edu.utdallas.mwynn/Drafts"     # Directory for drafts
+set realname  = "Matthew Wynn"                   # Name for 'from' field
+set sendmail  = "msmtp -a edu.utdallas.mwynn"    # Command used to send mail
+set spoolfile = "+edu.utdallas.mwynn/inbox"      # Directory for new mail

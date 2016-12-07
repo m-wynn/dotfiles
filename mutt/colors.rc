@@ -1,7 +1,5 @@
-## Theme kindly inspired from
-## http://nongeekshandbook.blogspot.ie/2009/03/mutt-color-configuration.html
-
 ## Colours for items in the index
+color index cyan black ~A
 color index brightcyan black ~N
 color index brightred black ~O
 color index brightyellow black ~F
@@ -81,7 +79,14 @@ color bold brightyellow black
 #color underline magenta black
 color markers brightcyan black
 
-## Colour definitions when on a mono screen
+## Color definitions when on a mono screen
 mono bold bold
 mono underline underline
 mono indicator reverse
+
+# Color utd emails
+color index green       black '~C @.*utdallas.edu'
+color index green       black '~f maw140130@utdallas.edu'
+color index green       black '~f mwynn@utdallas.edu'
+color index green       black '~f matthew.wynn@utdallas.edu'
+color index brightgreen black '~N ~C @.*utdallas.edu'

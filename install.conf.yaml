@@ -10,20 +10,21 @@
 - link:
     ~/.Xresources: Xresources
     ~/.config/awesome: awesome
+    ~/.config/mpd/mpd.conf: mpd/mpd.conf
+    ~/.config/mpv: mpv
+    ~/.config/nvim/after: nvim/after
+    ~/.config/nvim/init.vim: nvim/init.vim
+    ~/.config/nvim/my-snippets: nvim/my-snippets
     ~/.emacs.d: emacs.d
     ~/.gitconfig: gitconfig
     ~/.mbsyncrc: mbsyncrc
-    ~/.config/mpv/mpv.conf: mpv.conf
     ~/.msmtprc: msmtprc
     ~/.mutt: mutt
     ~/.ncmpcpp/config: ncmpcpp/config
     ~/.nethackrc: nethackrc
-    ~/.config/nvim/init.vim: nvim/init.vim
-    ~/.config/nvim/after: nvim/after
-    ~/.config/nvim/my-snippets: nvim/my-snippets
-    ~/.vim: ~/.config/nvim
     ~/.tmux.conf: tmux.conf
     ~/.tmuxinator: tmuxinator
+    ~/.vim: ~/.config/nvim
     ~/.weechat: weechat
     ~/.zshrc: zshrc
 

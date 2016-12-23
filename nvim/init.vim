@@ -95,6 +95,8 @@ colorscheme hybrid
 let g:airline_theme = 'hybridline'
 " Use this if you have a colorscheme that breaks terminal transparency
 hi Normal ctermbg=none
+" Use truecolor
+set termguicolors
 
 " Show matching parenthesis
 set showmatch

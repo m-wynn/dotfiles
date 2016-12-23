@@ -15,6 +15,7 @@
     ~/.config/nvim/after: nvim/after
     ~/.config/nvim/init.vim: nvim/init.vim
     ~/.config/nvim/my-snippets: nvim/my-snippets
+    ~/.config/pangoterm.cfg: pangoterm.cfg
     ~/.emacs.d: emacs.d
     ~/.gitconfig: gitconfig
     ~/.mbsyncrc: mbsyncrc

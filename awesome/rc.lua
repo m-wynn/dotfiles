@@ -21,9 +21,9 @@ do
    awesome.connect_signal("debug::error", function (err)
                              if in_error then return end
                              in_error = true
-                             naughty.notify({ preset = naughty.config.presets.critical,
-                                              title = "Oops, an error happened!",
-                                              text = err })
+                             -- naughty.notify({ preset = naughty.config.presets.critical,
+                             --                  title = "Oops, an error happened!",
+                             --                  text = err })
                              in_error = false
    end)
 end
@@ -69,10 +69,10 @@ os.setlocale(os.getenv("LANG"))
 beautiful.init(os.getenv("HOME") .. "/.config/awesome/theme/theme.lua")
 
 -- common
-modkey	   = "Mod4"
-altkey	   = "Mod1"
-terminal   = "urxvtc" or "xterm"
-editor	   = os.getenv("EDITOR") or  "vim" or "vi" or "emacs"
+modkey     = "Mod4"
+altkey     = "Mod1"
+terminal   = "pangoterm" or "xterm"
+editor     = os.getenv("EDITOR") or  "vim" or "vi" or "emacs"
 editor_cmd = terminal .. " -e " .. editor
 
 -- user defined
@@ -80,7 +80,7 @@ browser    = "firefox-nightly"
 browser2   = "chromium"
 gui_editor = "gedit"
 graphics   = "gimp"
-iptraf	   = terminal .. " -e sudo iptraf-ng -i all "
+iptraf     = terminal .. " -e sudo iptraf-ng -i all "
 musicplr   = terminal .. " -e ncmpcpp "
 
 local layouts = {

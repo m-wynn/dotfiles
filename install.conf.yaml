@@ -28,6 +28,7 @@
     ~/.vim: ~/.config/nvim
     ~/.weechat: weechat
     ~/.zshrc: zshrc
+    ~/.ssh/config: sensitive-dotfiles/ssh/config
 
 - xbps:
   - emacs

@@ -1,3 +1,6 @@
+[submodule "sensitive-dotfiles"]
+	path = sensitive-dotfiles
+	url = git@gitlab.com:m_wynn/sensitive-dotfiles.git
 [submodule "dotbot"]
 	path = dotbot
 	url = https://github.com/anishathalye/dotbot

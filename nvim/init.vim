@@ -48,6 +48,7 @@ Plug 'tpope/vim-commentary'                        " Comment things easily with 
 Plug 'tpope/vim-ragtag'                            " More tag mappings
 Plug 'tpope/vim-surround'                          " Change the surrounding stuff
 Plug 'vim-latex/vim-latex', {'for': 'latex'}       " Such a powerful thing for LaTeX
+Plug 'raymond-w-ko/vim-lua-indent', {'for': 'lua'}
 
 " UI
 Plug 'ap/vim-css-color'                            " Sets the background to your color. #ff0000 < that is white on red
@@ -218,3 +219,7 @@ let g:Imap_FreezeImap=1
 
 "" xolox/vim-notes
 let g:notes_directories = ['~/Documents/notes']
+
+let g:polyglot_disabled = ['lua']
+let lua_version = 5
+let lua_subversion = 2

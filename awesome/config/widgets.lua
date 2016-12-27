@@ -4,6 +4,7 @@ local lain = require("lain")
 local beautiful = require("beautiful")
 local wibox = require("wibox")
 local helpers = require("helpers")
+local vicious = require("vicious")
 
 local widget_loader = {}
 
@@ -56,7 +57,71 @@ function widget_loader.init(awesome_context)
     }
   )
 
+  -- RAM
+  local innermemwidget = wibox.widget {
+    border_color     = nil,
+    background_color = beautiful.bg_focus,
+    color            = beautiful.fg_urgent,
+    widget           = wibox.widget.progressbar,
+  }
+  w.memwidget = wibox.widget {
+    {
+      widget      = innermemwidget,
+    },
+    forced_height = 18,
+    forced_width  = 8,
+    direction     = "east",
+    layout        = wibox.container.rotate,
+  }
+  vicious.cache(vicious.widgets.mem)
+  vicious.register(innermemwidget, vicious.widgets.mem, "$1", 13)
+  w.memicon = wibox.widget.imagebox(beautiful.widget_mem)
 
+  -- CPU
+  w.cpuicon = wibox.widget.imagebox(beautiful.widget_cpu)
+  w.cpuwidget = wibox.widget{
+    forced_width = 50,
+    forced_height = 18,
+    background_color = beautiful.bg_normal,
+    color = ({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = { {0, beautiful.fg_red}, {0.5, beautiful.fg_green}, {1, beautiful.bg_green}}}),
+    widget = wibox.widget.graph
+  }
+  vicious.cache(vicious.widgets.cpu)
+  vicious.register(w.cpuwidget, vicious.widgets.cpu, "$1")
+
+  -- Battery
+  baticon = wibox.widget.imagebox(beautiful.widget_battery)
+  batwidget = lain.widgets.bat(
+    {
+      battery = "BAT1",
+      settings = function()
+        if bat_now.perc == "N/A" then
+          widget:set_markup(" AC ")
+          baticon:set_image(beautiful.widget_ac)
+          return
+        elseif tonumber(bat_now.perc) <= 5 then
+          baticon:set_image(beautiful.widget_battery_empty)
+        elseif tonumber(bat_now.perc) <= 15 then
+          baticon:set_image(beautiful.widget_battery_low)
+        else
+          baticon:set_image(beautiful.widget_battery)
+        end
+        widget:set_markup(" " .. bat_now.perc .. "% ")
+      end
+    })
+
+  -- Net
+  neticon = wibox.widget.imagebox(beautiful.widget_net)
+  netwidget = lain.widgets.net(
+    {
+      settings = function()
+        widget:set_markup(markup(beautiful.bg_green, " " .. net_now.received)
+                          .. " " ..
+                          markup(beautiful.bg_blue, " " .. net_now.sent .. " "))
+      end
+    })
+
+  -- taglist
   w.taglist_buttons = awful.util.table.join(
     awful.button({}, 1,
                  function(t) t:view_only() end

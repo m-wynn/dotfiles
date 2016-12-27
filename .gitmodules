@@ -1,9 +1,3 @@
-[submodule "bin/ssh-find-agent"]
-	path = bin/ssh-find-agent
-	url = git@github.com:wwalker/ssh-find-agent.git
-[submodule "ssh-find-agent"]
-	path = ssh-find-agent
-	url = git@github.com:wwalker/ssh-find-agent.git
 [submodule "dotbot"]
 	path = dotbot
 	url = https://github.com/anishathalye/dotbot
@@ -12,4 +6,7 @@
 	url = https://github.com/m-wynn/dotbot-xbps
 [submodule "awesome/lain"]
 	path = awesome/lain
-	url = git@github.com:copycat-killer/lain.git
+	url = https://github.com/m-wynn/lain.git
+[submodule "awesome/vicious"]
+	path = awesome/vicious
+	url = http://git.sysphere.org/vicious

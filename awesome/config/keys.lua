@@ -181,19 +181,19 @@ function keys.init(awesome_context)
     -- MPD control
     awful.key({}, "XF86AudioPlay",
               function()
-                awful.util.spawn_with_shell("mpc toggle || ncmpcpp toggle || ncmpc toggle || pms toggle")
+                awful.spawn.with_shell("mpc toggle || ncmpcpp toggle || ncmpc toggle || pms toggle")
                 awesome_context.widgets.mpdwidget.update()
               end
               ),
     awful.key({}, "XF86AudioPrev",
               function()
-                awful.util.spawn_with_shell("mpc prev || ncmpcpp prev || ncmpc prev || pms prev")
+                awful.spawn.with_shell("mpc prev || ncmpcpp prev || ncmpc prev || pms prev")
                 awesome_context.widgets.mpdwidget.update()
               end
               ),
     awful.key({}, "XF86AudioNext",
               function()
-                awful.util.spawn_with_shell("mpc next || ncmpcpp next || ncmpc next || pms next")
+                awful.spawn.with_shell("mpc next || ncmpcpp next || ncmpc next || pms next")
                 awesome_context.widgets.mpdwidget.update()
               end
               ),

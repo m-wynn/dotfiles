@@ -9,6 +9,7 @@ editor_cmd = terminal .. " -e " .. editor
 context = {
 
   modkey = "Mod4",
+  altkey = "Mod1",
 
   theme_file = awful.util.getdir("config") .. "/theme/theme.lua",
 

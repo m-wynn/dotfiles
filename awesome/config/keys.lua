@@ -310,7 +310,7 @@ function keys.init(awesome_context)
   end
 
   clientbuttons = awful.util.table.join(
-    awful.button({ }, 1,
+    awful.button({}, 1,
                  function (c) client.focus = c; c:raise() end
                  ),
     awful.button({ modkey }, 1,
@@ -323,8 +323,8 @@ function keys.init(awesome_context)
 
   root.buttons(
     awful.util.table.join(
-      awful.button({ }, 4, awful.tag.viewnext),
-      awful.button({ }, 5, awful.tag.viewprev)
+      awful.button({}, 4, awful.tag.viewnext),
+      awful.button({}, 5, awful.tag.viewprev)
     )
   )
 

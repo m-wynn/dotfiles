@@ -7,7 +7,7 @@ function rules.init()
 
   awful.rules.rules = {
     {
-      rule = { },
+      rule = {},
       properties = {
         border_width = beautiful.border_width,
         border_color = beautiful.border_normal,

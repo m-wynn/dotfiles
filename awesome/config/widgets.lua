@@ -182,7 +182,7 @@ function widget_loader.init(awesome_context)
     )
 
 
-    sw.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, sw.taglist_buttons)
+    sw.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, w.taglist_buttons)
 
 
     sw.mypromptbox = awful.widget.prompt()
@@ -192,10 +192,10 @@ function widget_loader.init(awesome_context)
 
     sw.mylayoutbox = awful.widget.layoutbox(s)
     sw.mylayoutbox:buttons(awful.util.table.join(
-      awful.button({ }, 1, function () awful.layout.inc( 1) end),
-      awful.button({ }, 3, function () awful.layout.inc(-1) end),
-      awful.button({ }, 4, function () awful.layout.inc( 1) end),
-      awful.button({ }, 5, function () awful.layout.inc(-1) end)))
+      awful.button({}, 1, function () awful.layout.inc( 1) end),
+      awful.button({}, 3, function () awful.layout.inc(-1) end),
+      awful.button({}, 4, function () awful.layout.inc( 1) end),
+      awful.button({}, 5, function () awful.layout.inc(-1) end)))
 
 
   end)

@@ -2,7 +2,7 @@ local awful = require("awful")
 require("awful.autofocus")
 local beautiful = require("beautiful")
 
-terminal = "urxvtc"
+terminal = "urxvtc" or "urxvt" or "st"
 editor = os.getenv("EDITOR") or "vim" or "vi"
 editor_cmd = terminal .. " -e " .. editor
 

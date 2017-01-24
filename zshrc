@@ -8,6 +8,14 @@ BULLETTRAIN_GIT_BG='15'
 BULLETTRAIN_CONTEXT_FG=black;
 BULLETTRAIN_STATUS_FG='15'
 
+BULLETTRAIN_PROMPT_ORDER=(
+    status
+    context
+    dir
+    git
+    virtualenv
+)
+
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
     BULLETTRAIN_CONTEXT_BG=9;
 else
@@ -52,10 +60,10 @@ setopt extendedglob
 #If pattern for filename generation has no matches, print an error.
 setopt nomatch
 
-# Include go and ruby in Path
+# Include go and cargo in path
 export GOPATH=$HOME/.go
 
-export PATH=$PATH:~/bin:${GOPATH//://bin:}/bin
+export PATH=$PATH:~/bin:${GOPATH//://bin:}/bin:${HOME}/.cargo/bin
 
 # Disable changing the window title
 export DISABLE_AUTO_TITLE=true

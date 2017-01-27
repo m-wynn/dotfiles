@@ -21,9 +21,8 @@ Plug 'tpope/vim-repeat'                            " Use . in to repeat plugin s
 Plug 'tpope/vim-sleuth'                            " Figure out tabs based on the file
 Plug 'tpope/vim-unimpaired'                        " Add lots of handy mappings
 Plug 'tpope/vim-vinegar'                           " Improve netrw
+Plug 'vimwiki/vimwiki'                             " For taking notes, probably
 Plug 'xolox/vim-misc'                              " Miscellaneous stuff, required for vim-notes
-Plug 'xolox/vim-notes'                             " Notes in Vim!
-Plug 'yegappan/mru'                                " Most Recently Used Files
 
 " Completion
 Plug 'Shougo/context_filetype.vim'                 " Add context filetype feature to completion
@@ -35,7 +34,6 @@ Plug 'wellle/tmux-complete.vim'                    " Completion from other tmux 
 Plug 'zchee/deoplete-jedi', {'for': 'python'}      " Python completion
 
 " Editing
-Plug 'amirh/HTML-AutoCloseTag', {'for': 'html'}    " Auto close html tags
 Plug 'AndrewRadev/splitjoin.vim'                   " Splitting and joining lines and blocks
 Plug 'honza/vim-snippets'                          " Snippits Stuff
 Plug 'junegunn/vim-easy-align'                     " Align things more easily
@@ -216,6 +214,9 @@ set grepprg=grep\ -nH\ $*
 let g:tex_flavor='latex'
 let g:Imap_UsePlaceHolders = 0        "Set this if you ever EVER are going to use '()'
 let g:Imap_FreezeImap=1
+
+"" vimwiki stuff
+let g:vimwiki_list = [{'path':'~/Documents/school/current/', 'path_html':'~/Documents/school/current/export/html/'}]
 
 "" xolox/vim-notes
 let g:notes_directories = ['~/Documents/notes']

@@ -22,12 +22,13 @@
     ~/.mutt: mutt
     ~/.ncmpcpp/config: ncmpcpp/config
     ~/.nethackrc: nethackrc
+    ~/.ssh/config: ssh/config
     ~/.tmux.conf: tmux.conf
     ~/.tmuxinator: tmuxinator
     ~/.vim: ~/.config/nvim
     ~/.weechat: weechat
     ~/.zshrc: zshrc
-    ~/.ssh/config: sensitive-dotfiles/ssh/config
+    ~/.ssh/config.d/sensitive: sensitive-dotfiles/ssh/sensitive
 
 - xbps:
   - emacs

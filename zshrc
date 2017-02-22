@@ -7,6 +7,7 @@ BULLETTRAIN_DIR_FG='15'
 BULLETTRAIN_GIT_BG='15'
 BULLETTRAIN_CONTEXT_FG=black;
 BULLETTRAIN_STATUS_FG='15'
+BULLETTRAIN_PROMPT_CHAR='$ '
 
 BULLETTRAIN_PROMPT_ORDER=(
     status
@@ -166,7 +167,6 @@ if [[ "$TERM" != dumb ]] && (( $+commands[grc] )) ; then
 fi
 
 # The following lines were added by compinstall
-
 zstyle ':completion:*' completer _expand _complete _ignored _approximate
 zstyle ':completion:*' use-cache on                                                # Enable completion caching layer
 zstyle ':completion:*' expand prefix suffix

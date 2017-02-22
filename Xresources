@@ -67,14 +67,6 @@ URxvt.iso14755_52: false
 URxvt.keysym.C-C: perl:clipboard:copy
 URxvt.keysym.C-V: perl:clipboard:paste
 
-!URxvt.tabbed.new-button: true
-!URXvt.tabbed.reopen-on-close: yes
-!URxvt.tabbed.autohide: true
-
-!URxvt.keysym.Control-t: perl:tabbedex:new_tab
-!URxvt.keysym.Control-Tab: perl:tabbedex:next_tab
-!URxvt.keysym.Control-Shift-Tab: perl:tabbedex:prev_tab
-
 URxvt.urgentOnBell: true
 URxvt.visualBell: true
 URxvt.termName: rxvt-unicode

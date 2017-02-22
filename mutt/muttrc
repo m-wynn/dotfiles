@@ -4,7 +4,7 @@ set arrow_cursor      = yes                 # Use -> instead of highlighting sel
 set autoedit          = yes                 # Go immediately to editor when composing
 set copy              = yes                 # Always save a copy of outgoing messages
 set delete            = yes                 # Purge deleted messages without asking
-set edit_headers      = yes                 # Edit the message header when composing
+set edit_headers      = no                  # Edit the message header when composing
 set editor            = vim
 set fast_reply        = no                  # Skip initial prompts when replying
 set folder            = "$HOME/.mail"       # Directory of new folder
@@ -21,6 +21,7 @@ set mime_forward      = yes                 # Use message/rfc822 type to forward
 set move              = no                  # Don't move messages
 set pager             = builtin             # Location of an external pager
 set print             = ask-yes             # ask me if I really want to print messages
+set query_command     = "goobook query '%s'"
 set quit              = yes                 # No further input after wanting to quit
 set read_inc          = 25                  # Increment to show progress when reading mailbox
 set recall            = ask-yes             # Prompt to recall postponed messages
@@ -54,6 +55,9 @@ reply-hook "~t matthew@matthewwynn.com" "source $HOME/.mutt/accounts/com.matthew
 macro index,pager <f2> '<change-folder>notmuch://?query=tag:inbox<enter>'
 macro index,pager <f3> '<enter-command>source ~/.mutt/accounts/com.matthewwynn.matthew.rc<enter><change-folder>!<enter>'
 macro index,pager <f4> '<enter-command>source ~/.mutt/accounts/edu.utdallas.mwynn.rc<enter><change-folder>!<enter>'
+macro index,pager a "<pipe-message>goobook add<return>" "add sender to google contacts"
+
+bind editor <Tab> complete-query
 
 #alternates "(matthew@matthewwynn\.com)|(mwynn@utdallas\.edu)|(maw140130@utdallas\.edu)"
 

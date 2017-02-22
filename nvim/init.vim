@@ -176,6 +176,8 @@ augroup neomake_on_save
   autocmd BufWritePost * Neomake
 augroup END
 
+let g:neomake_python_enabled_makers = ['flake8']
+
 "" junegunn/vim-easy-align
 xmap ga <Plug>(EasyAlign)|         " Start interactive EasyAlign in visual mode (e.g. ipga)
 

@@ -36,6 +36,9 @@ Host cs1
 Host cs2
     Hostname cs2.utdallas.edu
 
+Host giant
+    Hostname giant.utdallas.edu
+
 Host *utdallas.edu
     User maw140130
 

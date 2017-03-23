@@ -24,9 +24,9 @@ Host nemesis*
     Hostname apartment.matthewwynn.com
 
 Host rem
-    Port 8822
     User matthew
-    Hostname apartment.matthewwynn.com
+    Hostname rem.apartment.matthewwynn.com
+    ProxyJump nemesis
 
 # UTD
 
@@ -85,6 +85,10 @@ Host si silicon
 
 Host p phosphorus
     Hostname phosphorus.collegiumv.org
+
+Host alexandria
+    MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-ripemd160-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,hmac-ripemd160,umac-128@openssh.com,hmac-sha1
+    Hostname alexandria.collegiumv.org
 
 Host argus busterjangle crossroads dominic emery flintlock greenhouse hardtack ivy julin kittens latchkey mandrel niblick oberon phalanx quicksilver redwing sunbeam touchstone unicorn vixen wigwam xray zinia cocks rivest shamir adleman
     Hostname %h.collegiumv.org

@@ -20,7 +20,6 @@ Plug 'tpope/vim-fugitive'                          " Git plugin for like, :Gstat
 Plug 'tpope/vim-repeat'                            " Use . in to repeat plugin stuff
 Plug 'tpope/vim-sleuth'                            " Figure out tabs based on the file
 Plug 'tpope/vim-unimpaired'                        " Add lots of handy mappings
-Plug 'tpope/vim-vinegar'                           " Improve netrw
 Plug 'vimwiki/vimwiki'                             " For taking notes, probably
 Plug 'xolox/vim-misc'                              " Miscellaneous stuff, required for vim-notes
 
@@ -46,7 +45,8 @@ Plug 'tpope/vim-commentary'                        " Comment things easily with 
 Plug 'tpope/vim-ragtag'                            " More tag mappings
 Plug 'tpope/vim-surround'                          " Change the surrounding stuff
 Plug 'vim-latex/vim-latex', {'for': 'latex'}       " Such a powerful thing for LaTeX
-Plug 'raymond-w-ko/vim-lua-indent', {'for': 'lua'}
+Plug 'raymond-w-ko/vim-lua-indent', {'for': 'lua'} " Better lua indents
+Plug 'https://github.com/lafrenierejm/wstrip.vim.git'
 
 " UI
 Plug 'ap/vim-css-color'                            " Sets the background to your color. #ff0000 < that is white on red
@@ -54,6 +54,7 @@ Plug 'vim-airline/vim-airline'                     " Informative tabline/status 
 Plug 'vim-airline/vim-airline-themes'              " Themes for Airline
 Plug 'majutsushi/tagbar'                           " Display tags in a window, ordered by scope
 Plug 'w0ng/vim-hybrid'                             " Colors!
+Plug 'https://gitlab.com/lafrenierejm/vim-equivalence.git'
 
 " Mail Plugins
 Plug 'chrisbra/CheckAttach'                        " Ask if you forgot to attach something

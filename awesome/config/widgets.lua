@@ -17,7 +17,7 @@ function widget_loader.init(awesome_context)
 
   -- volume
   w.volumeicon = wibox.widget.imagebox(beautiful.widget_vol)
-  w.volumewidget = lain.widgets.alsa(
+  w.volumewidget = lain.widget.alsa(
     {
       settings = function()
         if volume_now.status == "off" then
@@ -37,7 +37,7 @@ function widget_loader.init(awesome_context)
 
   -- mpd
   w.mpdicon = wibox.widget.imagebox(beautiful.widget_music)
-  w.mpdwidget = lain.widgets.mpd(
+  w.mpdwidget = lain.widget.mpd(
     {
       settings = function()
         if mpd_now.state == "play" then
@@ -90,29 +90,29 @@ function widget_loader.init(awesome_context)
   vicious.register(w.cpuwidget, vicious.widgets.cpu, "$1")
 
   -- Battery
-  baticon = wibox.widget.imagebox(beautiful.widget_battery)
-  batwidget = lain.widgets.bat(
+  w.baticon = wibox.widget.imagebox(beautiful.widget_battery)
+  w.batwidget = lain.widget.bat(
     {
       battery = "BAT1",
       settings = function()
         if bat_now.perc == "N/A" then
           widget:set_markup(" AC ")
-          baticon:set_image(beautiful.widget_ac)
+          w.baticon:set_image(beautiful.widget_ac)
           return
         elseif tonumber(bat_now.perc) <= 5 then
-          baticon:set_image(beautiful.widget_battery_empty)
+          w.baticon:set_image(beautiful.widget_battery_empty)
         elseif tonumber(bat_now.perc) <= 15 then
-          baticon:set_image(beautiful.widget_battery_low)
+          w.baticon:set_image(beautiful.widget_battery_low)
         else
-          baticon:set_image(beautiful.widget_battery)
+          w.baticon:set_image(beautiful.widget_battery)
         end
         widget:set_markup(" " .. bat_now.perc .. "% ")
       end
     })
 
   -- Net
-  neticon = wibox.widget.imagebox(beautiful.widget_net)
-  netwidget = lain.widgets.net(
+  w.neticon = wibox.widget.imagebox(beautiful.widget_net)
+  w.netwidget = lain.widget.net(
     {
       settings = function()
         widget:set_markup(markup(beautiful.bg_green, " " .. net_now.received)

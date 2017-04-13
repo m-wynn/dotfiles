@@ -9,7 +9,7 @@
 	url = https://github.com/m-wynn/dotbot-xbps
 [submodule "awesome/lain"]
 	path = awesome/lain
-	url = https://github.com/m-wynn/lain.git
+	url = https://github.com/copycat-killer/lain.git
 [submodule "awesome/vicious"]
 	path = awesome/vicious
 	url = http://git.sysphere.org/vicious

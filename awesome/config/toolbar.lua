@@ -48,12 +48,12 @@ function toolbar.init(awesome_context)
     end
 
     right_layout:add(wibox.widget.systray())
-    right_layout_add(widgets.mpdicon, widgets.mpdwidget)
-    right_layout_add(widgets.volumeicon, widgets.volumewidget)
+    right_layout_add(widgets.mpdicon, widgets.mpdwidget.widget)
+    right_layout_add(widgets.volumeicon, widgets.volumewidget.widget)
     right_layout_add(widgets.memicon, widgets.memwidget)
     right_layout_add(widgets.cpuicon, widgets.cpuwidget)
-    right_layout_add(baticon, batwidget)
-    right_layout_add(neticon, netwidget)
+    right_layout_add(widgets.baticon, widgets.batwidget.widget)
+    right_layout_add(widget.neticon, widgets.netwidget.widget)
     right_layout_add(widgets.mytextclock, spr)
     right_layout_add(widgets.screen[si].mylayoutbox)
 

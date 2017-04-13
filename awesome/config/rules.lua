@@ -52,10 +52,33 @@ function rules.init()
       }, properties = { titlebars_enabled = false }
     },
 
-    -- Set Firefox to always map on the tag named "2" on screen 1.
     {
       rule = { class = "Firefox" },
       properties = { screen = 1, tag = "" }
+    },
+    {
+      rule = { class = "discord" },
+      properties = { screen = 1, tag = "" }
+    },
+    {
+      rule = { class = "HipChat" },
+      properties = { screen = 1, tag = "" }
+    },
+    {
+      rule = { class = "Nemo" },
+      properties = { screen = 1, tag = "" }
+    },
+    {
+      rule = { instance = "ncmpcpp" },
+      properties = { screen = 1, tag = "" }
+    },
+    {
+      rule = { class = "Pavucontrol" },
+      properties = { screen = 1, tag = "" }
+    },
+    {
+      rule = { instance = "mutt" },
+      properties = { screen = 1, tag = "" }
     },
   }
 

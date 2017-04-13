@@ -69,7 +69,7 @@ URxvt.keysym.C-V: perl:clipboard:paste
 
 URxvt.urgentOnBell: true
 URxvt.visualBell: true
-URxvt.termName: rxvt-unicode
+URxvt.termName: rxvt-unicode-256color
 URxvt.resize-font.smaller: C-minus
 URxvt.resize-font.bigger: C-plus
 URxvt.resize-font.reset: C-equal

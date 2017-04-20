@@ -227,3 +227,7 @@ let g:notes_directories = ['~/Documents/notes']
 let g:polyglot_disabled = ['lua']
 let lua_version = 5
 let lua_subversion = 2
+
+"" Remember cursor position on buffer leave
+au BufLeave * let b:winview = winsaveview()
+au BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif

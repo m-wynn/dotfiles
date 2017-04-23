@@ -23,7 +23,7 @@ Host nemesis*
     User matthew
     Hostname apartment.matthewwynn.com
 
-Host rem
+Host rem rem.apartment*
     User matthew
     Hostname rem.apartment.matthewwynn.com
     ProxyJump nemesis

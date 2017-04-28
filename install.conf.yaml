@@ -9,6 +9,7 @@
 
 - link:
     ~/.Xresources: Xresources
+    ~/.config/alacritty: alacritty
     ~/.config/awesome: awesome
     ~/.config/mpd/mpd.conf: mpd/mpd.conf
     ~/.config/mpv: mpv

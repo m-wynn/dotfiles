@@ -45,7 +45,7 @@ URxvt*font: xft:LiterationMonoPowerline Nerd Font:size=10, \
     xft:Noto Sans Mono CJK KR size=10, \
     xft:WenQuanYi Bitmap Song:pixelsize=14, \
     xft:FreeSerif:style=Regular, \
-    xft:Unifont:pixelsize=5, \ \
+    xft:Unifont:pixelsize=5, \
     xft:Noto Sans Kannada:style=Regular:pixelsize=14, \
     xft:Symbola:pixelsize=7, \
     -misc-fixed-medium-r-normal--18-120-100-100-c-90-iso10646-1
@@ -74,3 +74,7 @@ URxvt.resize-font.smaller: C-minus
 URxvt.resize-font.bigger: C-plus
 URxvt.resize-font.reset: C-equal
 URxvt.resize-font.show: C-question
+
+st.font: LiterationMonoPowerline Nerd Font:pixelsize=14;
+st.borderpx: 1
+st.opacity: 230

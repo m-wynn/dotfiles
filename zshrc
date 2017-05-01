@@ -150,6 +150,10 @@ alias ip="ip -h -c"                                     # This too
 
 export LESS="-R"
 
+function sudoedit() {
+    SUDO_COMMAND="sudoedit $@" command sudoedit "$@"
+}
+
 if [[ "$TERM" != dumb ]] && (( $+commands[grc] )) ; then
     # Prevent grc aliases from overriding zsh completions.
     setopt COMPLETE_ALIASES

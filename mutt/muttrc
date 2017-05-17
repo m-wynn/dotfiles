@@ -49,7 +49,7 @@ folder-hook "com.matthewwynn.matthew"    "source $HOME/.mutt/accounts/com.matthe
 folder-hook "edu.utdallas.mwynn"         "source $HOME/.mutt/accounts/edu.utdallas.mwynn.rc"
 folder-hook "notmuch://?query=tag:inbox" "source $HOME/.mutt/accounts/unified.rc"
 
-reply-hook "~t *@utdallas.edu" "source $HOME/.mutt/accounts/edu.utdallas.mwynn.rc"
+reply-hook "~t .*@utdallas.edu" "source $HOME/.mutt/accounts/edu.utdallas.mwynn.rc"
 reply-hook "~t matthew@matthewwynn.com" "source $HOME/.mutt/accounts/com.matthewwynn.matthew.rc"
 
 macro index,pager <f2> '<change-folder>notmuch://?query=tag:inbox<enter>'

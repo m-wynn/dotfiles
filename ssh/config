@@ -30,6 +30,9 @@ Host rem rem.apartment*
 
 # UTD
 
+Match canonical host="*utdallas.edu"
+    User maw140130
+
 Host cs1
     Hostname cs1.utdallas.edu
 
@@ -38,9 +41,6 @@ Host cs2
 
 Host giant
     Hostname giant.utdallas.edu
-
-Host *utdallas.edu
-    User maw140130
 
 # CV
 
@@ -98,6 +98,8 @@ Host *.collegiumv.org
 
 # LUG
 
-Host lug lug.utdallas.edu
+Host lug*
+    CanonicalizeHostname no
     User m_wynn
     Hostname lug.utdallas.edu
+    ProxyJump cs1

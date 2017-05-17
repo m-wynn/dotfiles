@@ -41,3 +41,5 @@
 	prompt = false
 [include]
 	path = ~/.config/git/override
+[gpg]
+	program = gpg2

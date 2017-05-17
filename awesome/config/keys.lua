@@ -36,6 +36,10 @@ function keys.init(awesome_context)
              awesome.quit,
              "quit awesome", "awesome"
              ),
+    bind_key({ }, "Print",
+             function () awful.util.spawn("scrot -e 'mv $f ~/screenshots/ 2>/dev/null'", false) end,
+             "Print Screen", "awesome"
+             ),
 
     -- Navigation and selection
     bind_key({ modkey }, "Left",
@@ -240,6 +244,10 @@ function keys.init(awesome_context)
     bind_key({ modkey }, "t",
              function (c) c.ontop = not c.ontop end,
              "toggle keep on top", "client"
+             ),
+    bind_key({ modkey }, "a",
+             function (c) c.sticky = not c.sticky end,
+             "toggle sticky", "client"
              ),
     bind_key({ modkey }, "n",
              -- The client currently has the input focus, so it cannot be

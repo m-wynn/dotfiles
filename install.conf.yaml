@@ -18,6 +18,7 @@
     ~/.config/nvim/my-snippets: nvim/my-snippets
     ~/.config/nvim/ftplugin: nvim/ftplugin
     ~/.config/nvim/plugin: nvim/plugin
+    ~/.config/zsh: zsh
     ~/.emacs.d: emacs.d
     ~/.gitconfig: gitconfig
     ~/.mbsyncrc: mbsyncrc
@@ -30,7 +31,7 @@
     ~/.tmuxinator: tmuxinator
     ~/.vim: ~/.config/nvim
     ~/.weechat: weechat
-    ~/.zshrc: zshrc
+    ~/.zshenv: zshenv
     ~/.ssh/config.d/sensitive: sensitive-dotfiles/ssh/sensitive
 
 - xbps:

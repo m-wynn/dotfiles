@@ -13,3 +13,6 @@
 [submodule "awesome/vicious"]
 	path = awesome/vicious
 	url = http://git.sysphere.org/vicious
+[submodule "zsh/zplug-installer"]
+	path = zsh/zplug-installer
+	url = git@github.com:zplug/installer.git

@@ -26,11 +26,13 @@
     ~/.mutt: mutt
     ~/.ncmpcpp/config: ncmpcpp/config
     ~/.nethackrc: nethackrc
+    ~/.services: services
     ~/.ssh/config: ssh/config
     ~/.tmux.conf: tmux.conf
     ~/.tmuxinator: tmuxinator
     ~/.vim: ~/.config/nvim
     ~/.weechat: weechat
+    ~/.xsession: xsession
     ~/.zshenv: zshenv
     ~/.ssh/config.d/sensitive: sensitive-dotfiles/ssh/sensitive
 

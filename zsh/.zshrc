@@ -35,20 +35,8 @@ if [[ ! -f "${ZPLUG_HOME}/init.zsh" ]]; then
 fi
 source "${ZPLUG_HOME}/init.zsh"
 
-# Colorizes man pages
-zplug "plugins/colored-man-pages", \
-    from:oh-my-zsh
-
 # Manage.py completions
 zplug "plugins/django", \
-    from:oh-my-zsh
-
-# Docker autocompletes
-zplug "plugins/docker", \
-    from:oh-my-zsh
-
-# Encode and decode 64-bit
-zplug "plugins/encode64", \
     from:oh-my-zsh
 
 # Faster git completion
@@ -65,10 +53,6 @@ zplug "plugins/pip", \
 
 # Python completion
 zplug "plugins/python", \
-    from:oh-my-zsh
-
-# Rsync commands, like `rsync-copy`
-zplug "plugins/rsync", \
     from:oh-my-zsh
 
 # Warp directories
@@ -103,9 +87,6 @@ zplug "caarlos0/zsh-open-pr"
 
 # Add upstream remote to git like `add-upstream username`
 zplug "caarlos0/zsh-add-upstream"
-
-# Encourage 256 color mode
-zplug "chrissicool/zsh-256color"
 
 # Prettier version of l, with git support
 zplug "rimraf/k"
@@ -180,6 +161,7 @@ say() { mplayer -really-quiet "http://translate.google.com/translate_tts?tl=en&q
 gpr() { git push origin HEAD && open-pr "$*" }
 
 alias ip="ip -h -c"                                     # This too
+alias ls="ls --color=auto"
 
 export LESS="-R"
 
@@ -204,6 +186,9 @@ if [[ "$TERM" != dumb ]] && (( $+commands[grc] )) ; then
     # Clean up variables
     unset cmds cmd
 fi
+
+autoload -Uz manydots-magic
+manydots-magic
 
 # The following lines were added by compinstall
 zstyle ':completion:*' completer _expand _complete _ignored _approximate

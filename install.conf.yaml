@@ -24,7 +24,7 @@
     ~/.mbsyncrc: mbsyncrc
     ~/.msmtprc: msmtprc
     ~/.mutt: mutt
-    ~/.ncmpcpp/config: ncmpcpp/config
+    ~/.ncmpcpp: ncmpcpp
     ~/.nethackrc: nethackrc
     ~/.services: services
     ~/.ssh/config: ssh/config

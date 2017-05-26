@@ -5,17 +5,19 @@ mpd_music_dir = "/home/matthew/Music"
 mpd_connection_timeout = "5"
 mpd_crossfade_time = "2"
 
+#LIBRARY SETTINGS
+media_library_primary_tag = "album_artist"
+
 #VISUALIZER SETTINGS
 visualizer_fifo_path = "/tmp/mpd.fifo"
 visualizer_output_name = "my_fifo"
-visualizer_sync_interval = "60"
+visualizer_sync_interval = "30"
 visualizer_in_stereo = "no"
 visualizer_type = "ellipse"
 visualizer_look = ●▮
-visualizer_color = white, cyan, blue, green, yellow, red
+visualizer_color = blue, cyan, green, yellow, magenta, red
 
 #UI SETTINGS
-
 playlist_disable_highlight_delay = "0"
 playlist_display_mode = "columns"
 browser_display_mode = "columns"
@@ -25,13 +27,7 @@ header_visibility = "yes"
 statusbar_visibility = "yes"
 user_interface = "alternative"
 
-color1 = "blue"
-color2 = "cyan"
-active_column_color = "cyan"
-active_window_border = "blue"
-
 progressbar_look = "─╼ "
-#progressbar_look = "█ "
 titles_visibility = "yes"
 discard_colors_if_item_is_selected = "no"
 clock_display_seconds="no"
@@ -46,3 +42,22 @@ search_engine_display_mode = "columns"
 fetch_lyrics_for_current_song_in_background = "yes"
 store_lyrics_in_song_dir = "yes"
 follow_now_playing_lyrics = "yes"
+
+#COLORS
+colors_enabled = yes
+empty_tag_color = cyan
+header_window_color = default
+volume_color = default
+state_line_color = default
+state_flags_color = default:b
+main_window_color = yellow
+color1 = white
+color2 = green
+progressbar_color = black:b
+progressbar_elapsed_color = green:b
+statusbar_color = default
+statusbar_time_color = default:b
+player_state_color = default:b
+alternative_ui_separator_color = black:b
+window_border_color = green
+active_window_border = red

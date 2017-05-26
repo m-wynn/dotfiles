@@ -9,7 +9,3 @@ emacs.d/undo
 emacs.d/url
 mpv/watch_later
 mutt/tmp
-weechat/certs
-weechat/logs
-weechat/weechat.log
-weechat/xfer

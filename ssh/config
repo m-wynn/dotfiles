@@ -26,7 +26,7 @@ Host nemesis*
 Host rem rem.apartment*
     User matthew
     Hostname rem.apartment.matthewwynn.com
-    ProxyJump nemesis
+    #ProxyJump nemesis
 
 # UTD
 

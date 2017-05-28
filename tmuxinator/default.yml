@@ -21,6 +21,7 @@ root: ~/
 windows:
   - carbon: mosh c -- tmux a -d
   - squares: mosh squares -- tmux a -d
-  - emilia: mosh emilia -- tmux a -d
+    #  rip
+    #  - emilia: mosh emilia -- tmux a -d
   - local: zsh
 

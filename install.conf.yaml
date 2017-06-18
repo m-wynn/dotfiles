@@ -29,6 +29,7 @@
     ~/.services: services
     ~/.ssh/config: ssh/config
     ~/.tmux.conf: tmux.conf
+    ~/.config/tmux: tmux
     ~/.tmuxinator: tmuxinator
     ~/.vim: ~/.config/nvim
     ~/.weechat: weechat

@@ -1,3 +1,4 @@
-urxvtd -q -o -f
+eval `ssh-agent`
 xrdb ~/.Xresources
 xmodmap ~/.Xmodmap
+mpd &

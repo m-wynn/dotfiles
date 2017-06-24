@@ -8,16 +8,17 @@
 - clean: ['~']
 
 - link:
-    ~/.Xresources: Xresources
     ~/.config/alacritty: alacritty
     ~/.config/awesome: awesome
+    ~/.config/fontconfig: fontconfig
     ~/.config/mpd/mpd.conf: mpd/mpd.conf
     ~/.config/mpv: mpv
     ~/.config/nvim/after: nvim/after
+    ~/.config/nvim/ftplugin: nvim/ftplugin
     ~/.config/nvim/init.vim: nvim/init.vim
     ~/.config/nvim/my-snippets: nvim/my-snippets
-    ~/.config/nvim/ftplugin: nvim/ftplugin
     ~/.config/nvim/plugin: nvim/plugin
+    ~/.config/tmux: tmux
     ~/.config/zsh: zsh
     ~/.emacs.d: emacs.d
     ~/.gitconfig: gitconfig
@@ -27,15 +28,15 @@
     ~/.ncmpcpp: ncmpcpp
     ~/.nethackrc: nethackrc
     ~/.services: services
+    ~/.ssh/config.d/sensitive: sensitive-dotfiles/ssh/sensitive
     ~/.ssh/config: ssh/config
     ~/.tmux.conf: tmux.conf
-    ~/.config/tmux: tmux
     ~/.tmuxinator: tmuxinator
     ~/.vim: ~/.config/nvim
     ~/.weechat: weechat
+    ~/.Xresources: Xresources
     ~/.xsession: xsession
     ~/.zshenv: zshenv
-    ~/.ssh/config.d/sensitive: sensitive-dotfiles/ssh/sensitive
 
 - xbps:
   - emacs

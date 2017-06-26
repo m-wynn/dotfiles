@@ -1,3 +1,4 @@
 .zcompdump*
 zplug
 tinycare.zsh
+local.zsh

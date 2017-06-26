@@ -12,4 +12,6 @@ alias :E=sudoedit
 # Use UTF-8
 export LANG=en_US.UTF-8
 
-
+if [[ -r local.zsh ]]; then
+        source local.zsh
+fi

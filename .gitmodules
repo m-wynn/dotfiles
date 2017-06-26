@@ -15,7 +15,7 @@
 	url = http://git.sysphere.org/vicious
 [submodule "zsh/zplug-installer"]
 	path = zsh/zplug-installer
-	url = git@github.com:zplug/installer.git
+	url = http://github.com/zplug/installer.git
 [submodule "tmux/tmux-yank"]
 	path = tmux/tmux-yank
-	url = git@github.com:tmux-plugins/tmux-yank.git
+	url = http://github.com/tmux-plugins/tmux-yank.git

@@ -1,15 +1,23 @@
-"" Plugins using Vim Plug https://github.com/junegunn/vim-plug
-
+let http_proxy=$http_proxy
 if !filereadable(expand('~/.config/nvim/autoload/plug.vim'))
-  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  if exists($http_proxy)
+    silent !curl --insecure -x $http_proxy -fLo ~/.config/nvim/autoload/plug.vim --create-dirs http://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  else
+    silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  endif
+endif
+
+if exists($http_proxy)
+  let g:plug_url_format='http://github.com/%s.git'
 endif
 
 call plug#begin('~/.vim/plugged')
-
 " Tools
 Plug 'AndrewRadev/linediff.vim'                    " Diff two visual selections
 Plug 'neomake/neomake'                             " Linting and Making
-Plug 'cazador481/fakeclip.neovim'                  " Use X and tmux clipboard
+if !has('mac')
+  Plug 'cazador481/fakeclip.neovim'                  " Use X and tmux clipboard
+endif
 Plug 'ctrlpvim/ctrlp.vim'                          " Fuzzy File Finder
 Plug 'Konfekt/FastFold'                            " Speed up folds
 Plug 'ntpeters/vim-better-whitespace'              " Easily strip whitespace

@@ -1,64 +1,66 @@
 "" Plugins using Vim Plug https://github.com/junegunn/vim-plug
 
 if !filereadable(expand('~/.config/nvim/autoload/plug.vim'))
-    silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 endif
 
 call plug#begin('~/.vim/plugged')
 
 " Tools
 Plug 'AndrewRadev/linediff.vim'                    " Diff two visual selections
-Plug 'neomake/neomake'                             " Make for all kinds of things.  Can take advantage of Neovims asyncronity
-Plug 'cazador481/fakeclip.neovim'                  " * and + map to the X clipboard if X is running.  & maps to tmux if it's running.
+Plug 'neomake/neomake'                             " Linting and Making
+Plug 'cazador481/fakeclip.neovim'                  " Use X and tmux clipboard
+Plug 'ctrlpvim/ctrlp.vim'                          " Fuzzy File Finder
 Plug 'Konfekt/FastFold'                            " Speed up folds
 Plug 'ntpeters/vim-better-whitespace'              " Easily strip whitespace
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'tmhedberg/SimpylFold', {'for': 'python'}     " Python folding
-Plug 'tpope/vim-abolish'                           " Smarter find-replacement, and because I can't spell
-Plug 'tpope/vim-afterimage'                        " Edit images, pdfs, and word docs in vim
-Plug 'tpope/vim-eunuch'                            " Handy UNIX commands like :Locate and :SudoEdit
-Plug 'tpope/vim-fugitive'                          " Git plugin for like, :Gstatus
-Plug 'tpope/vim-repeat'                            " Use . in to repeat plugin stuff
-Plug 'tpope/vim-sleuth'                            " Figure out tabs based on the file
+Plug 'tpope/vim-abolish'                           " Smarter find-replacement
+Plug 'tpope/vim-afterimage'                        " Edit images, pdfs, and word
+Plug 'tpope/vim-eunuch'                            " Handy UNIX commands
+Plug 'tpope/vim-fugitive'                          " Git plugin
+Plug 'tpope/vim-repeat'                            " Use . to repeat plugin stuff
+Plug 'tpope/vim-sleuth'                            " Figure out tabs
 Plug 'tpope/vim-unimpaired'                        " Add lots of handy mappings
-Plug 'vimwiki/vimwiki'                             " For taking notes, probably
-Plug 'xolox/vim-misc'                              " Miscellaneous stuff, required for vim-notes
+Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 
 " Completion
-Plug 'Shougo/context_filetype.vim'                 " Add context filetype feature to completion
+Plug 'Shougo/context_filetype.vim'                 " Add context filetype
 Plug 'Shougo/deoplete.nvim'                        " Completion
-Plug 'Shougo/echodoc.vim'                          " Print documentation in autocomplete
+Plug 'Shougo/echodoc.vim'                          " Print documentation
 Plug 'Shougo/neoinclude.vim'                       " Completion framework
-Plug 'Shougo/neopairs.vim'                         " Autoclose parentheses after completion
-Plug 'wellle/tmux-complete.vim'                    " Completion from other tmux panes
+Plug 'Shougo/neopairs.vim'                         " Autoclose after completion
+Plug 'wellle/tmux-complete.vim'                    " Completion from tmux panes
 Plug 'zchee/deoplete-jedi', {'for': 'python'}      " Python completion
 
 " Editing
-Plug 'AndrewRadev/splitjoin.vim'                   " Splitting and joining lines and blocks
+Plug 'AndrewRadev/splitjoin.vim'                   " Splitting and joining
 Plug 'honza/vim-snippets'                          " Snippits Stuff
 Plug 'junegunn/vim-easy-align'                     " Align things more easily
-Plug 'pearofducks/ansible-vim', {'for': 'ansible'} " Ansible stuff
+Plug 'michaeljsmith/vim-indent-object'             " Indents as text objects
+Plug 'pearofducks/ansible-vim', { 'do': './UltiSnips/generate.py' }
+Plug 'raymond-w-ko/vim-lua-indent', {'for': 'lua'} " Better lua indents
+Plug 'rhysd/clever-f.vim'                          " Better f and t
 Plug 'rhysd/vim-grammarous'                        " Grammar checking
-Plug 'shawncplus/phpcomplete.vim'                  " Lots of completions and ctag-jumping stuff for PHP.  Pretty cool, check readme for ctags
-Plug 'sheerun/vim-polyglot'                        " Support for sooo many languages
+Plug 'sheerun/vim-polyglot'                        " Support for many languages
 Plug 'SirVer/ultisnips'                            " Snippits
-Plug 'tpope/vim-commentary'                        " Comment things easily with gc
+Plug 'tpope/vim-commentary'                        " Comment things with gc
 Plug 'tpope/vim-ragtag'                            " More tag mappings
 Plug 'tpope/vim-surround'                          " Change the surrounding stuff
 Plug 'vim-latex/vim-latex', {'for': 'latex'}       " Such a powerful thing for LaTeX
-Plug 'raymond-w-ko/vim-lua-indent', {'for': 'lua'} " Better lua indents
-Plug 'https://github.com/lafrenierejm/wstrip.vim.git'
+Plug 'wellle/targets.vim'                          " More text objects
 
 " UI
-Plug 'ap/vim-css-color'                            " Sets the background to your color. #ff0000 < that is white on red
-Plug 'vim-airline/vim-airline'                     " Informative tabline/status bar for vim
+Plug 'ap/vim-css-color'                            " Colors your hex colors
+Plug 'vim-airline/vim-airline'                     " Tabline/status bar for vim
 Plug 'vim-airline/vim-airline-themes'              " Themes for Airline
-Plug 'majutsushi/tagbar'                           " Display tags in a window, ordered by scope
+Plug 'majutsushi/tagbar'                           " Display tags in a window
 Plug 'w0ng/vim-hybrid'                             " Colors!
 Plug 'https://gitlab.com/lafrenierejm/vim-equivalence.git'
 
 " Mail Plugins
-Plug 'chrisbra/CheckAttach'                        " Ask if you forgot to attach something
-Plug 'dbeniamine/vim-mail'                         " Contact completion, message folds, navigation, and more
+Plug 'chrisbra/CheckAttach'                        " Did you forgot to attach
+Plug 'dbeniamine/vim-mail'                         " Mail stuff
 Plug 'https://gitlab.com/lafrenierejm/vim-format-flowed.git'
 
 call plug#end()
@@ -125,16 +127,16 @@ set wildmenu
 " Show line numbers
 set number
 augroup line_numbers
-    autocmd InsertEnter * :set norelativenumber
-    autocmd InsertLeave * :set relativenumber
+  autocmd InsertEnter * :set norelativenumber
+  autocmd InsertLeave * :set relativenumber
 augroup END
 
 function! NumberToggle()
-    if(&relativenumber == 1)
+  if(&relativenumber == 1)
     set norelativenumber
-    else
+  else
     set relativenumber
-    endif
+  endif
 endfunc
 
 nnoremap <C-n> :call NumberToggle()<cr>
@@ -158,7 +160,7 @@ set splitbelow
 set splitright
 
 " Make Enter select completion without adding a new line.
-inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
 
 " Don't ring the terminal bell
 set visualbell t_fb=
@@ -166,68 +168,8 @@ set visualbell t_fb=
 " Incsub stuff
 set inccommand=nosplit
 
-"""""""""""""""""""
-" Plugin-Specific "
-"     Settings    "
-"""""""""""""""""""
-
-"" benekastah/neomake -- Asyncronous syntax checking
-augroup neomake_on_save
-  au!
-  autocmd BufWritePost * Neomake
-augroup END
-
-let g:neomake_python_enabled_makers = ['flake8']
-
-"" junegunn/vim-easy-align
-xmap ga <Plug>(EasyAlign)|         " Start interactive EasyAlign in visual mode (e.g. ipga)
-
-nmap ga <Plug>(EasyAlign)|         " Start interactive EasyAlign for a motion/text object (e.g. gaip)
-
-"" ntpters/vim-better-whitespace -- Automagically strip on save
-let g:better_whitespace_filetypes_blacklist=['mail', 'diff', 'gitcommit', 'unite', 'qf', 'help']
-
-"" Shougo/deoplete.nvim -- Completion
-let g:deoplete#enable_at_startup = 1
-
-"" SirVer/ultisnips -- Snippets
-let g:UltiSnipsExpandTrigger='<tab>'        "Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsJumpForwardTrigger='<c-b>'
-let g:UltiSnipsJumpBackwardTrigger='<c-z>'
-
-let g:UltiSnipsEditSplit='vertical'             " If you want :UltiSnipsEdit to split your window.
-set runtimepath+=~/.config/nvim/my-snippets/
-
-"" tpope/vim-fugitive -- All the gits
-augroup delete_fugitive_buffers
-    autocmd BufReadPost fugitive://* set bufhidden=delete    " Delete old git-object buffers when traversing the dag
-augroup END
-
-"" vim-airline/vim-airline
-set laststatus=2                                          " Always show the status
-set noshowmode                                            " Don't show the mode below the statusline, we're taking care of that in vim-airline
-let g:airline_powerline_fonts = 1                         " Use powerline symbols
-let g:airline#extensions#tabline#enabled = 1              " Tablinify the tabbar
-let g:airline#extensions#whitespace#mixed_indent_algo = 1 " Don't complain about C-style comments with funny indents
-let g:airline#extensions#tabline#buffer_nr_show = 1
-
-"" vim-latex/vim-latex -- LaTex stuff
-let g:Tex_DefaultTargetFormat = 'pdf'
-set grepprg=grep\ -nH\ $*
-let g:tex_flavor='latex'
-let g:Imap_UsePlaceHolders = 0        "Set this if you ever EVER are going to use '()'
-let g:Imap_FreezeImap=1
-
-"" vimwiki stuff
-let g:vimwiki_list = [{'path':'~/Documents/school/current/', 'path_html':'~/Documents/school/current/export/html/'}]
-
-"" xolox/vim-notes
-let g:notes_directories = ['~/Documents/notes']
-
-let g:polyglot_disabled = ['lua']
-let lua_version = 5
-let lua_subversion = 2
-
 "" Remember cursor position on buffer leave
-au BufLeave * let b:winview = winsaveview()
-au BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
+augroup cursorRemember
+  au BufLeave * let b:winview = winsaveview()
+  au BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
+augroup end

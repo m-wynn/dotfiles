@@ -14,10 +14,3 @@ set spell spelllang=en
 
 " allow a maximum of 2 trailing spaces
 let b:wstrip_trailing_max=2
-
-" Define an autocmd group to strip blank trailing quotes
-augroup StripTrailMailQuote
-	autocmd!
-	autocmd BufWritePre * :call StripTrailMailQuote()
-augroup END
-

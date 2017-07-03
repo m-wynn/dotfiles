@@ -162,6 +162,9 @@ gpr() { git push origin HEAD && open-pr "$*" }
 
 alias ip="ip -h -c"                                     # This too
 alias ls="ls --color=auto"
+if [[ `uname` == 'Darwin' ]]; then
+    alias ls="ls -G"
+fi
 
 export LESS="-R"
 
@@ -189,8 +192,6 @@ fi
 
 autoload -Uz manydots-magic
 manydots-magic
-
-source ~/.config/zsh/tinycare.zsh
 
 # The following lines were added by compinstall
 zstyle ':completion:*' completer _expand _complete _ignored _approximate

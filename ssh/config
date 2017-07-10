@@ -19,13 +19,10 @@ Host *
 Host nemesis*
     Port 22
     User matthew
-    Hostname 172.125.112.65
-    ProxyJump squares
 
 Host rem rem.apartment*
     User matthew
     Hostname rem.apartment.matthewwynn.com
-    ProxyJump nemesis
 
 # UTD
 

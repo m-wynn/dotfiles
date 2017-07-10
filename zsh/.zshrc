@@ -161,10 +161,12 @@ say() { mplayer -really-quiet "http://translate.google.com/translate_tts?tl=en&q
 gpr() { git push origin HEAD && open-pr "$*" }
 
 alias ip="ip -h -c"                                     # This too
-alias ls="ls --color=auto"
 if [[ `uname` == 'Darwin' ]]; then
     alias ls="ls -G"
+else
+    alias ls="ls --color=auto"
 fi
+lc() { ~/bin/colorls/colorls.rb $1; }
 
 export LESS="-R"
 

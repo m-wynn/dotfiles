@@ -89,13 +89,13 @@ set titlestring=VIM:\ %-5.10t\ %a%r%m titlelen=15
 set title
 
 "" Put temps somewhere else
-silent !mkdir -p ~/.config/nvim/swaps/
-silent !mkdir -p ~/.config/nvim/backups/
-silent !mkdir -p ~/.config/nvim/undo/
+silent !mkdir -p ~/.local/share/nvim/swaps/
+silent !mkdir -p ~/.local/share/nvim/backups/
+silent !mkdir -p ~/.local/share/nvim/undo/
 
-set directory=~/.config/nvim/swaps//
-set backupdir=~/.config/nvim/backups//
-set undodir=~/.config/nvim/undo//
+set directory=~/.local/share/nvim/swaps//
+set backupdir=~/.local/share/nvim/backups//
+set undodir=~/.local/share/nvim/undo//
 set undofile
 
 " Colors!

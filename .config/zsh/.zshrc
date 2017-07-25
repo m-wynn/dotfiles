@@ -28,7 +28,7 @@ fi
 if [[ ! -f "${ZPLUG_HOME}/init.zsh" ]]; then
     vared -p 'Would you like to install zplug? (Y/N): ' -c choice
     if [[ $choice = y* || $choice = Y* ]]; then
-        source zplug-installer/installer.zsh
+        source ~/.config/zsh/zplug-installer/installer.zsh
     else
         echo "Things will fail."
     fi
@@ -167,6 +167,8 @@ else
     alias ls="ls --color=auto"
 fi
 lc() { ~/bin/colorls/colorls.rb $1; }
+
+alias conf='git --git-dir="${HOME}/.dotfiles/" --work-tree="$HOME"'
 
 export LESS="-R"
 

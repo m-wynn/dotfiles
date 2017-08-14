@@ -197,6 +197,8 @@ fi
 autoload -Uz manydots-magic
 manydots-magic
 
+fpath+=~/.config/zsh/.zfunc
+
 # The following lines were added by compinstall
 zstyle ':completion:*' completer _expand _complete _ignored _approximate
 zstyle ':completion:*' use-cache on

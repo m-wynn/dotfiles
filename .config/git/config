@@ -43,3 +43,5 @@
 	path = ~/.config/git/override
 [gpg]
 	program = gpg2
+[credential]
+	helper = cache

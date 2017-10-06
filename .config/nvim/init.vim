@@ -30,9 +30,12 @@ Plug 'tpope/vim-fugitive'                          " Git plugin
 Plug 'tpope/vim-repeat'                            " Use . to repeat plugin stuff
 Plug 'tpope/vim-sleuth'                            " Figure out tabs
 Plug 'tpope/vim-unimpaired'                        " Add lots of handy mappings
+Plug 'vimoutliner/vimoutliner'                     " Outlines
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 
 " Completion
+Plug 'fszymanski/deoplete-emoji'
+Plug 'sebastianmarkow/deoplete-rust', {'for': 'rust'}
 Plug 'Shougo/context_filetype.vim'                 " Add context filetype
 Plug 'Shougo/deoplete.nvim'                        " Completion
 Plug 'Shougo/echodoc.vim'                          " Print documentation
@@ -188,3 +191,14 @@ inoremap <F12> <C-o>:syntax sync fromstart<CR>
 
 "" Change cursor shape
 set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
+
+
+function DetectInnerFile()
+  let ext = expand('%:r:e')
+  echom ext
+  let matching = uniq(sort(filter(split(execute('autocmd filetypedetect'), "\n"), 'v:val =~ "\*\.".ext ')))
+  for i in matching
+    echom substitute(i, "\s\*\*.ext\s\*", "", "")
+  endfor
+
+endfunction

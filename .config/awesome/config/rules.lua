@@ -61,10 +61,6 @@ function rules.init()
       properties = { screen = 1, tag = "" }
     },
     {
-      rule = { class = "HipChat" },
-      properties = { screen = 1, tag = "" }
-    },
-    {
       rule = { class = "Nemo" },
       properties = { screen = 1, tag = "" }
     },
@@ -79,6 +75,10 @@ function rules.init()
     {
       rule = { instance = "mutt" },
       properties = { screen = 1, tag = "" }
+    },
+    {
+      rule = { instance = "sddm-greeter" },
+      properties = { screen = 1, tag = "", fullscreen = true }
     },
   }
 

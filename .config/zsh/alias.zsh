@@ -13,12 +13,12 @@ man() {
         man "$@"
 }
 
+# Make aliases work in Sudo
+alias sudo="sudo "
 
 say() { mplayer -really-quiet "http://translate.google.com/translate_tts?tl=en&q=$1"; }
 
 gpr() { git push origin HEAD && open-pr "$*" }
-
-alias ip="ip -h -c"                                     # This too
 if [[ `uname` == 'Darwin' ]]; then
     alias ls="ls -G"
 else
@@ -43,7 +43,7 @@ if [[ "$TERM" != dumb ]] && (( $+commands[grc] )) ; then
     setopt COMPLETE_ALIASES
 
     # Supported commands
-    cmds=(c++ cc configure cvs df diff dig gcc g++ ifconfig last ld ldap ldapadd ldapauth ldapdelete ldapmodify ldapmodrdn ldappassd ldapsearch ldapwhoami make mount mtr netstat ping ping6 ps traceroute traceroute6 wdiff );
+    cmds=(blkid c++ cc configure cvs df diff dig env fdisk findmnt free g++ gcc getfacl getsebool id ifconfig iostat ip iptables journalctl last ld ldap ldapadd ldapauth ldapdelete ldapmodify ldapmodrdn ldappassd ldapsearch ldapwhoami lsattr lsblk lsmod lsof lspci make mount mtr netstat ping ping6 ps sar semanage sysctl systemctl traceroute traceroute6 ulimit uptime vmstat w wdiff);
 
     # Set alias for available commands.
     for cmd in $cmds ; do

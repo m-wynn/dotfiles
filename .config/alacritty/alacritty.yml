@@ -27,12 +27,6 @@ padding:
   x: 2
   y: 2
 
-# The FreeType rasterizer needs to know the device DPI for best results
-# (changes require restart)
-dpi:
-  x: 92.0
-  y: 92.0
-
 # Display tabs using this many cells (changes require restart)
 tabspaces: 8
 
@@ -40,6 +34,24 @@ tabspaces: 8
 draw_bold_text_with_bright_colors: true
 
 # Font configuration (changes require restart)
+#
+# Important font attributes like antialiasing, subpixel aa, and hinting can be
+# controlled through fontconfig. Specifically, the following attributes should
+# have an effect:
+#
+# * hintstyle
+# * antialias
+# * lcdfilter
+# * rgba
+#
+# For instance, if you wish to disable subpixel antialiasing, you might set the
+# rgba property to "none". If you wish to completely disable antialiasing, you
+# can set antialias to false.
+#
+# Please see these resources for more information on how to use fontconfig
+#
+# * https://wiki.archlinux.org/index.php/font_configuration#Fontconfig_configuration
+# * file:///usr/share/doc/fontconfig/fontconfig-user.html
 font:
   # The normal (roman) font face to use.
   normal:
@@ -60,14 +72,14 @@ font:
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
   offset:
-    x: 0.0
-    y: 0.0
+    x: -9.0
+    y: -0.0
 
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increase the x offset to move the glyph to
   # the right, increase the y offset to move the glyph upward.
   glyph_offset:
-    x: -1.0
+    x: 0.0
     y: 0.0
 
   # OS X only: use thin stroke font rendering. Thin strokes are suitable
@@ -180,10 +192,14 @@ background_opacity: 0.9
 # capitalization must match exactly, and piped items must not have whitespace
 # around them.
 #
-# Either an `action` or `chars` field must be present. `chars` writes the
-# specified string every time that binding is activated. These should generally
-# be escape sequences, but they can be configured to send arbitrary strings of
-# bytes. Possible values of `action` include `Paste` and `PasteSelection`.
+# Either an `action`, `chars`, or `command` field must be present.
+#   `action` must be one of `Paste`, `PasteSelection`, `Copy`, or `Quit`.
+#   `chars` writes the specified string every time that binding is activated.
+#     These should generally be escape sequences, but they can be configured to
+#     send arbitrary strings of bytes.
+#   `command` must be a map containing a `program` string, and `args` array of
+#     strings. For example:
+#     - { ... , command: { program: "alacritty", args: ["-e", "vttest"] } }
 #
 # Want to add a binding (e.g. "PageUp") but are unsure what the X sequence
 # (e.g. "\x1b[5~") is? Open another terminal (like xterm) without tmux,
@@ -194,6 +210,9 @@ key_bindings:
   - { key: Q,        mods: Command, action: Quit                         }
   - { key: W,        mods: Command, action: Quit                         }
   - { key: Insert,   mods: Shift,   action: PasteSelection               }
+  - { key: Key0,     mods: Control, action: ResetFontSize                }
+  - { key: Equals,   mods: Control, action: IncreaseFontSize             }
+  - { key: Subtract, mods: Control, action: DecreaseFontSize             }
   - { key: Home,                    chars: "\x1bOH",   mode: AppCursor   }
   - { key: Home,                    chars: "\x1b[H",   mode: ~AppCursor  }
   - { key: End,                     chars: "\x1bOF",   mode: AppCursor   }
@@ -268,6 +287,9 @@ selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
 
 hide_cursor_when_typing: false
+
+# Live config reload (changes require restart)
+live_config_reload: true
 
 # Shell
 #

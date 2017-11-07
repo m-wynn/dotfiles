@@ -39,6 +39,12 @@ source "${ZPLUG_HOME}/init.zsh"
 zplug "plugins/django", \
     from:oh-my-zsh
 
+zplug "plugins/docker", \
+    from:oh-my-zsh
+
+zplug "plugins/docker-compose", \
+    from:oh-my-zsh
+
 # Faster git completion
 zplug "plugins/gitfast", \
     from:oh-my-zsh

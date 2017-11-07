@@ -17,6 +17,11 @@ function keys.init(awesome_context)
 
   local globalkeys = awful.util.table.join(
 
+    bind_key({ "Control" }, "q",
+             awful.spawn.with_shell(""),
+             "Do nothing", "awesome"
+             ),
+
     -- Help
     bind_key({ modkey }, "s",
              hotkeys_popup.show_help,

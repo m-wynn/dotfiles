@@ -46,6 +46,7 @@ Plug 'zchee/deoplete-jedi', {'for': 'python'}      " Python completion
 
 " Editing
 Plug 'AndrewRadev/splitjoin.vim'                   " Splitting and joining
+Plug 'Chiel92/vim-autoformat'                      " Automagically format
 Plug 'honza/vim-snippets'                          " Snippits Stuff
 Plug 'junegunn/vim-easy-align'                     " Align things more easily
 Plug 'michaeljsmith/vim-indent-object'             " Indents as text objects
@@ -183,6 +184,11 @@ set inccommand=nosplit
 augroup cursorRemember
   au BufLeave * let b:winview = winsaveview()
   au BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
+augroup end
+
+" Automagically format on save
+augroup saveFormat
+  au BufWrite * :Autoformat
 augroup end
 
 "" F12 resyncs syntax

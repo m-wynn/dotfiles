@@ -37,6 +37,7 @@
 [user]
 	email = matthew@matthewwynn.com
 	name = Matthew Wynn
+	signingkey = EA840B7051329C82942A5EE8ECEB282430604CA4
 [difftool]
 	prompt = false
 [include]

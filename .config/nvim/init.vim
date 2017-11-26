@@ -20,6 +20,7 @@ if !has('mac')
 endif
 Plug 'ctrlpvim/ctrlp.vim'                          " Fuzzy File Finder
 Plug 'Konfekt/FastFold'                            " Speed up folds
+Plug 'noahfrederick/vim-skeleton'                  " Provides skeleton file
 Plug 'ntpeters/vim-better-whitespace'              " Easily strip whitespace
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'tmhedberg/SimpylFold', {'for': 'python'}     " Python folding
@@ -187,9 +188,9 @@ augroup cursorRemember
 augroup end
 
 " Automagically format on save
-augroup saveFormat
-  au BufWrite * :Autoformat
-augroup end
+" augroup saveFormat
+"   au BufWrite * :Autoformat
+" augroup end
 
 "" F12 resyncs syntax
 noremap <F12> <Esc>:syntax sync fromstart<CR>
@@ -198,6 +199,8 @@ inoremap <F12> <C-o>:syntax sync fromstart<CR>
 "" Change cursor shape
 set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
 
+" Change vim skeleton file
+let g:skeleton_template_dir = "~/.config/nvim/templates"
 
 function DetectInnerFile()
   let ext = expand('%:r:e')

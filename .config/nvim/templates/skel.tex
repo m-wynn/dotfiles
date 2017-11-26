@@ -1,0 +1,53 @@
+\documentclass[12pt,letterpaper,hidelinks,oneside]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset{%
+    backgroundcolor=\color{white},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    frame=single,
+    keepspaces=true,
+    columns=flexible,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    rulecolor=\color{black},
+    showspaces=false,
+    showtabs=false,
+    stepnumber=5,
+    tabsize=4
+}
+
+\newcommand{\mytitle}{@CURSOR@}
+\newcommand{\myauthor}{Matthew Wynn}
+
+\author{\myauthor}
+\title{\mytitle}
+\date{\today}
+
+\linespread{1.2}
+\usepackage[pdftex,
+pdfauthor={\myauthor},
+pdftitle={\mytitle\space--- \myauthor},
+pdfproducer={pdflatex}]{hyperref}
+
+% Header
+\pagestyle{fancy}
+\setlength{\headheight}{15.0pt}
+\fancyhf{}
+\lhead{\mytitle}
+\rhead{\myauthor}
+
+\begin{document}
+\maketitle
+
+\end{document}

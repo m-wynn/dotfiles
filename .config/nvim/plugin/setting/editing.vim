@@ -5,7 +5,7 @@ nmap ga <Plug>(EasyAlign)|         " Start interactive EasyAlign for a motion/te
 
 
 "" vim-lua-indent
-let g:polyglot_disabled = ['lua']
+let g:polyglot_disabled = ['lua', 'latex']
 let g:lua_version = 5
 let g:lua_subversion = 2
 
@@ -22,10 +22,4 @@ let g:UltiSnipsJumpBackwardTrigger='<c-z>'
 let g:UltiSnipsEditSplit='vertical'             " If you want :UltiSnipsEdit to split your window.
 set runtimepath+=~/.config/nvim/my-snippets/
 
-"" vim-latex/vim-latex -- LaTex stuff
-let g:Tex_DefaultTargetFormat = 'pdf'
-set grepprg=grep\ -nH\ $*
-let g:tex_flavor='latex'
-let g:Imap_UsePlaceHolders = 0        "Set this if you use '()'
-let g:Imap_FreezeImap=1
 

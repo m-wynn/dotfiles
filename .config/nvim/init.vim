@@ -50,6 +50,8 @@ Plug 'AndrewRadev/splitjoin.vim'                   " Splitting and joining
 Plug 'Chiel92/vim-autoformat'                      " Automagically format
 Plug 'honza/vim-snippets'                          " Snippits Stuff
 Plug 'junegunn/vim-easy-align'                     " Align things more easily
+Plug 'lervag/vimtex', {'for': 'tex'}               " Latex Plugin
+Plug 'machakann/vim-sandwich'                      " Change surrounding chars
 Plug 'michaeljsmith/vim-indent-object'             " Indents as text objects
 Plug 'pearofducks/ansible-vim', { 'do': './UltiSnips/generate.py' }
 Plug 'raymond-w-ko/vim-lua-indent', {'for': 'lua'} " Better lua indents
@@ -59,8 +61,6 @@ Plug 'sheerun/vim-polyglot'                        " Support for many languages
 Plug 'SirVer/ultisnips'                            " Snippits
 Plug 'tpope/vim-commentary'                        " Comment things with gc
 Plug 'tpope/vim-ragtag'                            " More tag mappings
-Plug 'tpope/vim-surround'                          " Change the surrounding stuff
-Plug 'vim-latex/vim-latex', {'for': 'latex'}       " Such a powerful thing for LaTeX
 Plug 'wellle/targets.vim'                          " More text objects
 
 " UI
@@ -202,12 +202,4 @@ set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr
 " Change vim skeleton file
 let g:skeleton_template_dir = "~/.config/nvim/templates"
 
-function DetectInnerFile()
-  let ext = expand('%:r:e')
-  echom ext
-  let matching = uniq(sort(filter(split(execute('autocmd filetypedetect'), "\n"), 'v:val =~ "\*\.".ext ')))
-  for i in matching
-    echom substitute(i, "\s\*\*.ext\s\*", "", "")
-  endfor
-
-endfunction
+let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)

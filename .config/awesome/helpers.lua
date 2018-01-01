@@ -40,16 +40,4 @@ function helpers.utf8sub(str, startChar, numChars)
   return str:sub(startIndex, currentIndex - 1)
 end
 
--- run once
--- runs a command unless it's already running
-
-function helpers.run_once(cmd)
-  local findme = cmd
-  local firstspace = cmd:find(" &")
-  if firstspace then
-    findme = cmd:sub(0, firstspace-1)
-  end
-  awful.spawn.with_shell("pgrep -u $USER -f " .. findme .. " > /dev/null || (" .. cmd .. ")")
-end
-
 return helpers

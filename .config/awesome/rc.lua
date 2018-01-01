@@ -18,7 +18,6 @@ context = {
     editor_cmd = editor_cmd,
   },
 
-  autorun = {},
   widgets = {},
   menu = {},
 }
@@ -27,7 +26,6 @@ beautiful.init(context.theme_file)
 
 local config = require("config")
 config.notify.init(context)
-config.autorun.init(context)
 config.layouts.init(context)
 config.widgets.init(context)
 config.toolbar.init(context)

@@ -1,10 +1,10 @@
-"" neomake
-augroup neomake_on_save
-  au!
-  autocmd BufWritePost * Neomake
-augroup END
-
-let g:neomake_python_enabled_makers = ['flake8']
+"" ale
+let g:ale_completion_enabled = 1
+let g:ale_fix_on_save = 1
+let g:ale_linters = {'rust': ['cargo']}
+let g:ale_fixers = {'rust': ['rustfmt']}
+let g:ale_sign_error = '✘'
+let g:ale_sign_warning = '⚠'
 
 
 "" ctrlp

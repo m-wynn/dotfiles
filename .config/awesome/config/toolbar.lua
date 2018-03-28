@@ -48,7 +48,7 @@ function toolbar.init(awesome_context)
     end
 
     right_layout:add(wibox.widget.systray())
-    right_layout_add(widgets.mpdicon, widgets.mpdwidget.widget)
+    right_layout_add(widgets.musicicon, widgets.musicwidget)
     right_layout_add(widgets.volumeicon, widgets.volumewidget.widget)
     right_layout_add(widgets.memicon, widgets.memwidget)
     right_layout_add(widgets.cpuicon, widgets.cpuwidget)

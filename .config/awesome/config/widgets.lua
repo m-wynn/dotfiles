@@ -35,27 +35,44 @@ function widget_loader.init(awesome_context)
     }
   )
 
-  -- mpd
-  w.mpdicon = wibox.widget.imagebox(beautiful.widget_music)
-  w.mpdwidget = lain.widget.mpd(
-    {
-      settings = function()
-        if mpd_now.state == "play" then
-          artist = " " .. helpers.utf8sub(mpd_now.artist, 1, 12) .. " "
-          title  = helpers.utf8sub(mpd_now.title, 1, 20) .. " "
-          w.mpdicon:set_image(beautiful.widget_music_on)
-        elseif mpd_now.state == "pause" then
-          artist = " mpd "
-          title  = "paused "
-        else
-          artist = ""
-          title  = ""
-          w.mpdicon:set_image(beautiful.widget_music)
-        end
-        widget:set_markup(markup(beautiful.bg_red, artist) .. title)
-      end
-    }
-  )
+  -- music
+  w.musicicon = wibox.widget.imagebox(beautiful.widget_music)
+  w.musicwidget = awful.widget.watch({"pidof", "Google Play Music Desktop Player"}, 2, function(widget, stdout)
+    local file_location = os.getenv("HOME") .. "/.config/Google Play Music Desktop Player/json_store/playback.json"
+    local filelines = helpers.get_lines(file_location)
+    if not filelines then
+      widget:set_text(" not running ")
+      return
+    end -- GPMDP not running?
+
+    gpm_now = { running = stdout ~= '' }
+
+    if not next(filelines) then
+      gpm_now.running = false
+      gpm_now.playing = false
+    else
+      dict, pos, err    = require("lain.util").dkjson.decode(table.concat(filelines), 1, nil) -- lain
+      gpm_now.artist    = dict.song.artist
+      gpm_now.album     = dict.song.album
+      gpm_now.title     = dict.song.title
+      gpm_now.cover_url = dict.song.albumArt
+      gpm_now.playing   = dict.playing
+    end
+
+    if gpm_now.playing then
+      artist = " " .. helpers.sanitize_markup(helpers.utf8sub(gpm_now.artist, 1, 20)) .. " "
+      title  = helpers.sanitize_markup(helpers.utf8sub(gpm_now.title, 1, 20)) .. " "
+      w.musicicon:set_image(beautiful.widget_music_on)
+    elseif gpm_now.running then
+      artist = " Music "
+      title  = "Paused "
+    else
+      artist = ""
+      title  = ""
+      w.musicicon:set_image(beautiful.widget_music)
+    end
+    widget:set_markup(markup(beautiful.bg_red, artist) .. title)
+  end)
 
   -- RAM
   local innermemwidget = wibox.widget {

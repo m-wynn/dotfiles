@@ -187,26 +187,6 @@ function keys.init(awesome_context)
               end
               ),
 
-    -- MPD control
-    awful.key({}, "XF86AudioPlay",
-              function()
-                awful.spawn.with_shell("mpc toggle || ncmpcpp toggle || ncmpc toggle || pms toggle")
-                awesome_context.widgets.mpdwidget.update()
-              end
-              ),
-    awful.key({}, "XF86AudioPrev",
-              function()
-                awful.spawn.with_shell("mpc prev || ncmpcpp prev || ncmpc prev || pms prev")
-                awesome_context.widgets.mpdwidget.update()
-              end
-              ),
-    awful.key({}, "XF86AudioNext",
-              function()
-                awful.spawn.with_shell("mpc next || ncmpcpp next || ncmpc next || pms next")
-                awesome_context.widgets.mpdwidget.update()
-              end
-              ),
-
     -- Brightness control
     awful.key({}, "XF86MonBrightnessDown",
               function () awful.util.spawn("xbacklight -dec 10") end

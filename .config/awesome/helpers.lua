@@ -40,4 +40,31 @@ function helpers.utf8sub(str, startChar, numChars)
   return str:sub(startIndex, currentIndex - 1)
 end
 
+function helpers.get_lines(file)
+    local f = io.open(file)
+    if not f then
+        return
+    else
+        f:close()
+    end
+
+    local lines = {}
+    for line in io.lines(file) do
+        lines[#lines + 1] = line
+    end
+    return lines
+end
+
+function helpers.sanitize_markup(txt)
+  local replacements = {
+    ['&' ] = '&amp;',
+    ['<' ] = '&lt;',
+    ['>' ] = '&gt;',
+    ['\n'] = '<br/>'
+  }
+  return txt
+  :gsub('[&<>\n]', replacements)
+  :gsub(' +', function(s) return ' '..('&nbsp;'):rep(#s-1) end)
+end
+
 return helpers

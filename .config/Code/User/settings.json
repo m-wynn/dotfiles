@@ -3,7 +3,6 @@
     "rust.all_features": true,
     "rust-client.updateOnStartup": true,
     "rust.unstable_features": true,
-    "workbench.colorTheme": "Tomorrow Night",
     "files.watcherExclude": {
         "**/.git/objects/**": true,
         "**/.git/subtree-cache/**": true,
@@ -24,7 +23,7 @@
     "terminal.external.linuxExec": "alacritty",
     "rust-client.revealOutputChannelOn": "error",
     "git.autofetch": true,
-    "workbench.iconTheme": "vscode-icons",
+    "workbench.iconTheme": "eq-material-theme-icons-darker",
     "files.useExperimentalFileWatcher": true,
     "files.insertFinalNewline": true,
     "files.trimTrailingWhitespace": true,
@@ -52,5 +51,6 @@
     "cSpell.allowCompoundWords": true,
     "cSpell.userWords": [
         "mutex"
-    ]
+    ],
+    "workbench.colorTheme": "Base16 Tomorrow Dark"
 }

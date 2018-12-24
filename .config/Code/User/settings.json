@@ -1,5 +1,5 @@
 {
-    "files.autoSave": "afterDelay",
+    "files.autoSave": "onFocusChange",
     "rust.all_features": true,
     "rust-client.updateOnStartup": true,
     "rust.unstable_features": true,
@@ -11,7 +11,7 @@
     },
     "editor.fontLigatures": true,
     "editor.fontFamily": "'Fira Code', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
-    "terminal.integrated.fontFamily": "LiterationMono Nerd Font Mono",
+    "terminal.integrated.fontFamily": "Fira Code",
     "terminal.integrated.rendererType": "dom",
     "rust.build_on_save": true,
     "searchRipgrep.enable": true,
@@ -52,5 +52,9 @@
     "cSpell.userWords": [
         "mutex"
     ],
-    "workbench.colorTheme": "Base16 Tomorrow Dark"
+    "workbench.colorTheme": "Monokai Dimmed",
+    "editor.fontSize": 13,
+    "editor.fontWeight": "500",
+    "prettier.eslintIntegration": true,
+    "window.zoomLevel": 0
 }

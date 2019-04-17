@@ -25,7 +25,6 @@ Plug 'ntpeters/vim-better-whitespace'              " Easily strip whitespace
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'tmhedberg/SimpylFold', {'for': 'python'}     " Python folding
 Plug 'tpope/vim-abolish'                           " Smarter find-replacement
-Plug 'tpope/vim-afterimage'                        " Edit images, pdfs, and word
 Plug 'tpope/vim-eunuch'                            " Handy UNIX commands
 Plug 'tpope/vim-fugitive'                          " Git plugin
 Plug 'tpope/vim-repeat'                            " Use . to repeat plugin stuff
@@ -71,29 +70,24 @@ Plug 'majutsushi/tagbar'                           " Display tags in a window
 Plug 'w0ng/vim-hybrid'                             " Colors!
 Plug 'https://gitlab.com/lafrenierejm/vim-equivalence.git'
 
-" Mail Plugins
-Plug 'chrisbra/CheckAttach'                        " Did you forgot to attach
-Plug 'dbeniamine/vim-mail'                         " Mail stuff
-Plug 'https://gitlab.com/lafrenierejm/vim-format-flowed.git'
-
 call plug#end()
 
-"""""""""""""""
+""""""""
 "   General   "
 "     Vim     "
-"""""""""""""""
+""""""""
 
-"" Load plugins and indentation for specific filetypes
+" Load plugins and indentation for specific filetypes
 filetype plugin indent on
 
-"" Syntax highlighting
+" Syntax highlighting
 syntax on
 
-"" title in the titlebar.  A bit weird
+" title in the titlebar.  A bit weird
 set titlestring=VIM:\ %-5.10t\ %a%r%m titlelen=15
 set title
 
-"" Put temps somewhere else
+" Put temps somewhere else
 silent !mkdir -p ~/.local/share/nvim/swaps/
 silent !mkdir -p ~/.local/share/nvim/backups/
 silent !mkdir -p ~/.local/share/nvim/undo/
@@ -119,7 +113,7 @@ set showmatch
 " Autoindentation.
 set autoindent
 
-"" tabs
+" tabs
 set tabstop=4 softtabstop=0 expandtab shiftwidth=4
 
 " Allow backspacing over line breaks, start of insert action, and autoindentation
@@ -181,22 +175,22 @@ set visualbell t_fb=
 " Incsub stuff
 set inccommand=nosplit
 
-"" Remember cursor position on buffer leave
+" Remember cursor position on buffer leave
 augroup cursorRemember
   au BufLeave * let b:winview = winsaveview()
   au BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
 augroup end
 
 " Automagically format on save
-" augroup saveFormat
-"   au BufWrite * :Autoformat
-" augroup end
+augroup saveFormat
+  au BufWrite * :Autoformat
+augroup end
 
-"" F12 resyncs syntax
+" F12 resyncs syntax
 noremap <F12> <Esc>:syntax sync fromstart<CR>
 inoremap <F12> <C-o>:syntax sync fromstart<CR>
 
-"" Change cursor shape
+" Change cursor shape
 set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
 
 " Change vim skeleton file

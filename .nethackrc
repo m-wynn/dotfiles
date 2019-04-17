@@ -15,4 +15,5 @@ AUTOPICKUP_EXCEPTION=">chest"
 OPTIONS=clicklook
 OPTIONS=disclose:+i+a+v+g+c+o
 # names
-OPTIONS=catname:Dino,dogname:Sheila,
+OPTIONS=catname:Dino
+OPTIONS=dogname:Sheila

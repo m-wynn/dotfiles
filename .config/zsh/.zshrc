@@ -35,10 +35,6 @@ if [[ ! -f "${ZPLUG_HOME}/init.zsh" ]]; then
 fi
 source "${ZPLUG_HOME}/init.zsh"
 
-# Manage.py completions
-zplug "plugins/django", \
-    from:oh-my-zsh
-
 zplug "plugins/docker", \
     from:oh-my-zsh
 
@@ -61,122 +57,109 @@ zplug "plugins/pip", \
 zplug "plugins/python", \
     from:oh-my-zsh
 
-# Warp directories
-zplug "plugins/wd", \
-    from:oh-my-zsh
-
 # Vim-like keybindings with some modifications
 zplug "plugins/vi-mode", \
     from:oh-my-zsh
-
-#OS-specific packages
-zplug "plugins/archlinux", \
-    from:oh-my-zsh, \
-    if:"[[ -x /usr/bin/pacman ]]"
-
-zplug "plugins/yum", \
-    from:oh-my-zsh, \
-    if:"[[ -x /usr/bin/yum ]]"
 
 zplug "plugins/dnf", \
     from:oh-my-zsh, \
     if:"[[ -x /usr/bin/dnf ]]"
 
-zplug "plugins/debian", \
-    from:oh-my-zsh, \
-    if:"[[ -x /usr/bin/apt-get ]]"
+        # zplug "plugins/debian", \
+            #     from:oh-my-zsh, \
+            #     if:"[[ -x /usr/bin/apt-get ]]"
 
 
-# External Bundles
-# Add upstream remote to git like `add-upstream username`
-zplug "caarlos0/zsh-add-upstream"
+        # External Bundles
+        # Add upstream remote to git like `add-upstream username`
+        zplug "caarlos0/zsh-add-upstream"
 
-# So many scripts
-zplug "skx/sysadmin-util"
+        # So many scripts
+        zplug "skx/sysadmin-util"
 
-# Add a .gitignore based on a template
-zplug "voronkovich/gitignore.plugin.zsh"
+        # Add a .gitignore based on a template
+        zplug "voronkovich/gitignore.plugin.zsh"
 
-# Tons and tons of completions
-zplug "zsh-users/zsh-completions", \
-    use:"src"
+        # Tons and tons of completions
+        zplug "zsh-users/zsh-completions", \
+            use:"src"
 
-# Pretty colors
-zplug "zsh-users/zsh-syntax-highlighting", \
-    defer:2
+        # Pretty colors
+        zplug "zsh-users/zsh-syntax-highlighting", \
+            defer:2
 
-# Manage itself
-zplug 'zplug/zplug', \
-    hook-build:'zplug --self-manage'
+        # Manage itself
+        zplug 'zplug/zplug', \
+            hook-build:'zplug --self-manage'
 
-# Load the theme.
-zplug "robbyrussell/oh-my-zsh"
-setopt prompt_subst # Make sure prompt is able to be generated properly.
-zplug "caiogondim/bullet-train.zsh", \
-    use:bullet-train.zsh-theme
+        # Load the theme.
+        zplug "robbyrussell/oh-my-zsh"
+        setopt prompt_subst # Make sure prompt is able to be generated properly.
+        zplug "caiogondim/bullet-train.zsh", \
+            use:bullet-train.zsh-theme
 
-if ! zplug check; then
-    zplug install
-fi
+        if ! zplug check; then
+            zplug install
+        fi
 
-zplug load
+        zplug load
 
-# History tweaks
-mkdir -p "${HOME}/.local/share/zsh"
-HISTFILE="${HOME}/.local/share/zsh/history"
-HISTSIZE=1000000000
-SAVEHIST=$HISTSIZE
-setopt inc_append_history # Append every command to $HISTFILE immediately
-setopt share_history      # Always import new commands from $HISTFILE
-setopt extended_history   # Save additional info to $HISTFILE
-setopt hist_ignore_space  # Ignore history beginning with a space
-setopt NO_BEEP
+        # History tweaks
+        mkdir -p "${HOME}/.local/share/zsh"
+        HISTFILE="${HOME}/.local/share/zsh/history"
+        HISTSIZE=1000000000
+        SAVEHIST=$HISTSIZE
+        setopt inc_append_history # Append every command to $HISTFILE immediately
+        setopt share_history      # Always import new commands from $HISTFILE
+        setopt extended_history   # Save additional info to $HISTFILE
+        setopt hist_ignore_space  # Ignore history beginning with a space
+        setopt NO_BEEP
 
-#ZSH Colorful stuff
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern root)
+        #ZSH Colorful stuff
+        ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern root)
 
-# Eliminate escape delay
-KEYTIMEOUT=1
+        # Eliminate escape delay
+        KEYTIMEOUT=1
 
-# Allow new features, i.e. ^ which negates the pattern following it
-# ls <100-200>.txt, **/, and more
-setopt extendedglob
+        # Allow new features, i.e. ^ which negates the pattern following it
+        # ls <100-200>.txt, **/, and more
+        setopt extendedglob
 
-#If pattern for filename generation has no matches, print an error.
-setopt nomatch
+        #If pattern for filename generation has no matches, print an error.
+        setopt nomatch
 
-# Disable changing the window title
-export DISABLE_AUTO_TITLE=true
+        # Disable changing the window title
+        export DISABLE_AUTO_TITLE=true
 
-bindkey '^R' history-incremental-search-backward
+        bindkey '^R' history-incremental-search-backward
 
-source "${HOME}/.config/zsh/alias.zsh"
+        source "${HOME}/.config/zsh/alias.zsh"
 
-autoload -Uz manydots-magic
-manydots-magic
+        autoload -Uz manydots-magic
+        manydots-magic
 
-fpath+=~/.config/zsh/.zfunc
+        fpath+=~/.config/zsh/.zfunc
 
-# The following lines were added by compinstall
-zstyle ':completion:*' completer _expand _complete _ignored _approximate
-zstyle ':completion:*' use-cache on
-zstyle ':completion:*' expand prefix suffix
-zstyle ':completion:*' file-sort access
-zstyle ':completion:*' ignore-parents parent .. directory
-zstyle ':completion:*' list-colors ''
-zstyle ':completion:*' list-prompt '%SAt %p: Hit TAB for more, or the character to insert%s'
-zstyle ':completion:*' list-suffixes true
-zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'r:|[._-]=** r:|=**' 'l:|=* r:|=*'
-zstyle ':completion:*' menu select=1
-zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
-zstyle :compinstall filename ${HOME}/.config/zsh/.zshrc
+        # The following lines were added by compinstall
+        zstyle ':completion:*' completer _expand _complete _ignored _approximate
+        zstyle ':completion:*' use-cache on
+        zstyle ':completion:*' expand prefix suffix
+        zstyle ':completion:*' file-sort access
+        zstyle ':completion:*' ignore-parents parent .. directory
+        zstyle ':completion:*' list-colors ''
+        zstyle ':completion:*' list-prompt '%SAt %p: Hit TAB for more, or the character to insert%s'
+        zstyle ':completion:*' list-suffixes true
+        zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'r:|[._-]=** r:|=**' 'l:|=* r:|=*'
+        zstyle ':completion:*' menu select=1
+        zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
+        zstyle :compinstall filename ${HOME}/.config/zsh/.zshrc
 
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
+        autoload -Uz compinit
+        compinit
+        # End of lines added by compinstall
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/maw27ah/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/maw27ah/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+        # The next line updates PATH for the Google Cloud SDK.
+        if [ -f '/Users/maw27ah/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/maw27ah/Downloads/google-cloud-sdk/path.zsh.inc'; fi
 
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/maw27ah/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/maw27ah/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+        # The next line enables shell command completion for gcloud.
+        if [ -f '/Users/maw27ah/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/maw27ah/Downloads/google-cloud-sdk/completion.zsh.inc'; fi

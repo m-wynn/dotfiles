@@ -4,10 +4,10 @@ export GOPATH=$HOME/.go
 export PATH=$PATH:~/bin:${GOPATH//://bin:}/bin:${HOME}/.cargo/bin
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
-export EDITOR=vim
-export VISUAL=vim
+export EDITOR=nvim
+export VISUAL=nvim
 export ALTERNATIVE_EDITOR=vi
-alias :e=vim
+alias :e=nvim
 alias :E=sudoedit
 
 # Use UTF-8

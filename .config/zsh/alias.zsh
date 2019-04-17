@@ -19,15 +19,27 @@ alias sudo="sudo "
 say() { mplayer -really-quiet "http://translate.google.com/translate_tts?tl=en&q=$1"; }
 
 gpr() { git push origin HEAD && open-pr "$*" }
+
 if [[ `uname` == 'Darwin' ]]; then
     alias ls="ls -G"
 else
     alias ls="ls --color=auto"
 fi
-lc() { ~/bin/colorls/colorls.rb $1; }
 
 if (( $+commands[exa] )) ; then
-    alias ll="exa"
+    alias ls="exa"
+fi
+
+if (( $+commands[fd] )) ; then
+    alias find="echo >&2 \"Try fd\"; find"
+fi
+
+if (( $+commands[hexyl] )) ; then
+    alias hexdump="echo >&2 \"Try hexyl\"; hexdump"
+fi
+
+if (( $+commands[bat] )) ; then
+    alias less="echo >&2 \"Try bat\"; less"
 fi
 
 alias conf='git --git-dir="${HOME}/.dotfiles/" --work-tree="$HOME"'

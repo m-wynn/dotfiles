@@ -1,5 +1,5 @@
 {
-    "files.autoSave": "afterDelay",
+    "files.autoSave": "onFocusChange",
     "rust.all_features": true,
     "rust-client.updateOnStartup": true,
     "rust.unstable_features": true,
@@ -17,7 +17,6 @@
     "searchRipgrep.enable": true,
     "[rust]": {},
     "breadcrumbs.enabled": true,
-    "editor.formatOnSave": true,
     "editor.formatOnPaste": true,
     "rust.clippy_preference": "on",
     "terminal.external.linuxExec": "alacritty",
@@ -52,5 +51,12 @@
     "cSpell.userWords": [
         "mutex"
     ],
-    "workbench.colorTheme": "Base16 Tomorrow Dark"
+    "workbench.colorTheme": "Monokai Dimmed",
+    "window.titleBarStyle": "custom",
+    "editor.tabSize": 2,
+    "vim.neovimPath": "/usr/bin/nvim",
+    "editor.formatOnSave": true,
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "javascript.updateImportsOnFileMove.enabled": "always"
 }

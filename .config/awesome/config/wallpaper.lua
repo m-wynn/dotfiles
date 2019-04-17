@@ -13,7 +13,7 @@ function wallpaper.init()
       if type(wallpaper) == "function" then
         wallpaper = wallpaper(s)
       end
-      gears.wallpaper.maximized(wallpaper, s, true)
+      gears.wallpaper.maximized(wallpaper, s, false)
     end
   end
 
@@ -52,7 +52,7 @@ end
 
     -- set wallpaper to current index for all screens
     for s = 1, screen.count() do
-      gears.wallpaper.maximized(wp_path .. wp_files[wp_index], s, true)
+      gears.wallpaper.maximized(wp_path .. wp_files[wp_index], s, false)
     end
 
     -- stop the timer (we don't need multiple instances running at the same time)

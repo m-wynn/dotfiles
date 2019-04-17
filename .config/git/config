@@ -20,7 +20,7 @@
 [color]
 	ui = true
 [core]
-	editor = vim
+	editor = nvim
 	filemode = false
 	excludesfile = /home/matthew/.config/git/gitignore
 [diff]

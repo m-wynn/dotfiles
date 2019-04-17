@@ -88,23 +88,11 @@ zplug "plugins/debian", \
 
 
 # External Bundles
-# Open a pull request right there
-zplug "caarlos0/zsh-open-pr"
-
 # Add upstream remote to git like `add-upstream username`
 zplug "caarlos0/zsh-add-upstream"
 
-# Prettier version of l, with git support
-zplug "rimraf/k"
-
 # So many scripts
 zplug "skx/sysadmin-util"
-
-# Back up to directory name
-zplug "Tarrasch/zsh-bd"
-
-# So many colors "echo I am red | red" or "red hi"
-zplug "Tarrasch/zsh-colors"
 
 # Add a .gitignore based on a template
 zplug "voronkovich/gitignore.plugin.zsh"
@@ -186,3 +174,9 @@ zstyle :compinstall filename ${HOME}/.config/zsh/.zshrc
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/maw27ah/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/maw27ah/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/maw27ah/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/maw27ah/Downloads/google-cloud-sdk/completion.zsh.inc'; fi

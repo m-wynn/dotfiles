@@ -57,6 +57,7 @@ Plug 'raymond-w-ko/vim-lua-indent', {'for': 'lua'} " Better lua indents
 Plug 'rhysd/clever-f.vim'                          " Better f and t
 Plug 'rhysd/vim-grammarous'                        " Grammar checking
 Plug 'sheerun/vim-polyglot'                        " Support for many languages
+Plug 'jparise/vim-graphql'
 Plug 'SirVer/ultisnips'                            " Snippits
 Plug 'tpope/vim-commentary'                        " Comment things with gc
 Plug 'tpope/vim-ragtag'                            " More tag mappings

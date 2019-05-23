@@ -48,13 +48,11 @@
         "statusBar.debuggingBackground": "#005f5f"
     },
     "cSpell.allowCompoundWords": true,
-    "cSpell.userWords": [
-        "mutex"
-    ],
+    "cSpell.userWords": ["mutex"],
     "workbench.colorTheme": "Monokai Dimmed",
     "window.titleBarStyle": "custom",
     "editor.tabSize": 2,
-    "vim.neovimPath": "/usr/bin/nvim",
+    "vim.neovimPath": "/usr/local/bin/nvim",
     "editor.formatOnSave": true,
     "editor.suggestSelection": "first",
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
@@ -62,5 +60,6 @@
     "editor.fontSize": 13,
     "editor.fontWeight": "500",
     "prettier.eslintIntegration": true,
-    "window.zoomLevel": 0
+    "window.zoomLevel": 0,
+    "workbench.colorTheme": "Monokai Dimmed"
 }

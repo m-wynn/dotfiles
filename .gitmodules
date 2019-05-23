@@ -18,4 +18,4 @@
 	url = http://github.com/tmux-plugins/tmux-yank.git
 [submodule ".skim"]
 	path = .skim
-	url = /home/matthew/.skim
+	url = http://github.com/lotabout/skim.git

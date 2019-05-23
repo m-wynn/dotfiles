@@ -28,6 +28,7 @@ augroup nerdtree
   autocmd BufEnter * call NERDTreeRefresh()
 augroup end
 
+map <C-n> :NERDTreeToggle<CR>
 let g:NERDTreeUpdateOnCursorHold = 0
 
 

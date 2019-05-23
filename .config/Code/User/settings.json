@@ -51,7 +51,6 @@
     "cSpell.userWords": [
         "mutex"
     ],
-    "workbench.colorTheme": "Monokai Dimmed",
     "window.titleBarStyle": "custom",
     "editor.tabSize": 2,
     "vim.neovimPath": "/usr/bin/nvim",
@@ -62,5 +61,6 @@
     "editor.fontSize": 13,
     "editor.fontWeight": "500",
     "prettier.eslintIntegration": true,
-    "window.zoomLevel": 0
+    "window.zoomLevel": 0,
+    "workbench.colorTheme": "Monokai Dimmed"
 }

@@ -16,3 +16,6 @@
 [submodule "tmux/tmux-yank"]
 	path = .config/tmux/tmux-yank
 	url = http://github.com/tmux-plugins/tmux-yank.git
+[submodule ".skim"]
+	path = .skim
+	url = /home/matthew/.skim

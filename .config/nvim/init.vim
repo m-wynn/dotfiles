@@ -11,6 +11,8 @@ if exists($http_proxy)
   let g:plug_url_fmrmat='http://github.com/%s.git'
 endif
 
+set rtp+=~/.skim
+
 call plug#begin('~/.vim/plugged')
 " Tools
 Plug 'AndrewRadev/linediff.vim'                    " Diff two visual selections
@@ -18,7 +20,7 @@ Plug 'w0rp/ale'                                    " Linting
 if !has('mac')
   Plug 'cazador481/fakeclip.neovim'                " Use X and tmux clipboard
 endif
-Plug 'ctrlpvim/ctrlp.vim'                          " Fuzzy File Finder
+Plug 'lotabout/skim', { 'dir': '~/.skim', 'do': './install' }
 Plug 'Konfekt/FastFold'                            " Speed up folds
 Plug 'noahfrederick/vim-skeleton'                  " Provides skeleton file
 Plug 'ntpeters/vim-better-whitespace'              " Easily strip whitespace

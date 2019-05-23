@@ -51,9 +51,10 @@
     "cSpell.userWords": [
         "mutex"
     ],
+    "cSpell.userWords": ["mutex"],
     "window.titleBarStyle": "custom",
     "editor.tabSize": 2,
-    "vim.neovimPath": "/usr/bin/nvim",
+    "vim.neovimPath": "/usr/local/bin/nvim",
     "editor.formatOnSave": true,
     "editor.suggestSelection": "first",
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",

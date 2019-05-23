@@ -1,11 +1,17 @@
 "" ale
 let g:ale_completion_enabled = 1
 let g:ale_fix_on_save = 1
-let g:ale_linters = {'rust': ['cargo']}
-let g:ale_fixers = {'rust': ['rustfmt']}
+let g:ale_linter_aliases = {'jsx': ['css', 'javascript']}
+let g:ale_fixer_aliases = {'jsx': ['css', 'javascript']}
+let g:ale_linters = {'rust': ['cargo'], 'jsx': ['eslint']}
 let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '⚠'
 
+let g:ale_fixers = {
+      \    'rust': ['rustfmt'],
+      \   'javascript': ['prettier_eslint'],
+      \   'css': ['prettier_eslint'],
+      \}
 
 "" ctrlp
 let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'

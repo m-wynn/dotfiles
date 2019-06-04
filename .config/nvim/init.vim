@@ -1,9 +1,9 @@
 let http_proxy=$http_proxy
-if !filereadable(expand('~/.config/nvim/autoload/plug.vim'))
+if !filereadable(expand('~/.local/share/nvim/site/autoload/plug.vim'))
   if exists($http_proxy)
-    silent !curl --insecure -x $http_proxy -fLo ~/.config/nvim/autoload/plug.vim --create-dirs http://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    silent !curl --insecure -x $http_proxy -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs http://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   else
-    silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   endif
 endif
 
@@ -11,20 +11,19 @@ if exists($http_proxy)
   let g:plug_url_fmrmat='http://github.com/%s.git'
 endif
 
-set rtp+=~/.skim
+call plug#begin('~/.local/share/nvim/plugged')
 
-call plug#begin('~/.vim/plugged')
 " Tools
 Plug 'AndrewRadev/linediff.vim'                    " Diff two visual selections
-Plug 'w0rp/ale'                                    " Linting
 if !has('mac')
   Plug 'cazador481/fakeclip.neovim'                " Use X and tmux clipboard
 endif
 Plug 'lotabout/skim', { 'dir': '~/.skim', 'do': './install' }
-Plug 'Konfekt/FastFold'                            " Speed up folds
+Plug 'lotabout/skim.vim'
 Plug 'noahfrederick/vim-skeleton'                  " Provides skeleton file
-Plug 'ntpeters/vim-better-whitespace'              " Easily strip whitespace
+Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'     " NerdTree syntax highlighting
 Plug 'tmhedberg/SimpylFold', {'for': 'python'}     " Python folding
 Plug 'tpope/vim-abolish'                           " Smarter find-replacement
 Plug 'tpope/vim-eunuch'                            " Handy UNIX commands
@@ -32,32 +31,26 @@ Plug 'tpope/vim-fugitive'                          " Git plugin
 Plug 'tpope/vim-repeat'                            " Use . to repeat plugin stuff
 Plug 'tpope/vim-sleuth'                            " Figure out tabs
 Plug 'tpope/vim-unimpaired'                        " Add lots of handy mappings
-Plug 'vimoutliner/vimoutliner'                     " Outlines
+Plug 'w0rp/ale'                                    " Linting
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
+" Plug 'udalov/kotlin-vim'
 
 " Completion
 Plug 'fszymanski/deoplete-emoji'
-Plug 'sebastianmarkow/deoplete-rust', {'for': 'rust'}
 Plug 'Shougo/context_filetype.vim'                 " Add context filetype
 Plug 'Shougo/deoplete.nvim'                        " Completion
 Plug 'Shougo/echodoc.vim'                          " Print documentation
 Plug 'Shougo/neoinclude.vim'                       " Completion framework
 Plug 'Shougo/neopairs.vim'                         " Autoclose after completion
 Plug 'wellle/tmux-complete.vim'                    " Completion from tmux panes
-Plug 'zchee/deoplete-jedi', {'for': 'python'}      " Python completion
 
 " Editing
 Plug 'AndrewRadev/splitjoin.vim'                   " Splitting and joining
-Plug 'Chiel92/vim-autoformat'                      " Automagically format
 Plug 'honza/vim-snippets'                          " Snippits Stuff
 Plug 'junegunn/vim-easy-align'                     " Align things more easily
-Plug 'lervag/vimtex', {'for': 'tex'}               " Latex Plugin
 Plug 'machakann/vim-sandwich'                      " Change surrounding chars
 Plug 'michaeljsmith/vim-indent-object'             " Indents as text objects
-Plug 'pearofducks/ansible-vim', { 'do': './UltiSnips/generate.py' }
-Plug 'raymond-w-ko/vim-lua-indent', {'for': 'lua'} " Better lua indents
 Plug 'rhysd/clever-f.vim'                          " Better f and t
-Plug 'rhysd/vim-grammarous'                        " Grammar checking
 Plug 'sheerun/vim-polyglot'                        " Support for many languages
 Plug 'jparise/vim-graphql'
 Plug 'SirVer/ultisnips'                            " Snippits
@@ -70,7 +63,7 @@ Plug 'ap/vim-css-color'                            " Colors your hex colors
 Plug 'vim-airline/vim-airline'                     " Tabline/status bar for vim
 Plug 'vim-airline/vim-airline-themes'              " Themes for Airline
 Plug 'majutsushi/tagbar'                           " Display tags in a window
-Plug 'w0ng/vim-hybrid'                             " Colors!
+Plug 'kristijanhusak/vim-hybrid-material'          " Colors!
 Plug 'https://gitlab.com/lafrenierejm/vim-equivalence.git'
 
 call plug#end()
@@ -101,9 +94,10 @@ set undodir=~/.local/share/nvim/undo//
 set undofile
 
 " Colors!
-let g:hybrid_custom_term_colors = 1
-set background=dark
-colorscheme hybrid
+let g:enable_bold_font = 1
+let g:enable_italic_font = 1
+let g:hybrid_transparent_background= 1
+colorscheme hybrid_material
 let g:airline_theme = 'hybridline'
 " Use this if you have a colorscheme that breaks terminal transparency
 hi Normal ctermbg=none
@@ -184,11 +178,6 @@ augroup cursorRemember
   au BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
 augroup end
 
-" Automagically format on save
-augroup saveFormat
-  au BufWrite * :Autoformat
-augroup end
-
 " F12 resyncs syntax
 noremap <F12> <Esc>:syntax sync fromstart<CR>
 inoremap <F12> <C-o>:syntax sync fromstart<CR>
@@ -200,3 +189,7 @@ set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr
 let g:skeleton_template_dir = "~/.config/nvim/templates"
 
 let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
+
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)

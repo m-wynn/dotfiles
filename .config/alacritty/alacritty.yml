@@ -39,7 +39,7 @@ window:
     y: 2
 
   # Spread additional padding evenly around the terminal content.
-  dynamic_padding: false
+  dynamic_padding: true
 
   # Window decorations
   #
@@ -107,16 +107,16 @@ tabspaces: 8
 font:
   # The normal (roman) font face to use.
   normal:
-    family: Fira Code
+    family: monospace
 
   # The bold font face
   bold:
-    family: Fira Code
+    family: monospace
     style: Bold
 
   # The italic font face
   italic:
-    family: Fira Code
+    family: monospace
     style: Italic
 
   # Point size of the font

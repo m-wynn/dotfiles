@@ -46,6 +46,7 @@ Plug 'wellle/tmux-complete.vim'                    " Completion from tmux panes
 
 " Editing
 Plug 'AndrewRadev/splitjoin.vim'                   " Splitting and joining
+Plug 'epilande/vim-react-snippets'
 Plug 'honza/vim-snippets'                          " Snippits Stuff
 Plug 'junegunn/vim-easy-align'                     " Align things more easily
 Plug 'machakann/vim-sandwich'                      " Change surrounding chars

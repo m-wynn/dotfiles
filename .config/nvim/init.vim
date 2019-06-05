@@ -194,3 +194,4 @@ let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
 nmap <leader><tab> <plug>(fzf-maps-n)
 xmap <leader><tab> <plug>(fzf-maps-x)
 omap <leader><tab> <plug>(fzf-maps-o)
+set nomodeline

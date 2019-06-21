@@ -1,26 +1,29 @@
-# Bullet-train theme variables
-BULLETTRAIN_PROMPT_SEPARATE_LINE=false
-BULLETTRAIN_PROMPT_ADD_NEWLINE=false
-BULLETTRAIN_CONTEXT_SHOW=true
-BULLETTRAIN_TIME_SHOW=false
-BULLETTRAIN_DIR_FG='15'
-BULLETTRAIN_GIT_BG='15'
-BULLETTRAIN_CONTEXT_FG=black;
-BULLETTRAIN_STATUS_FG='15'
+POWERLEVEL9K_MODE='nerdfont-complete'
+POWERLEVEL9K_DIR_DEFAULT_FOREGROUND='15'
+POWERLEVEL9K_DIR_HOME_FOREGROUND='15'
+POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND='15'
+POWERLEVEL9K_DIR_HOME_ETC_FOREGROUND='15'
+POWERLEVEL9K_CONTEXT_DEFAULT_FOREGROUND='black';
+POWERLEVEL9K_CONTEXT_DEFAULT_BACKGROUND='10';
+POWERLEVEL9K_CONTEXT_REMOTE_BACKGROUND='9';
+POWERLEVEL9K_STATUS_FOREGROUND='15'
 
-BULLETTRAIN_PROMPT_ORDER=(
+POWERLEVEL9K_STATUS_CROSS=true
+POWERLEVEL9K_STATUS_OK=false
+POWERLEVEL9K_ALWAYS_SHOW_CONTEXT=true
+POWERLEVEL9K_DIR_SHOW_WRITABLE=true
+
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
 status
 context
 dir
-git
+vcs
 virtualenv
+background_jobs
 )
 
-if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-    BULLETTRAIN_CONTEXT_BG=9;
-else
-    BULLETTRAIN_CONTEXT_BG=10;
-fi
+POWERLEVEL9K_DISABLE_RPROMPT=true
+
 # Source Zplug, or offer to download it.
 if [[ -z $ZPLUG_HOME ]]; then
     export ZPLUG_HOME=~/.config/zsh/zplug
@@ -97,8 +100,7 @@ zplug 'zplug/zplug', \
 # Load the theme.
 zplug "robbyrussell/oh-my-zsh"
 setopt prompt_subst # Make sure prompt is able to be generated properly.
-zplug "caiogondim/bullet-train.zsh", \
-    use:bullet-train.zsh-theme
+zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
 
 if ! zplug check; then
     zplug install

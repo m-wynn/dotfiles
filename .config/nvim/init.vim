@@ -33,7 +33,6 @@ Plug 'tpope/vim-sleuth'                            " Figure out tabs
 Plug 'tpope/vim-unimpaired'                        " Add lots of handy mappings
 Plug 'w0rp/ale'                                    " Linting
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
-" Plug 'udalov/kotlin-vim'
 
 " Completion
 Plug 'fszymanski/deoplete-emoji'
@@ -64,7 +63,7 @@ Plug 'ap/vim-css-color'                            " Colors your hex colors
 Plug 'vim-airline/vim-airline'                     " Tabline/status bar for vim
 Plug 'vim-airline/vim-airline-themes'              " Themes for Airline
 Plug 'majutsushi/tagbar'                           " Display tags in a window
-Plug 'kristijanhusak/vim-hybrid-material'          " Colors!
+Plug 'morhetz/gruvbox'                             " Colors
 Plug 'https://gitlab.com/lafrenierejm/vim-equivalence.git'
 
 call plug#end()
@@ -97,9 +96,8 @@ set undofile
 " Colors!
 let g:enable_bold_font = 1
 let g:enable_italic_font = 1
-let g:hybrid_transparent_background= 1
-colorscheme hybrid_material
-let g:airline_theme = 'hybridline'
+colorscheme gruvbox
+let g:airline_theme = 'gruvbox'
 " Use this if you have a colorscheme that breaks terminal transparency
 hi Normal ctermbg=none
 " Use truecolor

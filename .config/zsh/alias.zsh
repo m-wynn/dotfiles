@@ -16,6 +16,8 @@ man() {
 # Make aliases work in Sudo
 alias sudo="sudo "
 
+alias vim=nvim
+
 say() { mplayer "http://translate.google.com/translate_tts?tl=en&q=$1"; }
 
 gpr() { git push origin HEAD && open-pr "$*" }

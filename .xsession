@@ -8,6 +8,8 @@ ibus-daemon -drx &
 compton --backend glx --paint-on-overlay --glx-no-stencil --vsync opengl-swc --unredir-if-possible --no-fading-openclose &
 unclutter -root &
 nm-applet &
-alacritty -t ncmpcpp -e /bin/sh -c 'tmux a -t ncmpcpp || tmux new-session -s ncmpcpp -- ncmpcpp' &
-alacritty -t neomutt -e /bin/sh -c 'tmux a -t neomutt || tmux new-session -s neomutt -- neomutt' &
 alacritty -t default -e /bin/sh -c 'tmux a -t default || tmux new-session -s default' &
+exec xautolock -detectsleep 
+  -time 3 -locker "i3lock -d -c 000070" \
+  -notify 30 \
+  -notifier "notify-send -u critical -t 10000 -- 'LOCKING screen in 30 seconds'"

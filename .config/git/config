@@ -19,16 +19,34 @@
 	d = difftool
 [color]
 	ui = true
+[commit]
+	gpgsign = true
 [core]
 	editor = nvim
 	filemode = false
 	excludesfile = /home/matthew/.config/git/gitignore
+[credential]
+	helper = cache
 [diff]
 	tool = vimdiff
+[difftool]
+	prompt = false
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
 [github]
 	user = m-wynn
+[gpg]
+	program = gpg2
+[include]
+	path = ~/.config/git/override
 [merge]
 	tool = vimdiff
+	conflictstyle = diff3
+[mergetool "vimdiff"]
+    cmd = nvim -f -c \"Gdiff\" \"$MERGED\"
 [pretty]
 	colorful-oneline = format:%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset
 [push]
@@ -39,18 +57,3 @@
 	email = matthew@matthewwynn.com
 	name = Matthew Wynn
 	signingkey = EA840B7051329C82942A5EE8ECEB282430604CA4
-[difftool]
-	prompt = false
-[include]
-	path = ~/.config/git/override
-[gpg]
-	program = gpg2
-[credential]
-	helper = cache
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
-[commit]
-	gpgsign = true

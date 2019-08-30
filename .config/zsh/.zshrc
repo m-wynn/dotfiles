@@ -86,6 +86,8 @@ zplug "voronkovich/gitignore.plugin.zsh"
 
 zplug "walesmd/caniuse.plugin.zsh"
 
+zplug "caarlos0/open-pr"
+
 # Tons and tons of completions
 zplug "zsh-users/zsh-completions", \
     use:"src"

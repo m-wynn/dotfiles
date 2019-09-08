@@ -47,14 +47,14 @@ function keys.init(awesome_context)
              ),
 
     -- Navigation and selection
-    bind_key({ modkey }, "Left",
-             awful.tag.viewprev,
-             "view previous", "tag"
-             ),
-    bind_key({ modkey }, "Right",
-             awful.tag.viewnext,
-             "view next", "tag"
-             ),
+    -- bind_key({ modkey }, "Left",
+    --          awful.tag.viewprev,
+    --          "view previous", "tag"
+    --          ),
+    -- bind_key({ modkey }, "Right",
+    --          awful.tag.viewnext,
+    --          "view next", "tag"
+             -- ),
     bind_key({ modkey }, "Escape",
              awful.tag.history.restore,
              "go back", "tag"
@@ -186,6 +186,22 @@ function keys.init(awesome_context)
                 awesome_context.widgets.volumewidget.update()
               end
               ),
+
+    bind_key({ modkey }, "Up",
+              function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.google_play_music_desktop_player /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause") end,
+              "Play/Pause Music", "control"),
+
+    awful.key({ modkey }, "Down",
+              function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.google_play_music_desktop_player /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause") end
+              ),
+
+    bind_key({ modkey }, "Right",
+              function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.google_play_music_desktop_player /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next") end,
+              "Next Track", "control"),
+
+    bind_key({ modkey }, "Left",
+              function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.google_play_music_desktop_player /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous") end,
+              "Previous Track", "control"),
 
     -- Brightness control
     awful.key({}, "XF86MonBrightnessDown",

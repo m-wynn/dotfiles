@@ -1,0 +1,20 @@
+#!/usr/bin/python3
+"""Edit a file in the host nvim instance."""
+import os
+import sys
+
+from neovim import attach
+
+args = sys.argv[1:]
+
+addr = os.environ.get("NVIM_LISTEN_ADDRESS", None)
+if not addr:
+    os.execvp('nvim', ['nvim'] + args)
+
+nvim = attach("socket", path=addr)
+
+nvim.command('wincmd k')
+
+for file in reversed(args):
+    file = os.path.abspath(file)
+    nvim.command(f'edit {file}')

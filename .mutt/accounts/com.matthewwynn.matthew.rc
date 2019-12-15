@@ -1,7 +1,0 @@
-set record    = "+com.matthewwynn.matthew/Sent"              # Directory for sent messages
-set from      = "matthew@matthewwynn.com"                    # Address for 'from' field
-set mbox      = "+com.matthewwynn.matthew/inbox"             # Directory for saved messages
-set postponed = "+com.matthewwynn.matthew/\[Gmail\]/.Drafts" # Directory for drafts
-set realname  = "Matthew Wynn"                               # Name for 'from' field
-set sendmail  = "msmtp -a com.matthewwynn.matthew"           # Command used to send mail
-set spoolfile = "+com.matthewwynn.matthew/inbox"             # Directory for new mail

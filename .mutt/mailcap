@@ -1,6 +1,0 @@
-text/html;       w3m -I %{charset} -T text/html; copiousoutput;
-image/*;         feh --scale-down --auto-zoom %s;
-audio/*;         mpv '%s'; test=test -n "$DISPLAY";
-video/*;         mpv '%s'; test=test -n "$DISPLAY";
-application/pdf; evince '%s'; test=test -n "$DISPLAY";
-

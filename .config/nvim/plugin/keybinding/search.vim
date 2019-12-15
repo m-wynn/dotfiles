@@ -11,3 +11,5 @@ nnoremap <Esc> :noh<Return><Esc>
 " The bindings apply in Normal, Visual, Select, and Operator-pending modes.
 noremap <expr> n (v:searchforward ? 'n' : 'N')
 noremap <expr> N (v:searchforward ? 'N' : 'n')
+
+noremap ; :

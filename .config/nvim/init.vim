@@ -1,14 +1,5 @@
-let http_proxy=$http_proxy
 if !filereadable(expand('~/.local/share/nvim/site/autoload/plug.vim'))
-  if exists($http_proxy)
-    silent !curl --insecure -x $http_proxy -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs http://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  else
-    silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  endif
-endif
-
-if exists($http_proxy)
-  let g:plug_url_fmrmat='http://github.com/%s.git'
+  silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 endif
 
 call plug#begin('~/.local/share/nvim/plugged')
@@ -25,7 +16,8 @@ Plug 'tpope/vim-fugitive'                          " Git plugin
 Plug 'tpope/vim-repeat'                            " Use . to repeat plugin stuff
 Plug 'tpope/vim-sleuth'                            " Figure out tabs
 Plug 'tpope/vim-unimpaired'                        " Add lots of handy mappings
-Plug 'sense-analysis/ale'                          " Linting
+Plug 'dense-analysis/ale'                          " Linting
+Plug 'kassio/neoterm'
 
 " NerdTree
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -66,10 +58,10 @@ Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
-""""""""
+"""""""""""""""
 "   General   "
 "     Vim     "
-""""""""
+"""""""""""""""
 
 " Load plugins and indentation for specific filetypes
 filetype plugin indent on
@@ -167,12 +159,6 @@ set visualbell t_fb=
 
 " Incsub stuff
 set inccommand=nosplit
-
-" Remember cursor position on buffer leave
-augroup cursorRemember
-  au BufLeave * let b:winview = winsaveview()
-  au BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
-augroup end
 
 " F12 resyncs syntax
 noremap <F12> <Esc>:syntax sync fromstart<CR>

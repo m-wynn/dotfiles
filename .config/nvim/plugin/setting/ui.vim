@@ -10,6 +10,11 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+
+let g:airline#extensions#tabline#show_tab_nr = 0
+let g:airline#extensions#tabline#buffer_nr_show = 0
+
 function! DeleteInactiveBufs()
     "From tabpagebuflist() help, get a list of all buffers in all tabs
     let tablist = []
@@ -21,7 +26,7 @@ function! DeleteInactiveBufs()
     "http://tech.groups.yahoo.com/group/vim/message/56425
     let nWipeouts = 0
     for i in range(1, bufnr('$'))
-        if bufexists(i) && !getbufvar(i,"&mod") && index(tablist, i) == -1
+        if bufexists(i) && !getbufvar(i,'&mod') && index(tablist, i) == -1
         "bufno exists AND isn't modified AND isn't in the list of buffers open in windows and tabs
             silent exec 'bwipeout' i
             let nWipeouts = nWipeouts + 1

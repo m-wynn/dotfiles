@@ -49,10 +49,6 @@ zplug "plugins/docker-compose", \
 zplug "plugins/gitfast", \
     from:oh-my-zsh
 
-# Pass completion
-zplug "plugins/pass", \
-    from:oh-my-zsh
-
 # Pip completion
 zplug "plugins/pip", \
     from:oh-my-zsh
@@ -68,11 +64,6 @@ zplug "plugins/vi-mode", \
 zplug "plugins/dnf", \
     from:oh-my-zsh, \
     if:"[[ -x /usr/bin/dnf ]]"
-
-# zplug "plugins/debian", \
-    #     from:oh-my-zsh, \
-    #     if:"[[ -x /usr/bin/apt-get ]]"
-
 
 # External Bundles
 # Add upstream remote to git like `add-upstream username`

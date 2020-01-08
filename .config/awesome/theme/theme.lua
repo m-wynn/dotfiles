@@ -94,4 +94,6 @@ theme.tasklist_floating             = ""
 theme.tasklist_maximized_horizontal = ""
 theme.tasklist_maximized_vertical   = ""
 
+theme.useless_gap = 4
+
 return theme

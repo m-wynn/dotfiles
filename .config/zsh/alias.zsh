@@ -30,16 +30,28 @@ if (( $+commands[exa] )) ; then
     alias ls="exa"
 fi
 
-if (( $+commands[fd] )) ; then
-    alias find="echo >&2 \"Try fd\"; find"
-fi
-
 if (( $+commands[hexyl] )) ; then
     alias hexdump="echo >&2 \"Try hexyl\"; hexdump"
 fi
 
 if (( $+commands[bat] )) ; then
     alias less="echo >&2 \"Try bat\"; less"
+fi
+
+if (( $+commands[batgrep] )) ; then
+    alias bgrep="batgrep"
+fi
+
+if (( $+commands[batman] )) ; then
+    alias man="batman"
+fi
+
+if (( $+commands[batwatch] )) ; then
+    alias bw="batwatch"
+fi
+
+if (( $+commands[prettybat] )) ; then
+    alias pbat="prettybat"
 fi
 
 alias conf='git --git-dir="${HOME}/.dotfiles/" --work-tree="$HOME"'

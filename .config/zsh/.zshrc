@@ -21,9 +21,14 @@ dir
 vcs
 virtualenv
 background_jobs
+custom_nomad_status
 )
 
 POWERLEVEL9K_DISABLE_RPROMPT=true
+POWERLEVEL9K_CUSTOM_NOMAD_STATUS="get_nomad_env"
+
+POWERLEVEL9K_CUSTOM_NOMAD_STATUS_BACKGROUND="007"
+POWERLEVEL9K_CUSTOM_NOMAD_STATUS_FOREGROUND="darkgreen"
 
 # Source Zplug, or offer to download it.
 if [[ -z $ZPLUG_HOME ]]; then
@@ -161,3 +166,16 @@ if [ -f "$HOME/Downloads/google-cloud-sdk/path.zsh.inc" ]; then source "$HOME/Do
 
 # The next line enables shell command completion for gcloud.
 if [ -f "$HOME/Downloads/google-cloud-sdk/completion.zsh.inc" ]; then source "$HOME/Downloads/google-cloud-sdk/completion.zsh.inc"; fi
+
+
+get_nomad_env() {
+	if [[ -v NOMAD_TOKEN ]] && [[ -v NOMAD_ADDR ]]; then
+		if [[ $NOMAD_ADDR =~ "http://192.*" ]]; then
+			echo " Vagrant"
+		elif [[ $NOMAD_ADDR =~ "http://127.*" ]]; then
+			echo " Local"
+		elif [[ $NOMAD_ADDR =~ "https://.*" ]]; then
+			echo " Prod"
+		fi
+	fi
+}

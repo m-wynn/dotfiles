@@ -6,6 +6,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " Tools
 Plug 'airblade/vim-rooter'                         " Chdir to nearest .git
+Plug 'jreybert/vimagit'                            " Git management buffer
 Plug 'lotabout/skim', { 'dir': '~/.skim', 'do': './install' }
 Plug 'lotabout/skim.vim'
 Plug 'noahfrederick/vim-skeleton'                  " Provides skeleton file
@@ -14,10 +15,12 @@ Plug 'tpope/vim-abolish'                           " Smarter find-replacement
 Plug 'tpope/vim-eunuch'                            " Handy UNIX commands
 Plug 'tpope/vim-fugitive'                          " Git plugin
 Plug 'tpope/vim-repeat'                            " Use . to repeat plugin stuff
+Plug 'tpope/vim-rhubarb'                           " Github plugin for fugitive
 Plug 'tpope/vim-sleuth'                            " Figure out tabs
 Plug 'tpope/vim-unimpaired'                        " Add lots of handy mappings
 Plug 'dense-analysis/ale'                          " Linting
 Plug 'kassio/neoterm'
+Plug 'dense-analysis/ale'                          " Linting
 
 " NerdTree
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -36,6 +39,7 @@ Plug 'wellle/tmux-complete.vim'                    " Completion from tmux panes
 " Editing
 Plug 'AndrewRadev/splitjoin.vim'                   " Splitting and joining
 Plug 'junegunn/vim-easy-align'                     " Align things more easily
+Plug 'tpope/vim-surround'
 Plug 'machakann/vim-sandwich'                      " Change surrounding chars
 Plug 'michaeljsmith/vim-indent-object'             " Indents as text objects
 Plug 'rhysd/clever-f.vim'                          " Better f and t

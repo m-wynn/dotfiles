@@ -10,31 +10,33 @@ let g:airline#extensions#ale#enabled = 1
 let g:ale_php_langserver_use_global = 1
 let g:ale_php_langserver_executable = expand('~/.config/composer/vendor/bin/php-language-server.php')
 
+let g:ale_lint_on_text_changed = "never"
 
 nnoremap gd :ALEGoToDefinition<cr>
 nnoremap K :ALEHover<cr>
 
+
 let g:ale_linters = {
       \    'ansible': ['ansible-lint'],
       \    'go': ['gopls'],
-      \    'web': ['eslint', 'flow-language-server'],
+      \    'jsx': ['eslint', 'flow-language-server'],
       \    'php': ['langserver'],
       \    'python': ['flake8', 'pyls'],
-      \    'rust': ['rls'],
       \    'qml': ['qmllint'],
+      \    'rust': ['rls'],
       \    'shell': ['shellcheck'],
+      \    'terraform': ['tflint', 'terraform-lsp'],
       \    'vim': ['vint'],
-      \    'terraform': ['tflint'],
       \}
 
 let g:ale_fixers = {
       \   '*': ['remove_trailing_lines', 'trim_whitespace'],
       \   'go': ['gofmt', 'goimports'],
-      \   'json': ['prettier'],
       \   'html': ['prettier'],
-      \   'markdown': ['prettier'],
-      \   'web': ['prettier_eslint'],
+      \   'json': ['prettier'],
+      \   'jsx': ['prettier_eslint'],
       \   'kotlin': ['ktlint'],
+      \   'markdown': ['prettier'],
       \   'python': ['yapf'],
       \   'rust': ['rustfmt'],
       \   'terraform': ['terraform'],
@@ -50,6 +52,10 @@ augroup delete_fugitive_buffers
 augroup ENDuto
 set autoread
 
+nmap <Leader>gs :Gstatus<CR>
+nmap <Leader>gd :Gdiff<CR>
+nmap <Leader>gs :Gdiff HEAD~1<CR>
+nmap <Leader>gb :Gblame<CR>
 
 " Change vim skeleton file
 let g:skeleton_template_dir = expand('~/.config/nvim/templates')
@@ -61,7 +67,6 @@ let g:neoterm_autoscroll=1
 let g:neoterm_default_mod='belowright'
 let g:neoterm_size=16
 tnoremap <Esc><Esc> <C-\><C-n>
-
 
 """
 " Packages to install

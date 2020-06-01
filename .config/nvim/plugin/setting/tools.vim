@@ -9,6 +9,7 @@ let g:ale_set_balloons = 1
 let g:airline#extensions#ale#enabled = 1
 let g:ale_php_langserver_use_global = 1
 let g:ale_php_langserver_executable = expand('~/.config/composer/vendor/bin/php-language-server.php')
+let g:ale_rust_rustfmt_options = '--edition=2018'
 
 let g:ale_lint_on_text_changed = "never"
 
@@ -22,6 +23,7 @@ let g:ale_linters = {
       \    'jsx': ['eslint', 'flow-language-server'],
       \    'php': ['langserver'],
       \    'python': ['flake8', 'pyls'],
+      \    'rust': ['analyzer'],
       \    'qml': ['qmllint'],
       \    'rust': ['rls'],
       \    'shell': ['shellcheck'],

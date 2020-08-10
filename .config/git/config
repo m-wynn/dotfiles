@@ -48,7 +48,7 @@
 [mergetool "vimdiff"]
     cmd = nvim -f -c \"Gdiff\" \"$MERGED\"
 [pretty]
-	colorful-oneline = format:%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset
+	colorful-oneline = format:%C(yellow)%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset
 [push]
 	default = current
 [rerere]

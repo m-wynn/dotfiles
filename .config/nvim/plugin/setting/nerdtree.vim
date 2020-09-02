@@ -26,7 +26,7 @@ endfunction
 " Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
 " file, and we're not in vimdiff
 function! SyncTree()
-  if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
+  if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && bufname() != t:NERDTreeBufName && !&diff
     NERDTreeFind
     wincmd p
   endif

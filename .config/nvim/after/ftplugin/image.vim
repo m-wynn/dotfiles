@@ -1,0 +1,1 @@
+execute "read !viu " . expand("%")

@@ -1,8 +1,8 @@
 "" ale
 " let g:ale_completion_enabled = 1
 let g:ale_fix_on_save = 1
-let g:ale_linter_aliases = {'jsx': ['css', 'javascript'], 'shell': ['sh', 'zsh']}
-let g:ale_fixer_aliases = {'jsx': ['css', 'javascript']}
+let g:ale_linter_aliases = {'jsx': ['css', 'javascript', 'javascriptreact'], 'shell': ['sh', 'zsh']}
+let g:ale_fixer_aliases = {'jsx': ['css', 'javascript', 'javascriptreact']}
 let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '⚠'
 let g:ale_set_balloons = 1
@@ -25,10 +25,9 @@ let g:ale_linters = {
       \    'python': ['flake8', 'pyls'],
       \    'rust': ['analyzer'],
       \    'qml': ['qmllint'],
-      \    'rust': ['rls'],
       \    'shell': ['shellcheck'],
       \    'terraform': ['tflint', 'terraform-lsp'],
-      \    'vim': ['vint'],
+      \    'vim': ['vint']
       \}
 
 let g:ale_fixers = {
@@ -36,12 +35,12 @@ let g:ale_fixers = {
       \   'go': ['gofmt', 'goimports'],
       \   'html': ['prettier'],
       \   'json': ['prettier'],
-      \   'jsx': ['prettier_eslint'],
+      \   'jsx': ['prettier'],
       \   'kotlin': ['ktlint'],
       \   'markdown': ['prettier'],
-      \   'python': ['yapf'],
+      \   'python': ['black'],
       \   'rust': ['rustfmt'],
-      \   'terraform': ['terraform'],
+      \   'terraform': ['terraform', 'remove_trailing_lines'],
       \   'yaml': ['prettier']
       \}
 

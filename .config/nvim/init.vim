@@ -11,6 +11,7 @@ Plug 'lotabout/skim', { 'dir': '~/.skim', 'do': './install' }
 Plug 'lotabout/skim.vim'
 Plug 'noahfrederick/vim-skeleton'                  " Provides skeleton file
 Plug 'tmhedberg/SimpylFold', {'for': 'python'}     " Python folding
+Plug 'tommcdo/vim-fubitive'                        " Bitbucket support for fugitive
 Plug 'tpope/vim-abolish'                           " Smarter find-replacement
 Plug 'tpope/vim-eunuch'                            " Handy UNIX commands
 Plug 'tpope/vim-fugitive'                          " Git plugin
@@ -47,8 +48,10 @@ Plug 'sheerun/vim-polyglot'                        " Support for many languages
 Plug 'tpope/vim-commentary'                        " Comment things with gc
 Plug 'tpope/vim-ragtag'                            " More tag mappings
 Plug 'wellle/targets.vim'                          " More text objects
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 
 " Snippets
+Plug 'SirVer/ultisnips'
 Plug 'epilande/vim-react-snippets'
 Plug 'honza/vim-snippets'                          " Snippits Stuff
 
@@ -176,3 +179,11 @@ set nomodeline
 " Jump to start and end of line using the home row keys
 map H ^
 map L $
+let g:UltiSnipsExpandTrigger="<tab>"
+
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
+  \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
+  \   <bang>0)

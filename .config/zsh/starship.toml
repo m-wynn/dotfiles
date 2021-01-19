@@ -1,0 +1,30 @@
+add_newline = false
+
+[aws]
+format = '[$symbol$profile(\($region\))]($style) '
+style = "bold yellow"
+symbol = " "
+
+[aws.region_aliases]
+us-east-1 = "va"
+us-east-2 = "oh"
+us-west-1 = "va"
+
+[cmd_duration]
+min_time = 2_000
+style = "bold blue"
+show_notifications = true
+
+[custom.nomad]
+command = """
+if [[ $NOMAD_ADDR =~ "http://192.*" ]]; then
+    echo "Vagrant"
+elif [[ $NOMAD_ADDR =~ "http://127.*" ]]; then
+    echo "Local"
+elif [[ $NOMAD_ADDR =~ "https://.*" ]]; then
+    echo "Prod"
+fi
+"""
+when = """ [[ -v NOMAD_TOKEN ]] && [[ -v NOMAD_ADDR ]] """
+format = "$symbol [$output]($style) "
+symbol = ""

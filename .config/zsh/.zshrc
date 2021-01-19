@@ -1,111 +1,28 @@
-POWERLEVEL9K_MODE='nerdfont-complete'
-POWERLEVEL9K_DIR_DEFAULT_FOREGROUND='15'
-POWERLEVEL9K_DIR_HOME_FOREGROUND='15'
-POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND='15'
-POWERLEVEL9K_DIR_HOME_ETC_FOREGROUND='15'
-POWERLEVEL9K_CONTEXT_DEFAULT_FOREGROUND='black';
-POWERLEVEL9K_CONTEXT_DEFAULT_BACKGROUND='10';
-POWERLEVEL9K_CONTEXT_REMOTE_BACKGROUND='9';
-POWERLEVEL9K_CONTEXT_REMOTE_FOREGROUND='black';
-POWERLEVEL9K_STATUS_FOREGROUND='15'
+export STARSHIP_CONFIG=~/.config/zsh/starship.toml
+source ~/.zinit/bin/zinit.zsh
 
-POWERLEVEL9K_STATUS_CROSS=true
-POWERLEVEL9K_STATUS_OK=false
-POWERLEVEL9K_ALWAYS_SHOW_CONTEXT=true
-POWERLEVEL9K_DIR_SHOW_WRITABLE=true
+zinit wait lucid light-mode for \
+  atinit"zicompinit; zicdreplay" \
+      zdharma/fast-syntax-highlighting \
+  atload"_zsh_autosuggest_start" \
+      zsh-users/zsh-autosuggestions \
+  blockf atpull'zinit creinstall -q .' \
+      zsh-users/zsh-completions
 
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
-status
-context
-dir
-vcs
-virtualenv
-background_jobs
-custom_nomad_status
-)
+zinit ice wait"2" lucid
+zinit load voronkovich/gitignore.plugin.zsh
 
-POWERLEVEL9K_DISABLE_RPROMPT=true
-POWERLEVEL9K_CUSTOM_NOMAD_STATUS="get_nomad_env"
+# sharkdp/fd
+zinit ice as"command" from"gh-r" mv"fd* -> fd" pick"fd/fd"
+zinit light sharkdp/fd
 
-POWERLEVEL9K_CUSTOM_NOMAD_STATUS_BACKGROUND="007"
-POWERLEVEL9K_CUSTOM_NOMAD_STATUS_FOREGROUND="darkgreen"
+# sharkdp/bat
+zinit ice as"command" from"gh-r" mv"bat* -> bat" pick"bat/bat"
+zinit light sharkdp/bat
 
-# Source Zplug, or offer to download it.
-if [[ -z $ZPLUG_HOME ]]; then
-    export ZPLUG_HOME=~/.config/zsh/zplug
-fi
-if [[ ! -f "${ZPLUG_HOME}/init.zsh" ]]; then
-    vared -p 'Would you like to install zplug? (Y/N): ' -c choice
-    if [[ $choice = y* || $choice = Y* ]]; then
-        source ~/.config/zsh/zplug-installer/installer.zsh
-    else
-        echo "Things will fail."
-    fi
-fi
-source "${ZPLUG_HOME}/init.zsh"
-
-zplug "plugins/docker", \
-    from:oh-my-zsh
-
-zplug "plugins/docker-compose", \
-    from:oh-my-zsh
-
-# Faster git completion
-zplug "plugins/gitfast", \
-    from:oh-my-zsh
-
-# Pip completion
-zplug "plugins/pip", \
-    from:oh-my-zsh
-
-# Python completion
-zplug "plugins/python", \
-    from:oh-my-zsh
-
-# Vim-like keybindings with some modifications
-zplug "plugins/vi-mode", \
-    from:oh-my-zsh
-
-zplug "plugins/dnf", \
-    from:oh-my-zsh, \
-    if:"[[ -x /usr/bin/dnf ]]"
-
-# External Bundles
-# Add upstream remote to git like `add-upstream username`
-zplug "caarlos0/zsh-add-upstream"
-
-# So many scripts
-zplug "skx/sysadmin-util"
-
-# Add a .gitignore based on a template
-zplug "voronkovich/gitignore.plugin.zsh"
-
-zplug "walesmd/caniuse.plugin.zsh"
-
-zplug "caarlos0/open-pr"
-
-# Tons and tons of completions
-zplug "zsh-users/zsh-completions", \
-    use:"src"
-
-# Pretty colors
-zplug "zsh-users/zsh-syntax-highlighting", \
-    defer:2
-
-# Manage itself
-zplug 'zplug/zplug', \
-    hook-build:'zplug --self-manage'
-
-# Load the theme.
-zplug "robbyrussell/oh-my-zsh"
-setopt prompt_subst # Make sure prompt is able to be generated properly.
-zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
-
-if ! zplug check; then
-    zplug install
-fi
-
-zplug load
+# ogham/exa, replacement for ls
+zinit ice wait"2" lucid from"gh-r" as"program" mv"exa* -> exa"
+zinit light ogham/exa
 
 # History tweaks
 mkdir -p "${HOME}/.local/share/zsh"
@@ -117,9 +34,6 @@ setopt share_history      # Always import new commands from $HISTFILE
 setopt extended_history   # Save additional info to $HISTFILE
 setopt hist_ignore_space  # Ignore history beginning with a space
 setopt NO_BEEP
-
-#ZSH Colorful stuff
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern root)
 
 # Eliminate escape delay
 KEYTIMEOUT=1
@@ -171,11 +85,14 @@ if [ -f "$HOME/Downloads/google-cloud-sdk/completion.zsh.inc" ]; then source "$H
 get_nomad_env() {
 	if [[ -v NOMAD_TOKEN ]] && [[ -v NOMAD_ADDR ]]; then
 		if [[ $NOMAD_ADDR =~ "http://192.*" ]]; then
-			echo " Vagrant"
+			export NOMAD_ENV="Vagrant"
 		elif [[ $NOMAD_ADDR =~ "http://127.*" ]]; then
-			echo " Local"
+			export NOMAD_ENV="Local"
 		elif [[ $NOMAD_ADDR =~ "https://.*" ]]; then
-			echo " Prod"
+			export NOMAD_ENV="Prod"
 		fi
 	fi
 }
+get_nomad_env
+
+eval "$(starship init zsh)"

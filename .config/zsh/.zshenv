@@ -17,3 +17,4 @@ export LANG=en_US.UTF-8
 if [[ -r ~/.config/zsh/local.zsh ]]; then
         source ~/.config/zsh/local.zsh
 fi
+source "$HOME/.cargo/env"

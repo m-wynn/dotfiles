@@ -67,7 +67,7 @@ if [[ "$TERM" != dumb ]] && (( $+commands[grc] )) ; then
     setopt COMPLETE_ALIASES
 
     # Supported commands
-    cmds=(blkid c++ cc configure cvs df diff dig env fdisk findmnt free g++ gcc getfacl getsebool id ifconfig iostat ip iptables journalctl last ld ldap ldapadd ldapauth ldapdelete ldapmodify ldapmodrdn ldappassd ldapsearch ldapwhoami lsattr lsblk lsmod lsof lspci make mount mtr netstat ping ping6 ps sar semanage sysctl systemctl traceroute traceroute6 ulimit uptime vmstat w wdiff);
+    cmds=(blkid c++ cc configure cvs df diff dig env fdisk findmnt free g++ gcc getfacl getsebool id ifconfig iostat ip iptables journalctl last ld ldap ldapadd ldapauth ldapdelete ldapmodify ldapmodrdn ldappassd ldapsearch ldapwhoami lsattr lsblk lsmod lsof lspci make mount mtr netstat nmap ping ping6 ps sar semanage sysctl systemctl traceroute traceroute6 ulimit uptime vmstat w wdiff);
 
     # Set alias for available commands.
     for cmd in $cmds ; do

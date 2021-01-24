@@ -26,7 +26,7 @@ let g:ale_linters = {
       \    'rust': ['analyzer'],
       \    'qml': ['qmllint'],
       \    'shell': ['shellcheck'],
-      \    'terraform': ['tflint', 'terraform-lsp'],
+      \    'terraform': ['tflint', 'terraform_lsp'],
       \    'vim': ['vint']
       \}
 

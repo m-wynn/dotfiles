@@ -5,11 +5,15 @@ export QT_IM_MODULE=ibus
 # Adjust keyboard typematic delay and rate
 # xset r rate 270 30
 # Start Xorg server at this DPI
+xrandr --setprovideroutputsource modesetting NVIDIA-0
+xrandr --auto
 xrandr --dpi 90
+xinput map-to-output 20 eDP-1-1
 # Merge & load configuration from .Xresources
 # xrdb -merge ~/.Xresources
 # xrdb -merge ~/.Xdefaults
 xmodmap ~/.Xmodmap
+picom &
 # Let QT and GTK autodetect retina screen and autoadjust
 # export QT_AUTO_SCREEN_SCALE_FACTOR=1
 # export GDK_SCALE=2
@@ -17,7 +21,7 @@ xmodmap ~/.Xmodmap
 ibus-daemon -drx &
 
 # Startup programs
-compton --backend glx --paint-on-overlay --glx-no-stencil --vsync opengl-swc --unredir-if-possible --no-fading-openclose &
+# compton --backend glx --paint-on-overlay --glx-no-stencil --vsync opengl-swc --unredir-if-possible --no-fading-openclose &
 # unclutter -root &
 nm-applet &
 eval $(ssh-agent) &

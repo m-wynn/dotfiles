@@ -46,6 +46,11 @@ function keys.init(awesome_context)
              "Print Screen", "awesome"
              ),
 
+    bind_key({ modkey, "Shift" }, "s",
+             function () awful.util.spawn("zsh -c ~/bin/screenshot", false) end,
+             "Clip screen selection", "awesome"
+             ),
+
     -- Navigation and selection
     -- bind_key({ modkey }, "Left",
     --          awful.tag.viewprev,

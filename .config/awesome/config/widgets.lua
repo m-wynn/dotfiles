@@ -110,7 +110,7 @@ function widget_loader.init(awesome_context)
   w.baticon = wibox.widget.imagebox(beautiful.widget_battery)
   w.batwidget = lain.widget.bat(
     {
-      battery = "BAT1",
+      battery = "BAT0",
       settings = function()
         if bat_now.perc == "N/A" then
           widget:set_markup(" AC ")

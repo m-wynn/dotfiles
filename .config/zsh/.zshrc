@@ -1,4 +1,5 @@
 export STARSHIP_CONFIG=~/.config/zsh/starship.toml
+export FZF_MARKS_COMMAND="sk --height 40% --reverse"
 source ~/.zinit/bin/zinit.zsh
 
 zinit wait lucid light-mode for \
@@ -23,6 +24,9 @@ zinit light sharkdp/bat
 # ogham/exa, replacement for ls
 zinit ice wait"2" lucid from"gh-r" as"program" mv"exa* -> exa"
 zinit light ogham/exa
+
+zinit ice wait lucid
+zinit load urbainvaes/fzf-marks
 
 # History tweaks
 mkdir -p "${HOME}/.local/share/zsh"
@@ -80,19 +84,5 @@ if [ -f "$HOME/Downloads/google-cloud-sdk/path.zsh.inc" ]; then source "$HOME/Do
 
 # The next line enables shell command completion for gcloud.
 if [ -f "$HOME/Downloads/google-cloud-sdk/completion.zsh.inc" ]; then source "$HOME/Downloads/google-cloud-sdk/completion.zsh.inc"; fi
-
-
-get_nomad_env() {
-	if [[ -v NOMAD_TOKEN ]] && [[ -v NOMAD_ADDR ]]; then
-		if [[ $NOMAD_ADDR =~ "http://192.*" ]]; then
-			export NOMAD_ENV="Vagrant"
-		elif [[ $NOMAD_ADDR =~ "http://127.*" ]]; then
-			export NOMAD_ENV="Local"
-		elif [[ $NOMAD_ADDR =~ "https://.*" ]]; then
-			export NOMAD_ENV="Prod"
-		fi
-	fi
-}
-get_nomad_env
 
 eval "$(starship init zsh)"

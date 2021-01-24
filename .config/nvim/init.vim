@@ -11,7 +11,7 @@ Plug 'lotabout/skim', { 'dir': '~/.skim', 'do': './install' }
 Plug 'lotabout/skim.vim'
 Plug 'noahfrederick/vim-skeleton'                  " Provides skeleton file
 Plug 'tmhedberg/SimpylFold', {'for': 'python'}     " Python folding
-Plug 'tommcdo/vim-fubitive'                        " Bitbucket support for fugitive
+Plug 'deathlyfrantic/vim-fubitive', { 'branch': 'fix-bitbucket-cloud-urls' }
 Plug 'tpope/vim-abolish'                           " Smarter find-replacement
 Plug 'tpope/vim-eunuch'                            " Handy UNIX commands
 Plug 'tpope/vim-fugitive'                          " Git plugin
@@ -22,6 +22,7 @@ Plug 'tpope/vim-unimpaired'                        " Add lots of handy mappings
 Plug 'dense-analysis/ale'                          " Linting
 Plug 'kassio/neoterm'
 Plug 'dense-analysis/ale'                          " Linting
+Plug 'vim-vdebug/vdebug'
 
 " NerdTree
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -181,9 +182,11 @@ map H ^
 map L $
 let g:UltiSnipsExpandTrigger="<tab>"
 
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
-  \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
-  \   <bang>0)
+" command! -bang -nargs=* Rg
+"   \ call fzf#vim#rg_interactive(
+"   \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+"   \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
+"   \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
+"   \   <bang>0)
+
+vnoremap p "_dP

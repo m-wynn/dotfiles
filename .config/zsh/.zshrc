@@ -2,6 +2,8 @@ export STARSHIP_CONFIG=~/.config/zsh/starship.toml
 export FZF_MARKS_COMMAND="sk --height 40% --reverse"
 source ~/.zinit/bin/zinit.zsh
 
+zinit light zinit-zsh/z-a-bin-gem-node
+
 zinit wait lucid light-mode for \
   atinit"zicompinit; zicdreplay" \
       zdharma/fast-syntax-highlighting \
@@ -10,23 +12,25 @@ zinit wait lucid light-mode for \
   blockf atpull'zinit creinstall -q .' \
       zsh-users/zsh-completions
 
+zinit ice wait lucid
+zinit load urbainvaes/fzf-marks
+
+zinit wait"1" lucid from"gh-r" as"null" for \
+    sbin"**/fd" @sharkdp/fd \
+    sbin"**/bat" @sharkdp/bat \
+    sbin"**/sk" @lotabout/skim \
+    sbin"exa* -> exa" ogham/exa \
+    sbin"**/nvim -> nvim" neovim/neovim
+
+zinit wait"1" lucid light-mode for \
+    pick"shell/key-bindings.zsh" id-as"skim-full" lotabout/skim \
+    atclone"mkdir -p ~/.config/grc; cp -fv ./colourfiles/conf.* ./grc.conf ~/.config/grc" \
+        atpull"%atclone" sbin"(grc|grcat)" ver"devel" garabik/grc
+
 zinit ice wait"2" lucid
 zinit load voronkovich/gitignore.plugin.zsh
 
-# sharkdp/fd
-zinit ice as"command" from"gh-r" mv"fd* -> fd" pick"fd/fd"
-zinit light sharkdp/fd
-
-# sharkdp/bat
-zinit ice as"command" from"gh-r" mv"bat* -> bat" pick"bat/bat"
-zinit light sharkdp/bat
-
-# ogham/exa, replacement for ls
-zinit ice wait"2" lucid from"gh-r" as"program" mv"exa* -> exa"
-zinit light ogham/exa
-
-zinit ice wait lucid
-zinit load urbainvaes/fzf-marks
+zinit light %HOME/.config/zsh/aliases
 
 # History tweaks
 mkdir -p "${HOME}/.local/share/zsh"
@@ -54,10 +58,10 @@ export DISABLE_AUTO_TITLE=true
 
 bindkey '^R' history-incremental-search-backward
 
-source "${HOME}/.config/zsh/alias.zsh"
+# source "${HOME}/.config/zsh/alias.zsh"
 
-autoload -Uz manydots-magic
-manydots-magic
+# autoload -Uz manydots-magic
+# manydots-magic
 
 fpath+=~/.config/zsh/.zfunc
 

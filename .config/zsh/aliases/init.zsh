@@ -1,3 +1,4 @@
+alias eee=vim
 man() {
     env \
         LESS_TERMCAP_mb=$(printf "\e[1;31m") \
@@ -19,6 +20,7 @@ alias sudo="sudo "
 say() { mplayer "http://translate.google.com/translate_tts?tl=en&q=$1"; }
 
 gpr() { git push origin HEAD && open-pr "$*" }
+
 
 if [[ `uname` == 'Darwin' ]]; then
     alias ls="ls -G"
@@ -62,20 +64,21 @@ function sudoedit() {
     SUDO_COMMAND="sudoedit $@" command sudoedit "$@"
 }
 
-if [[ "$TERM" != dumb ]] && (( $+commands[grc] )) ; then
-    # Prevent grc aliases from overriding zsh completions.
-    setopt COMPLETE_ALIASES
 
-    # Supported commands
-    cmds=(blkid c++ cc configure cvs df diff dig env fdisk findmnt free g++ gcc getfacl getsebool id ifconfig iostat ip iptables journalctl last ld ldap ldapadd ldapauth ldapdelete ldapmodify ldapmodrdn ldappassd ldapsearch ldapwhoami lsattr lsblk lsmod lsof lspci make mount mtr netstat nmap ping ping6 ps sar semanage sysctl systemctl traceroute traceroute6 ulimit uptime vmstat w wdiff);
+# if [[ "$TERM" != dumb ]] && (( $+commands[grc] )) ; then
+#     # Prevent grc aliases from overriding zsh completions.
+#     setopt COMPLETE_ALIASES
 
-    # Set alias for available commands.
-    for cmd in $cmds ; do
-        if (( $+commands[$cmd] )) ; then
-            alias $cmd="grc --colour=auto $cmd"
-        fi
-    done
+#     # Supported commands
+#     cmds=(blkid c++ cc configure cvs df diff dig env fdisk findmnt free g++ gcc getfacl getsebool id ifconfig iostat ip iptables journalctl last ld ldap ldapadd ldapauth ldapdelete ldapmodify ldapmodrdn ldappassd ldapsearch ldapwhoami lsattr lsblk lsmod lsof lspci make mount mtr netstat nmap ping ping6 ps sar semanage sysctl systemctl traceroute traceroute6 ulimit uptime vmstat w wdiff);
 
-    # Clean up variables
-    unset cmds cmd
-fi
+#     # Set alias for available commands.
+#     for cmd in $cmds ; do
+#         if (( $+commands[$cmd] )) ; then
+#             alias $cmd="grc --colour=auto $cmd"
+#         fi
+#     done
+
+#     # Clean up variables
+#     unset cmds cmd
+# fi

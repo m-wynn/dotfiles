@@ -52,3 +52,6 @@ modified = "[ ](blue)"
 staged = '[ \($count\)](green) '
 renamed = "➜"
 deleted = " "
+
+[terraform]
+disabled = true

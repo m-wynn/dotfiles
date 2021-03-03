@@ -1,5 +1,6 @@
 export STARSHIP_CONFIG=~/.config/zsh/starship.toml
 export FZF_MARKS_COMMAND="sk --height 40% --reverse"
+export SKIM_DEFAULT_OPTIONS="--tiebreak=score,index"
 source ~/.zinit/bin/zinit.zsh
 
 zinit light zinit-zsh/z-a-bin-gem-node

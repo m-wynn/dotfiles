@@ -18,9 +18,9 @@ show_notifications = true
 
 [custom.nomad]
 command = """
-if [[ $NOMAD_ADDR == "https://nomad.us-east-1.prod.betterhelp.com" ]]; then
+if [[ $NOMAD_ADDR =~ ".*.prod..*" ]]; then
     echo "Prod"
-elif [[ $NOMAD_ADDR == "https://nomad.us-east-1.staging.betterhelp.com" ]]; then
+elif [[ $NOMAD_ADDR =~ ".*.staging..*" ]]; then
     echo "Staging"
 elif [[ $NOMAD_ADDR =~ "http://192.*" ]]; then
     echo "Vagrant"

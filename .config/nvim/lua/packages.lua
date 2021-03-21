@@ -218,7 +218,7 @@ return require('packer').startup(function()
       requires = {'kyazdani42/nvim-web-devicons', opt = true},
 
     config = function()
-      require('lualine').status{
+      require('lualine').setup{
         options = {
           theme = 'gruvbox',
 
@@ -253,16 +253,18 @@ return require('packer').startup(function()
     use {'romgrk/barbar.nvim',
         requires = {'kyazdani42/nvim-web-devicons', opt = true},
         config = function()
-            require'bufferline'.setup{
-                options = {
-                    separator_style = { '', '' },
-                },
-                highlights = {
-                    buffer_selected = {
-                        gui = "bold"
-                    }
-                }
-            }
+            MAP("n", "]b", [[<Cmd>:BufferNext<CR>]], {noremap = true})
+            MAP("n", "[b", [[<Cmd>:BufferPrevious<CR>]], {noremap = true})
+           -- require'bufferline'.setup{
+            --     options = {
+            --         separator_style = { '', '' },
+            --     },
+            --     highlights = {
+            --         buffer_selected = {
+            --             gui = "bold"
+            --         }
+            --     }
+            -- }
         end
     }
 end)

@@ -1,4 +1,3 @@
-alias eee=vim
 man() {
     env \
         LESS_TERMCAP_mb=$(printf "\e[1;31m") \
@@ -17,6 +16,8 @@ man() {
 # Make aliases work in Sudo
 alias sudo="sudo "
 
+alias k="kubectl"
+
 say() { mplayer "http://translate.google.com/translate_tts?tl=en&q=$1"; }
 
 gpr() { git push origin HEAD && open-pr "$*" }
@@ -30,14 +31,6 @@ fi
 
 if (( $+commands[exa] )) ; then
     alias ls="exa"
-fi
-
-if (( $+commands[hexyl] )) ; then
-    alias hexdump="echo >&2 \"Try hexyl\"; hexdump"
-fi
-
-if (( $+commands[bat] )) ; then
-    alias less="echo >&2 \"Try bat\"; less"
 fi
 
 if (( $+commands[batgrep] )) ; then

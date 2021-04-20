@@ -18,3 +18,4 @@ if [[ -r ~/.config/zsh/local.zsh ]]; then
         source ~/.config/zsh/local.zsh
 fi
 source "$HOME/.cargo/env"
+export LBC_VERSION="v2.0.0"

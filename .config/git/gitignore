@@ -49,3 +49,5 @@ Thumbs.db
 *.xlk
 ~$*.ppt*
 *.~vsd*
+
+**/modules/*/.terraform.lock.hcl

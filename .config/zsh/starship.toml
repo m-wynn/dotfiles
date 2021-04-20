@@ -1,5 +1,60 @@
 add_newline = false
 
+format = """
+$username\
+$hostname\
+$shlvl\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$hg_branch\
+$docker_context\
+$package\
+$cmake\
+$dart\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$golang\
+$helm\
+$java\
+$julia\
+$kotlin\
+$nim\
+$nodejs\
+$ocaml\
+$perl\
+$php\
+$purescript\
+$python\
+$ruby\
+$rust\
+$swift\
+$terraform\
+$vagrant\
+$zig\
+$nix_shell\
+$conda\
+$memory_usage\
+$aws\
+$gcloud\
+$openstack\
+$env_var\
+$crystal\
+$kubernetes\
+$custom\
+$cmd_duration\
+$line_break\
+$lua\
+$jobs\
+$battery\
+$time\
+$status\
+$character"""
+
 [aws]
 # format = '[$symbol$profile(\($region\))]($style) '
 style = "bold yellow"
@@ -18,9 +73,9 @@ show_notifications = true
 
 [custom.nomad]
 command = """
-if [[ $NOMAD_ADDR =~ ".*.prod..*" ]]; then
+if [[ $NOMAD_ADDR =~ ".prod." ]]; then
     echo "Prod"
-elif [[ $NOMAD_ADDR =~ ".*.staging..*" ]]; then
+elif [[ $NOMAD_ADDR =~ ".staging." ]]; then
     echo "Staging"
 elif [[ $NOMAD_ADDR =~ "http://192.*" ]]; then
     echo "Vagrant"
@@ -34,8 +89,8 @@ symbol = ""
 shell = ["sh"]
 
 [directory]
+truncation_length = 5
 truncation_symbol = "…/"
-truncation_lenth = 5
 style = "bold blue"
 
 [gcloud]
@@ -46,12 +101,21 @@ conflicted = " "
 ahead = " ${count}"
 behind = " ${count}"
 diverged = "⇕⇡${ahead_count}⇣${behind_count}"
-untracked = ""
+untracked = " "
 stashed = '[ \($count\)](yellow) '
 modified = "[ ](blue)"
 staged = '[ \($count\)](green) '
 renamed = "➜"
 deleted = " "
+format = '([$all_status$ahead_behind]($style) )'
 
 [terraform]
+disabled = true
+
+[kubernetes]
+format = '[$symbol$context( \($namespace\))]($style) '
+symbol = 'ﴱ '
+disabled = false
+
+[helm]
 disabled = true

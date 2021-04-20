@@ -35,6 +35,7 @@ return require('packer').startup(function()
         config = function()
             MAP("n", "<leader>f", [[<Cmd>:Files<CR>]], {noremap = true})
             MAP("n", "<leader>s", [[<Cmd>:Rg<CR>]], {noremap = true})
+            MAP("n", "<leader>b", [[<Cmd>:Buffers<CR>]], {noremap = true})
         end
     }
 
@@ -49,6 +50,7 @@ return require('packer').startup(function()
             vim.g.nvim_tree_indent_markers = 1
             vim.g.nvim_tree_git_hl = 1
             vim.g.nvim_tree_follow = 1
+            vim.g.nvim_tree_disable_netrw = 0
             vim.g.nvim_tree_show_icons = {
                 git = 1,
                 folders = 1,
@@ -68,6 +70,8 @@ return require('packer').startup(function()
                 terraformls = {},
                 rust_analyzer = {},
                 intelephense = {},
+                pyright = {},
+                yamlls = {},
                 sumneko_lua = {
                     cmd = {sumneko_lua_path .. "bin/Linux/lua-language-server", "-E", sumneko_lua_path .. "main.lua"},
                     settings = {
@@ -155,11 +159,21 @@ return require('packer').startup(function()
 
     -- completion
     use {'nvim-lua/completion-nvim',
+        requires = {'steelsojka/completion-buffers', 'nvim-treesitter/completion-treesitter'},
         config = function()
-            vim.cmd [[autocmd BufEnter * lua require 'completion'.on_attach()]]
+            vim.cmd [[autocmd BufEnter * lua require'completion'.on_attach()]]
             vim.o.completeopt="menuone,noinsert,noselect"
             vim.o.shortmess = vim.o.shortmess .. "c"
             vim.g.completion_enable_snippet = 'UltiSnips'
+            vim.g.completion_auto_change_source = 1
+            vim.g.completion_chain_complete_list = {
+                default = {
+                    { complete_items = { 'lsp', 'ts', 'snippet', 'path', 'buffers' } },
+                    { mode = { '<c-p>' } },
+                    { mode = { '<c-n>' } }
+                },
+            }
+
             local function t(str)
                 return vim.api.nvim_replace_termcodes(str, true, true, true)
             end
@@ -255,16 +269,6 @@ return require('packer').startup(function()
         config = function()
             MAP("n", "]b", [[<Cmd>:BufferNext<CR>]], {noremap = true})
             MAP("n", "[b", [[<Cmd>:BufferPrevious<CR>]], {noremap = true})
-           -- require'bufferline'.setup{
-            --     options = {
-            --         separator_style = { '', '' },
-            --     },
-            --     highlights = {
-            --         buffer_selected = {
-            --             gui = "bold"
-            --         }
-            --     }
-            -- }
         end
     }
 end)

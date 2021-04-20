@@ -1,26 +1,53 @@
 export STARSHIP_CONFIG=~/.config/zsh/starship.toml
 export FZF_MARKS_COMMAND="sk --height 40% --reverse"
 export SKIM_DEFAULT_OPTIONS="--tiebreak=score,index"
+export ZSH_AUTOSUGGEST_HISTORY_IGNORE="cd *|?(#c50,)"
 source ~/.zinit/bin/zinit.zsh
 
 zinit light zinit-zsh/z-a-bin-gem-node
 
+# zinit ice wait notify
+# zinit snippet OMZ::plugins/vi-mode
+
 zinit wait lucid light-mode for \
-  atinit"zicompinit; zicdreplay" \
+  atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
       zdharma/fast-syntax-highlighting \
   atload"_zsh_autosuggest_start" \
       zsh-users/zsh-autosuggestions \
   blockf atpull'zinit creinstall -q .' \
-      zsh-users/zsh-completions
+      zsh-users/zsh-completions \
 
 zinit ice wait lucid
 zinit load urbainvaes/fzf-marks
+
+zinit ice wait"2" as"command" from"gh-r" lucid \
+  mv"zoxide* -> zoxide" \
+  atclone"./zoxide init zsh > init.zsh" \
+  atpull"%atclone" src"init.zsh" nocompile'!'
+zinit light ajeetdsouza/zoxide
+
+zinit ice from"gh-r" as"program" atload'!eval $(starship init zsh)'
+zinit light starship/starship
+
+zinit light-mode lucid wait has"kubectl" for \
+  id-as"kubectl_completion" \
+  as"completion" \
+  atclone"kubectl completion zsh > _kubectl" \
+  atpull"%atclone" \
+  run-atpull \
+    zdharma/null \
+  id-as"helm_completion" \
+  as"completion" \
+  atclone"helm completion zsh > _helm" \
+  atpull"%atclone" \
+  run-atpull \
+    zdharma/null
 
 zinit wait"1" lucid from"gh-r" as"null" for \
     sbin"**/fd" @sharkdp/fd \
     sbin"**/bat" @sharkdp/bat \
     sbin"**/sk" @lotabout/skim \
-    sbin"exa* -> exa" ogham/exa \
+    sbin"**/exa" ogham/exa \
     sbin"**/nvim -> nvim" neovim/neovim
 
 zinit wait"1" lucid light-mode for \
@@ -32,6 +59,10 @@ zinit ice wait"2" lucid
 zinit load voronkovich/gitignore.plugin.zsh
 
 zinit light %HOME/.config/zsh/aliases
+
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd 'v' edit-command-line
 
 # History tweaks
 mkdir -p "${HOME}/.local/share/zsh"
@@ -89,5 +120,3 @@ if [ -f "$HOME/Downloads/google-cloud-sdk/path.zsh.inc" ]; then source "$HOME/Do
 
 # The next line enables shell command completion for gcloud.
 if [ -f "$HOME/Downloads/google-cloud-sdk/completion.zsh.inc" ]; then source "$HOME/Downloads/google-cloud-sdk/completion.zsh.inc"; fi
-
-eval "$(starship init zsh)"

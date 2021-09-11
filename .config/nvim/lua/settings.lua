@@ -9,7 +9,7 @@ os.execute("mkdir -p ~/.local/share/nvim/undo/")
 vim.o.directory= vim.env.HOME .. '/.local/share/nvim/swaps//'
 vim.o.backupdir= vim.env.HOME ..'/.local/share/nvim/backups//'
 vim.o.undodir= vim.env.HOME ..'/.local/share/nvim/undo//'
-vim.o.undofile=true
+vim.bo.undofile=true
 
 vim.o.shiftwidth=2
 vim.o.tabstop=2

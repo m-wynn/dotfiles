@@ -11,7 +11,14 @@ end
 
 vim.cmd [[packadd packer.nvim]]
 
-return require('packer').startup(function()
+vim.cmd([[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost packages.lua source <afile> | PackerCompile
+  augroup end
+]])
+
+return require('packer').startup({function()
     use {'wbthomason/packer.nvim',
         opt = true,
         config = function()
@@ -25,19 +32,43 @@ return require('packer').startup(function()
     -- navigation and tools
     use {'airblade/vim-rooter'}
     use {'jreybert/vimagit'}
-    use {'kassio/neoterm'}
-    use {'deathlyfrantic/vim-fubitive'}
+    use {'kassio/neoterm',
+        config = function()
+            vim.g.neoterm_default_mod = "botright"
+            vim.g.neoterm_size = "20"
+            MAP("n", "<leader>tt", "<cmd>T cd $(dirname %:p)/<CR>", {noremap = true})
+        end
+    }
+    use {'tommcdo/vim-fubitive'}
     use {'tpope/vim-eunuch'}
     use {'tpope/vim-fugitive'}
     use {'tpope/vim-rhubarb'}
-    use {'lotabout/skim.vim',
-        requires = {{'lotabout/skim', run='./install'}},
+    -- use {'lotabout/skim.vim',
+    --     requires = {{'lotabout/skim', run='./install'}},
+    --     config = function()
+    --         MAP("n", "<leader>f", [[<Cmd>:Files<CR>]], {noremap = true})
+    --         MAP("n", "<leader>s", [[<Cmd>:Rg<CR>]], {noremap = true})
+    --         MAP("n", "<leader>b", [[<Cmd>:Buffers<CR>]], {noremap = true})
+    --     end
+    -- }
+    use {
+        'nvim-telescope/telescope.nvim',
+        requires = { {'nvim-lua/plenary.nvim'} },
         config = function()
-            MAP("n", "<leader>f", [[<Cmd>:Files<CR>]], {noremap = true})
-            MAP("n", "<leader>s", [[<Cmd>:Rg<CR>]], {noremap = true})
-            MAP("n", "<leader>b", [[<Cmd>:Buffers<CR>]], {noremap = true})
+
+            -- vim.cmd [[highlight TelescopeSelection      guifg=#ffffff gui=bold]]
+            MAP("n", "<leader>f", [[<cmd>lua require('telescope.builtin').find_files()<cr>]], {noremap = true})
+            MAP("n", "<leader>s", [[<cmd>lua require('telescope.builtin').live_grep()<cr>]], {noremap = true})
+            MAP("n", "<leader>b", [[<cmd>lua require('telescope.builtin').buffers()<cr>]], {noremap = true})
+            MAP("n", "<leader>r", [[<cmd>lua require('telescope.builtin').lsp_references()<cr>]], {noremap = true})
+            MAP("n", "<leader>w", [[<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols()<cr>]], {noremap = true})
+            MAP("n", "<leader>gs", [[<cmd>lua require('telescope.builtin').git_status()<cr>]], {noremap = true})
+            MAP("n", "<leader>gb", [[<cmd>lua require('telescope.builtin').git_branches()<cr>]], {noremap = true})
+            MAP("n", "<leader>gc", [[<cmd>lua require('telescope.builtin').git_bcommits()<cr>]], {noremap = true})
+            MAP("n", "<leader>a", [[<cmd>lua require('telescope.builtin').lsp_code_actions(require('telescope.themes').get_cursor({}))<cr>]], {noremap = true})
         end
     }
+    use {'justinmk/vim-dirvish'}
 
     -- nerdtree
     use {
@@ -51,6 +82,8 @@ return require('packer').startup(function()
             vim.g.nvim_tree_git_hl = 1
             vim.g.nvim_tree_follow = 1
             vim.g.nvim_tree_disable_netrw = 0
+            vim.g.nvim_tree_hijack_netrw = 0
+            vim.g.nvim_tree_update_cwd = 0
             vim.g.nvim_tree_show_icons = {
                 git = 1,
                 folders = 1,
@@ -166,9 +199,10 @@ return require('packer').startup(function()
             vim.o.shortmess = vim.o.shortmess .. "c"
             vim.g.completion_enable_snippet = 'UltiSnips'
             vim.g.completion_auto_change_source = 1
+            vim.g.completion_trigger_keyword_length = 3
             vim.g.completion_chain_complete_list = {
                 default = {
-                    { complete_items = { 'lsp', 'ts', 'snippet', 'path', 'buffers' } },
+                    { complete_items = { 'snippet', 'lsp', 'ts', 'path', 'buffers' } },
                     { mode = { '<c-p>' } },
                     { mode = { '<c-n>' } }
                 },
@@ -189,8 +223,8 @@ return require('packer').startup(function()
     use {'AndrewRadev/splitjoin.vim'}
     use {'junegunn/vim-easy-align',
         config = function()
-            MAP('x', 'ga', '<Plug>(EasyAlign)|', {})
-            MAP('n', 'ga', '<Plug>(EasyAlign)|', {})
+            MAP('x', 'ga', '<Plug>(EasyAlign)', {})
+            MAP('n', 'ga', '<Plug>(EasyAlign)', {})
         end
     }
     use {'machakann/vim-sandwich'}
@@ -217,7 +251,7 @@ return require('packer').startup(function()
             vim.g.UltiSnipsJumpForwardTrigger='<c-b>'
             vim.g.UltiSnipsJumpBackwardTrigger='<c-z>'
             vim.g.UltiSnipsEditSplit='vertical'
-            vim.o.runtimepath = vim.o.runtimepath .. "~/.config/nvim/my-snippets/"
+            vim.o.runtimepath = vim.o.runtimepath .. ",~/.config/nvim/my-snippets"
         end
     }
     use {'epilande/vim-react-snippets'}
@@ -262,7 +296,10 @@ return require('packer').startup(function()
 
 
     }
-    use {'morhetz/gruvbox'}
+    -- use {'morhetz/gruvbox'}
+    -- use {'eddyekofo94/gruvbox-flat.nvim'}
+    use {'rktjmp/lush.nvim'}
+    use {'ellisonleao/gruvbox.nvim'}
 
     use {'romgrk/barbar.nvim',
         requires = {'kyazdani42/nvim-web-devicons', opt = true},
@@ -271,4 +308,13 @@ return require('packer').startup(function()
             MAP("n", "[b", [[<Cmd>:BufferPrevious<CR>]], {noremap = true})
         end
     }
-end)
+
+    use {'andrewstuart/vim-kubernetes'}
+end,
+config = {
+  display = {
+    open_fn = function()
+      return require('packer.util').float({ border = 'single' })
+    end
+  }
+}})

@@ -3,6 +3,8 @@ MAP = vim.api.nvim_set_keymap
 local execute = vim.api.nvim_command
 local fn = vim.fn
 
+pcall(require("local"))
+
 local install_path = fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
 
 if fn.empty(fn.glob(install_path)) > 0 then
@@ -21,9 +23,6 @@ vim.cmd([[
 return require('packer').startup({function()
     use {'wbthomason/packer.nvim',
         opt = true,
-        config = function()
-            execute[[autocmd BufWritePost plugins.lua PackerCompile]]
-        end
     }
     -- lua
     use {'svermeulen/vimpeccable'}
@@ -66,6 +65,39 @@ return require('packer').startup({function()
             MAP("n", "<leader>gb", [[<cmd>lua require('telescope.builtin').git_branches()<cr>]], {noremap = true})
             MAP("n", "<leader>gc", [[<cmd>lua require('telescope.builtin').git_bcommits()<cr>]], {noremap = true})
             MAP("n", "<leader>a", [[<cmd>lua require('telescope.builtin').lsp_code_actions(require('telescope.themes').get_cursor({}))<cr>]], {noremap = true})
+            require('telescope').setup {
+                extensions = {
+                    frecency = {
+                        show_scores = false,
+                        show_unindexed = false,
+                        ignore_patterns = {"*.git/*", "*/tmp/*", "*/.terraform/*", "*venv/*"},
+                        disable_devicons = false,
+                        workspaces = WORKSPACES
+                    }
+                },
+            }
+
+        end
+    }
+    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make',
+        config = function()
+            require('telescope').load_extension('fzf')
+        end
+    }
+    use {
+        "nvim-telescope/telescope-frecency.nvim",
+        config = function()
+            require"telescope".load_extension("frecency")
+            MAP("n", "<leader><leader>", [[<cmd>lua require('telescope').extensions.frecency.frecency()<cr>]], {noremap = true})
+
+        end,
+        requires = {"tami5/sqlite.lua"}
+    }
+
+    use {'nvim-telescope/telescope-project.nvim',
+        config = function()
+            require('telescope').load_extension('project')
+            MAP("n", "<leader>p", [[<cmd>lua require('telescope').extensions.project.project{}<cr>]], {noremap = true})
         end
     }
     use {'justinmk/vim-dirvish'}
@@ -75,19 +107,24 @@ return require('packer').startup({function()
         'kyazdani42/nvim-tree.lua',
         requires = {'kyazdani42/nvim-web-devicons'},
         config = function()
-            vim.g.nvim_tree_ignore = {'.git', 'node_modules', '.cache'}
-            vim.g.nvim_tree_auto_open = 1
-            vim.g.nvim_tree_auto_close = 1
-            vim.g.nvim_tree_indent_markers = 1
             vim.g.nvim_tree_git_hl = 1
-            vim.g.nvim_tree_follow = 1
-            vim.g.nvim_tree_disable_netrw = 0
-            vim.g.nvim_tree_hijack_netrw = 0
-            vim.g.nvim_tree_update_cwd = 0
+            vim.g.nvim_tree_gitignore = 1
+            vim.g.nvim_tree_ignore = {'.git', 'node_modules', '.cache', '.terraform'}
             vim.g.nvim_tree_show_icons = {
                 git = 1,
                 folders = 1,
                 files = 1
+            }
+            require'nvim-tree'.setup {
+                disable_netrw = false,
+                auto_close = false,
+                open_on_setup = false,
+                update_to_buf_dir = true,
+                lsp_diagnostics = true,
+                hijack_netrw = 1,
+                indent_markers = 1,
+                quit_on_open = false,
+                update_cwd = false,
             }
             MAP('n', '<c-n>', '<cmd>NvimTreeToggle<CR><c-w><c-p><cmd>NvimTreeFindFile<CR><c-w><c-p>', {noremap = true, silent = true})
         end
@@ -166,6 +203,7 @@ return require('packer').startup({function()
             end
         end
     }
+    use {'nvim-treesitter/playground'}
     use {'nvim-treesitter/nvim-treesitter', run=':TSUpdate',
         config = function()
             require'nvim-treesitter.configs'.setup {
@@ -183,7 +221,8 @@ return require('packer').startup({function()
                     },
                 },
                 indent = {
-                    enable = true
+                    enable = true,
+                    disable = { 'yaml' }
                 },
             }
         end
@@ -206,6 +245,8 @@ return require('packer').startup({function()
                     { mode = { '<c-p>' } },
                     { mode = { '<c-n>' } }
                 },
+                TelescopePrompt = {},
+                frecency = {},
             }
 
             local function t(str)
@@ -296,10 +337,7 @@ return require('packer').startup({function()
 
 
     }
-    -- use {'morhetz/gruvbox'}
-    -- use {'eddyekofo94/gruvbox-flat.nvim'}
-    use {'rktjmp/lush.nvim'}
-    use {'ellisonleao/gruvbox.nvim'}
+    use {"ellisonleao/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}
 
     use {'romgrk/barbar.nvim',
         requires = {'kyazdani42/nvim-web-devicons', opt = true},
@@ -309,7 +347,7 @@ return require('packer').startup({function()
         end
     }
 
-    use {'andrewstuart/vim-kubernetes'}
+    -- use {'andrewstuart/vim-kubernetes'}
 end,
 config = {
   display = {

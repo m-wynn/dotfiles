@@ -115,7 +115,13 @@ disabled = true
 [kubernetes]
 format = '[$symbol$context( \($namespace\))]($style) '
 symbol = 'ﴱ '
-disabled = false
+disabled = true
 
 [helm]
+disabled = true
+
+[php]
+disabled = true
+
+[nodejs]
 disabled = true

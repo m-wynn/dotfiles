@@ -5,6 +5,7 @@ export ZSH_AUTOSUGGEST_HISTORY_IGNORE="cd *|?(#c50,)"
 source ~/.zinit/bin/zinit.zsh
 
 zinit light zinit-zsh/z-a-bin-gem-node
+zinit light zinit-zsh/z-a-readurl
 
 # zinit ice wait notify
 # zinit snippet OMZ::plugins/vi-mode
@@ -21,7 +22,7 @@ zinit ice wait lucid
 zinit load urbainvaes/fzf-marks
 
 zinit ice wait"2" as"command" from"gh-r" lucid \
-  mv"zoxide* -> zoxide" \
+  mv"zoxide*/zoxide -> zoxide" \
   atclone"./zoxide init zsh > init.zsh" \
   atpull"%atclone" src"init.zsh" nocompile'!'
 zinit light ajeetdsouza/zoxide
@@ -43,12 +44,21 @@ zinit light-mode lucid wait has"kubectl" for \
   run-atpull \
     zdharma/null
 
+zinit wait"1" lucid id-as'terraform' as'readurl|command' extract \
+    dlink0'/terraform/%VERSION%/~%.*-(alpha|beta|rc).*%' \
+    dlink'/terraform/%VERSION%/terraform_%VERSION%_linux_amd64.zip' \
+    for https://releases.hashicorp.com/terraform/
+
 zinit wait"1" lucid from"gh-r" as"null" for \
     sbin"**/fd" @sharkdp/fd \
     sbin"**/bat" @sharkdp/bat \
     sbin"**/sk" @lotabout/skim \
     sbin"**/exa" ogham/exa \
-    sbin"**/nvim -> nvim" neovim/neovim
+    sbin"**/terraform-ls" @hashicorp/terraform-ls \
+    sbin"**/nvim -> nvim" neovim/neovim \
+    sbin"**/k9s -> k9s" derailed/k9s \
+    sbin"**/delta -> delta" dandavison/delta \
+    sbin"**/sad -> sad" bpick"*linux-gnu.zip" ms-jpq/sad \
 
 zinit wait"1" lucid light-mode for \
     pick"shell/key-bindings.zsh" id-as"skim-full" lotabout/skim \

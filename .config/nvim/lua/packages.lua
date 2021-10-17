@@ -54,8 +54,6 @@ return require('packer').startup({function()
         'nvim-telescope/telescope.nvim',
         requires = { {'nvim-lua/plenary.nvim'} },
         config = function()
-
-            -- vim.cmd [[highlight TelescopeSelection      guifg=#ffffff gui=bold]]
             MAP("n", "<leader>f", [[<cmd>lua require('telescope.builtin').find_files()<cr>]], {noremap = true})
             MAP("n", "<leader>s", [[<cmd>lua require('telescope.builtin').live_grep()<cr>]], {noremap = true})
             MAP("n", "<leader>b", [[<cmd>lua require('telescope.builtin').buffers()<cr>]], {noremap = true})
@@ -65,7 +63,14 @@ return require('packer').startup({function()
             MAP("n", "<leader>gb", [[<cmd>lua require('telescope.builtin').git_branches()<cr>]], {noremap = true})
             MAP("n", "<leader>gc", [[<cmd>lua require('telescope.builtin').git_bcommits()<cr>]], {noremap = true})
             MAP("n", "<leader>a", [[<cmd>lua require('telescope.builtin').lsp_code_actions(require('telescope.themes').get_cursor({}))<cr>]], {noremap = true})
+            local trouble = require("trouble.providers.telescope")
             require('telescope').setup {
+                defaults = {
+                    mappings = {
+                        i = { ["<a-t>"] = trouble.open_with_trouble },
+                        n = { ["<a-t>"] = trouble.open_with_trouble },
+                    },
+                },
                 extensions = {
                     frecency = {
                         show_scores = false,
@@ -119,8 +124,19 @@ return require('packer').startup({function()
                 disable_netrw = false,
                 auto_close = false,
                 open_on_setup = false,
-                update_to_buf_dir = true,
-                lsp_diagnostics = true,
+                update_to_buf_dir   = {
+                    enable = false,
+                    auto_open = true,
+                },
+                diagnostics = {
+                    enable = false,
+                    icons = {
+                        hint = "",
+                        info = "",
+                        warning = "",
+                        error = "",
+                    }
+                },
                 hijack_netrw = 1,
                 indent_markers = 1,
                 quit_on_open = false,
@@ -129,8 +145,42 @@ return require('packer').startup({function()
             MAP('n', '<c-n>', '<cmd>NvimTreeToggle<CR><c-w><c-p><cmd>NvimTreeFindFile<CR><c-w><c-p>', {noremap = true, silent = true})
         end
     }
+    use {
+        "folke/trouble.nvim",
+        requires = "kyazdani42/nvim-web-devicons",
+        config = function()
+            require("trouble").setup {
+                 use_lsp_diagnostic_signs = false,
+                 auto_close = true,
+            }
+            vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>Trouble<cr>",
+                {silent = true, noremap = true}
+            )
+        end
+}
 
     -- lanugages
+    use { "jose-elias-alvarez/null-ls.nvim",
+        requires = {"nvim-lua/plenary.nvim", "neovim/nvim-lspconfig"},
+        config = function()
+            local null_ls = require("null-ls")
+            local sources = {
+                null_ls.builtins.formatting.eslint_d, -- `npm install -g eslint_d`
+                null_ls.builtins.formatting.fixjson,   -- `npm install -g fixjson`
+                null_ls.builtins.formatting.nginx_beautifier,  -- npm install -g nginxbeautifier`
+                null_ls.builtins.formatting.phpcbf, -- `composer global require "squizlabs/php_codesniffer=*"`
+                null_ls.builtins.formatting.prettierd, -- `npm install -g prettierd`
+                null_ls.builtins.code_actions.shellcheck, -- `dnf install shellcheck`
+                null_ls.builtins.formatting.sqlformat,  -- `pip3 install sqlformat`
+                null_ls.builtins.formatting.terraform_fmt, -- `dnf install terraform`
+                null_ls.builtins.formatting.phpcsfixer, -- `composer global require friendsofphp/php-cs-fixer`
+                null_ls.builtins.diagnostics.hadolint, -- `dnf install hadolint`
+            }
+
+            require("null-ls").config({ sources })
+            require("lspconfig")["null-ls"].setup({})
+        end,
+    }
     use {'neovim/nvim-lspconfig',
         config = function()
             -- https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md

@@ -1,1 +1,0 @@
-execute "read !viu " . expand("%")

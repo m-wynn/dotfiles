@@ -177,7 +177,7 @@ return require('packer').startup({function()
                 null_ls.builtins.diagnostics.hadolint, -- `dnf install hadolint`
             }
 
-            require("null-ls").config({ sources })
+            require("null-ls").config({ sources, debug=true })
             require("lspconfig")["null-ls"].setup({})
         end,
     }

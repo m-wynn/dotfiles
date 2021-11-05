@@ -1,12 +1,12 @@
-zinit load zinit-zsh/z-a-bin-gem-node
-zinit load zinit-zsh/z-a-readurl
+zinit load zdharma-continuum/z-a-bin-gem-node
+zinit load zdharma-continuum/z-a-as-monitor
 
 zinit ice from"gh-r" as"program" atload'!eval $(starship init zsh)'
 zinit load starship/starship
 
 zinit wait lucid for \
   atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
-      zdharma/fast-syntax-highlighting \
+      zdharma-continuum/fast-syntax-highlighting \
   atload"_zsh_autosuggest_start" \
       zsh-users/zsh-autosuggestions \
   blockf atpull'zinit creinstall -q .' \
@@ -22,10 +22,10 @@ zinit load ajeetdsouza/zoxide
 zinit wait"1" lucid has"kubectl" as"completion" atpull"%atclone" run-atpull for \
   id-as"kubectl_completion" \
     atclone"kubectl completion zsh > _kubectl" \
-    zdharma/null \
+    zdharma-continuum/null \
   id-as"helm_completion" \
     atclone"helm completion zsh > _helm" \
-    zdharma/null
+    zdharma-continuum/null
 
 zinit wait"1" lucid from"gh-r" as"null" for \
     sbin"**/delta"        @dandavison/delta \
@@ -45,8 +45,12 @@ zinit wait"1" lucid from"gh-r" as"command" atpull"%atclone" for \
     atclone"cp -vf fd*/autocomplete/fd.zsh _fd" \
     sbin"**/fd" @sharkdp/fd \
 
-# zinit lucid for \
-#   node"eslint_d" zdharma/null
+zinit lucid wait"2" as"command" nocompletions for \
+  id-as"eslint_d" node"eslint_d" zdharma-continuum/null \
+  id-as"fixjson" node"fixjson" zdharma-continuum/null \
+  id-as"nginxbeautifier" node"nginxbeautifier" zdharma-continuum/null \
+  id-as"prettierd" node"prettierd" zdharma-continuum/null \
+  id-as"checkov" pip"checkov <- !checkov -> checkov" zdharma-continuum/null \
 
 # wait1 misc
 zinit lucid wait"1" for \

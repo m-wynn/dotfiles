@@ -19,6 +19,6 @@
 [submodule ".skim"]
 	path = .skim
 	url = http://github.com/lotabout/skim.git
-[submodule "/home/matthew/.zinit/bin"]
+[submodule ".zinit/bin"]
 	path = /home/matthew/.zinit/bin
-	url = https://github.com/zdharma/zinit.git
+	url = https://github.com/zdharma-continuum/zinit.git

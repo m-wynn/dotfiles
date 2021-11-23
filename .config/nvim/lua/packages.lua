@@ -33,8 +33,8 @@ return require('packer').startup({function()
     use {'jreybert/vimagit'}
     use {'kassio/neoterm',
         config = function()
-            vim.g.neoterm_default_mod = "botright"
-            vim.g.neoterm_size = "20"
+            vim.g.neoterm_default_mod = "vertical"
+            vim.g.neoterm_size = "120"
             MAP("n", "<leader>tt", "<cmd>T cd $(dirname %:p)/<CR>", {noremap = true})
         end
     }
@@ -67,8 +67,8 @@ return require('packer').startup({function()
             require('telescope').setup {
                 defaults = {
                     mappings = {
-                        i = { ["<a-t>"] = trouble.open_with_trouble },
-                        n = { ["<a-t>"] = trouble.open_with_trouble },
+                        i = { ["<c-x>"] = trouble.open_with_trouble },
+                        n = { ["<c-x>"] = trouble.open_with_trouble },
                     },
                 },
                 extensions = {
@@ -114,7 +114,6 @@ return require('packer').startup({function()
         config = function()
             vim.g.nvim_tree_git_hl = 1
             vim.g.nvim_tree_gitignore = 1
-            vim.g.nvim_tree_ignore = {'.git', 'node_modules', '.cache', '.terraform'}
             vim.g.nvim_tree_show_icons = {
                 git = 1,
                 folders = 1,
@@ -128,6 +127,7 @@ return require('packer').startup({function()
                     enable = false,
                     auto_open = true,
                 },
+                ignore = {'.git', 'node_modules', '.cache', '.terraform'},
                 diagnostics = {
                     enable = false,
                     icons = {
@@ -170,11 +170,11 @@ return require('packer').startup({function()
                 null_ls.builtins.formatting.nginx_beautifier,  -- npm install -g nginxbeautifier`
                 null_ls.builtins.formatting.phpcbf, -- `composer global require "squizlabs/php_codesniffer=*"`
                 null_ls.builtins.formatting.prettierd, -- `npm install -g prettierd`
-                null_ls.builtins.code_actions.shellcheck, -- `dnf install shellcheck`
                 null_ls.builtins.formatting.sqlformat,  -- `pip3 install sqlformat`
                 null_ls.builtins.formatting.terraform_fmt, -- `dnf install terraform`
                 null_ls.builtins.formatting.phpcsfixer, -- `composer global require friendsofphp/php-cs-fixer`
                 null_ls.builtins.diagnostics.hadolint, -- `dnf install hadolint`
+                null_ls.builtins.diagnostics.shellcheck, -- `dnf install shellcheck`
             }
 
             require("null-ls").config({ sources, debug=true })

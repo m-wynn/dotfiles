@@ -9,7 +9,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    # neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 
     fenix = {
       url = "github:nix-community/fenix";
@@ -24,13 +24,13 @@
     };
 
     overlays = [
-      inputs.neovim-nightly-overlay.overlay
-      fenix.overlay
-      (self: super:
-        {
-          zsh-defer = super.callPackage ./pkgs/zsh-defer.nix { };
-        }
-      )
+      # inputs.neovim-nightly-overlay.overlay
+      # fenix.overlay
+      # (self: super:
+      #   {
+      #     zsh-defer = super.callPackage ./pkgs/zsh-defer.nix { };
+      #   }
+      # )
     ];
 
   in {

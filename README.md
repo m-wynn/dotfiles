@@ -1,5 +1,16 @@
 # Setup
 
+## Place this repository in ~/.config/nixpkgs
+
+```bash
+git clone git@github.com:m-wynn/dotfiles.git ~/.config/nixpkgs
+```
+or 
+```bash
+rm -r ~/.config/nixpkgs
+ln -s ~/dotfiles ~/.confix/nixpkgs
+```
+
 ## Install nix
 
 ```bash
@@ -11,7 +22,7 @@ sh <(curl -L https://nixos.org/nix/install)
 
 ```bash
 nix-env -iA nixpkgs.nixFlakes
-??? > /etc/nix/nix.conf "experimental-features = nix-command flakes"
+echo "experimental-features = nix-command flakes" | sudo tee /etc/nix/nix.conf 
 ```
 
 ## Add cachix
@@ -28,3 +39,13 @@ nix-channel --add https://github.com/nix-community/home-manager/archive/master.t
 nix-channel --update
 nix-shell '<home-manager>' -A install
 ```
+
+## Switch to the proper home-manager config
+
+E.g. for the WSL profile:
+
+```bash
+ home-manager switch --flake ~/.config/nixpkgs/\#wsl -v
+
+```
+

@@ -13,7 +13,7 @@ map('n', '<ESC>', '<cmd>nohlsearch<CR><Esc>')
 
 map('n', '//', '*')
 map('n', '??', '#')
-map('n', ';', ':')
+-- map('n', ';', ':')
 
 -- I find myself opening files in the same folder a lot
 map('n', '<C-e>', ':e %:h/')

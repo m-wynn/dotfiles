@@ -42,14 +42,6 @@ return require('packer').startup({function()
     use {'tpope/vim-eunuch'}
     use {'tpope/vim-fugitive'}
     use {'tpope/vim-rhubarb'}
-    -- use {'lotabout/skim.vim',
-    --     requires = {{'lotabout/skim', run='./install'}},
-    --     config = function()
-    --         MAP("n", "<leader>f", [[<Cmd>:Files<CR>]], {noremap = true})
-    --         MAP("n", "<leader>s", [[<Cmd>:Rg<CR>]], {noremap = true})
-    --         MAP("n", "<leader>b", [[<Cmd>:Buffers<CR>]], {noremap = true})
-    --     end
-    -- }
     use {
         'nvim-telescope/telescope.nvim',
         requires = { {'nvim-lua/plenary.nvim'} },
@@ -84,11 +76,11 @@ return require('packer').startup({function()
 
         end
     }
-    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make',
-        config = function()
-            require('telescope').load_extension('fzf')
-        end
-    }
+    -- use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make',
+    --     config = function()
+    --         require('telescope').load_extension('fzf')
+    --     end
+    -- }
     use {
         "nvim-telescope/telescope-frecency.nvim",
         config = function()
@@ -113,7 +105,6 @@ return require('packer').startup({function()
         requires = {'kyazdani42/nvim-web-devicons'},
         config = function()
             vim.g.nvim_tree_git_hl = 1
-            vim.g.nvim_tree_gitignore = 1
             vim.g.nvim_tree_show_icons = {
                 git = 1,
                 folders = 1,
@@ -122,6 +113,7 @@ return require('packer').startup({function()
             require'nvim-tree'.setup {
                 disable_netrw = false,
                 auto_close = false,
+                gitignore = 1,
                 open_on_setup = false,
                 update_to_buf_dir   = {
                     enable = false,
@@ -277,7 +269,7 @@ return require('packer').startup({function()
             }
         end
     }
-    use {'sheerun/vim-polyglot'}
+    -- use {'sheerun/vim-polyglot'}
 
     -- completion
     use {'nvim-lua/completion-nvim',
@@ -320,11 +312,11 @@ return require('packer').startup({function()
     }
     use {'machakann/vim-sandwich'}
     use {'michaeljsmith/vim-indent-object'}
-    use {'rhysd/clever-f.vim',
-        config = function()
-            vim.g.clever_f_smart_case = 1
-        end
-    }
+    -- use {'rhysd/clever-f.vim',
+    --     config = function()
+    --         vim.g.clever_f_smart_case = 1
+    --     end
+    -- }
     use {'tpope/vim-abolish'}
     use {'tpope/vim-commentary'}
     use {'tpope/vim-ragtag'}
@@ -397,7 +389,11 @@ return require('packer').startup({function()
         end
     }
 
-    -- use {'andrewstuart/vim-kubernetes'}
+    use {"unblevable/quick-scope", 
+        config = function()
+            vim.g.qs_highlight_on_keys = {'f', 'F', 't', 'T'}
+        end
+    }
 end,
 config = {
   display = {

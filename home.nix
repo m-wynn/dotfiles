@@ -27,6 +27,8 @@
     pkgs.terraform
     pkgs.tmux
 
+    pkgs.python39
+    pkgs.python39Packages.pynvim
 
     # linters and checkers
     pkgs.checkov
@@ -45,7 +47,5 @@
     pkgs.rustup
     pkgs.libstdcxx5
     pkgs.gcc
-
-    pkgs.vimPlugins.telescope-frecency-nvim
   ];
 }

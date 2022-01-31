@@ -15,8 +15,8 @@ vim.cmd [[packadd packer.nvim]]
 
 vim.cmd([[
   augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost packages.lua source <afile> | PackerCompile
+  autocmd!
+  autocmd BufWritePost packages.lua source <afile> | PackerCompile
   augroup end
 ]])
 
@@ -73,14 +73,17 @@ return require('packer').startup({function()
                     }
                 },
             }
+            require"telescope".load_extension("frecency")
+            MAP("n", "<leader><leader>", [[<cmd>lua require('telescope').extensions.frecency.frecency()<cr>]], {noremap = true})
+
 
         end
     }
-    -- use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make',
-    --     config = function()
-    --         require('telescope').load_extension('fzf')
-    --     end
-    -- }
+    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make',
+        config = function()
+            require('telescope').load_extension('fzf')
+        end
+    }
     use {
         "nvim-telescope/telescope-frecency.nvim",
         config = function()
@@ -115,6 +118,8 @@ return require('packer').startup({function()
                 auto_close = false,
                 gitignore = 1,
                 open_on_setup = false,
+                nvim_tree_gitignore = 1,
+                nvim_tree_ignore = {'.git', 'node_modules', '.cache', '.terraform'},
                 update_to_buf_dir   = {
                     enable = false,
                     auto_open = true,
@@ -142,14 +147,14 @@ return require('packer').startup({function()
         requires = "kyazdani42/nvim-web-devicons",
         config = function()
             require("trouble").setup {
-                 use_lsp_diagnostic_signs = false,
-                 auto_close = true,
+                use_lsp_diagnostic_signs = false,
+                auto_close = true,
             }
             vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>Trouble<cr>",
-                {silent = true, noremap = true}
+            {silent = true, noremap = true}
             )
         end
-}
+    }
 
     -- lanugages
     use { "jose-elias-alvarez/null-ls.nvim",
@@ -169,82 +174,16 @@ return require('packer').startup({function()
                 null_ls.builtins.diagnostics.shellcheck, -- `dnf install shellcheck`
             }
 
-            require("null-ls").config({ sources, debug=true })
-            require("lspconfig")["null-ls"].setup({})
+            require("null-ls").setup({ sources, debug=true })
+            -- require("lspconfig")["null-ls"].setup({})
         end,
     }
-    use {'neovim/nvim-lspconfig',
-        config = function()
-            -- https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
-            local sumneko_lua_path = vim.env.HOME .. "/Documents/git/lua-language-server/"
 
-            local servers = {
-                terraformls = {},
-                rust_analyzer = {},
-                intelephense = {},
-                pyright = {},
-                yamlls = {},
-                sumneko_lua = {
-                    cmd = {sumneko_lua_path .. "bin/Linux/lua-language-server", "-E", sumneko_lua_path .. "main.lua"},
-                    settings = {
-                        Lua = {
-                            diagnostics = {
-                                globals = {"vim", "use"}
-                            }
-                        }
-                    }
-                },
-            }
-
-            local nvim_lsp = require('lspconfig')
-            local on_attach = function(client, bufnr)
-                local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-                -- local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
-                -- Mappings.
-                local opts = { noremap=true, silent=true }
-                buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-                buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-                buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-                buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-                buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-                buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-                buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-                buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-                buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-                buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-                buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-                buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-                buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-                buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-                buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-
-                -- Set some keybinds conditional on server capabilities
-                if client.resolved_capabilities.document_formatting then
-                    buf_set_keymap("n", "<C-f>", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-                elseif client.resolved_capabilities.document_range_formatting then
-                    buf_set_keymap("n", "<C-f>", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
-                end
-
-                -- Set autocommands conditional on server_capabilities
-                if client.resolved_capabilities.document_highlight then
-                    vim.api.nvim_exec([[
-                    hi LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
-                    hi LspReferenceText cterm=bold ctermbg=red guibg=LightYellow
-                    hi LspReferenceWrite cterm=bold ctermbg=red guibg=LightYellow
-                        ]], false)
-                end
-            end
-
-            -- -- Use a loop to conveniently both setup defined servers
-            -- -- and map buffer local keybindings when the language server attaches
-            for lsp_name, lsp_config in pairs(servers) do
-                local setup = {on_attach = on_attach}
-                for k, v in pairs(lsp_config) do setup[k] = v end
-                nvim_lsp[lsp_name].setup(setup)
-            end
-        end
+    -- completion
+    use {'ms-jpq/coq_nvim',
+        requires = {'ms-jpq/coq.artifacts', 'ms-jpq/coq.thirdparty', 'github/copilot.vim'},
     }
+    use {'neovim/nvim-lspconfig'}
     use {'nvim-treesitter/playground'}
     use {'nvim-treesitter/nvim-treesitter', run=':TSUpdate',
         config = function()
@@ -269,38 +208,8 @@ return require('packer').startup({function()
             }
         end
     }
-    -- use {'sheerun/vim-polyglot'}
+    use {'sheerun/vim-polyglot'}
 
-    -- completion
-    use {'nvim-lua/completion-nvim',
-        requires = {'steelsojka/completion-buffers', 'nvim-treesitter/completion-treesitter'},
-        config = function()
-            vim.cmd [[autocmd BufEnter * lua require'completion'.on_attach()]]
-            vim.o.completeopt="menuone,noinsert,noselect"
-            vim.o.shortmess = vim.o.shortmess .. "c"
-            vim.g.completion_enable_snippet = 'UltiSnips'
-            vim.g.completion_auto_change_source = 1
-            vim.g.completion_trigger_keyword_length = 3
-            vim.g.completion_chain_complete_list = {
-                default = {
-                    { complete_items = { 'snippet', 'lsp', 'ts', 'path', 'buffers' } },
-                    { mode = { '<c-p>' } },
-                    { mode = { '<c-n>' } }
-                },
-                TelescopePrompt = {},
-                frecency = {},
-            }
-
-            local function t(str)
-                return vim.api.nvim_replace_termcodes(str, true, true, true)
-            end
-
-            function _G.smart_tab()
-                return vim.fn.pumvisible() == 1 and t'<C-n>' or t'<Tab>'
-            end
-            MAP('i', '<Tab>', 'v:lua.smart_tab()', {expr = true, noremap = true})
-        end
-    }
 
     -- editing
     use {'AndrewRadev/splitjoin.vim'}
@@ -327,16 +236,82 @@ return require('packer').startup({function()
     use {'wellle/targets.vim'}
     use {'iamcco/markdown-preview.nvim', run='cd app & yarn install'}
 
-    -- snippets
-    use {'SirVer/ultisnips',
+    use {'gelguy/wilder.nvim',
+        requires = { "roxma/nvim-yarp", "romgrk/fzy-lua-native" },
+        run = ':UpdateRemotePlugins',
         config = function()
-            vim.g.UltiSnipsExpandTrigger='<c-y>'
-            vim.g.UltiSnipsJumpForwardTrigger='<c-b>'
-            vim.g.UltiSnipsJumpBackwardTrigger='<c-z>'
-            vim.g.UltiSnipsEditSplit='vertical'
-            vim.o.runtimepath = vim.o.runtimepath .. ",~/.config/nvim/my-snippets"
+            vim.cmd [[
+                call wilder#setup({'modes': [':', '/', '?']})
+
+                call wilder#set_option('pipeline', [
+                \   wilder#branch(
+                \     wilder#python_file_finder_pipeline({
+                \       'file_command': {_, arg -> stridx(arg, '.') != -1 ? ['fd', '-tf', '-H'] : ['fd', '-tf']},
+                \       'dir_command': ['fd', '-td'],
+                \     }),
+                \     wilder#substitute_pipeline({
+                \       'pipeline': wilder#python_search_pipeline({
+                \         'skip_cmdtype_check': 1,
+                \         'pattern': wilder#python_fuzzy_pattern({
+                \           'start_at_boundary': 0,
+                \         }),
+                \       }),
+                \     }),
+                \     wilder#cmdline_pipeline({
+                \       'fuzzy': 1,
+                \       'fuzzy_filter': has('nvim') ? wilder#lua_fzy_filter() : wilder#vim_fuzzy_filter(),
+                \     }),
+                \     [
+                \       wilder#check({_, x -> empty(x)}),
+                \       wilder#history(),
+                \     ],
+                \     wilder#python_search_pipeline({
+                \       'pattern': wilder#python_fuzzy_pattern({
+                \         'start_at_boundary': 0,
+                \       }),
+                \     }),
+                \   ),
+                \ ])
+
+                let s:highlighters = [
+                \ wilder#lua_fzy_highlighter() 
+                \ ]
+
+                let s:popupmenu_renderer = wilder#popupmenu_renderer(wilder#popupmenu_border_theme({
+                \ 'border': 'rounded',
+                \ 'empty_message': wilder#popupmenu_empty_message_with_spinner(),
+                \ 'highlighter': s:highlighters,
+                \ 'left': [
+                \   ' ',
+                \   wilder#popupmenu_devicons(),
+                \   wilder#popupmenu_buffer_flags({
+                \     'flags': ' a + ',
+                \     'icons': {'+': '', 'a': '', 'h': ''},
+                \   }),
+                \ ],
+                \ 'right': [
+                \   ' ',
+                \   wilder#popupmenu_scrollbar(),
+                \ ],
+                \ }))
+
+                let s:wildmenu_renderer = wilder#wildmenu_renderer({
+                \ 'highlighter': s:highlighters,
+                \ 'separator': ' · ',
+                \ 'left': [' ', wilder#wildmenu_spinner(), ' '],
+                \ 'right': [' ', wilder#wildmenu_index()],
+                \ })
+
+                call wilder#set_option('renderer', wilder#renderer_mux({
+                \ ':': s:popupmenu_renderer,
+                \ '/': s:wildmenu_renderer,
+                \ 'substitute': s:wildmenu_renderer,
+                \ }))
+                ]]
         end
     }
+
+    -- snippets
     use {'epilande/vim-react-snippets'}
     use {'honza/vim-snippets'}
     use {'juliosueiras/vim-terraform-snippets', run='rm snippets && mkdir snippets && mv terraform snippets/terraform' }
@@ -345,41 +320,46 @@ return require('packer').startup({function()
     -- ui
     use {'ap/vim-css-color'}
     use {
-      'hoob3rt/lualine.nvim',
-      requires = {'kyazdani42/nvim-web-devicons', opt = true},
+        'hoob3rt/lualine.nvim',
+        requires = {'kyazdani42/nvim-web-devicons', opt = true},
 
-    config = function()
-      require('lualine').setup{
-        options = {
-          theme = 'gruvbox',
+        config = function()
+            require('lualine').setup{
+                options = {
+                    theme = 'gruvbox',
 
-          section_separators = {'', ''},
+                    section_separators = {'', ''},
 
-          component_separators = {'', ''},
-          icons_enabled = true,
-        },
-        sections = {
-          lualine_a = { {'mode', upper = true} },
-          lualine_b = { {'branch', icon = ''} },
-          lualine_c = { {'filename', file_status = true} },
-          lualine_x = { 'encoding', 'fileformat', 'filetype' },
-          lualine_y = { 'progress' },
-          lualine_z = { 'location'  },
-        },
-        inactive_sections = {
-          lualine_a = {  },
-          lualine_b = {  },
-          lualine_c = { 'filename' },
-          lualine_x = { 'location' },
-          lualine_y = {  },
-          lualine_z = {  }
-        },
-      }
-    end
+                    component_separators = {'', ''},
+                    icons_enabled = true,
+                },
+                sections = {
+                    lualine_a = { {'mode', upper = true} },
+                    lualine_b = { {'branch', icon = ''} },
+                    lualine_c = { {'filename', file_status = true} },
+                    lualine_x = { 'encoding', 'fileformat', 'filetype' },
+                    lualine_y = { 'progress' },
+                    lualine_z = { 'location'  },
+                },
+                inactive_sections = {
+                    lualine_a = {  },
+                    lualine_b = {  },
+                    lualine_c = { 'filename' },
+                    lualine_x = { 'location' },
+                    lualine_y = {  },
+                    lualine_z = {  }
+                },
+            }
+        end
 
 
     }
-    use {"ellisonleao/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}
+    use {"ellisonleao/gruvbox.nvim",
+        requires = {"rktjmp/lush.nvim"},
+        config = function()
+            vim.cmd [[colorscheme gruvbox]]
+        end
+    }
 
     use {'romgrk/barbar.nvim',
         requires = {'kyazdani42/nvim-web-devicons', opt = true},
@@ -389,16 +369,84 @@ return require('packer').startup({function()
         end
     }
 
-    use {"unblevable/quick-scope", 
+    use {"unblevable/quick-scope",
         config = function()
             vim.g.qs_highlight_on_keys = {'f', 'F', 't', 'T'}
         end
     }
+    use {"mfussenegger/nvim-dap", 
+        config = function()
+            local dap = require('dap')
+            dap.adapters.php = {
+                type = 'executable',
+                command = 'node',
+                args = { '/Users/matthew/Documents/git/vscode-php-debug/out/phpDebug.js' }
+            }
+
+            dap.configurations.php = {
+            {
+                    type = 'php',
+                    request = 'launch',
+                    name = 'Listen for Xdebug',
+                    port = 9000,
+                    pathMappings = {
+                        ['/srv/www/multisite'] = '/Users/matthew/Documents/git/multisite/multisite',
+                        ['/srv/www/private'] = '/Users/matthew/Documents/git/multisite/private',
+                        ['/srv/www/public'] = '/Users/matthew/Documents/git/multisite/public',
+                        ['/srv/www/public/index.php'] = '/Users/matthew/Documents/git/multisite/public/index.php',
+                    },
+                    xdebugSettings = {
+                        max_data = -1
+                    },
+                }
+            }
+            function dapsidebars(str)
+                local widgets = require('dap.ui.widgets')
+                local scopes = widgets.sidebar(widgets.scopes)
+                local frames = widgets.sidebar(widgets.frames)
+                scopes.open()
+                frames.open()
+            end
+
+            MAP("n", "<leader>ec", [[<cmd>lua require('dap').continue()<cr>]], {noremap = true})
+            MAP("n", "<leader>es", [[<cmd>lua require('dap').step_over()<cr>]], {noremap = true})
+            MAP("n", "<leader>ei", [[<cmd>lua require('dap').step_into()<cr>]], {noremap = true})
+            MAP("n", "<leader>eo", [[<cmd>lua require('dap').step_out()<cr>]], {noremap = true})
+            MAP("n", "<leader>eb", [[<cmd>lua require('dap').toggle_breakpoint()<cr>]], {noremap = true})
+            MAP("n", "<leader>er", [[<cmd>lua require('dap').repl_open()<cr>]], {noremap = true})
+            MAP("n", "<leader>el", [[<cmd>lua require('dap').run_last()<cr>]], {noremap = true})
+            MAP("n", "<leader>eh", [[<cmd>lua require('dap.ui.widgets').hover()<cr>]], {noremap = true})
+            MAP("n", "<leader>ef", [[<cmd>lua require('dap.ui.widgets').hover()<cr>]], {noremap = true})
+        end
+    }
+    use {'theHamsta/nvim-dap-virtual-text',
+        config = function()
+            require("nvim-dap-virtual-text").setup {
+                enabled = true,
+                enabled_commands = true,
+                highlight_changed_variables = true,
+                highlight_new_as_changed = true,
+                show_stop_reason = true,
+                commented = true,
+                virt_text_pos = 'eol',
+                all_frames = false,
+                virt_lines = false,
+                virt_text_win_col = nil
+            }
+        end
+    }
+    use {"simrat39/rust-tools.nvim",
+        requires = {"nvim-lua/popup.nvim", "nvim-lua/plenary.nvim", "mfussenegger/nvim-dap"},
+        config = function()
+            require('rust-tools').setup({})
+        end
+    }
 end,
-config = {
-  display = {
-    open_fn = function()
-      return require('packer.util').float({ border = 'single' })
-    end
-  }
-}})
+    config = {
+        display = {
+            open_fn = function()
+                return require('packer.util').float({ border = 'single' })
+            end
+        }
+    }
+})

@@ -19,3 +19,11 @@ if [[ -r ~/.config/zsh/local.zsh ]]; then
 fi
 source "$HOME/.cargo/env"
 export LBC_VERSION="v2.0.0"
+
+# export LD_LIBRARY_PATH="/usr/lib64"
+# export LIBRARY_PATH="/usr/lib64"
+# export PKG_CONFIG_PATH="/usr/lib64/pkgconfig"
+
+. "$HOME/.nix-profile/etc/profile.d/nix.sh"
+. ~/.nix-profile/etc/profile.d/hm-session-vars.sh
+

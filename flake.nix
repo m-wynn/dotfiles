@@ -2,59 +2,71 @@
   description = "m-wynn/dotfiles";
   inputs = {
 
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-22.05-darwin";
+    trunk.url = "github:nixos/nixpkgs";
+    # unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     home = {
-      url = "github:nix-community/home-manager";
+      url = "https://github.com/nix-community/home-manager/archive/release-22.05.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-
-    fenix = {
-      url = "github:nix-community/fenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = inputs @ { self, home, nixpkgs, fenix, ... }:
   let
     nixpkgs_config = {
       allowUnfree = true;
+      allowBroken = true;
     };
-
+    nixpkgs-stable_config = {
+      allowUnfree = true;
+    };
     overlays = [
-      # inputs.neovim-nightly-overlay.overlay
-      # fenix.overlay
-      # (self: super:
-      #   {
-      #     zsh-defer = super.callPackage ./pkgs/zsh-defer.nix { };
-      #   }
-      # )
+      # Inject 'unstable' and 'trunk' into the overridden package set, so that
+      # the following overlays may access them (along with any system configs
+      # that wish to do so).
+      (self: super: {
+        zsh-defer = super.callPackage ./pkgs/zsh-defer.nix { };
+        unstable = import inputs.nixpkgs { system = self.system; };
+        stable = import inputs.nixpkgs { system = self.system; };
+        trunk = import inputs.trunk { system = self.system; };
+      })
     ];
+
 
   in {
     homeConfigurations = {
-      work = home.lib.homeManagerConfiguration {
-        system = "amd64-darwin";
-        username = "m-wynn";
-        homeDirectory = "/Users/m-wynn";
+      matthew = home.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+        system = "aarch64-darwin";
+        username = "matthew";
+        homeDirectory = "/Users/matthew";
+        stateVersion = "22.05";
         configuration = { pkgs, imports, ... }:
           {
-            imports = [ ./home.nix ];
+            imports = [
+              ./home.nix
+              ./shell.nix
+            ];
             nixpkgs.overlays = overlays;
           };
       };
 
       wsl = home.lib.homeManagerConfiguration {
-        system = "x86_64-linux";
-        username = "matthew";
-        homeDirectory = "/home/matthew";
-        configuration = { pkgs, imports, ... }:
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        modules = [
+          ./home.nix
           {
-            imports = [ ./home.nix ];
             nixpkgs.overlays = overlays;
-          };
+            home = {
+              username = "matthew";
+              homeDirectory = "/home/matthew";
+              stateVersion = "22.05";
+            };
+          }
+        ];
       };
     };
   };

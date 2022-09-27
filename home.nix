@@ -1,94 +1,114 @@
 { config, pkgs, ... }:
 let
-  python-with-packages = pkgs.python3.withPackages (pp: with pp; [
-
-  ]);
-
 in
   {
     programs.home-manager.enable = true;
+    home.packages = with pkgs; [
+      trunk.kitty
 
-    home.packages = [
+      prometheus-alertmanager
 
-    # shell
-    pkgs.zoxide
-    pkgs.starship
-    pkgs.grc
+      prometheus
 
-    # shell programs
-    pkgs.bat
-    pkgs.delta
-    pkgs.exa
-    pkgs.fd
-    pkgs.gh
-    pkgs.helm
-    pkgs.htop
-    pkgs.k9s
-    pkgs.kubectl
-    pkgs.ripgrep
-    pkgs.skim
-    pkgs.sqlite
-    pkgs.terraform
-    pkgs.tmux
+      zsh-defer
+      zsh-you-should-use
+      zsh-fast-syntax-highlighting
+      zsh-completions
+      zsh-autosuggestions
+      grc
+      zoxide
+      nomad
 
-    # pkgs.python39
-    python-with-packages
+      fzf
 
-    # linters and checkers
-    pkgs.checkov
-    pkgs.ctags
-    pkgs.deno
-    pkgs.pyright
-    pkgs.rnix-lsp
-    pkgs.terraform-ls
-    pkgs.openssl
-    pkgs.pkg-config
-    pkgs.sumneko-lua-language-server
+      bat-extras.batdiff
+      bat-extras.batgrep
+      bat-extras.batman
+      bat-extras.batwatch
+      bat-extras.prettybat
+      trunk.awscli2
+      bat
+      delta
+      exa
+      fd
+      gh
+      htop
+      json2hcl
+      k9s
+      kubectl
+      kubelogin-oidc
+      trunk.kubernetes-helm
+      ripgrep
+      sqlite
+      terraform
+      tmux
 
-    pkgs.nodePackages.eslint_d
-    pkgs.nodePackages.fixjson
+      (python3.withPackages (pp: with pp; [
+        boto3
+        botocore
+        cryptography
+        isort
+        psutil
+        pip
+        pyyaml
+        flake8
+        black
+      ]))
+      poetry
 
-    # Compilers
-    pkgs.rustup
-    pkgs.libstdcxx5
-    pkgs.gcc
+      checkov
+      ctags
+      deno
+      pyright
+      rnix-lsp
+      terraform-ls
+      openssl
+      pkg-config
+      sumneko-lua-language-server
+      nodePackages.yaml-language-server
 
-  ];
+      nodePackages.eslint_d
+      nodePackages.fixjson
 
-  home.sessionVariables = {
-    PYTHONPATH = "${python-with-packages}/${python-with-packages.sitePackages}";
-  };
-  programs.neovim = {
-    enable = true;
-    package = pkgs.neovim-unwrapped;
-    vimAlias = true;
-    vimdiffAlias = true;
-    withPython3 = true;
-    extraPython3Packages = (ps: with ps; [
-      msgpack
-      pynvim
-    ]);
-    extraPackages = [
-      pkgs.sqlite
-      pkgs.tree-sitter
+      rustup
+      gcc
+      cmake
     ];
-    plugins =  with pkgs.vimPlugins; [
-      yankring
-      vim-nix
-      { plugin = sqlite-lua; }
-    ];
-    extraConfig = builtins.concatStringsSep "\n" [
-      ''
-      luafile ${builtins.toString /home/matthew/.config/nvim/init_lua.lua}
-      ''
-    ];
-  };
-  xdg.configFile."nvim" = {
-    source = ./.config/nvim;
-    recursive = true;
-  };
-  xdg.configFile."zsh" = {
-    source = ./.config/zsh;
-    recursive = true;
-  };
-}
+
+    home.sessionVariables = {
+      EDITOR = "nvim";
+      MANPAGER = "sh -c 'col -bx | bat -l man -p'";
+    };
+    programs.neovim = {
+      enable = true;
+      package = pkgs.trunk.neovim-unwrapped;
+      vimAlias = true;
+      vimdiffAlias = true;
+      withPython3 = true;
+      extraPython3Packages = (ps: with ps; [
+        msgpack
+        pynvim
+        pyyaml
+      ]);
+      extraPackages = [
+        pkgs.checkov
+        pkgs.sqlite
+        pkgs.tree-sitter
+        pkgs.pyright
+      ];
+      plugins =  with pkgs.vimPlugins; [
+        yankring
+        vim-nix
+        { plugin = sqlite-lua; }
+      ];
+      extraConfig = builtins.concatStringsSep "\n" [
+        ''
+          luafile ${builtins.toString /Users/matthew/.config/nvim/init_lua.lua}
+        ''
+      ];
+    };
+    xdg.configFile."nvim" = {
+      source = ./.config/nvim;
+      recursive = true;
+    };
+  }

@@ -1,5 +1,4 @@
 local null_ls = require("null-ls")
-
 local checkov_source = {
   method = null_ls.methods.DIAGNOSTICS,
   filetypes = { "terraform" },

@@ -26,7 +26,7 @@ command! Bdi :call DeleteInactiveBufs()
 
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
-set foldlevelstart=2
+set foldlevelstart=3
 
 lua << EOF
 EOF

@@ -2,8 +2,9 @@ export STARSHIP_CONFIG=~/.config/zsh/starship.toml
 export FZF_MARKS_COMMAND="sk --height 40% --reverse"
 export SKIM_DEFAULT_OPTIONS="--tiebreak=score,index"
 export ZSH_AUTOSUGGEST_HISTORY_IGNORE="cd *|?(#c50,)"
-source ~/.zinit/bin/zinit.zsh
-source ~/.config/zsh/zinit.zsh
+source ~/.config/zsh/.zshnew
+
+eval "$(starship init zsh)"
 
 autoload -Uz edit-command-line
 zle -N edit-command-line
@@ -68,6 +69,7 @@ if [ -f "$HOME/Downloads/google-cloud-sdk/completion.zsh.inc" ]; then source "$H
 
 compdef _gnu_generic delta
 
+source ~/.config/zsh/aliases/init.zsh
 
 # # >>> conda initialize >>>
 # # !! Contents within this block are managed by 'conda init' !!
@@ -84,3 +86,5 @@ compdef _gnu_generic delta
 # unset __conda_setup
 # # <<< conda initialize <<<
 
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /Users/matthew/.nix-profile/bin/terraform terraform

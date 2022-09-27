@@ -5,10 +5,10 @@ local fn = vim.fn
 
 pcall(require("local"))
 
-local install_path = fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
+local install_path = fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
 
 if fn.empty(fn.glob(install_path)) > 0 then
-    execute('!git clone https://github.com/wbthomason/packer.nvim '..install_path)
+    execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
 end
 
 vim.cmd [[packadd packer.nvim]]
@@ -20,41 +20,41 @@ vim.cmd([[
   augroup end
 ]])
 
-return require('packer').startup({function()
-    use {'wbthomason/packer.nvim',
+return require('packer').startup({ function()
+    use { 'wbthomason/packer.nvim',
         opt = true,
     }
     -- lua
-    use {'svermeulen/vimpeccable'}
-    use {'nvim-lua/plenary.nvim'}
+    use { 'svermeulen/vimpeccable' }
+    use { 'nvim-lua/plenary.nvim' }
 
     -- navigation and tools
-    use {'airblade/vim-rooter'}
-    use {'jreybert/vimagit'}
-    use {'kassio/neoterm',
+    use { 'airblade/vim-rooter' }
+    use { 'jreybert/vimagit' }
+    use { 'kassio/neoterm',
         config = function()
             vim.g.neoterm_default_mod = "vertical"
             vim.g.neoterm_size = "120"
-            MAP("n", "<leader>tt", "<cmd>T cd $(dirname %:p)/<CR>", {noremap = true})
+            MAP("n", "<leader>tt", "<cmd>T cd $(dirname %:p)/<CR>", { noremap = true })
         end
     }
-    use {'tommcdo/vim-fubitive'}
-    use {'tpope/vim-eunuch'}
-    use {'tpope/vim-fugitive'}
-    use {'tpope/vim-rhubarb'}
+    use { 'tommcdo/vim-fubitive' }
+    use { 'tpope/vim-eunuch' }
+    use { 'tpope/vim-fugitive' }
+    use { 'tpope/vim-rhubarb' }
     use {
         'nvim-telescope/telescope.nvim',
-        requires = { {'nvim-lua/plenary.nvim'} },
+        requires = { { 'nvim-lua/plenary.nvim' } },
         config = function()
-            MAP("n", "<leader>f", [[<cmd>lua require('telescope.builtin').find_files()<cr>]], {noremap = true})
-            MAP("n", "<leader>s", [[<cmd>lua require('telescope.builtin').live_grep()<cr>]], {noremap = true})
-            MAP("n", "<leader>b", [[<cmd>lua require('telescope.builtin').buffers()<cr>]], {noremap = true})
-            MAP("n", "<leader>r", [[<cmd>lua require('telescope.builtin').lsp_references()<cr>]], {noremap = true})
-            MAP("n", "<leader>w", [[<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols()<cr>]], {noremap = true})
-            MAP("n", "<leader>gs", [[<cmd>lua require('telescope.builtin').git_status()<cr>]], {noremap = true})
-            MAP("n", "<leader>gb", [[<cmd>lua require('telescope.builtin').git_branches()<cr>]], {noremap = true})
-            MAP("n", "<leader>gc", [[<cmd>lua require('telescope.builtin').git_bcommits()<cr>]], {noremap = true})
-            MAP("n", "<leader>a", [[<cmd>lua require('telescope.builtin').lsp_code_actions(require('telescope.themes').get_cursor({}))<cr>]], {noremap = true})
+            MAP("n", "<leader>f", [[<cmd>lua require('telescope.builtin').find_files()<cr>]], { noremap = true })
+            MAP("n", "<leader>s", [[<cmd>lua require('telescope.builtin').live_grep()<cr>]], { noremap = true })
+            MAP("n", "<leader>b", [[<cmd>lua require('telescope.builtin').buffers()<cr>]], { noremap = true })
+            MAP("n", "<leader>r", [[<cmd>lua require('telescope.builtin').lsp_references()<cr>]], { noremap = true })
+            MAP("n", "<leader>w", [[<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols()<cr>]], { noremap = true })
+            MAP("n", "<leader>gs", [[<cmd>lua require('telescope.builtin').git_status()<cr>]], { noremap = true })
+            MAP("n", "<leader>gb", [[<cmd>lua require('telescope.builtin').git_branches()<cr>]], { noremap = true })
+            MAP("n", "<leader>gc", [[<cmd>lua require('telescope.builtin').git_bcommits()<cr>]], { noremap = true })
+            MAP("n", "<leader>a", [[<cmd>lua require('telescope.builtin').lsp_code_actions(require('telescope.themes').get_cursor({}))<cr>]], { noremap = true })
             local trouble = require("trouble.providers.telescope")
             require('telescope').setup {
                 defaults = {
@@ -67,19 +67,17 @@ return require('packer').startup({function()
                     frecency = {
                         show_scores = false,
                         show_unindexed = false,
-                        ignore_patterns = {"*.git/*", "*/tmp/*", "*/.terraform/*", "*venv/*"},
+                        ignore_patterns = { "*.git/*", "*/tmp/*", "*/.terraform/*", "*venv/*" },
                         disable_devicons = false,
                         workspaces = WORKSPACES
                     }
                 },
             }
-            require"telescope".load_extension("frecency")
-            MAP("n", "<leader><leader>", [[<cmd>lua require('telescope').extensions.frecency.frecency()<cr>]], {noremap = true})
-
-
+            require "telescope".load_extension("frecency")
+            MAP("n", "<leader><leader>", [[<cmd>lua require('telescope').extensions.frecency.frecency()<cr>]], { noremap = true })
         end
     }
-    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make',
+    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
         config = function()
             require('telescope').load_extension('fzf')
         end
@@ -87,44 +85,29 @@ return require('packer').startup({function()
     use {
         "nvim-telescope/telescope-frecency.nvim",
         config = function()
-            require"telescope".load_extension("frecency")
-            MAP("n", "<leader><leader>", [[<cmd>lua require('telescope').extensions.frecency.frecency()<cr>]], {noremap = true})
+            require "telescope".load_extension("frecency")
+            MAP("n", "<leader><leader>", [[<cmd>lua require('telescope').extensions.frecency.frecency()<cr>]], { noremap = true })
 
         end,
-        requires = {"tami5/sqlite.lua"}
+        requires = { "tami5/sqlite.lua" }
     }
 
-    use {'nvim-telescope/telescope-project.nvim',
+    use { 'nvim-telescope/telescope-project.nvim',
         config = function()
             require('telescope').load_extension('project')
-            MAP("n", "<leader>p", [[<cmd>lua require('telescope').extensions.project.project{}<cr>]], {noremap = true})
+            MAP("n", "<leader>p", [[<cmd>lua require('telescope').extensions.project.project{}<cr>]], { noremap = true })
         end
     }
-    use {'justinmk/vim-dirvish'}
+    use { 'justinmk/vim-dirvish' }
 
-    -- nerdtree
+    -- nvimtree
     use {
         'kyazdani42/nvim-tree.lua',
-        requires = {'kyazdani42/nvim-web-devicons'},
+        requires = { 'kyazdani42/nvim-web-devicons' },
         config = function()
-            vim.g.nvim_tree_git_hl = 1
-            vim.g.nvim_tree_show_icons = {
-                git = 1,
-                folders = 1,
-                files = 1
-            }
-            require'nvim-tree'.setup {
+            require 'nvim-tree'.setup {
                 disable_netrw = false,
-                auto_close = false,
-                gitignore = 1,
                 open_on_setup = false,
-                nvim_tree_gitignore = 1,
-                nvim_tree_ignore = {'.git', 'node_modules', '.cache', '.terraform'},
-                update_to_buf_dir   = {
-                    enable = false,
-                    auto_open = true,
-                },
-                ignore = {'.git', 'node_modules', '.cache', '.terraform'},
                 diagnostics = {
                     enable = false,
                     icons = {
@@ -134,12 +117,19 @@ return require('packer').startup({function()
                         error = "",
                     }
                 },
-                hijack_netrw = 1,
-                indent_markers = 1,
-                quit_on_open = false,
                 update_cwd = false,
+                renderer = {
+                    highlight_git = true,
+                    icons = {
+                        show = {
+                            git = true,
+                            folder = true,
+                            file = true
+                        }
+                    }
+                }
             }
-            MAP('n', '<c-n>', '<cmd>NvimTreeToggle<CR><c-w><c-p><cmd>NvimTreeFindFile<CR><c-w><c-p>', {noremap = true, silent = true})
+            MAP('n', '<c-n>', '<cmd>NvimTreeToggle<CR><c-w><c-p><cmd>NvimTreeFindFile<CR><c-w><c-p>', { noremap = true, silent = true })
         end
     }
     use {
@@ -151,44 +141,91 @@ return require('packer').startup({function()
                 auto_close = true,
             }
             vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>Trouble<cr>",
-            {silent = true, noremap = true}
+                { silent = true, noremap = true }
             )
         end
     }
 
     -- lanugages
     use { "jose-elias-alvarez/null-ls.nvim",
-        requires = {"nvim-lua/plenary.nvim", "neovim/nvim-lspconfig"},
+        requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
         config = function()
             local null_ls = require("null-ls")
             local sources = {
-                null_ls.builtins.formatting.eslint_d, -- `npm install -g eslint_d`
-                null_ls.builtins.formatting.fixjson,   -- `npm install -g fixjson`
-                null_ls.builtins.formatting.nginx_beautifier,  -- npm install -g nginxbeautifier`
-                null_ls.builtins.formatting.phpcbf, -- `composer global require "squizlabs/php_codesniffer=*"`
-                null_ls.builtins.formatting.prettierd, -- `npm install -g prettierd`
-                null_ls.builtins.formatting.sqlformat,  -- `pip3 install sqlformat`
-                null_ls.builtins.formatting.terraform_fmt, -- `dnf install terraform`
-                null_ls.builtins.formatting.phpcsfixer, -- `composer global require friendsofphp/php-cs-fixer`
-                null_ls.builtins.diagnostics.hadolint, -- `dnf install hadolint`
-                null_ls.builtins.diagnostics.shellcheck, -- `dnf install shellcheck`
+                null_ls.builtins.formatting.eslint_d,
+                null_ls.builtins.formatting.fixjson,
+                null_ls.builtins.formatting.nginx_beautifier,
+                null_ls.builtins.formatting.phpcbf,
+                null_ls.builtins.formatting.prettierd,
+                null_ls.builtins.formatting.sqlformat,
+                null_ls.builtins.formatting.terraform_fmt,
+                null_ls.builtins.formatting.phpcsfixer,
+                null_ls.builtins.formatting.isort,
+                null_ls.builtins.formatting.black,
+                null_ls.builtins.diagnostics.hadolint,
+                null_ls.builtins.diagnostics.shellcheck,
+                null_ls.builtins.diagnostics.flake8
             }
 
-            require("null-ls").setup({ sources, debug=true })
-            -- require("lspconfig")["null-ls"].setup({})
+            null_ls.setup({ sources = sources, debug = false })
         end,
     }
 
     -- completion
-    use {'ms-jpq/coq_nvim',
-        requires = {'ms-jpq/coq.artifacts', 'ms-jpq/coq.thirdparty', 'github/copilot.vim'},
+    use { 'ms-jpq/coq_nvim',
+        requires = { 'ms-jpq/coq.artifacts', 'ms-jpq/coq.thirdparty', 'github/copilot.vim' },
     }
-    use {'neovim/nvim-lspconfig'}
-    use {'nvim-treesitter/playground'}
-    use {'nvim-treesitter/nvim-treesitter', run=':TSUpdate',
+    use { 'neovim/nvim-lspconfig' }
+    use { 'nvim-treesitter/playground' }
+    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate',
         config = function()
-            require'nvim-treesitter.configs'.setup {
-                ensure_installed = "maintained",
+            require 'nvim-treesitter.configs'.setup {
+                ensure_installed = {
+                    "bash",
+                    "c",
+                    "cmake",
+                    "comment",
+                    "cpp",
+                    "css",
+                    "devicetree",
+                    "dockerfile",
+                    "gitattributes",
+                    "gitignore",
+                    "go",
+                    "hcl",
+                    "help",
+                    "hjson",
+                    "hocon",
+                    "html",
+                    "http",
+                    "java",
+                    "javascript",
+                    "jsdoc",
+                    "json",
+                    "json5",
+                    "jsonc",
+                    "kotlin",
+                    "latex",
+                    "llvm",
+                    "lua",
+                    "make",
+                    "markdown",
+                    "markdown_inline",
+                    "nix",
+                    "php",
+                    "phpdoc",
+                    "python",
+                    "regex",
+                    "ruby",
+                    "rust",
+                    "scss",
+                    "sql",
+                    "tsx",
+                    "typescript",
+                    "vim",
+                    "yaml",
+                },
+                ignore_install = { "phpdoc" },
                 highlight = {
                     enable = true,
                 },
@@ -208,35 +245,35 @@ return require('packer').startup({function()
             }
         end
     }
-    use {'sheerun/vim-polyglot'}
+    use { 'sheerun/vim-polyglot' }
 
 
     -- editing
-    use {'AndrewRadev/splitjoin.vim'}
-    use {'junegunn/vim-easy-align',
+    use { 'AndrewRadev/splitjoin.vim' }
+    use { 'junegunn/vim-easy-align',
         config = function()
             MAP('x', 'ga', '<Plug>(EasyAlign)', {})
             MAP('n', 'ga', '<Plug>(EasyAlign)', {})
         end
     }
-    use {'machakann/vim-sandwich'}
-    use {'michaeljsmith/vim-indent-object'}
+    use { 'machakann/vim-sandwich' }
+    use { 'michaeljsmith/vim-indent-object' }
     -- use {'rhysd/clever-f.vim',
     --     config = function()
     --         vim.g.clever_f_smart_case = 1
     --     end
     -- }
-    use {'tpope/vim-abolish'}
-    use {'tpope/vim-commentary'}
-    use {'tpope/vim-ragtag'}
-    use {'tpope/vim-repeat'}
-    use {'tpope/vim-sleuth'}
-    use {'tpope/vim-surround'}
-    use {'tpope/vim-unimpaired'}
-    use {'wellle/targets.vim'}
-    use {'iamcco/markdown-preview.nvim', run='cd app & yarn install'}
+    use { 'tpope/vim-abolish' }
+    use { 'tpope/vim-commentary' }
+    use { 'tpope/vim-ragtag' }
+    use { 'tpope/vim-repeat' }
+    use { 'tpope/vim-sleuth' }
+    use { 'tpope/vim-surround' }
+    use { 'tpope/vim-unimpaired' }
+    use { 'wellle/targets.vim' }
+    use { 'iamcco/markdown-preview.nvim', run = 'cd app & yarn install' }
 
-    use {'gelguy/wilder.nvim',
+    use { 'gelguy/wilder.nvim',
         requires = { "roxma/nvim-yarp", "romgrk/fzy-lua-native" },
         run = ':UpdateRemotePlugins',
         config = function()
@@ -312,69 +349,69 @@ return require('packer').startup({function()
     }
 
     -- snippets
-    use {'epilande/vim-react-snippets'}
-    use {'honza/vim-snippets'}
-    use {'juliosueiras/vim-terraform-snippets', run='rm snippets && mkdir snippets && mv terraform snippets/terraform' }
-    use {'noahfrederick/vim-skeleton'}
+    use { 'epilande/vim-react-snippets' }
+    use { 'honza/vim-snippets' }
+    use { 'juliosueiras/vim-terraform-snippets', run = 'rm snippets && mkdir snippets && mv terraform snippets/terraform' }
+    use { 'noahfrederick/vim-skeleton' }
 
     -- ui
-    use {'ap/vim-css-color'}
+    use { 'ap/vim-css-color' }
     use {
         'hoob3rt/lualine.nvim',
-        requires = {'kyazdani42/nvim-web-devicons', opt = true},
+        requires = { 'kyazdani42/nvim-web-devicons', opt = true },
 
         config = function()
-            require('lualine').setup{
+            require('lualine').setup {
                 options = {
                     theme = 'gruvbox',
 
-                    section_separators = {'', ''},
+                    section_separators = { '', '' },
 
-                    component_separators = {'', ''},
+                    component_separators = { '', '' },
                     icons_enabled = true,
                 },
                 sections = {
-                    lualine_a = { {'mode', upper = true} },
-                    lualine_b = { {'branch', icon = ''} },
-                    lualine_c = { {'filename', file_status = true} },
+                    lualine_a = { { 'mode', upper = true } },
+                    lualine_b = { { 'branch', icon = '' } },
+                    lualine_c = { { 'filename', file_status = true } },
                     lualine_x = { 'encoding', 'fileformat', 'filetype' },
                     lualine_y = { 'progress' },
-                    lualine_z = { 'location'  },
+                    lualine_z = { 'location' },
                 },
                 inactive_sections = {
-                    lualine_a = {  },
-                    lualine_b = {  },
+                    lualine_a = {},
+                    lualine_b = {},
                     lualine_c = { 'filename' },
                     lualine_x = { 'location' },
-                    lualine_y = {  },
-                    lualine_z = {  }
+                    lualine_y = {},
+                    lualine_z = {}
                 },
             }
         end
 
 
     }
-    use {"ellisonleao/gruvbox.nvim",
-        requires = {"rktjmp/lush.nvim"},
+    use { "ellisonleao/gruvbox.nvim",
+        requires = { "rktjmp/lush.nvim" },
         config = function()
             vim.cmd [[colorscheme gruvbox]]
         end
     }
 
-    use {'romgrk/barbar.nvim',
-        requires = {'kyazdani42/nvim-web-devicons', opt = true},
+    use { 'romgrk/barbar.nvim',
+        requires = { 'kyazdani42/nvim-web-devicons', opt = true },
         config = function()
-            MAP("n", "]b", [[<Cmd>:BufferNext<CR>]], {noremap = true})
-            MAP("n", "[b", [[<Cmd>:BufferPrevious<CR>]], {noremap = true})
+            MAP("n", "]b", [[<Cmd>:BufferNext<CR>]], { noremap = true })
+            MAP("n", "[b", [[<Cmd>:BufferPrevious<CR>]], { noremap = true })
         end
     }
 
-    use {"unblevable/quick-scope",
+    use { "unblevable/quick-scope",
         config = function()
-            vim.g.qs_highlight_on_keys = {'f', 'F', 't', 'T'}
+            vim.g.qs_highlight_on_keys = { 'f', 'F', 't', 'T' }
         end
     }
-    use {"mfussenegger/nvim-dap", 
+    use { "mfussenegger/nvim-dap",
         config = function()
             local dap = require('dap')
             dap.adapters.php = {
@@ -384,7 +421,7 @@ return require('packer').startup({function()
             }
 
             dap.configurations.php = {
-            {
+                {
                     type = 'php',
                     request = 'launch',
                     name = 'Listen for Xdebug',
@@ -408,18 +445,18 @@ return require('packer').startup({function()
                 frames.open()
             end
 
-            MAP("n", "<leader>ec", [[<cmd>lua require('dap').continue()<cr>]], {noremap = true})
-            MAP("n", "<leader>es", [[<cmd>lua require('dap').step_over()<cr>]], {noremap = true})
-            MAP("n", "<leader>ei", [[<cmd>lua require('dap').step_into()<cr>]], {noremap = true})
-            MAP("n", "<leader>eo", [[<cmd>lua require('dap').step_out()<cr>]], {noremap = true})
-            MAP("n", "<leader>eb", [[<cmd>lua require('dap').toggle_breakpoint()<cr>]], {noremap = true})
-            MAP("n", "<leader>er", [[<cmd>lua require('dap').repl_open()<cr>]], {noremap = true})
-            MAP("n", "<leader>el", [[<cmd>lua require('dap').run_last()<cr>]], {noremap = true})
-            MAP("n", "<leader>eh", [[<cmd>lua require('dap.ui.widgets').hover()<cr>]], {noremap = true})
-            MAP("n", "<leader>ef", [[<cmd>lua require('dap.ui.widgets').hover()<cr>]], {noremap = true})
+            MAP("n", "<leader>ec", [[<cmd>lua require('dap').continue()<cr>]], { noremap = true })
+            MAP("n", "<leader>es", [[<cmd>lua require('dap').step_over()<cr>]], { noremap = true })
+            MAP("n", "<leader>ei", [[<cmd>lua require('dap').step_into()<cr>]], { noremap = true })
+            MAP("n", "<leader>eo", [[<cmd>lua require('dap').step_out()<cr>]], { noremap = true })
+            MAP("n", "<leader>eb", [[<cmd>lua require('dap').toggle_breakpoint()<cr>]], { noremap = true })
+            MAP("n", "<leader>er", [[<cmd>lua require('dap').repl_open()<cr>]], { noremap = true })
+            MAP("n", "<leader>el", [[<cmd>lua require('dap').run_last()<cr>]], { noremap = true })
+            MAP("n", "<leader>eh", [[<cmd>lua require('dap.ui.widgets').hover()<cr>]], { noremap = true })
+            MAP("n", "<leader>ef", [[<cmd>lua require('dap.ui.widgets').hover()<cr>]], { noremap = true })
         end
     }
-    use {'theHamsta/nvim-dap-virtual-text',
+    use { 'theHamsta/nvim-dap-virtual-text',
         config = function()
             require("nvim-dap-virtual-text").setup {
                 enabled = true,
@@ -435,18 +472,29 @@ return require('packer').startup({function()
             }
         end
     }
-    use {"simrat39/rust-tools.nvim",
-        requires = {"nvim-lua/popup.nvim", "nvim-lua/plenary.nvim", "mfussenegger/nvim-dap"},
+    use { "simrat39/rust-tools.nvim",
+        requires = { "nvim-lua/popup.nvim", "nvim-lua/plenary.nvim", "mfussenegger/nvim-dap" },
         config = function()
             require('rust-tools').setup({})
         end
     }
-end,
-    config = {
-        display = {
-            open_fn = function()
-                return require('packer.util').float({ border = 'single' })
-            end
-        }
+
+    use { "towolf/vim-helm" }
+
+    use {
+      "cuducos/yaml.nvim",
+      ft = {"yaml"},
+      requires = {
+        "nvim-treesitter/nvim-treesitter",
+        "nvim-telescope/telescope.nvim"
+      },
     }
+end,
+config = {
+    display = {
+        open_fn = function()
+            return require('packer.util').float({ border = 'single' })
+        end
+    }
+}
 })

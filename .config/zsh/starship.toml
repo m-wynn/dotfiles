@@ -115,7 +115,7 @@ disabled = true
 [kubernetes]
 format = '[$symbol$context( \($namespace\))]($style) '
 symbol = 'ﴱ '
-disabled = true
+disabled = false
 
 [helm]
 disabled = true

@@ -16,7 +16,7 @@ man() {
 # Make aliases work in Sudo
 alias sudo="sudo "
 
-alias k="kubectl"
+alias k="grc kubectl"
 
 say() { mplayer "http://translate.google.com/translate_tts?tl=en&q=$1"; }
 

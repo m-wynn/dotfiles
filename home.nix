@@ -4,7 +4,7 @@ in
   {
     programs.home-manager.enable = true;
     home.packages = with pkgs; [
-      trunk.kitty
+      kitty
 
       prometheus-alertmanager
 
@@ -18,6 +18,7 @@ in
       grc
       zoxide
       nomad
+      krew
 
       fzf
 
@@ -29,19 +30,26 @@ in
       trunk.awscli2
       bat
       delta
+      dog
       exa
       fd
       gh
+      go
+      gopls
       htop
       json2hcl
       k9s
       kubectl
       kubelogin-oidc
+      mysql
       trunk.kubernetes-helm
       ripgrep
+      sad
       sqlite
       terraform
       tmux
+      yamllint
+      php82Packages.phpstan
 
       (python3.withPackages (pp: with pp; [
         boto3
@@ -61,11 +69,14 @@ in
       deno
       pyright
       rnix-lsp
-      terraform-ls
+      shellharden
+      trunk.terraform-ls
+      terraform-lsp
+      tflint
       openssl
       pkg-config
       sumneko-lua-language-server
-      nodePackages.yaml-language-server
+      trunk.nodePackages.yaml-language-server
 
       nodePackages.eslint_d
       nodePackages.fixjson
@@ -81,7 +92,7 @@ in
     };
     programs.neovim = {
       enable = true;
-      package = pkgs.trunk.neovim-unwrapped;
+      # package = pkgs.trunk.neovim-unwrapped;
       vimAlias = true;
       vimdiffAlias = true;
       withPython3 = true;

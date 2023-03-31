@@ -146,7 +146,6 @@
       man = "batman";
       bw = "batwatch";
       pbat = "prettybat";
-      k = "kubectl";
       cat = "bat --paging=never";
     };
     shellGlobalAliases = {
@@ -209,9 +208,6 @@
   zsh-defer source "${pkgs.grc}/etc/grc.zsh"
 
   zsh-defer eval "$(zoxide init zsh)"
-  zsh-defer alias k=kubectl
-
   '';
 
 }
-

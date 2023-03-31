@@ -156,7 +156,8 @@ return require('packer').startup({ function()
                 null_ls.builtins.formatting.fixjson,
                 null_ls.builtins.formatting.nginx_beautifier,
                 null_ls.builtins.formatting.phpcbf,
-                null_ls.builtins.formatting.prettierd,
+                -- null_ls.builtins.formatting.prettierd,
+                null_ls.builtins.formatting.shellharden,
                 null_ls.builtins.formatting.sqlformat,
                 null_ls.builtins.formatting.terraform_fmt,
                 null_ls.builtins.formatting.phpcsfixer,
@@ -173,9 +174,9 @@ return require('packer').startup({ function()
 
     -- completion
     use { 'ms-jpq/coq_nvim',
-        requires = { 'ms-jpq/coq.artifacts', 'ms-jpq/coq.thirdparty', 'github/copilot.vim' },
+        requires = { 'ms-jpq/coq.artifacts', 'ms-jpq/coq.thirdparty' },
     }
-    use { 'neovim/nvim-lspconfig' }
+    use { 'neovim/nvim-lspconfig', requires = { "Afourcat/treesitter-terraform-doc.nvim" } }
     use { 'nvim-treesitter/playground' }
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate',
         config = function()
@@ -220,6 +221,7 @@ return require('packer').startup({ function()
                     "rust",
                     "scss",
                     "sql",
+                    "terraform",
                     "tsx",
                     "typescript",
                     "vim",
@@ -351,7 +353,7 @@ return require('packer').startup({ function()
     -- snippets
     use { 'epilande/vim-react-snippets' }
     use { 'honza/vim-snippets' }
-    use { 'juliosueiras/vim-terraform-snippets', run = 'rm snippets && mkdir snippets && mv terraform snippets/terraform' }
+    use { 'juliosueiras/vim-terraform-snippets', run = 'rm -fr coq-user-snippets; mkdir coq-user-snippets && cat terraform/* >> coq-user-snippets/terraform.snip' }
     use { 'noahfrederick/vim-skeleton' }
 
     -- ui
@@ -480,6 +482,7 @@ return require('packer').startup({ function()
     }
 
     use { "towolf/vim-helm" }
+    use { "github/copilot.vim" }
 
     use {
       "cuducos/yaml.nvim",

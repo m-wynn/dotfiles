@@ -2,12 +2,12 @@
   description = "m-wynn/dotfiles";
   inputs = {
 
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-22.05-darwin";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-22.11-darwin";
     trunk.url = "github:nixos/nixpkgs";
     # unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     home = {
-      url = "https://github.com/nix-community/home-manager/archive/release-22.05.tar.gz";
+      url = "https://github.com/nix-community/home-manager/archive/release-22.11.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -40,18 +40,18 @@
     homeConfigurations = {
       matthew = home.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-        system = "aarch64-darwin";
-        username = "matthew";
-        homeDirectory = "/Users/matthew";
-        stateVersion = "22.05";
-        configuration = { pkgs, imports, ... }:
+        modules = [
+          ./home.nix
+          ./shell.nix
           {
-            imports = [
-              ./home.nix
-              ./shell.nix
-            ];
+            home = {
+              username = "matthew";
+              homeDirectory = "/Users/matthew";
+              stateVersion = "22.05";
+            };
             nixpkgs.overlays = overlays;
-          };
+          }
+        ];
       };
 
       wsl = home.lib.homeManagerConfiguration {

@@ -1,5 +1,67 @@
 { config, pkgs, ... }:
 {
+  programs.wezterm = {
+  };
+  programs.tmux = {
+    enable = true;
+    baseIndex = 1;
+    aggressiveResize = true;
+    historyLimit = 10000;
+    keyMode = "vi";
+    # mouse = true; # unsupported yet?
+    newSession = true;
+    plugins = with pkgs; [
+      tmuxPlugins.yank
+      tmuxPlugins.tmux-thumbs
+      { 
+        plugin = tmuxPlugins.mkTmuxPlugin {
+          pluginName = "catppuccin";
+          version = "4e48b09";
+          src = pkgs.fetchFromGitHub {
+            owner = "catppuccin";
+            repo = "tmux";
+            rev = "4e48b09a76829edc7b55fbb15467cf0411f07931";
+            sha256 = "bXEsxt4ozl3cAzV3ZyvbPsnmy0RAdpLxHwN82gvjLdU=";
+          };
+        };
+      }
+    ];
+    extraConfig = ''
+    set-option -g -q mouse on
+    set -g default-terminal "tmux-256color"
+    set-option -ga terminal-overrides ",xterm-256color:RGB"
+    set-option -sg escape-time 10
+    set -g @catppuccin_flavour 'mocha'
+    set -g status-position top
+
+    bind x kill-pane
+    bind r source-file "$HOME/.config/tmux/tmux.conf"
+
+    unbind %
+    bind h split-window -h -c "#{pane_current_path}"
+    unbind '"'
+    bind v split-window -v -c "#{pane_current_path}"
+
+    if-shell '[ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]' \
+    'unbind C-b;\
+    set-option -g prefix C-a;\
+    bind C-a send-prefix
+    bind -n M-Right next-window; \
+    bind -n M-Left previous-window; \
+    bind -n M-t new-window "#{pane_current_path}"; \
+    bind -n M-Up command-prompt "rename-window %%"; \
+    bind -n C-M-Left swap-window -t -1; \
+    bind -n C-M-Right swap-window -t +1'
+    if-shell '[ -z "$SSH_CLIENT" ] && [ -z "$SSH_TTY" ]' \
+    'bind -n S-Right next-window; \
+    bind -n S-Left previous-window; \
+    bind -n C-t new-window -c "#{pane_current_path}"; \
+    bind -n S-Up command-prompt "rename-window %%"; \
+    bind -n C-Left swap-window -t -1; \
+    bind -n C-Left swap-window -t -1; \
+    bind -n C-Right swap-window -t +1'
+    '';
+  };
   programs.kitty = {
     font = {
       name = "FiraCode Nerd Font Mono";
@@ -50,7 +112,15 @@
   programs.bat = {
     enable = true;
     config = {
-      theme = "gruvbox-dark";
+      theme = "Catppuccin-mocha";
+    };
+    themes = {
+      catppuccin-mocha = builtins.readFile (pkgs.fetchFromGitHub {
+        owner = "catppuccin";
+        repo = "bat";
+        rev = "ba4d16880d63e656acced2b7d4e034e4a93f74b1";
+        sha256 = "6WVKQErGdaqb++oaXnY3i6/GuH2FhTgK0v4TN4Y0Wbw=";
+      } + "/Catppuccin-mocha.tmTheme");
     };
   };
 
@@ -134,7 +204,15 @@
       terraform = {
         disabled = true;
       };
-    };
+      palette = "catppuccin_mocha";
+    } // builtins.fromTOML (builtins.readFile
+    (pkgs.fetchFromGitHub
+    {
+      owner = "catppuccin";
+      repo = "starship";
+      rev = "3e3e54410c3189053f4da7a7043261361a1ed1bc";
+      sha256 = "soEBVlq3ULeiZFAdQYMRFuswIIhI9bclIU8WXjxd7oY=";
+    } + /palettes/mocha.toml));
   };
   programs.zsh = {
     enable = true;

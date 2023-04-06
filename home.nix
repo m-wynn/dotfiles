@@ -64,7 +64,6 @@ in
       ]))
       poetry
 
-      checkov
       ctags
       deno
       pyright
@@ -78,6 +77,7 @@ in
       sumneko-lua-language-server
       trunk.nodePackages.yaml-language-server
 
+      nodejs
       nodePackages.eslint_d
       nodePackages.fixjson
 
@@ -102,7 +102,6 @@ in
         pyyaml
       ]);
       extraPackages = [
-        pkgs.checkov
         pkgs.sqlite
         pkgs.tree-sitter
         pkgs.pyright
@@ -114,7 +113,7 @@ in
       ];
       extraConfig = builtins.concatStringsSep "\n" [
         ''
-          luafile ${builtins.toString /Users/matthew/.config/nvim/init_lua.lua}
+          luafile ${builtins.toString /home/matthew/.config/nvim/init_lua.lua}
         ''
       ];
     };

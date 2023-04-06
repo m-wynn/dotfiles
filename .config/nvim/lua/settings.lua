@@ -29,9 +29,6 @@ vim.g.enable_reverse_font = true
 vim.g.enable_inverse_font = true
 vim.g.mapleader = ' '
 
-vim.g.airline_theme = 'gruvbox'
-vim.g.airline_powerline_fonts = true
-
 vim.o.termguicolors = true
 
 vim.o.showmatch = true

@@ -1,4 +1,3 @@
-"" vim-airline
 " Always show the status
 set laststatus=2
 " Don't show the mode below the statusline

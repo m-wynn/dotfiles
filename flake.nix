@@ -2,7 +2,8 @@
   description = "m-wynn/dotfiles";
   inputs = {
 
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-22.11-darwin";
+    # nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-22.11-darwin";
+    # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     trunk.url = "github:nixos/nixpkgs";
     # unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
@@ -28,6 +29,7 @@
       # the following overlays may access them (along with any system configs
       # that wish to do so).
       (self: super: {
+        fcitx-engines = self.fcitx5;
         zsh-defer = super.callPackage ./pkgs/zsh-defer.nix { };
         unstable = import inputs.nixpkgs { system = self.system; };
         stable = import inputs.nixpkgs { system = self.system; };
@@ -58,13 +60,14 @@
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         modules = [
           ./home.nix
+          ./shell.nix
           {
-            nixpkgs.overlays = overlays;
             home = {
               username = "matthew";
               homeDirectory = "/home/matthew";
               stateVersion = "22.05";
             };
+            nixpkgs.overlays = overlays;
           }
         ];
       };

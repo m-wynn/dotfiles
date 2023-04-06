@@ -5,6 +5,10 @@ in
     programs.home-manager.enable = true;
     home.packages = with pkgs; [
       kitty
+      wezterm
+      fira-code
+      discocss
+      discord
 
       prometheus-alertmanager
 
@@ -36,6 +40,7 @@ in
       gh
       go
       gopls
+      hadolint
       htop
       json2hcl
       k9s
@@ -50,6 +55,8 @@ in
       tmux
       yamllint
       php82Packages.phpstan
+      # php82Packages.phpcbf
+      # php82Packages.php-cs-fixer
 
       (python3.withPackages (pp: with pp; [
         boto3
@@ -113,7 +120,7 @@ in
       ];
       extraConfig = builtins.concatStringsSep "\n" [
         ''
-          luafile ${builtins.toString /home/matthew/.config/nvim/init_lua.lua}
+          luafile ${builtins.toString /Users/matthew/.config/nvim/init_lua.lua}
         ''
       ];
     };

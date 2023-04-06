@@ -52,13 +52,14 @@ return require('packer').startup({
                 MAP("n", "<leader>b", [[<cmd>lua require('telescope.builtin').buffers()<cr>]], { noremap = true })
                 MAP("n", "<leader>r", [[<cmd>lua require('telescope.builtin').lsp_references()<cr>]], { noremap = true })
                 MAP("n", "<leader>w", [[<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols()<cr>]],
-                { noremap = true })
+                    { noremap = true })
                 MAP("n", "<leader>gs", [[<cmd>lua require('telescope.builtin').git_status()<cr>]], { noremap = true })
                 MAP("n", "<leader>gb", [[<cmd>lua require('telescope.builtin').git_branches()<cr>]], { noremap = true })
                 MAP("n", "<leader>gc", [[<cmd>lua require('telescope.builtin').git_bcommits()<cr>]], { noremap = true })
                 MAP("n", "<leader>a",
-                [[<cmd>lua require('telescope.builtin').lsp_code_actions(require('telescope.themes').get_cursor({}))<cr>]],
-                { noremap = true })
+                    [[<cmd>lua require('telescope.builtin').lsp_code_actions(require('telescope.themes').get_cursor({}))<cr>]]
+                    ,
+                    { noremap = true })
                 local trouble = require("trouble.providers.telescope")
                 require('telescope').setup {
                     defaults = {
@@ -79,7 +80,7 @@ return require('packer').startup({
                 }
                 require "telescope".load_extension("frecency")
                 MAP("n", "<leader><leader>", [[<cmd>lua require('telescope').extensions.frecency.frecency()<cr>]],
-                { noremap = true })
+                    { noremap = true })
             end
         }
         -- use {'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
@@ -92,7 +93,7 @@ return require('packer').startup({
             config = function()
                 require "telescope".load_extension("frecency")
                 MAP("n", "<leader><leader>", [[<cmd>lua require('telescope').extensions.frecency.frecency()<cr>]],
-                { noremap = true })
+                    { noremap = true })
             end,
             requires = { "tami5/sqlite.lua" }
         }
@@ -101,7 +102,7 @@ return require('packer').startup({
             config = function()
                 require('telescope').load_extension('project')
                 MAP("n", "<leader>p", [[<cmd>lua require('telescope').extensions.project.project{}<cr>]],
-                { noremap = true })
+                    { noremap = true })
             end
         }
         use { 'justinmk/vim-dirvish' }
@@ -136,7 +137,7 @@ return require('packer').startup({
                     }
                 }
                 MAP('n', '<c-n>', '<cmd>NvimTreeToggle<CR><c-w><c-p><cmd>NvimTreeFindFile<CR><c-w><c-p>',
-                { noremap = true, silent = true })
+                    { noremap = true, silent = true })
             end
         }
         use {
@@ -152,7 +153,6 @@ return require('packer').startup({
                 )
             end
         }
-
         -- lanugages
         use { "jose-elias-alvarez/null-ls.nvim",
             requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
@@ -507,7 +507,15 @@ return require('packer').startup({
         }
 
         use { "towolf/vim-helm" }
-        use { "github/copilot.vim" }
+        use { "github/copilot.vim",
+            config = function()
+                vim.g.copilot_filetypes = {
+                    xml = false,
+                    json = false,
+                    yaml = false,
+                }
+            end
+        }
 
         use {
             "cuducos/yaml.nvim",

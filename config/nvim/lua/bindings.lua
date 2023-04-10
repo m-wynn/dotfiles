@@ -11,8 +11,8 @@ map('n', '//', '*')
 map('n', '??', '#')
 
 -- I find myself opening files in the same folder a lot
-map('n', '<C-e>', ':e %:h/', {silent = false})
-map('c', '<C-e>', '| e %:h/', {silent = false})
+map('n', '<C-e>', ':e ./' .. vim.fn.expand('%:h') .. '/', {silent = false})
+map('c', '<C-e>', '| e ./' .. vim.fn.expand('%:h') .. '/', {silent = false})
 
 -- Use relativenumber when in insertmode
 vim.cmd [[

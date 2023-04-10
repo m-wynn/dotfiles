@@ -8,7 +8,6 @@ in
       wezterm
       fira-code
       discocss
-      discord
 
       prometheus-alertmanager
 
@@ -89,6 +88,7 @@ in
       nodePackages.fixjson
 
       rustup
+      rust-analyzer
       gcc
       cmake
     ];
@@ -99,7 +99,7 @@ in
     };
     programs.neovim = {
       enable = true;
-      # package = pkgs.trunk.neovim-unwrapped;
+      package = pkgs.trunk.neovim-unwrapped;
       vimAlias = true;
       vimdiffAlias = true;
       withPython3 = true;
@@ -120,12 +120,12 @@ in
       ];
       extraConfig = builtins.concatStringsSep "\n" [
         ''
-          luafile ${builtins.toString /Users/matthew/.config/nvim/init_lua.lua}
+          luafile ${builtins.toString ~/.config/nvim/init_lua.lua}
         ''
       ];
     };
     xdg.configFile."nvim" = {
-      source = ./.config/nvim;
+      source = ./config/nvim;
       recursive = true;
     };
   }

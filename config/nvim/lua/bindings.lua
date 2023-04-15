@@ -1,5 +1,5 @@
 local function map(mode, lhs, rhs, opts)
-    local options = {noremap = true, silent = true}
+    local options = { noremap = true, silent = true }
     if opts then options = vim.tbl_extend('force', options, opts) end
     vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
@@ -11,8 +11,14 @@ map('n', '//', '*')
 map('n', '??', '#')
 
 -- I find myself opening files in the same folder a lot
-map('n', '<C-e>', ':e ./' .. vim.fn.expand('%:h') .. '/', {silent = false})
-map('c', '<C-e>', '| e ./' .. vim.fn.expand('%:h') .. '/', {silent = false})
+vim.keymap.set('n', '<C-e>',
+    function() return string.format(':e ./%s/', vim.fn.expand('%:h')) end,
+    { expr = true }
+)
+vim.keymap.set('c', '<C-e>',
+    function() return string.format('| e ./%s/', vim.fn.expand('%:h')) end,
+    { expr = true }
+)
 
 -- Use relativenumber when in insertmode
 vim.cmd [[
@@ -31,10 +37,11 @@ function _G.toggle_relativenumber()
         end
     ]]
 end
+
 map('n', '<C-m>', ':lua toggle_relativenumber()<CR>')
 
 -- Save files as sudo when I forget to start vim using sudo
-map('c',  'w!!', '!sudo tee > /dev/null')
+map('c', 'w!!', '!sudo tee > /dev/null')
 
 
 map('n', '<F12>', '<Esc>:syntax sync fromstart<CR>')
@@ -46,3 +53,9 @@ map('n', 'L', '$')
 
 -- When pasting in visual mode, don't overwrite the buffer
 map('v', 'p', '"_dP')
+
+vim.g.copilot_filetypes = {
+    xml = false,
+    json = false,
+    yaml = false,
+}

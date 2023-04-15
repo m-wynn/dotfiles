@@ -42,7 +42,7 @@ in
       hadolint
       htop
       json2hcl
-      k9s
+      trunk.k9s
       kubectl
       kubelogin-oidc
       mysql

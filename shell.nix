@@ -112,7 +112,7 @@
   programs.bat = {
     enable = true;
     config = {
-      theme = "Catppuccin-mocha";
+      theme = "catppuccin-mocha";
     };
     themes = {
       catppuccin-mocha = builtins.readFile (pkgs.fetchFromGitHub {
@@ -225,6 +225,7 @@
       bw = "batwatch";
       pbat = "prettybat";
       cat = "bat --paging=never";
+      k9s = "TERM=xterm-256color k9s";
     };
     shellGlobalAliases = {
       awsprod = "237107622521";

@@ -127,7 +127,6 @@ require('lazy').setup({
             'hrsh7th/cmp-nvim-lsp-signature-help',
             'hrsh7th/cmp-path',
             'andersevenrud/cmp-tmux',
-            'neovim/nvim-lspconfig',
             'saadparwaiz1/cmp_luasnip',
         },
         config = function()
@@ -247,8 +246,8 @@ require('lazy').setup({
             { "<leader>f", function() require('telescope.builtin').find_files() end, desc = "Telesope files" },
             { "<leader>s", function() require('telescope.builtin').live_grep() end },
             { "<leader>b", function() require('telescope.builtin').buffers() end },
-            { "<leader>r", function() require('telescope.builtin').lsp_references() end },
-            { "<leader>ws", function() require('telescope.builtin').lsp_dynamic_workleader_symbols() end },
+            { "<leader>rr", function() require('telescope.builtin').lsp_references() end },
+            { "<leader>ws", function() require('telescope.builtin').lsp_dynamic_workspace_symbols() end },
             { "<leader>gs", function() require('telescope.builtin').git_status() end },
             { "<leader>gb", function() require('telescope.builtin').git_branches() end },
             { "<leader>gc", function() require('telescope.builtin').git_bcommits() end },
@@ -279,11 +278,13 @@ require('lazy').setup({
             }
         end
     },
-    -- {'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
-    --     config = function()
-    --         require('telescope').load_extension('fzf')
-    --     end
-    -- },
+    {'nvim-telescope/telescope-fzf-native.nvim', 
+        dependencies = { 'nvim-telescope/telescope.nvim' },
+        build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
+        config = function()
+            require('telescope').load_extension('fzf')
+        end
+    },
     {
         "nvim-telescope/telescope-frecency.nvim",
         dependencies = { "tami5/sqlite.lua" },
@@ -370,74 +371,218 @@ require('lazy').setup({
         end,
     },
 
-    { 'neovim/nvim-lspconfig', dependencies = { "Afourcat/treesitter-terraform-doc.nvim" } },
+    { 'neovim/nvim-lspconfig', dependencies = { "Afourcat/treesitter-terraform-doc.nvim", "towolf/vim-helm", "hrsh7th/cmp-nvim-lsp" },
+        config = function()
+            vim.o.completeopt = "menuone,noinsert,noselect"
+            vim.o.shortmess = vim.o.shortmess .. "c"
+
+            local configs = require('lspconfig.configs')
+            local util = require('lspconfig.util')
+            if not configs.helm_ls then
+                configs.helm_ls = {
+                    default_config = {
+                        cmd = { "helm_ls", "serve" },
+                        filetypes = { 'helm' },
+                        root_dir = function(fname)
+                            return util.root_pattern('Chart.yaml')(fname)
+                        end,
+                    },
+                }
+            end
+            local servers = {
+                gopls = {},
+                terraformls = {},
+                -- terraform_lsp = {},
+                tflint = {},
+                rust_analyzer = {},
+                intelephense = {},
+                pyright = {},
+                yamlls = {
+                    settings = {
+                        yaml = {
+                            schemaDownload = {
+                                enable = true
+                            },
+                            schemas = {
+                                [vim.fn.expand("$HOME/Documents/schema/schemas/all.json")] = "*.yaml"
+                            },
+                            format = {
+                                enable = true,
+                                defaultConfig = {
+                                    indent_style = "space",
+                                    indent_size = "4",
+                                },
+                            },
+                            validate = true,
+                            hover = true,
+                            completion = true,
+                        }
+                    }
+                },
+                lua_ls = {
+                    settings = {
+                        Lua = {
+                            format = {
+                                enable = true,
+                            },
+                            runtime = {
+                                version = 'LuaJIT',
+                            },
+                            diagnostics = {
+                                globals = { 'vim' },
+                            },
+                            workspace = {
+                                library = vim.api.nvim_get_runtime_file("", true),
+                            },
+                            telemetry = {
+                                enable = false,
+                            }
+                        }
+                    }
+                },
+                helm_ls = {
+                    filetypes = { "helm" },
+                }
+            }
+
+            local nvim_lsp = require('lspconfig')
+            local opts = { noremap = true, silent = true }
+            vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
+            vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+            vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+            vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
+            local on_attach = function(client, bufnr)
+                if vim.bo[bufnr].filetype == "helm" and client.name == "yamlls" then
+                    vim.defer_fn(function()
+                        local clients = vim.lsp.get_active_clients()
+                        for client_id, c in pairs(clients) do
+                            if c.name == "yamlls" then
+                                vim.lsp.buf_detach_client(0, client_id)
+                            end
+                        end
+                    end, 1000)
+                    goto continue
+                end
+                local bufopts = { noremap = true, silent = true, buffer = bufnr }
+                if client.name == "yamlls" then
+                    client.server_capabilities.document_formatting = true
+                end
+                if client.name == "terraformls" then
+                    require('treesitter-terraform-doc').setup({
+                        command_name       = "OpenDoc",
+                        url_opener_command = "!open",
+                    })
+                    vim.keymap.set('n', '<leader>do', ':OpenDoc<cr>', bufopts)
+                end
+                -- Mappings.
+
+                vim.keymap.set("n", '<C-f>', function() vim.lsp.buf.format { async = true } end, bufopts)
+                vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+                vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+                vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+                vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+                vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+                vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+                vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+                vim.keymap.set('n', '<leader>wl', function()
+                    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+                end, bufopts)
+                vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
+                vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
+                vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+                vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
+                vim.keymap.set('n', '<leader>e', vim.lsp.diagnostic.show_line_diagnostics, bufopts)
+
+                -- Set autocommands conditional on server_capabilities
+                if client.server_capabilities.document_highlight then
+                    vim.api.nvim_exec([[
+                hi LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
+                hi LspReferenceText cterm=bold ctermbg=red guibg=LightYellow
+                hi LspReferenceWrite cterm=bold ctermbg=red guibg=LightYellow
+                    ]], false)
+                end
+                ::continue::
+            end
+
+            -- -- Use a loop to conveniently both setup defined servers
+            local capabilities = require('cmp_nvim_lsp').default_capabilities()
+            for lsp_name, lsp_config in pairs(servers) do
+                local setup = { on_attach = on_attach }
+                setup['capabilities'] = capabilities
+                for k, v in pairs(lsp_config) do setup[k] = v end
+                nvim_lsp[lsp_name].setup(setup)
+            end
+        end
+    },
     { 'nvim-treesitter/playground', lazy = true },
     { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate',
-        opts = {
-            ensure_installed = {
-                "bash",
-                "c",
-                "cmake",
-                "comment",
-                "cpp",
-                "css",
-                "devicetree",
-                "dockerfile",
-                "gitattributes",
-                "gitignore",
-                "go",
-                "hcl",
-                "hjson",
-                "hocon",
-                "html",
-                "http",
-                "java",
-                "javascript",
-                "jsdoc",
-                "json",
-                "json5",
-                "jsonc",
-                "kotlin",
-                "latex",
-                "llvm",
-                "lua",
-                "make",
-                "markdown",
-                "markdown_inline",
-                "nix",
-                "php",
-                "phpdoc",
-                "python",
-                "regex",
-                "ruby",
-                "rust",
-                "scss",
-                "sql",
-                "terraform",
-                "tsx",
-                "typescript",
-                "vim",
-                "vimdoc",
-                "yaml",
-            },
-            ignore_install = { "phpdoc" },
-            highlight = {
-                enable = true,
-            },
-            incremental_selection = {
-                enable = true,
-                keymaps = {
-                    init_selection = "gnn",
-                    node_incremental = "grn",
-                    scope_incremental = "grc",
-                    node_decremental = "grm",
+        config = function()
+            require("nvim-treesitter.configs").setup {
+                ensure_installed = {
+                    "bash",
+                    "c",
+                    "cmake",
+                    "comment",
+                    "cpp",
+                    "css",
+                    "devicetree",
+                    "dockerfile",
+                    "gitattributes",
+                    "gitignore",
+                    "go",
+                    "hcl",
+                    "hjson",
+                    "hocon",
+                    "html",
+                    "http",
+                    "java",
+                    "javascript",
+                    "jsdoc",
+                    "json",
+                    "json5",
+                    "jsonc",
+                    "kotlin",
+                    "latex",
+                    "llvm",
+                    "lua",
+                    "make",
+                    "markdown",
+                    "markdown_inline",
+                    "nix",
+                    "php",
+                    "phpdoc",
+                    "python",
+                    "regex",
+                    "ruby",
+                    "rust",
+                    "scss",
+                    "sql",
+                    "terraform",
+                    "tsx",
+                    "typescript",
+                    "vim",
+                    "vimdoc",
+                    "yaml",
                 },
-            },
-            indent = {
-                enable = true,
-                disable = { 'yaml' },
-            },
-        }
+                ignore_install = { "phpdoc" },
+                highlight = {
+                    enable = true,
+                },
+                incremental_selection = {
+                    enable = true,
+                    keymaps = {
+                        init_selection = "gnn",
+                        node_incremental = "grn",
+                        scope_incremental = "grc",
+                        node_decremental = "grm",
+                    },
+                },
+                indent = {
+                    enable = true,
+                    disable = { 'yaml' },
+                },
+            }
+        end
     },
 
     -- todo: replace with https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-align.md maybe?
@@ -586,9 +731,13 @@ require('lazy').setup({
         end
     },
 
-    { "towolf/vim-helm" },
+    { "towolf/vim-helm",
+        priority = 1000,
+    },
     { "github/copilot.vim",
         config = function()
+            vim.keymap.set('i', '<C-j>', 'copilot#Accept("\\<CR>")', { silent = true, script = true, expr = true })
+            vim.g.copilot_no_tab_map = true
             vim.g.copilot_filetypes = {
                 xml = false,
                 json = false,

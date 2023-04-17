@@ -134,4 +134,21 @@ return {
       require("mini.indentscope").setup()
     end,
   },
+  {
+    "zbirenbaum/copilot.lua",
+    opts = {
+      filetypes = {
+        json = false,
+        yaml = true,
+        markdown = false,
+        help = false,
+        gitcommit = false,
+        gitrebase = false,
+        hgcommit = false,
+        svn = false,
+        cvs = false,
+        ["."] = false,
+      },
+    },
+  },
 }

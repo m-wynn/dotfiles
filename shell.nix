@@ -6,7 +6,7 @@
     enable = true;
     baseIndex = 1;
     aggressiveResize = true;
-    historyLimit = 10000;
+    historyLimit = 30000;
     keyMode = "vi";
     # mouse = true; # unsupported yet?
     newSession = true;
@@ -26,9 +26,9 @@
         };
       }
     ];
+    terminal = "screen-256color";
     extraConfig = ''
     set-option -g -q mouse on
-    set -g default-terminal "tmux-256color"
     set-option -ga terminal-overrides ",xterm-256color:RGB"
     set-option -sg escape-time 10
     set -g @catppuccin_flavour 'mocha'
@@ -252,6 +252,12 @@
 
     autoload -Uz compinit
     compinit
+    '';
+
+    initExtraFirst=''
+    if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+    fi
     '';
     initExtra=''
     source "${pkgs.zsh-defer}/share/zsh/plugins/zsh-defer/zsh-defer.plugin.zsh"

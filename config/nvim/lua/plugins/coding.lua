@@ -40,6 +40,9 @@ return {
   },
   {
     "L3MON4D3/LuaSnip",
+    config = function()
+      require("luasnip.loaders.from_lua").lazy_load({ paths = "~/.config/nvim/snippets" })
+    end,
     keys = function()
       return {} -- disable default tab
     end,
@@ -88,19 +91,17 @@ return {
           end
         end, { "i", "s" }),
       })
-      opts.sources = cmp.config.sources(
-        vim.list_extend(opts.sources, {
-          { name = "luasnip" },
-          { name = "nvim_lsp" },
-          { name = "nvim_lua" },
-          { name = "calc" },
-          { name = "nvim_lsp_signature_help" },
-          { name = "tmux" },
-        }),
-        {
-          { name = "buffer" },
-        }
-      )
+      opts.sources = cmp.config.sources({
+        { name = "luasnip" },
+        { name = "nvim_lsp" },
+        { name = "nvim_lua" },
+        { name = "calc" },
+        { name = "nvim_lsp_signature_help" },
+        { name = "tmux" },
+      }, {
+        { name = "buffer" },
+        { name = "path" },
+      })
     end,
     config = function(_, opts)
       local cmp = require("cmp")

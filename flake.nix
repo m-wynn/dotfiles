@@ -31,6 +31,7 @@
       (self: super: {
         # fcitx-engines = self.fcitx5;
         zsh-defer = super.callPackage ./pkgs/zsh-defer.nix { };
+        terraform-zsh-plugin = super.callPackage ./pkgs/terraform-zsh-plugin.nix { };
         unstable = import inputs.nixpkgs { system = self.system; };
         stable = import inputs.nixpkgs { system = self.system; };
         trunk = import inputs.trunk { system = self.system; };

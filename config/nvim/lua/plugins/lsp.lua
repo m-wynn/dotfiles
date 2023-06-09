@@ -80,7 +80,7 @@ return {
                 cmd = { "helm_ls", "serve" },
                 filetypes = { "helm" },
                 root_dir = function(fname)
-                  return util.root_pattern("Chart.yaml")(fname)
+                  return (util.root_pattern("Chart.lock") or util.root_pattern("Chart.yaml"))(fname)
                 end,
               },
             }

@@ -8,6 +8,8 @@ in
       wezterm
       fira-code
       discocss
+      comma
+      dive
 
       prometheus-alertmanager
 
@@ -18,6 +20,7 @@ in
       zsh-fast-syntax-highlighting
       zsh-completions
       zsh-autosuggestions
+      terraform-zsh-plugin
       grc
       zoxide
       nomad

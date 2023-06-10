@@ -25,6 +25,7 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 require("lazy").setup({
   { "LazyVim/LazyVim", import = "lazyvim.plugins" },
   { import = "lazyvim.plugins.extras.coding.copilot" },
+  { import = "lazyvim.plugins.extras.ui.edgy" },
   { import = "plugins" },
   defaults = {
     lazy = false,

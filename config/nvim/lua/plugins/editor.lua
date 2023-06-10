@@ -11,6 +11,18 @@ return {
     },
   },
   {
+    "folke/edgy.nvim",
+    opts = {
+      animate = {
+        cps = 400,
+      },
+    },
+  },
+  {
+    "simrat39/symbols-outline.nvim",
+    cmd = "SymbolsOutline",
+  },
+  {
     "nvim-telescope/telescope-fzf-native.nvim",
     dependencies = { "nvim-telescope/telescope.nvim" },
     build = "make",

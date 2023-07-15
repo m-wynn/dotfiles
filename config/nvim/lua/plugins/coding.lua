@@ -59,6 +59,7 @@ return {
       "hrsh7th/cmp-nvim-lsp-signature-help",
       "hrsh7th/cmp-path",
       "andersevenrud/cmp-tmux",
+      "zbirenbaum/copilot-cmp",
       "saadparwaiz1/cmp_luasnip",
     },
     opts = function(_, opts)
@@ -92,9 +93,10 @@ return {
         end, { "i", "s" }),
       })
       opts.sources = cmp.config.sources({
-        { name = "luasnip" },
-        { name = "nvim_lsp" },
-        { name = "nvim_lua" },
+        { name = "copilot", group_index = 2 },
+        { name = "luasnip", group_index = 2 },
+        { name = "nvim_lsp", group_index = 2 },
+        { name = "nvim_lua", group_index = 2 },
         { name = "calc" },
         { name = "nvim_lsp_signature_help" },
         { name = "tmux" },
@@ -102,6 +104,21 @@ return {
         { name = "buffer" },
         { name = "path" },
       })
+      opts.sorting = {
+        priority_weight = 2,
+        comparators = {
+          require("copilot_cmp.comparators").prioritize,
+          cmp.config.compare.offset,
+          cmp.config.compare.exact,
+          cmp.config.compare.score,
+          cmp.config.compare.recently_used,
+          cmp.config.compare.locality,
+          cmp.config.compare.kind,
+          cmp.config.compare.sort_text,
+          cmp.config.compare.length,
+          cmp.config.compare.order,
+        },
+      }
     end,
     config = function(_, opts)
       local cmp = require("cmp")

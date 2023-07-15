@@ -110,6 +110,7 @@ return {
     build = "rm -fr coq-user-snippets; mkdir coq-user-snippets && cat terraform/* >> coq-user-snippets/terraform.snip",
   },
   { "noahfrederick/vim-skeleton" },
+  { "hashivim/vim-terraform" },
   {
     "towolf/vim-helm",
     config = function()

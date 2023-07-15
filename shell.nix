@@ -260,6 +260,7 @@
     fi
     '';
     initExtra=''
+    export BAT_THEME=Catppuccin-mocha
     source "${pkgs.zsh-defer}/share/zsh/plugins/zsh-defer/zsh-defer.plugin.zsh"
     zsh-defer source "${pkgs.grc}/etc/grc.zsh"
     autoload -Uz edit-command-line

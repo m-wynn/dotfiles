@@ -45,6 +45,7 @@ in
       hadolint
       htop
       json2hcl
+      lazygit
       trunk.k9s
       kubectl
       kubelogin-oidc
@@ -53,7 +54,7 @@ in
       ripgrep
       sad
       sqlite
-      terraform
+      trunk.terraform
       tmux
       yamllint
       php82Packages.phpstan

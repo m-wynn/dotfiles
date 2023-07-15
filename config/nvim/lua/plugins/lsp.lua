@@ -15,7 +15,7 @@ return {
         nls.builtins.formatting.phpcsfixer,
         nls.builtins.formatting.isort,
         nls.builtins.formatting.black,
-        nls.builtins.diagnostics.hadolint,
+        -- nls.builtins.diagnostics.hadolint,
         nls.builtins.diagnostics.shellcheck,
         nls.builtins.diagnostics.flake8,
       })
@@ -38,12 +38,12 @@ return {
     opts = {
       servers = {
         gopls = {},
-        terraformls = {},
+        -- terraformls = {},
         -- terraform_lsp = {},
         tflint = {},
-        rust_analyzer = {},
+        -- rust_analyzer = {},
         intelephense = {},
-        pyright = {},
+        -- pyright = {},
         yamlls = {
           settings = {
             yaml = {

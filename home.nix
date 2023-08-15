@@ -74,6 +74,7 @@ in
       ]))
       poetry
 
+      checkov
       ctags
       deno
       pyright
@@ -90,9 +91,8 @@ in
       nodejs
       nodePackages.eslint_d
       nodePackages.fixjson
+      darwin.apple_sdk.frameworks.Security
 
-      rustup
-      rust-analyzer
       gcc
       cmake
     ];
@@ -113,6 +113,7 @@ in
         pyyaml
       ]);
       extraPackages = [
+        pkgs.checkov
         pkgs.sqlite
         pkgs.tree-sitter
         pkgs.pyright

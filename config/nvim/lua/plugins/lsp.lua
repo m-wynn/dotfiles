@@ -44,50 +44,31 @@ return {
         -- rust_analyzer = {},
         intelephense = {},
         -- pyright = {},
-        yamlls = {
-          settings = {
-            yaml = {
-              schemaDownload = {
-                enable = true,
-              },
-              schemas = {
-                [vim.fn.expand("$HOME/Documents/schema/schemas/all.json")] = "*.yaml",
-              },
-              format = {
-                enable = true,
-                defaultConfig = {
-                  indent_style = "space",
-                  indent_size = "4",
-                },
-              },
-              validate = true,
-              hover = true,
-              completion = true,
-            },
-          },
+        docker_compose_language_service = {
+          filetypes = { "dockerfile " },
         },
         helm_ls = {
           filetypes = { "helm" },
         },
       },
-      setup = {
-        helm_ls = function(server, server_opts)
-          local configs = require("lspconfig.configs")
-          local util = require("lspconfig.util")
-          if not configs.helm_ls then
-            configs.helm_ls = {
-              default_config = {
-                cmd = { "helm_ls", "serve" },
-                filetypes = { "helm" },
-                root_dir = function(fname)
-                  return (util.root_pattern("Chart.lock") or util.root_pattern("Chart.yaml"))(fname)
-                end,
-              },
-            }
-            require("lspconfig")[server].setup(server_opts)
-          end
-        end,
-      },
+      -- setup = {
+      --   helm_ls = function(server, server_opts)
+      --     local configs = require("lspconfig.configs")
+      --     local util = require("lspconfig.util")
+      --     if not configs.helm_ls then
+      --       configs.helm_ls = {
+      --         default_config = {
+      --           cmd = { "helm_ls", "serve" },
+      --           filetypes = { "helm" },
+      --           root_dir = function(fname)
+      --             return (util.root_pattern("Chart.lock") or util.root_pattern("Chart.yaml"))(fname)
+      --           end,
+      --         },
+      --       }
+      --       require("lspconfig")[server].setup(server_opts)
+      --     end
+      --   end,
+      -- },
     },
   },
 }

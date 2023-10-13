@@ -5,7 +5,7 @@ in
     programs.home-manager.enable = true;
     home.packages = with pkgs; [
       kitty
-      wezterm
+      trunk.wezterm
       fira-code
       discocss
       comma
@@ -83,7 +83,9 @@ in
       trunk.terraform-ls
       terraform-lsp
       tflint
-      openssl
+      zlib
+      openssl_1_1
+      google-cloud-sdk
       pkg-config
       sumneko-lua-language-server
       trunk.nodePackages.yaml-language-server
@@ -93,6 +95,8 @@ in
       nodePackages.fixjson
       darwin.apple_sdk.frameworks.Security
 
+      rustup
+      rust-analyzer
       gcc
       cmake
     ];

@@ -1,21 +1,6 @@
 return {
   { "echasnovski/mini.pairs", enabled = false },
   {
-    "nmac427/guess-indent.nvim",
-    opts = {
-      filetype_exclude = {
-        "netrw",
-        "tutor",
-      },
-      buttype_exclude = {
-        "help",
-        "nofile",
-        "terminal",
-        "prompt",
-      },
-    },
-  },
-  {
     "Wansmer/treesj",
     keys = {
       {
@@ -93,6 +78,7 @@ return {
         end, { "i", "s" }),
       })
       opts.sources = cmp.config.sources({
+        { name = "path" },
         { name = "copilot", group_index = 2 },
         { name = "luasnip", group_index = 2 },
         { name = "nvim_lsp", group_index = 2 },
@@ -100,9 +86,7 @@ return {
         { name = "calc" },
         { name = "nvim_lsp_signature_help" },
         { name = "tmux" },
-      }, {
         { name = "buffer" },
-        { name = "path" },
       })
       opts.sorting = {
         priority_weight = 2,

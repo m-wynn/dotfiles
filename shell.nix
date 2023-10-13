@@ -112,7 +112,7 @@
   programs.bat = {
     enable = true;
     config = {
-      theme = "catppuccin-mocha";
+      theme = "Catppuccin-mocha";
     };
     themes = {
       catppuccin-mocha = builtins.readFile (pkgs.fetchFromGitHub {

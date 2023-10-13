@@ -34,7 +34,7 @@
         terraform-zsh-plugin = super.callPackage ./pkgs/terraform-zsh-plugin.nix { };
         unstable = import inputs.nixpkgs { system = self.system; };
         stable = import inputs.nixpkgs { system = self.system; };
-        trunk = import inputs.trunk { system = self.system; };
+        trunk = import inputs.trunk { system = self.system; config = nixpkgs_config; };
       })
     ];
 
@@ -61,7 +61,6 @@
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         modules = [
           ./home.nix
-          ./shell.nix
           {
             home = {
               username = "matthew";

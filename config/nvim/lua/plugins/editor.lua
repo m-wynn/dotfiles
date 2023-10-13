@@ -19,18 +19,6 @@ return {
     },
   },
   {
-    "simrat39/symbols-outline.nvim",
-    cmd = "SymbolsOutline",
-  },
-  {
-    "nvim-telescope/telescope-fzf-native.nvim",
-    dependencies = { "nvim-telescope/telescope.nvim" },
-    build = "make",
-    config = function()
-      require("telescope").load_extension("fzf")
-    end,
-  },
-  {
     "akinsho/toggleterm.nvim",
     keys = {
       {
@@ -87,6 +75,7 @@ return {
           "nix",
           "php",
           "phpdoc",
+          "prisma",
           "python",
           "regex",
           "ruby",
@@ -110,7 +99,7 @@ return {
     build = "rm -fr coq-user-snippets; mkdir coq-user-snippets && cat terraform/* >> coq-user-snippets/terraform.snip",
   },
   { "noahfrederick/vim-skeleton" },
-  { "hashivim/vim-terraform" },
+  -- { "hashivim/vim-terraform" },
   {
     "towolf/vim-helm",
     config = function()

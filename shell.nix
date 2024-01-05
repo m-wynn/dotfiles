@@ -26,7 +26,7 @@
         };
       }
     ];
-    terminal = "screen-256color";
+    terminal = "tmux-256color";
     extraConfig = ''
     set-option -g -q mouse on
     set-option -ga terminal-overrides ",xterm-256color:RGB"
@@ -226,9 +226,6 @@
       pbat = "prettybat";
       cat = "bat --paging=never";
       k9s = "TERM=xterm-256color k9s";
-    };
-    shellGlobalAliases = {
-      awsprod = "237107622521";
     };
     history = {
       size = 1000000000; 

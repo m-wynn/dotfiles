@@ -1,3 +1,4 @@
+local Util = require("lazyvim.util")
 return {
   {
     "catppuccin/nvim",
@@ -36,7 +37,41 @@ return {
   },
   "notjedi/nvim-rooter.lua",
   "tommcdo/vim-fubitive",
-  "tpope/vim-fugitive",
+  {
+    "tpope/vim-fugitive",
+    keys = {
+      {
+        "<leader>gbr",
+        "<cmd>GBrowse<cr>",
+        desc = "Open in browser",
+      },
+      {
+        "<leader>gbl",
+        "<cmd>Git blame<cr>",
+        desc = "Git blame",
+      },
+      {
+        "<leader>gw",
+        "<cmd>Gw<cr>",
+        desc = "Git write",
+      },
+      {
+        "<leader>gfu",
+        "<cmd>Git fixup<cr>",
+        desc = "Git fixup",
+      },
+      {
+        "<leader>gpf",
+        "<cmd>Git! push --force-with-lease<cr>",
+        desc = "Git push force (with lease)",
+      },
+      {
+        "<leader>gds",
+        "<cmd>Gdiffsplit<cr>",
+        desc = "Git diff split",
+      },
+    },
+  },
   "tpope/vim-rhubarb",
   {
     "nvim-treesitter/nvim-treesitter",
@@ -115,5 +150,44 @@ return {
         end,
       })
     end,
+  },
+  {
+    "nvim-telescope/telescope.nvim",
+    opts = function(_, opts)
+      local trouble = require("trouble.providers.telescope")
+      opts.defaults = vim.tbl_deep_extend("force", opts.defaults or {}, {
+        mappings = { n = { ["<c-x>"] = trouble.open_with_trouble }, i = { ["<c-x>"] = trouble.open_with_trouble } },
+      })
+    end,
+    dependencies = {
+      {
+        "ANGkeith/telescope-terraform-doc.nvim",
+        config = function()
+          Util.on_load("telescope.nvim", function()
+            require("telescope").load_extension("terraform_doc")
+          end)
+        end,
+      },
+      {
+        "cappyzawa/telescope-terraform.nvim",
+        config = function()
+          Util.on_load("telescope.nvim", function()
+            require("telescope").load_extension("terraform")
+          end)
+        end,
+      },
+    },
+    keys = {
+      {
+        "<leader>td",
+        "<cmd>Telescope terraform_doc full_name=hashicorp/aws<cr>",
+        desc = "Goto Symbol (Aerial)",
+      },
+      {
+        "<leader>ts",
+        "<cmd>Telescope terraform state_list<cr>",
+        desc = "Goto Symbol (Aerial)",
+      },
+    },
   },
 }

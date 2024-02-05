@@ -5,7 +5,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-22.11-darwin";
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     trunk.url = "github:nixos/nixpkgs";
-    # unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     home = {
       url = "https://github.com/nix-community/home-manager/archive/release-22.11.tar.gz";
@@ -30,9 +30,14 @@
       # that wish to do so).
       (self: super: {
         # fcitx-engines = self.fcitx5;
+        # use trunk for python3packages.pynvim
+        pythonPackagesExtensions = super.pythonPackagesExtensions ++ [ (pyfinal: pyprev: {
+            pynvim = pyfinal.callPackage ./pkg/pynvim.nix { };
+            })
+        ];
         zsh-defer = super.callPackage ./pkgs/zsh-defer.nix { };
         terraform-zsh-plugin = super.callPackage ./pkgs/terraform-zsh-plugin.nix { };
-        unstable = import inputs.nixpkgs { system = self.system; };
+        unstable = import inputs.unstable { system = self.system; };
         stable = import inputs.nixpkgs { system = self.system; };
         trunk = import inputs.trunk { system = self.system; config = nixpkgs_config; };
       })

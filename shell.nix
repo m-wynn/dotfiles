@@ -214,6 +214,25 @@
       sha256 = "soEBVlq3ULeiZFAdQYMRFuswIIhI9bclIU8WXjxd7oY=";
     } + /palettes/mocha.toml));
   };
+
+  xdg.configFile."fish/themes/Catppuccin Mocha.theme" = {
+    source = pkgs.fetchurl {
+      url = "https://raw.githubusercontent.com/catppuccin/fish/0ce27b518e8ead555dec34dd8be3df5bd75cff8e/themes/Catppuccin%20Mocha.theme";
+      sha256 = "MlI9Bg4z6uGWnuKQcZoSxPEsat9vfi5O1NkeYFaEb2I=";
+    };
+  };
+  # Still need to figure out how to run ``fish_config theme save "Catppuccin Mocha"` once automatically without making a custom package
+
+
+  programs.fish = {
+    enable = true;
+    interactiveShellInit = ''
+      fish_vi_key_bindings
+      '';
+    plugins = [
+      { name = "grc"; src = pkgs.fishPlugins.grc.src; }
+    ];
+  };
   programs.zsh = {
     enable = true;
     dotDir = ".config/zsh";

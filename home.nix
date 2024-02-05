@@ -113,8 +113,10 @@ in
       withPython3 = true;
       extraPython3Packages = (ps: with ps; [
         msgpack
-        pynvim
         pyyaml
+        python-dotenv
+        requests
+        prompt-toolkit
       ]);
       extraPackages = [
         pkgs.checkov

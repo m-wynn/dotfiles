@@ -159,6 +159,12 @@ return {
       show_help = "yes", -- Show help text for CopilotChatInPlace, default: yes
       debug = false, -- Enable or disable debug mode, the log file will be in ~/.local/state/nvim/CopilotChat.nvim.log
       disable_extra_info = "no", -- Disable extra information (e.g: system prompt) in the response.
+      prompts = {
+        Explain = "Explain how it works.",
+        Review = "Review the following code and provide concise suggestions.",
+        Tests = "Briefly explain how the selected code works, then generate unit tests.",
+        Refactor = "Refactor the code to improve clarity and readability.",
+      },
     },
     build = function()
       vim.notify("Please update the remote plugins by running ':UpdateRemotePlugins', then restart Neovim.")
@@ -167,6 +173,8 @@ return {
     keys = {
       { "<leader>cce", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
       { "<leader>cct", "<cmd>CopilotChatTests<cr>", desc = "CopilotChat - Generate tests" },
+      { "<leader>ccr", "<cmd>CopilotChatReview<cr>", desc = "CopilotChat - Review code" },
+      { "<leader>ccR", "<cmd>CopilotChatRefactor<cr>", desc = "CopilotChat - Refactor code" },
       {
         "<leader>ccv",
         ":CopilotChatVisual",
@@ -178,6 +186,28 @@ return {
         ":CopilotChatInPlace<cr>",
         mode = "x",
         desc = "CopilotChat - Run in-place code",
+      },
+      {
+        "<leader>ccm",
+        function()
+          local function get_git_diff(staged)
+            local cmd = staged and "git diff --staged" or "git diff"
+            local handle = io.popen(cmd)
+            if not handle then
+              return ""
+            end
+
+            local result = handle:read("*a")
+            handle:close()
+            return result
+          end
+          local diff = get_git_diff(true)
+          if diff ~= "" then
+            vim.fn.setreg('"', diff)
+            vim.cmd("CopilotChat Write commit message for the change.")
+          end
+        end,
+        desc = "CopilotChat - Generate commit message for all changes",
       },
     },
   },

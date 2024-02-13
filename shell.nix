@@ -238,7 +238,7 @@
     dotDir = ".config/zsh";
     shellAliases = {
       sudo = "sudo ";
-      ls = "exa";
+      ls = "eza";
       bgrep = "batgrep";
       man = "batman";
       bw = "batwatch";
@@ -301,7 +301,7 @@
   fpath+=("${pkgs.kubectl}/share/zsh/site-functions/")
   fpath+=("${pkgs.trunk.kubernetes-helm}/share/zsh/site-functions/")
   fpath+=("${pkgs.bat}/share/zsh/site-functions/")
-  fpath+=("${pkgs.exa}/share/zsh/site-functions/")
+  fpath+=("${pkgs.eza}/share/zsh/site-functions/")
   fpath+=("${pkgs.fd}/share/zsh/site-functions/")
 
   zsh-defer source "${pkgs.skim}/share/skim/key-bindings.zsh"

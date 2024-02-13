@@ -2,16 +2,15 @@
   description = "m-wynn/dotfiles";
   inputs = {
 
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-22.11-darwin";
-    # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-22.11-darwin";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     trunk.url = "github:nixos/nixpkgs";
     unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     home = {
-      url = "https://github.com/nix-community/home-manager/archive/release-22.11.tar.gz";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "unstable";
     };
-
     # neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
@@ -30,11 +29,6 @@
       # that wish to do so).
       (self: super: {
         # fcitx-engines = self.fcitx5;
-        # use trunk for python3packages.pynvim
-        pythonPackagesExtensions = super.pythonPackagesExtensions ++ [ (pyfinal: pyprev: {
-            pynvim = pyfinal.callPackage ./pkg/pynvim.nix { };
-            })
-        ];
         zsh-defer = super.callPackage ./pkgs/zsh-defer.nix { };
         terraform-zsh-plugin = super.callPackage ./pkgs/terraform-zsh-plugin.nix { };
         unstable = import inputs.unstable { system = self.system; };

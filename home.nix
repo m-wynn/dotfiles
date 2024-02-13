@@ -23,7 +23,6 @@ in
       terraform-zsh-plugin
       grc
       zoxide
-      nomad
       krew
 
       fzf
@@ -37,7 +36,7 @@ in
       bat
       delta
       dog
-      exa
+      eza
       fd
       gh
       go
@@ -46,7 +45,7 @@ in
       htop
       json2hcl
       lazygit
-      trunk.k9s
+      k9s
       kubectl
       kubelogin-oidc
       mysql
@@ -84,7 +83,6 @@ in
       terraform-lsp
       tflint
       zlib
-      openssl_1_1
       google-cloud-sdk
       pkg-config
       sumneko-lua-language-server
@@ -96,7 +94,6 @@ in
       darwin.apple_sdk.frameworks.Security
 
       rustup
-      rust-analyzer
       gcc
       cmake
     ];

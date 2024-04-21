@@ -66,15 +66,18 @@
   programs.bat = {
     enable = true;
     config = {
-      theme = "Catppuccin-mocha";
+      theme = "catppuccin-mocha";
     };
     themes = {
-      catppuccin-mocha = builtins.readFile (pkgs.fetchFromGitHub {
-        owner = "catppuccin";
-        repo = "bat";
-        rev = "ba4d16880d63e656acced2b7d4e034e4a93f74b1";
-        sha256 = "6WVKQErGdaqb++oaXnY3i6/GuH2FhTgK0v4TN4Y0Wbw=";
-      } + "/Catppuccin-mocha.tmTheme");
+      catppuccin-mocha = {
+        src = pkgs.fetchFromGitHub {
+          owner = "catppuccin";
+          repo = "bat";
+          rev = "b8134f01b0ac176f1cf2a7043a5abf5a1a29457b";
+          sha256 = "sha256-gzf0/Ltw8mGMsEFBTUuN33MSFtUP4xhdxfoZFntaycQ=";
+        };
+        file = "themes/Catppuccin Mocha.tmTheme";
+      };
     };
   };
 
@@ -222,7 +225,6 @@
     fi
     '';
     initExtra=''
-    export BAT_THEME=Catppuccin-mocha
     PKG_CONFIG_PATH="${pkgs.openssl.dev}/lib/pkgconfig";
     export SKIM_DEFAULT_OPTIONS="$SKIM_DEFAULT_OPTIONS --color=fg:#cdd6f4,bg:#1e1e2e,matched:#313244,matched_bg:#f2cdcd,current:#cdd6f4,current_bg:#45475a,current_match:#1e1e2e,current_match_bg:#f5e0dc,spinner:#a6e3a1,info:#cba6f7,prompt:#89b4fa,cursor:#f38ba8,selected:#eba0ac,header:#94e2d5,border:#6c7086"
     source "${pkgs.zsh-defer}/share/zsh/plugins/zsh-defer/zsh-defer.plugin.zsh"

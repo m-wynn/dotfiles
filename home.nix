@@ -53,6 +53,7 @@ in
       ripgrep
       sad
       sqlite
+      starship
       trunk.terraform
       tmux
       yamllint
@@ -77,7 +78,6 @@ in
       ctags
       deno
       pyright
-      rnix-lsp
       shellharden
       trunk.terraform-ls
       terraform-lsp
@@ -96,6 +96,7 @@ in
       rustup
       gcc
       cmake
+      argo-rollouts
     ];
 
     home.sessionVariables = {

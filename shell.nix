@@ -210,8 +210,8 @@
     {
       owner = "catppuccin";
       repo = "starship";
-      rev = "3e3e54410c3189053f4da7a7043261361a1ed1bc";
-      sha256 = "soEBVlq3ULeiZFAdQYMRFuswIIhI9bclIU8WXjxd7oY=";
+      rev = "5629d2356f62a9f2f8efad3ff37476c19969bd4f";
+      sha256 = "nsRuxQFKbQkyEI4TXgvAjcroVdG+heKX5Pauq/4Ota0=";
     } + /palettes/mocha.toml));
   };
 
@@ -251,7 +251,9 @@
       path = "${config.xdg.dataHome}/zsh/history";
     };
     defaultKeymap = "viins";
-    enableAutosuggestions = true;
+    autosuggestion = {
+      enable = true;
+    };
     completionInit = ''
     zstyle ':completion:*' completer _expand _complete _ignored _approximate
     zstyle ':completion:*' use-cache on

@@ -159,34 +159,16 @@ return {
         mappings = { n = { ["<c-x>"] = trouble.open_with_trouble }, i = { ["<c-x>"] = trouble.open_with_trouble } },
       })
     end,
-    dependencies = {
-      {
-        "ANGkeith/telescope-terraform-doc.nvim",
-        config = function()
-          Util.on_load("telescope.nvim", function()
-            require("telescope").load_extension("terraform_doc")
-          end)
-        end,
-      },
-      {
-        "cappyzawa/telescope-terraform.nvim",
-        config = function()
-          Util.on_load("telescope.nvim", function()
-            require("telescope").load_extension("terraform")
-          end)
-        end,
-      },
-    },
     keys = {
       {
         "<leader>td",
         "<cmd>Telescope terraform_doc full_name=hashicorp/aws<cr>",
-        desc = "Goto Symbol (Aerial)",
+        desc = "Goto Symbol",
       },
       {
         "<leader>ts",
         "<cmd>Telescope terraform state_list<cr>",
-        desc = "Goto Symbol (Aerial)",
+        desc = "Goto Symbol",
       },
     },
   },

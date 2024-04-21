@@ -103,6 +103,7 @@ return {
           cmp.config.compare.order,
         },
       }
+      opts.auto_brackets = { "terraform" }
     end,
     config = function(_, opts)
       local cmp = require("cmp")
@@ -171,6 +172,7 @@ return {
     end,
     event = "VeryLazy",
     keys = {
+      { "<leader>ccb", "<cmd>CopilotChatBuffer", desc = "CopilotChat - Run on buffer" },
       { "<leader>cce", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
       { "<leader>cct", "<cmd>CopilotChatTests<cr>", desc = "CopilotChat - Generate tests" },
       { "<leader>ccr", "<cmd>CopilotChatReview<cr>", desc = "CopilotChat - Review code" },
@@ -207,7 +209,7 @@ return {
             vim.cmd("CopilotChat Write commit message for the change.")
           end
         end,
-        desc = "CopilotChat - Generate commit message for all changes",
+        desc = "CopilotChat - Generate commit message for all changes.",
       },
     },
   },

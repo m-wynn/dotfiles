@@ -31,7 +31,6 @@ require("lazy").setup({
   { import = "lazyvim.plugins.extras.editor.mini-diff" },
   { import = "lazyvim.plugins.extras.editor.outline" },
   { import = "lazyvim.plugins.extras.formatting.black" },
-  { import = "lazyvim.plugins.extras.formatting.prettier" },
   { import = "lazyvim.plugins.extras.lang.docker" },
   { import = "lazyvim.plugins.extras.lang.go" },
   { import = "lazyvim.plugins.extras.lang.helm" },
@@ -68,3 +67,4 @@ require("lazy").setup({
 })
 
 vim.g.root_spec = { ".git", "lsp", "lua", "cwd" }
+vim.lsp.set_log_level("debug")

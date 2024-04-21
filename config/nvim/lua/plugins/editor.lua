@@ -1,4 +1,11 @@
 local Util = require("lazyvim.util")
+require("nvim-treesitter.configs").setup({
+  ensure_installed = { "astro", "tsx", "typescript", "html" },
+  auto_install = true,
+  highlight = {
+    enable = true,
+  },
+})
 return {
   {
     "catppuccin/nvim",
@@ -78,6 +85,7 @@ return {
     opts = function(_, opts)
       if type(opts.ensure_installed) == "table" then
         vim.list_extend(opts.ensure_installed, {
+          "astro",
           "bash",
           "c",
           "cmake",

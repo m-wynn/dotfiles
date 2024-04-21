@@ -2,7 +2,6 @@
   description = "m-wynn/dotfiles";
   inputs = {
 
-    # nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-22.11-darwin";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     trunk.url = "github:nixos/nixpkgs";
     unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
@@ -60,6 +59,7 @@
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         modules = [
           ./home.nix
+          ./shell.nix
           {
             home = {
               username = "matthew";

@@ -57,7 +57,7 @@ in
       trunk.terraform
       tmux
       yamllint
-      php82Packages.phpstan
+      # php82Packages.phpstan
       # php82Packages.phpcbf
       # php82Packages.php-cs-fixer
 
@@ -74,7 +74,7 @@ in
       ]))
       poetry
 
-      checkov
+      # checkov
       ctags
       deno
       pyright
@@ -87,11 +87,11 @@ in
       pkg-config
       sumneko-lua-language-server
       trunk.nodePackages.yaml-language-server
+      npm-check-updates
 
       nodejs
       nodePackages.eslint_d
       nodePackages.fixjson
-      darwin.apple_sdk.frameworks.Security
 
       rustup
       gcc
@@ -117,7 +117,7 @@ in
         prompt-toolkit
       ]);
       extraPackages = [
-        pkgs.checkov
+        # pkgs.checkov
         pkgs.sqlite
         pkgs.tree-sitter
         pkgs.pyright

@@ -1,9 +1,17 @@
 return {
   {
+    "williamboman/mason.nvim",
+    opts = function(_, opts)
+      table.insert(opts.ensure_installed, "prettierd")
+      table.insert(opts.ensure_installed, "rustywind")
+    end,
+  },
+  {
     "stevearc/conform.nvim",
     opts = {
       formatters_by_ft = {
-        ["php"] = { "php_cs_fixer", "phpcbf" },
+        php = { "php_cs_fixer", "phpcbf" },
+        typescriptreact = { "rustywind" },
       },
       formatters = {
         shfmt = {
@@ -59,6 +67,7 @@ return {
     },
     opts = {
       servers = {
+        astro = {},
         gopls = {},
         -- terraformls = {},
         -- terraform_lsp = {},
@@ -67,6 +76,7 @@ return {
         -- rust_analyzer = {},
         intelephense = {},
         -- pyright = {},
+        prismals = {},
         docker_compose_language_service = {
           filetypes = { "dockerfile " },
         },

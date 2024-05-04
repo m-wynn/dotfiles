@@ -72,7 +72,6 @@ return {
         -- terraformls = {},
         -- terraform_lsp = {},
         tflint = {},
-        bashls = {},
         -- rust_analyzer = {},
         intelephense = {},
         -- pyright = {},

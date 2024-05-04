@@ -62,52 +62,6 @@
     bind -n C-Right swap-window -t +1'
     '';
   };
-  programs.kitty = {
-    font = {
-      name = "FiraCode Nerd Font Mono";
-      size = "11";
-    };
-    keybindings = {
-      "cmd+shift+c" = "copy_to_clipboard";
-      "cmd+shift+v" = "paste";
-
-      "cmd+c" = "send_text application \x03";
-      "cmd+d" = "send_text application \x04";
-      "cmd+e" = "send_text application \x05";
-      "cmd+f" = "send_text application \x06";
-      "cmd+g" = "send_text application \x07";
-      "cmd+h" = "send_text application \x08";
-      "cmd+i" = "send_text application \x09";
-      "cmd+j" = "send_text application \x0A";
-      "cmd+k" = "send_text application \x0B";
-      "cmd+l" = "send_text application \x0C";
-      "cmd+m" = "send_text application \x0D";
-      "cmd+n" = "send_text application \x0E";
-      "cmd+o" = "send_text application \x0F";
-      "cmd+p" = "send_text application \x10";
-      "cmd+q" = "send_text application \x11";
-      "cmd+r" = "send_text application \x12";
-      "cmd+s" = "send_text application \x13";
-      "cmd+t" = "send_text application \x14";
-      "cmd+u" = "send_text application \x15";
-      "cmd+v" = "send_text application \x16";
-      "cmd+w" = "send_text application \x17";
-      "cmd+x" = "send_text application \x18";
-      "cmd+y" = "send_text application \x19";
-      "cmd+z" = "send_text application \x1A";
-      "cmd+[" = "send_text application \x1B";
-      "cmd+\\" = "send_text application \x1C";
-      "cmd+]" = "send_text application \x1D";
-      "cmd+^" = "send_text application \x1E";
-      "cmd+_" = "send_text application \x1F";
-    };
-
-    settings = {
-      "wayland_titlebar_color" = "background";
-    };
-
-    theme = "Gruvbox Dark";
-  };
 
   programs.bat = {
     enable = true;
@@ -142,7 +96,8 @@
       aws = {
         style = "bold yellow";
         symbol = " ";
-        format = "[$symbol($profile )(\\($region\\) )(\\[$duration\\] )]($style)";
+        expiration_symbol = "";
+        format = "[$symbol($profile )(\\($region\\) )]($style)";
         region_aliases = {
           us-east-1 = "va";
           us-east-2 = "oh";
@@ -154,17 +109,6 @@
         min_time = 2000;
         show_notifications = true;
         style = "bold blue";
-      };
-      custom = {
-        nomad = {
-          command = "if [[ $NOMAD_ADDR =~ \".prod.\" ]]; then\n    echo \"Prod\"\nelif [[ $NOMAD_ADDR =~ \".staging.\" ]]; then\n    echo \"Staging\"\nelif [[ $NOMAD_ADDR =~ \"http://192.*\" ]]; then\n    echo \"Vagrant\"\nelif [[ $NOMAD_ADDR =~ \"http://127.*\" ]]; then\n    echo \"Local\"\nfi\n";
-          format = "$symbol [$output]($style) ";
-          shell = [
-            "sh"
-          ];
-          symbol = "";
-          when = " [[ -v NOMAD_TOKEN ]] && [[ -v NOMAD_ADDR ]] ";
-        };
       };
       directory = {
         style = "bold blue";
@@ -192,7 +136,7 @@
       };
       kubernetes = {
         disabled = false;
-        format = "[$symbol$context( \\($namespace\\))]($style) ";
+        format = "[$symbol$cluster( \\($namespace\\))]($style) ";
         symbol = "ﴱ ";
       };
       nodejs = {

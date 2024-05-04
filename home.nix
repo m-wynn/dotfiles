@@ -72,7 +72,6 @@ in
         flake8
         black
       ]))
-      poetry
 
       # checkov
       ctags

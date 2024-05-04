@@ -157,14 +157,15 @@ return {
   {
     "CopilotC-Nvim/CopilotChat.nvim",
     opts = {
-      show_help = "yes", -- Show help text for CopilotChatInPlace, default: yes
-      debug = false, -- Enable or disable debug mode, the log file will be in ~/.local/state/nvim/CopilotChat.nvim.log
-      disable_extra_info = "no", -- Disable extra information (e.g: system prompt) in the response.
-      prompts = {
-        Explain = "Explain how it works.",
-        Review = "Review the following code and provide concise suggestions.",
-        Tests = "Briefly explain how the selected code works, then generate unit tests.",
-        Refactor = "Refactor the code to improve clarity and readability.",
+      debug = false,
+      show_help = false, -- Show help text for CopilotChatInPlace, default: yes
+      context = "buffer",
+      window = {
+        layout = "float",
+        relative = "cursor",
+        width = 1,
+        height = 0.4,
+        row = 1,
       },
     },
     build = function()
@@ -172,44 +173,15 @@ return {
     end,
     event = "VeryLazy",
     keys = {
-      { "<leader>ccb", "<cmd>CopilotChatBuffer", desc = "CopilotChat - Run on buffer" },
-      { "<leader>cce", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
-      { "<leader>cct", "<cmd>CopilotChatTests<cr>", desc = "CopilotChat - Generate tests" },
-      { "<leader>ccr", "<cmd>CopilotChatReview<cr>", desc = "CopilotChat - Review code" },
-      { "<leader>ccR", "<cmd>CopilotChatRefactor<cr>", desc = "CopilotChat - Refactor code" },
       {
-        "<leader>ccv",
-        ":CopilotChatVisual",
-        mode = "x",
-        desc = "CopilotChat - Open in vertical split",
-      },
-      {
-        "<leader>ccx",
-        ":CopilotChatInPlace<cr>",
-        mode = "x",
-        desc = "CopilotChat - Run in-place code",
-      },
-      {
-        "<leader>ccm",
+        "<leader>ccq",
         function()
-          local function get_git_diff(staged)
-            local cmd = staged and "git diff --staged" or "git diff"
-            local handle = io.popen(cmd)
-            if not handle then
-              return ""
-            end
-
-            local result = handle:read("*a")
-            handle:close()
-            return result
-          end
-          local diff = get_git_diff(true)
-          if diff ~= "" then
-            vim.fn.setreg('"', diff)
-            vim.cmd("CopilotChat Write commit message for the change.")
+          local input = vim.fn.input("Quick Chat: ")
+          if input ~= "" then
+            require("CopilotChat").ask(input, { selection = require("CopilotChat.select").buffer })
           end
         end,
-        desc = "CopilotChat - Generate commit message for all changes.",
+        desc = "CopilotChat - Quick chat",
       },
     },
   },

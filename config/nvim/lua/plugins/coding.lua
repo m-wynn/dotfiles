@@ -24,28 +24,20 @@ return {
     },
   },
   {
-    "L3MON4D3/LuaSnip",
-    config = function()
-      require("luasnip.loaders.from_lua").lazy_load({ paths = "~/.config/nvim/snippets" })
-    end,
-    keys = function()
-      return {} -- disable default tab
-    end,
-  },
-  {
     "hrsh7th/nvim-cmp",
     dependencies = {
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-calc",
-      "hrsh7th/cmp-cmdline",
-      "hrsh7th/cmp-nvim-lua",
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-nvim-lsp-document-symbol",
-      "hrsh7th/cmp-nvim-lsp-signature-help",
-      "hrsh7th/cmp-path",
-      "andersevenrud/cmp-tmux",
-      "zbirenbaum/copilot-cmp",
-      "saadparwaiz1/cmp_luasnip",
+      { "hrsh7th/cmp-buffer" },
+      { "hrsh7th/cmp-calc" },
+      { "hrsh7th/cmp-cmdline" },
+      { "hrsh7th/cmp-nvim-lua" },
+      { "hrsh7th/cmp-nvim-lsp" },
+      { "hrsh7th/cmp-nvim-lsp-document-symbol" },
+      { "hrsh7th/cmp-nvim-lsp-signature-help" },
+      { "hrsh7th/cmp-path" },
+      { "andersevenrud/cmp-tmux" },
+      { "zbirenbaum/copilot-cmp" },
+      { "rafamadriz/friendly-snippets" },
+      { "garymjr/nvim-snippets", opts = { friendly_snippets = true } },
     },
     opts = function(_, opts)
       local has_words_before = function()
@@ -53,14 +45,15 @@ return {
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
         return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
       end
-      local luasnip = require("luasnip")
       local cmp = require("cmp")
       opts.mapping = vim.tbl_extend("force", opts.mapping, {
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
-          elseif luasnip.expand_or_jumpable() then
-            luasnip.expand_or_jump()
+          elseif vim.snippet.active({ direction = 1 }) then
+            vim.schedule(function()
+              vim.snippet.jump(1)
+            end)
           elseif has_words_before() then
             cmp.complete()
           else
@@ -70,8 +63,10 @@ return {
         ["<S-Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_prev_item()
-          elseif luasnip.jumpable(-1) then
-            luasnip.jump(-1)
+          elseif vim.snippet.active({ direction = -1 }) then
+            vim.schedule(function()
+              vim.snippet.jump(-1)
+            end)
           else
             fallback()
           end
@@ -79,8 +74,8 @@ return {
       })
       opts.sources = cmp.config.sources({
         { name = "path" },
+        { name = "snippets" },
         { name = "copilot", group_index = 2 },
-        { name = "luasnip", group_index = 2 },
         { name = "nvim_lsp", group_index = 2 },
         { name = "nvim_lua", group_index = 2 },
         { name = "calc" },
@@ -132,12 +127,6 @@ return {
     end,
   },
   {
-    "echasnovski/mini.indentscope",
-    config = function()
-      require("mini.indentscope").setup()
-    end,
-  },
-  {
     "zbirenbaum/copilot.lua",
     opts = {
       filetypes = {
@@ -154,37 +143,60 @@ return {
       },
     },
   },
-  {
-    "CopilotC-Nvim/CopilotChat.nvim",
-    opts = {
-      debug = false,
-      show_help = false, -- Show help text for CopilotChatInPlace, default: yes
-      context = "buffer",
-      window = {
-        layout = "float",
-        relative = "cursor",
-        width = 1,
-        height = 0.4,
-        row = 1,
-      },
-    },
-    build = function()
-      vim.notify("Please update the remote plugins by running ':UpdateRemotePlugins', then restart Neovim.")
-    end,
-    event = "VeryLazy",
-    keys = {
-      {
-        "<leader>ccq",
-        function()
-          local input = vim.fn.input("Quick Chat: ")
-          if input ~= "" then
-            require("CopilotChat").ask(input, { selection = require("CopilotChat.select").buffer })
-          end
-        end,
-        desc = "CopilotChat - Quick chat",
-      },
-    },
-  },
+  -- {
+  --   "CopilotC-Nvim/CopilotChat.nvim",
+  --   opts = {
+  --     debug = false,
+  --     show_help = false, -- Show help text for CopilotChatInPlace, default: yes
+  --     context = "buffer",
+  --     window = {
+  --       layout = "float",
+  --       relative = "cursor",
+  --       width = 1,
+  --       height = 0.4,
+  --       row = 1,
+  --     },
+  --   },
+  --   build = function()
+  --     vim.notify("Please update the remote plugins by running ':UpdateRemotePlugins', then restart Neovim.")
+  --   end,
+  --   event = "VeryLazy",
+  --   branch = "canary",
+  --   keys = {
+  --     {
+  --       "<leader>aq",
+  --       function()
+  --         local input = vim.fn.input("Quick Chat: ")
+  --         if input ~= "" then
+  --           -- if visual, selection should be visual, else buffer
+  --           if vim.v.visualmode == "v" then
+  --             require("CopilotChat").ask(input, { selection = require("CopilotChat.select").visual })
+  --           else
+  --             require("CopilotChat").ask(input, { selection = require("CopilotChat.select").buffer })
+  --           end
+  --         end
+  --       end,
+  --       desc = "CopilotChat - Quick chat",
+  --       mode = { "n", "v" },
+  --     },
+  --     {
+  --       "<leader>ah",
+  --       function()
+  --         local actions = require("CopilotChat.actions")
+  --         require("CopilotChat.integrations.telescope").pick(actions.help_actions())
+  --       end,
+  --       desc = "CopilotChat - Help actions",
+  --     },
+  --     {
+  --       "<leader>ap",
+  --       function()
+  --         local actions = require("CopilotChat.actions")
+  --         require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
+  --       end,
+  --       desc = "CopilotChat - Prompt actions",
+  --     },
+  --   },
+  -- },
   {
     "mvaldes14/terraform.nvim",
     ft = "terraform",

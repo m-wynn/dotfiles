@@ -2,7 +2,6 @@ return {
   {
     "williamboman/mason.nvim",
     opts = function(_, opts)
-      table.insert(opts.ensure_installed, "prettierd")
       table.insert(opts.ensure_installed, "rustywind")
     end,
   },
@@ -30,27 +29,6 @@ return {
     },
   },
 
-  -- {
-  --   "nvimtools/none-ls.nvim",
-  --   dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-  --   opts = function(_, opts)
-  --     local nls = require("null-ls")
-  --     vim.list_extend(opts.sources, {
-  --       nls.builtins.formatting.eslint_d,
-  --       nls.builtins.formatting.fixjson,
-  --       nls.builtins.formatting.nginx_beautifier,
-  --       nls.builtins.formatting.phpcbf,
-  --       nls.builtins.formatting.shellharden,
-  --       nls.builtins.formatting.sqlformat,
-  --       nls.builtins.formatting.terraform_fmt,
-  --       nls.builtins.formatting.phpcsfixer,
-  --       nls.builtins.formatting.isort,
-  --       nls.builtins.diagnostics.shellcheck,
-  --       nls.builtins.diagnostics.flake8,
-  --       nls.builtins.formatting.prettier,
-  --     })
-  --   end,
-  -- },
   {
     "neovim/nvim-lspconfig",
     dependencies = {
@@ -63,6 +41,10 @@ return {
           })
           vim.keymap.set("n", "<leader>do", ":OpenDoc<cr>", { desc = "OpenDoc", buffer = buffer })
         end)
+        local keys = require("lazyvim.plugins.lsp.keymaps").get()
+        keys[#keys + 1] = { "<leader>cc", false }
+        keys[#keys + 1] =
+          { "<leader>ccl", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "v" }, has = "codeLens" }
       end,
     },
     opts = {

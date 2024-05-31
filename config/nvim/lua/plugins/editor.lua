@@ -127,14 +127,7 @@ return {
       end
     end,
   },
-  { "epilande/vim-react-snippets" },
-  { "honza/vim-snippets" },
-  {
-    "juliosueiras/vim-terraform-snippets",
-    build = "rm -fr coq-user-snippets; mkdir coq-user-snippets && cat terraform/* >> coq-user-snippets/terraform.snip",
-  },
   { "noahfrederick/vim-skeleton" },
-  -- { "hashivim/vim-terraform" },
   {
     "towolf/vim-helm",
     config = function()
@@ -154,9 +147,9 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     opts = function(_, opts)
-      local trouble = require("trouble.providers.telescope")
+      local open_with_trouble = require("trouble.sources.telescope").open
       opts.defaults = vim.tbl_deep_extend("force", opts.defaults or {}, {
-        mappings = { n = { ["<c-x>"] = trouble.open_with_trouble }, i = { ["<c-x>"] = trouble.open_with_trouble } },
+        mappings = { n = { ["<c-x>"] = open_with_trouble }, i = { ["<c-x>"] = open_with_trouble } },
       })
     end,
     keys = {

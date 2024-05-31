@@ -1,1 +1,1 @@
-vim.opt.clipboard = nil
+vim.opt.clipboard = ""

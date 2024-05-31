@@ -4,7 +4,6 @@ in
   {
     programs.home-manager.enable = true;
     home.packages = with pkgs; [
-      kitty
       trunk.wezterm
       fira-code
       discocss
@@ -33,6 +32,8 @@ in
       bat-extras.batwatch
       bat-extras.prettybat
       trunk.awscli2
+      trunk.aws-sam-cli
+      trunk.ssm-session-manager-plugin
       bat
       delta
       dog
@@ -84,7 +85,6 @@ in
       zlib
       google-cloud-sdk
       pkg-config
-      sumneko-lua-language-server
       trunk.nodePackages.yaml-language-server
       npm-check-updates
 

@@ -1,3 +1,4 @@
+table.unpack = table.unpack or unpack
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   pattern = {
     "*/templates/*.yaml",
@@ -22,29 +23,47 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
+local plugins = {
+  "ui.edgy",
+  "ui.mini-indentscope",
+  "coding.copilot",
+  "coding.copilot-chat",
+  "coding.mini-surround",
+  "coding.yanky",
+  "dap.core",
+  "dap.nlua",
+  "editor.dial",
+  "editor.mini-diff",
+  "editor.outline",
+  "editor.trouble-v3",
+  "formatting.black",
+  "lang.docker",
+  "lang.go",
+  "lang.helm",
+  "lang.json",
+  "lang.markdown",
+  "lang.python",
+  "lang.rust",
+  "lang.tailwind",
+  "lang.terraform",
+  "lang.typescript",
+  "lang.yaml",
+  "linting.eslint",
+  "test.core",
+  "util.dot",
+  "util.mini-hipatterns",
+}
+
+-- Import each plugin
+local setupTable = { { "LazyVim/LazyVim", import = "lazyvim.plugins" } }
+for _, plugin in ipairs(plugins) do
+  table.insert(setupTable, { import = "lazyvim.plugins.extras." .. plugin })
+end
+
+-- Add the non-extras plugin
+table.insert(setupTable, { import = "plugins" })
+
 require("lazy").setup({
-  { "LazyVim/LazyVim", import = "lazyvim.plugins" },
-  { import = "lazyvim.plugins.extras.coding.copilot" },
-  { import = "lazyvim.plugins.extras.ui.edgy" },
-  { import = "lazyvim.plugins.extras.dap.core" },
-  { import = "lazyvim.plugins.extras.dap.nlua" },
-  { import = "lazyvim.plugins.extras.editor.mini-diff" },
-  { import = "lazyvim.plugins.extras.editor.outline" },
-  { import = "lazyvim.plugins.extras.formatting.black" },
-  { import = "lazyvim.plugins.extras.lang.docker" },
-  { import = "lazyvim.plugins.extras.lang.go" },
-  { import = "lazyvim.plugins.extras.lang.helm" },
-  { import = "lazyvim.plugins.extras.lang.json" },
-  { import = "lazyvim.plugins.extras.lang.markdown" },
-  { import = "lazyvim.plugins.extras.lang.python" },
-  { import = "lazyvim.plugins.extras.lang.rust" },
-  { import = "lazyvim.plugins.extras.lang.tailwind" },
-  { import = "lazyvim.plugins.extras.lang.terraform" },
-  { import = "lazyvim.plugins.extras.lang.typescript" },
-  { import = "lazyvim.plugins.extras.lang.yaml" },
-  { import = "lazyvim.plugins.extras.linting.eslint" },
-  { import = "lazyvim.plugins.extras.util.dot" },
-  { import = "plugins" },
   defaults = {
     lazy = false,
     version = false,
@@ -65,6 +84,7 @@ require("lazy").setup({
       },
     },
   },
+  table.unpack(setupTable),
 })
 
 vim.g.root_spec = { ".git", "lsp", "lua", "cwd" }

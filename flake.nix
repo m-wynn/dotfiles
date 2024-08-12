@@ -5,6 +5,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     trunk.url = "github:nixos/nixpkgs";
     unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    catppuccin.url = "github:catppuccin/nix";
 
     home = {
       url = "github:nix-community/home-manager";
@@ -13,7 +14,7 @@
     # neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
-  outputs = inputs @ { self, home, nixpkgs, fenix, ... }:
+  outputs = inputs @ { self, home, nixpkgs, catppuccin, ... }:
   let
     nixpkgs_config = {
       allowUnfree = true;
@@ -45,6 +46,14 @@
           ./home.nix
           ./shell.nix
           {
+            imports = [
+              catppuccin.homeManagerModules.catppuccin
+            ];
+            catppuccin = {
+              enable = true;
+              accent = "lavender";
+              flavor = "mocha";
+            };
             home = {
               username = "matthew";
               homeDirectory = "/Users/matthew";

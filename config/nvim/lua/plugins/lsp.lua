@@ -20,16 +20,6 @@ return {
     },
   },
   {
-    "mfussenegger/nvim-lint",
-    opts = {
-      linters_by_ft = {
-        terraform = { "terraform_validate" },
-        tf = { "terraform_validate" },
-      },
-    },
-  },
-
-  {
     "neovim/nvim-lspconfig",
     dependencies = {
       "Afourcat/treesitter-terraform-doc.nvim",
@@ -54,7 +44,6 @@ return {
         -- terraformls = {},
         -- terraform_lsp = {},
         tflint = {},
-        -- rust_analyzer = {},
         intelephense = {},
         -- pyright = {},
         prismals = {},

@@ -74,11 +74,11 @@ return {
       })
       opts.sources = cmp.config.sources({
         { name = "path" },
-        { name = "snippets" },
         { name = "copilot", group_index = 2 },
         { name = "nvim_lsp", group_index = 2 },
         { name = "nvim_lua", group_index = 2 },
         { name = "calc" },
+        { name = "snippets" },
         { name = "nvim_lsp_signature_help" },
         { name = "tmux" },
         { name = "buffer" },
@@ -143,60 +143,6 @@ return {
       },
     },
   },
-  -- {
-  --   "CopilotC-Nvim/CopilotChat.nvim",
-  --   opts = {
-  --     debug = false,
-  --     show_help = false, -- Show help text for CopilotChatInPlace, default: yes
-  --     context = "buffer",
-  --     window = {
-  --       layout = "float",
-  --       relative = "cursor",
-  --       width = 1,
-  --       height = 0.4,
-  --       row = 1,
-  --     },
-  --   },
-  --   build = function()
-  --     vim.notify("Please update the remote plugins by running ':UpdateRemotePlugins', then restart Neovim.")
-  --   end,
-  --   event = "VeryLazy",
-  --   branch = "canary",
-  --   keys = {
-  --     {
-  --       "<leader>aq",
-  --       function()
-  --         local input = vim.fn.input("Quick Chat: ")
-  --         if input ~= "" then
-  --           -- if visual, selection should be visual, else buffer
-  --           if vim.v.visualmode == "v" then
-  --             require("CopilotChat").ask(input, { selection = require("CopilotChat.select").visual })
-  --           else
-  --             require("CopilotChat").ask(input, { selection = require("CopilotChat.select").buffer })
-  --           end
-  --         end
-  --       end,
-  --       desc = "CopilotChat - Quick chat",
-  --       mode = { "n", "v" },
-  --     },
-  --     {
-  --       "<leader>ah",
-  --       function()
-  --         local actions = require("CopilotChat.actions")
-  --         require("CopilotChat.integrations.telescope").pick(actions.help_actions())
-  --       end,
-  --       desc = "CopilotChat - Help actions",
-  --     },
-  --     {
-  --       "<leader>ap",
-  --       function()
-  --         local actions = require("CopilotChat.actions")
-  --         require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
-  --       end,
-  --       desc = "CopilotChat - Prompt actions",
-  --     },
-  --   },
-  -- },
   {
     "mvaldes14/terraform.nvim",
     ft = "terraform",

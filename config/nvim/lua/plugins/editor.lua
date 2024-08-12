@@ -22,7 +22,7 @@ return {
     "akinsho/toggleterm.nvim",
     keys = {
       {
-        "<leader>tt",
+        "<leader>wt",
         function()
           require("toggleterm").exec("cd $(dirname " .. vim.fn.expand("%:p") .. ")/")
         end,
@@ -42,11 +42,25 @@ return {
       {
         "<leader>gbr",
         "<cmd>GBrowse<cr>",
+        mode = "n",
+        desc = "Open in browser",
+      },
+      {
+        "<leader>gbr",
+        ":GBrowse<cr>",
+        mode = "v",
         desc = "Open in browser",
       },
       {
         "<leader>gbl",
         "<cmd>Git blame<cr>",
+        mode = "n",
+        desc = "Git blame",
+      },
+      {
+        "<leader>gbl",
+        ":Git blame<cr>",
+        mode = "v",
         desc = "Git blame",
       },
       {
@@ -106,7 +120,6 @@ return {
           "lua",
           "make",
           "markdown",
-          "markdown_inline",
           "nix",
           "php",
           "phpdoc",

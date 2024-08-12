@@ -13,25 +13,12 @@
     plugins = with pkgs; [
       tmuxPlugins.yank
       tmuxPlugins.tmux-thumbs
-      { 
-        plugin = tmuxPlugins.mkTmuxPlugin {
-          pluginName = "catppuccin";
-          version = "4e48b09";
-          src = pkgs.fetchFromGitHub {
-            owner = "catppuccin";
-            repo = "tmux";
-            rev = "4e48b09a76829edc7b55fbb15467cf0411f07931";
-            sha256 = "bXEsxt4ozl3cAzV3ZyvbPsnmy0RAdpLxHwN82gvjLdU=";
-          };
-        };
-      }
     ];
     terminal = "tmux-256color";
     extraConfig = ''
     set-option -g -q mouse on
     set-option -ga terminal-overrides ",xterm-256color:RGB"
     set-option -sg escape-time 10
-    set -g @catppuccin_flavour 'mocha'
     set -g status-position top
 
     bind x kill-pane
@@ -65,20 +52,6 @@
 
   programs.bat = {
     enable = true;
-    config = {
-      theme = "catppuccin-mocha";
-    };
-    themes = {
-      catppuccin-mocha = {
-        src = pkgs.fetchFromGitHub {
-          owner = "catppuccin";
-          repo = "bat";
-          rev = "b8134f01b0ac176f1cf2a7043a5abf5a1a29457b";
-          sha256 = "sha256-gzf0/Ltw8mGMsEFBTUuN33MSFtUP4xhdxfoZFntaycQ=";
-        };
-        file = "themes/Catppuccin Mocha.tmTheme";
-      };
-    };
   };
 
   programs.skim = {
@@ -151,31 +124,14 @@
       terraform = {
         disabled = true;
       };
-      palette = "catppuccin_mocha";
-    } // builtins.fromTOML (builtins.readFile
-    (pkgs.fetchFromGitHub
-    {
-      owner = "catppuccin";
-      repo = "starship";
-      rev = "5629d2356f62a9f2f8efad3ff37476c19969bd4f";
-      sha256 = "nsRuxQFKbQkyEI4TXgvAjcroVdG+heKX5Pauq/4Ota0=";
-    } + /palettes/mocha.toml));
-  };
-
-  xdg.configFile."fish/themes/Catppuccin Mocha.theme" = {
-    source = pkgs.fetchurl {
-      url = "https://raw.githubusercontent.com/catppuccin/fish/0ce27b518e8ead555dec34dd8be3df5bd75cff8e/themes/Catppuccin%20Mocha.theme";
-      sha256 = "MlI9Bg4z6uGWnuKQcZoSxPEsat9vfi5O1NkeYFaEb2I=";
     };
   };
-  # Still need to figure out how to run ``fish_config theme save "Catppuccin Mocha"` once automatically without making a custom package
-
 
   programs.fish = {
     enable = true;
     interactiveShellInit = ''
       fish_vi_key_bindings
-      '';
+    '';
     plugins = [
       { name = "grc"; src = pkgs.fishPlugins.grc.src; }
     ];
@@ -186,6 +142,8 @@
     shellAliases = {
       sudo = "sudo ";
       ls = "eza";
+      k = "kubectl";
+      g = "git";
       bgrep = "batgrep";
       man = "batman";
       bw = "batwatch";
@@ -242,6 +200,79 @@
     }
     '';
   };
+
+  programs.git = {
+    enable = true;
+
+    aliases = {
+      amend = "commit --amend";
+      br = "branch";
+      cm = "commit";
+      cmm = "commit --no-edit";
+      co = "checkout";
+      cob = "checkout -b";
+      com = "!f(){ git checkout $(git main-branch) $@;}; f";
+      d = "difftool";
+      fe = "fetch --all -p --tags";
+      fixup = "commit --amend -C HEAD";
+      fpush = "push --force-with-lease";
+      fu = "fetch upstream";
+      lg = "log --color --graph --pretty=colorful-oneline --abbrev-commit";
+      lga = "log --color --graph --pretty=colorful-oneline --abbrev-commit --all";
+      ll = "!git log --color --graph --pretty=colorful-oneline --abbrev-commit --all --since=\"$(git show -s --pretty=format:'%cd' master~3 2>/dev/null || git log --format=\"format:%cd\" --reverse | head -n 1)\"";
+      main-branch = "!git symbolic-ref refs/remotes/origin/HEAD | cut -d'/' -f4";
+      pop = "stash pop";
+      rev = "diff --staged -M";
+      review = "diff --staged";
+      save = "commit -m'savepoint'";
+      st = "status -sb";
+    };
+    delta = {
+      enable = true;
+    };
+    ignores = [
+      "**/modules/*/.terraform.lock.hcl"
+      ".venv"
+      "venv"
+    ];
+    lfs = {
+      enable = true;
+    };
+    includes = [
+      { path = "~/.config/git/override"; }
+    ];
+    extraConfig = {
+      rerere = {
+        enabled = true;
+        autoUpdate = true;
+      };
+      column = {
+        ui = "auto";
+      };
+      branch = {
+        sort = "-committerdate";
+      };
+      pretty = {
+        colorful-oneline = "format:%C(yellow)%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset";
+      };
+      pull = {
+        ff = "only";
+      };
+      push = {
+        default = "current";
+      };
+      gpg = {
+        format = "ssh";
+        signByDefault = true;
+      };
+      user = {
+        signingKey = "~/.ssh/id_ed25519.pub";
+      };
+    };
+    userEmail = "matthew@matthewwynn.com"; # Make dynamic?
+    userName = "Matthew Wynn";
+  };
+
 
   xdg.configFile."zsh/.zshnew".text = ''
   fpath+=(${pkgs.zoxide}/share/zsh/site-functions)

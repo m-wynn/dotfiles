@@ -9,6 +9,7 @@ in
       discocss
       comma
       dive
+      iconv
 
       prometheus-alertmanager
 
@@ -32,7 +33,7 @@ in
       bat-extras.batwatch
       bat-extras.prettybat
       trunk.awscli2
-      trunk.aws-sam-cli
+      aws-sam-cli
       trunk.ssm-session-manager-plugin
       bat
       delta
@@ -48,6 +49,7 @@ in
       lazygit
       k9s
       kubectl
+      kustomize
       kubelogin-oidc
       mysql
       trunk.kubernetes-helm
@@ -74,6 +76,7 @@ in
         black
       ]))
 
+      argocd
       # checkov
       ctags
       deno
@@ -101,6 +104,7 @@ in
     home.sessionVariables = {
       EDITOR = "nvim";
       MANPAGER = "sh -c 'col -bx | bat -l man -p'";
+      KUBECTL_EXTERNAL_DIFF = "delta";
     };
     programs.neovim = {
       enable = true;
@@ -116,10 +120,9 @@ in
         prompt-toolkit
       ]);
       extraPackages = [
-        # pkgs.checkov
+        # pkgs.stable.checkov
         pkgs.sqlite
         pkgs.tree-sitter
-        pkgs.pyright
       ];
       plugins =  with pkgs.vimPlugins; [
         yankring

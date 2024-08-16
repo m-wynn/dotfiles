@@ -2,17 +2,15 @@
   description = "m-wynn/dotfiles";
   inputs = {
 
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    stable.url = "github:nixos/nixpkgs/nixpkgs-24.05-darwin";
     trunk.url = "github:nixos/nixpkgs";
     unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     catppuccin.url = "github:catppuccin/nix";
-    # catppuccin.url = "github:alejandro-angulo/catppuccin-nix";
 
     home = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "unstable";
     };
-    # neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
   outputs = inputs @ { self, home, nixpkgs, catppuccin, ... }:
@@ -21,19 +19,12 @@
       allowUnfree = true;
       allowBroken = true;
     };
-    nixpkgs-stable_config = {
-      allowUnfree = true;
-    };
     overlays = [
-      # Inject 'unstable' and 'trunk' into the overridden package set, so that
-      # the following overlays may access them (along with any system configs
-      # that wish to do so).
       (self: super: {
-        # fcitx-engines = self.fcitx5;
         zsh-defer = super.callPackage ./pkgs/zsh-defer.nix { };
         terraform-zsh-plugin = super.callPackage ./pkgs/terraform-zsh-plugin.nix { };
-        unstable = import inputs.unstable { system = self.system; };
-        stable = import inputs.nixpkgs { system = self.system; };
+        unstable = import inputs.unstable { system = self.system; config = nixpkgs_config; };
+        stable = import inputs.stable { system = self.system; };
         trunk = import inputs.trunk { system = self.system; config = nixpkgs_config; };
       })
     ];
@@ -42,7 +33,7 @@
   in {
     homeConfigurations = {
       matthew = home.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+        pkgs =  import nixpkgs { system = "aarch64-darwin"; config.allowUnfree = true; };
         modules = [
           ./home.nix
           ./shell.nix

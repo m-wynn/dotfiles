@@ -133,15 +133,6 @@
     };
   };
 
-  programs.fish = {
-    enable = true;
-    interactiveShellInit = ''
-      fish_vi_key_bindings
-    '';
-    plugins = [
-      { name = "grc"; src = pkgs.fishPlugins.grc.src; }
-    ];
-  };
   programs.k9s = {
     enable = true;
     aliases = {
@@ -273,6 +264,7 @@
     };
     delta = {
       enable = true;
+      package = pkgs.trunk.delta; # https://nixpk.gs/pr-tracker.html?pr=334814
     };
     ignores = [
       "**/modules/*/.terraform.lock.hcl"

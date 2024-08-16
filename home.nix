@@ -1,10 +1,8 @@
-{ config, pkgs, ... }:
-let
-in
+{ pkgs, ... }:
   {
     programs.home-manager.enable = true;
     home.packages = with pkgs; [
-      trunk.wezterm
+      trunk.wezterm # https://nixpk.gs/pr-tracker.html?pr=334814
       fira-code
       discocss
       comma
@@ -27,14 +25,14 @@ in
 
       fzf
 
-      bat-extras.batdiff
+      trunk.bat-extras.batdiff # https://nixpk.gs/pr-tracker.html?pr=334814
       bat-extras.batgrep
       bat-extras.batman
       bat-extras.batwatch
       bat-extras.prettybat
-      trunk.awscli2
-      aws-sam-cli
-      trunk.ssm-session-manager-plugin
+      trunk.awscli2 # https://nixpk.gs/pr-tracker.html?pr=334858
+      stable.aws-sam-cli # https://github.com/NixOS/nixpkgs/issues/325990
+      ssm-session-manager-plugin
       dog
       eza
       fd
@@ -46,15 +44,15 @@ in
       json2hcl
       lazygit
       kubectl
-      trunk.kustomize
+      kustomize
       kubelogin-oidc
       mysql
-      trunk.kubernetes-helm
+      kubernetes-helm
       ripgrep
       sad
       sqlite
       starship
-      trunk.terraform
+      terraform
       tmux
       yamllint
       # php82Packages.phpstan
@@ -79,13 +77,13 @@ in
       deno
       pyright
       shellharden
-      trunk.terraform-ls
+      terraform-ls
       terraform-lsp
       tflint
       zlib
       google-cloud-sdk
       pkg-config
-      trunk.nodePackages.yaml-language-server
+      nodePackages.yaml-language-server
       npm-check-updates
 
       nodejs
@@ -105,7 +103,7 @@ in
     };
     programs.neovim = {
       enable = true;
-      package = pkgs.trunk.neovim-unwrapped;
+      package = pkgs.neovim-unwrapped;
       vimAlias = true;
       vimdiffAlias = true;
       withPython3 = true;

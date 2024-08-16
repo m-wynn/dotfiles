@@ -96,4 +96,4 @@ require("lazy").setup({
 })
 
 vim.g.root_spec = { ".git", "lsp", "lua", "cwd" }
-vim.lsp.set_log_level("debug")
+vim.lsp.set_log_level("error")

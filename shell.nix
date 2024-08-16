@@ -1,5 +1,8 @@
 { config, pkgs, ... }:
 {
+  xdg = {
+    enable = true;
+  };
   programs.wezterm = {
   };
   programs.tmux = {
@@ -112,8 +115,11 @@
       };
       kubernetes = {
         disabled = false;
-        format = "[$symbol$cluster( \\($namespace\\))]($style) ";
+        format = "[$symbol$context]($style) ";
         symbol = "ﴱ ";
+        contexts = [
+          { context_pattern = "prod"; style = "red"; }
+        ];
       };
       nodejs = {
         disabled = true;
@@ -136,6 +142,37 @@
       { name = "grc"; src = pkgs.fishPlugins.grc.src; }
     ];
   };
+  programs.k9s = {
+    enable = true;
+    aliases = {
+      aliases = {
+        tgb = "elbv2.k8s.aws/v1beta1/targetgroupbindings";
+        dp = "deployments";
+        sec = "v1/secrets";
+        jo = "jobs";
+        cr = "clusterroles";
+        crb = "clusterrolebindings";
+        ro = "roles";
+        rb = "rolebindings";
+        np = "networkpolicies";
+      };
+    };
+    views = {
+      views = {
+        "v1/pods" = {
+          columns = [
+            "AGE"
+            "NAMESPACE"
+            "NAME"
+            "IP"
+            "NODE"
+            "STATUS"
+            "READY"
+          ];
+        };
+      };
+    };
+  };
   programs.zsh = {
     enable = true;
     dotDir = ".config/zsh";
@@ -150,6 +187,9 @@
       pbat = "prettybat";
       cat = "bat --paging=never";
       k9s = "TERM=xterm-256color k9s";
+      argocopy = "KUBECTL_EXTERNAL_DIFF=\"diff -u\" argocd";
+      kopy = "KUBECTL_EXTERNAL_DIFF=\"diff -u\" kubectl";
+      kust = "kubectl kustomize --enable-helm --load-restrictor=LoadRestrictionsNone";
     };
     history = {
       size = 1000000000; 
@@ -183,6 +223,10 @@
     fi
     '';
     initExtra=''
+    export XDG_CONFIG_HOME="${config.xdg.configHome}"
+    export XDG_DATA_HOME="${config.xdg.dataHome}"
+    export XDG_CACHE_HOME="${config.xdg.cacheHome}"
+    export XDG_STATE_HOME="${config.xdg.stateHome}"
     PKG_CONFIG_PATH="${pkgs.openssl.dev}/lib/pkgconfig";
     export SKIM_DEFAULT_OPTIONS="$SKIM_DEFAULT_OPTIONS --color=fg:#cdd6f4,bg:#1e1e2e,matched:#313244,matched_bg:#f2cdcd,current:#cdd6f4,current_bg:#45475a,current_match:#1e1e2e,current_match_bg:#f5e0dc,spinner:#a6e3a1,info:#cba6f7,prompt:#89b4fa,cursor:#f38ba8,selected:#eba0ac,header:#94e2d5,border:#6c7086"
     source "${pkgs.zsh-defer}/share/zsh/plugins/zsh-defer/zsh-defer.plugin.zsh"

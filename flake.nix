@@ -6,6 +6,7 @@
     trunk.url = "github:nixos/nixpkgs";
     unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     catppuccin.url = "github:catppuccin/nix";
+    # catppuccin.url = "github:alejandro-angulo/catppuccin-nix";
 
     home = {
       url = "github:nix-community/home-manager";

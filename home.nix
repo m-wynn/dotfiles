@@ -9,7 +9,7 @@ in
       discocss
       comma
       dive
-      iconv
+      libiconvReal
 
       prometheus-alertmanager
 
@@ -35,8 +35,6 @@ in
       trunk.awscli2
       aws-sam-cli
       trunk.ssm-session-manager-plugin
-      bat
-      delta
       dog
       eza
       fd
@@ -47,9 +45,8 @@ in
       htop
       json2hcl
       lazygit
-      k9s
       kubectl
-      kustomize
+      trunk.kustomize
       kubelogin-oidc
       mysql
       trunk.kubernetes-helm
@@ -123,6 +120,7 @@ in
         # pkgs.stable.checkov
         pkgs.sqlite
         pkgs.tree-sitter
+        pkgs.nil # I am having trouble compiling this inside Mason
       ];
       plugins =  with pkgs.vimPlugins; [
         yankring

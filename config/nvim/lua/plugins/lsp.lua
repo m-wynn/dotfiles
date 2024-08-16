@@ -45,6 +45,7 @@ return {
         -- terraform_lsp = {},
         tflint = {},
         intelephense = {},
+        nil_ls = { mason = false },
         -- pyright = {},
         prismals = {},
         docker_compose_language_service = {

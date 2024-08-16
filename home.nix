@@ -25,12 +25,11 @@
 
       fzf
 
-      trunk.bat-extras.batdiff # https://nixpk.gs/pr-tracker.html?pr=334814
+      stable.bat-extras.batdiff # https://nixpk.gs/pr-tracker.html?pr=334814
       bat-extras.batgrep
       bat-extras.batman
       bat-extras.batwatch
       bat-extras.prettybat
-      trunk.awscli2 # https://nixpk.gs/pr-tracker.html?pr=334858
       stable.aws-sam-cli # https://github.com/NixOS/nixpkgs/issues/325990
       ssm-session-manager-plugin
       dog

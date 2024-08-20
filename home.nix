@@ -1,8 +1,8 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
   {
     programs.home-manager.enable = true;
     home.packages = with pkgs; [
-      trunk.wezterm # https://nixpk.gs/pr-tracker.html?pr=334814
+      wezterm
       fira-code
       discocss
       comma
@@ -25,7 +25,7 @@
 
       fzf
 
-      stable.bat-extras.batdiff # https://nixpk.gs/pr-tracker.html?pr=334814
+      stable.bat-extras.batdiff
       bat-extras.batgrep
       bat-extras.batman
       bat-extras.batwatch
@@ -98,8 +98,9 @@
     home.sessionVariables = {
       EDITOR = "nvim";
       MANPAGER = "sh -c 'col -bx | bat -l man -p'";
-      KUBECTL_EXTERNAL_DIFF = "delta";
+      KUBECTL_EXTERNAL_DIFF = "kdiff";
     };
+    home.sessionPath = ["${config.home.homeDirectory}/.local/bin"];
     programs.neovim = {
       enable = true;
       package = pkgs.neovim-unwrapped;

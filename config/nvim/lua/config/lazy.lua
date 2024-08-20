@@ -60,6 +60,7 @@ local plugins = {
   "test.core",
   "util.dot",
   "util.mini-hipatterns",
+  "util.octo",
 }
 
 -- Import each plugin

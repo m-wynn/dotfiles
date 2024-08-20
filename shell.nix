@@ -5,7 +5,7 @@
   };
   programs.awscli = {
     enable = true;
-    package = pkgs.trunk.awscli2; # https://nixpk.gs/pr-tracker.html?pr=334858
+    package = pkgs.awscli2;
   };
   programs.wezterm = {
   };
@@ -184,7 +184,8 @@
       k9s = "TERM=xterm-256color k9s";
       argocopy = "KUBECTL_EXTERNAL_DIFF=\"diff -u\" argocd";
       kopy = "KUBECTL_EXTERNAL_DIFF=\"diff -u\" kubectl";
-      kust = "kubectl kustomize --enable-helm --load-restrictor=LoadRestrictionsNone";
+      kust = "kustomize --enable-helm --load-restrictor=LoadRestrictionsNone build";
+      cdr = "cd $(git root)";
     };
     history = {
       size = 1000000000; 
@@ -231,7 +232,7 @@
     bindkey -M vicmd 'v' edit-command-line
     bindkey '^R' history-incremental-search-backward
     zsh-defer source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/site-functions/fast-syntax-highlighting.plugin.zsh
-    zsh-defer source "${pkgs.trunk.awscli2}/share/zsh/site-functions/_aws" # This one is weird.  I think it's a nix bug that it's placed here
+    zsh-defer source "${pkgs.awscli2}/share/zsh/site-functions/_aws" # This one is weird.  I think it's a nix bug that it's placed here
     . ~/.config/zsh/local.zsh
     alias bathelp="bat --plain --language=cmd-help";
     help() {
@@ -264,12 +265,13 @@
       pop = "stash pop";
       rev = "diff --staged -M";
       review = "diff --staged";
+      root = "rev-parse --show-toplevel";
       save = "commit -m'savepoint'";
       st = "status -sb";
     };
     delta = {
       enable = true;
-      package = pkgs.trunk.delta; # https://nixpk.gs/pr-tracker.html?pr=334814
+      package = pkgs.delta;
     };
     ignores = [
       "**/modules/*/.terraform.lock.hcl"

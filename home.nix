@@ -41,7 +41,6 @@
       hadolint
       htop
       json2hcl
-      lazygit
       kubectl
       kustomize
       kubelogin-oidc

@@ -10,14 +10,14 @@ return {
       },
     },
   },
-  {
-    "folke/edgy.nvim",
-    opts = {
-      animate = {
-        cps = 400,
-      },
-    },
-  },
+  -- {
+  --   "folke/edgy.nvim",
+  --   opts = {
+  --     animate = {
+  --       cps = 400,
+  --     },
+  --   },
+  -- },
   {
     "akinsho/toggleterm.nvim",
     keys = {

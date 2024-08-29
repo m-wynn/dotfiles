@@ -322,6 +322,10 @@
     userName = "Matthew Wynn";
   };
 
+  programs.lazygit = {
+    enable = true;
+  };
+
 
   xdg.configFile."zsh/.zshnew".text = ''
 

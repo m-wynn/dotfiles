@@ -4,6 +4,12 @@ local severities = {
   refactor = vim.diagnostic.severity.INFO,
   convention = vim.diagnostic.severity.HINT,
 }
+vim.filetype.add({
+  pattern = {
+    [".*/.github/workflows/.*%.yml"] = "yaml.ghaction",
+    [".*/.github/workflows/.*%.yaml"] = "yaml.ghaction",
+  },
+})
 
 require("lint").linters.checkov = {
   name = "checkov",
@@ -59,6 +65,7 @@ return {
       linters_by_ft = {
         terraform = { "checkov", "terraform_validate" },
         tf = { "checkov", "terraform_validate" },
+        ghaction = { "actionlint" },
       },
     },
   },

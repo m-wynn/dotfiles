@@ -180,7 +180,7 @@
       man = "batman";
       bw = "batwatch";
       pbat = "prettybat";
-      cat = "bat --paging=never";
+      cat = "bat -pp";
       k9s = "TERM=xterm-256color k9s";
       argocopy = "KUBECTL_EXTERNAL_DIFF=\"diff -u\" argocd";
       kopy = "KUBECTL_EXTERNAL_DIFF=\"diff -u\" kubectl";

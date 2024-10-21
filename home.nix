@@ -70,7 +70,7 @@
       ]))
 
       argocd
-      # checkov
+      trunk.checkov
       ctags
       deno
       pyright

@@ -10,14 +10,28 @@ return {
       },
     },
   },
-  -- {
-  --   "folke/edgy.nvim",
-  --   opts = {
-  --     animate = {
-  --       cps = 400,
-  --     },
-  --   },
-  -- },
+  {
+    "folke/edgy.nvim",
+    opts = {
+      animate = {
+        cps = 400,
+      },
+    },
+  },
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "main",
+    opts = {
+      auto_expand_width = false,
+      filesystem = {
+        filtered_items = {
+          always_show = {
+            ".github",
+          },
+        },
+      },
+    },
+  },
   {
     "akinsho/toggleterm.nvim",
     keys = {
@@ -176,6 +190,12 @@ return {
         "<cmd>Telescope terraform state_list<cr>",
         desc = "Goto Symbol",
       },
+    },
+  },
+  {
+    "pwntester/octo.nvim",
+    opts = {
+      default_remote = { "gh", "upstream", "origin" },
     },
   },
 }

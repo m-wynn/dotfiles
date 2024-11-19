@@ -26,8 +26,8 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 local plugins = {
   "ui.edgy",
   "ui.mini-indentscope",
-  "coding.copilot",
-  "coding.copilot-chat",
+  "ai.copilot",
+  "ai.copilot-chat",
   "coding.mini-surround",
   "coding.neogen",
   "coding.yanky",

@@ -11,10 +11,12 @@
   };
   programs.tmux = {
     enable = true;
+    package = pkgs.stable.tmux;
     baseIndex = 1;
     aggressiveResize = true;
     historyLimit = 30000;
     keyMode = "vi";
+    shell = "/bin/zsh";
     # mouse = true; # unsupported yet?
     newSession = true;
     plugins = with pkgs; [
@@ -27,6 +29,11 @@
     set-option -ga terminal-overrides ",xterm-256color:RGB"
     set-option -sg escape-time 10
     set -g status-position top
+    set -g @catppuccin_window_text " #W"
+    set -g @catppuccin_window_current_text " #W"
+
+    set -g automatic-rename on
+    set-option -g automatic-rename-format "#{?#{==:#{pane_current_command},zsh},#{=-14:#{b:pane_current_path}},#{=-8:#{b:pane_current_path}} (#{=18:#{pane_current_command}})}"
 
     bind x kill-pane
     bind r source-file "$HOME/.config/tmux/tmux.conf"
@@ -268,6 +275,7 @@
       root = "rev-parse --show-toplevel";
       save = "commit -m'savepoint'";
       st = "status -sb";
+      pr = "!f() { gh pr view --web; };f";
     };
     delta = {
       enable = true;

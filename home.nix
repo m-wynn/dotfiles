@@ -44,14 +44,13 @@
       kubectl
       kustomize
       kubelogin-oidc
-      mysql
+      mariadb
       kubernetes-helm
       ripgrep
       sad
       sqlite
       starship
       terraform
-      tmux
       yamllint
       # php82Packages.phpstan
       # php82Packages.phpcbf

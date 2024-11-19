@@ -32,22 +32,6 @@ return {
       },
     },
   },
-  {
-    "akinsho/toggleterm.nvim",
-    keys = {
-      {
-        "<leader>wt",
-        function()
-          require("toggleterm").exec("cd $(dirname " .. vim.fn.expand("%:p") .. ")/")
-        end,
-      },
-    },
-    opts = {
-      size = 120,
-      shade_terminals = false,
-      direction = "vertical",
-    },
-  },
   "notjedi/nvim-rooter.lua",
   "tommcdo/vim-fubitive",
   {

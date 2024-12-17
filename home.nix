@@ -30,7 +30,7 @@
       bat-extras.batman
       bat-extras.batwatch
       bat-extras.prettybat
-      stable.aws-sam-cli # https://github.com/NixOS/nixpkgs/issues/325990
+      aws-sam-cli # https://github.com/NixOS/nixpkgs/issues/325990
       ssm-session-manager-plugin
       dog
       eza

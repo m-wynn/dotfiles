@@ -156,25 +156,15 @@ return {
     end,
   },
   {
-    "nvim-telescope/telescope.nvim",
+    "ibhagwan/fzf-lua",
     opts = function(_, opts)
-      local open_with_trouble = require("trouble.sources.telescope").open
-      opts.defaults = vim.tbl_deep_extend("force", opts.defaults or {}, {
-        mappings = { n = { ["<c-x>"] = open_with_trouble }, i = { ["<c-x>"] = open_with_trouble } },
-      })
+      local config = require("fzf-lua.config")
+
+      -- Trouble: I'm already using ctrl-t in tmux
+      if LazyVim.has("trouble.nvim") then
+        config.defaults.actions.files["ctrl-x"] = require("trouble.sources.fzf").actions.open
+      end
     end,
-    keys = {
-      {
-        "<leader>td",
-        "<cmd>Telescope terraform_doc full_name=hashicorp/aws<cr>",
-        desc = "Goto Symbol",
-      },
-      {
-        "<leader>ts",
-        "<cmd>Telescope terraform state_list<cr>",
-        desc = "Goto Symbol",
-      },
-    },
   },
   {
     "pwntester/octo.nvim",

@@ -37,7 +37,6 @@ local plugins = {
   "editor.inc-rename",
   "editor.mini-diff",
   "editor.outline",
-  "editor.telescope",
   "formatting.black",
   "lang.docker",
   "lang.git",

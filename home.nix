@@ -41,6 +41,7 @@
       hadolint
       htop
       json2hcl
+      jq
       kubectl
       kustomize
       kubelogin-oidc
@@ -52,6 +53,7 @@
       starship
       terraform
       yamllint
+      yq-go
       # php82Packages.phpstan
       # php82Packages.phpcbf
       # php82Packages.php-cs-fixer
@@ -69,7 +71,7 @@
       ]))
 
       argocd
-      trunk.checkov
+      stable.checkov
       ctags
       deno
       pyright

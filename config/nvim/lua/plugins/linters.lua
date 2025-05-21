@@ -66,6 +66,7 @@ return {
         terraform = { "checkov", "terraform_validate" },
         tf = { "checkov", "terraform_validate" },
         ghaction = { "actionlint" },
+        yaml = { "yamllint" },
       },
     },
   },

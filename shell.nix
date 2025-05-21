@@ -159,18 +159,19 @@
         np = "networkpolicies";
       };
     };
-    views = {
-      views = {
-        "v1/pods" = {
-          columns = [
-            "AGE"
-            "NAMESPACE"
-            "NAME"
-            "IP"
-            "NODE"
-            "STATUS"
-            "READY"
-          ];
+    # views = {
+    #   views = {
+    #     "containers" = {
+    #       columns = [
+    #         "NAME|R"
+    #       ];
+    #     };
+    #   };
+    # };
+    settings = {
+      k9s = {
+        ui = {
+          useFullGVRTitle = true;
         };
       };
     };

@@ -32,7 +32,7 @@ return {
       },
     },
   },
-  "notjedi/nvim-rooter.lua",
+  -- "notjedi/nvim-rooter.lua",
   "tommcdo/vim-fubitive",
   {
     "tpope/vim-fugitive",

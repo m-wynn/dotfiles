@@ -41,12 +41,9 @@ return {
       servers = {
         astro = {},
         gopls = {},
-        -- terraformls = {},
-        -- terraform_lsp = {},
         tflint = {},
         intelephense = {},
         nil_ls = { mason = false },
-        -- pyright = {},
         prismals = {},
         docker_compose_language_service = {
           filetypes = { "dockerfile " },
@@ -54,25 +51,10 @@ return {
         helm_ls = {
           filetypes = { "helm" },
         },
+        yamlls = {
+          filetypes = { "yaml", "yaml.ghaction" },
+        },
       },
-      -- setup = {
-      --   helm_ls = function(server, server_opts)
-      --     local configs = require("lspconfig.configs")
-      --     local util = require("lspconfig.util")
-      --     if not configs.helm_ls then
-      --       configs.helm_ls = {
-      --         default_config = {
-      --           cmd = { "helm_ls", "serve" },
-      --           filetypes = { "helm" },
-      --           root_dir = function(fname)
-      --             return (util.root_pattern("Chart.lock") or util.root_pattern("Chart.yaml"))(fname)
-      --           end,
-      --         },
-      --       }
-      --       require("lspconfig")[server].setup(server_opts)
-      --     end
-      --   end,
-      -- },
     },
   },
 }

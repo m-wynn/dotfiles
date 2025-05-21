@@ -39,7 +39,7 @@
           ./shell.nix
           {
             imports = [
-              catppuccin.homeManagerModules.catppuccin
+              catppuccin.homeModules.catppuccin
             ];
             catppuccin = {
               enable = true;

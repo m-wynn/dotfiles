@@ -183,6 +183,7 @@
       sudo = "sudo ";
       ls = "eza";
       k = "kubectl";
+      a = "argocd";
       g = "git";
       bgrep = "batgrep";
       man = "batman";

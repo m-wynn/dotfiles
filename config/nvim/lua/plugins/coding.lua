@@ -1,5 +1,5 @@
 return {
-  { "echasnovski/mini.pairs", enabled = false },
+  { "nvim-mini/mini.pairs", enabled = false },
   {
     "Wansmer/treesj",
     keys = {
@@ -59,5 +59,8 @@ return {
         ["."] = false,
       },
     },
+  },
+  {
+    "nmac427/guess-indent.nvim",
   },
 }

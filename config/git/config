@@ -4,7 +4,7 @@
 	br = branch
 	cm = commit
 	cmm = commit --no-edit
-	co = checkout
+	co = switch
 	fe = fetch --all -p --tags
 	fixup = commit --amend -C HEAD
 	fu = fetch upstream

@@ -1,6 +1,6 @@
 return {
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts = function(_, opts)
       table.insert(opts.ensure_installed, "rustywind")
       table.insert(opts.ensure_installed, "actionlint")
@@ -22,22 +22,6 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
-    dependencies = {
-      "Afourcat/treesitter-terraform-doc.nvim",
-      init = function()
-        require("lazyvim.util").lsp.on_attach(function(_, buffer)
-          require("treesitter-terraform-doc").setup({
-            command_name = "OpenDoc",
-            url_opener_command = "!open",
-          })
-          vim.keymap.set("n", "<leader>do", ":OpenDoc<cr>", { desc = "OpenDoc", buffer = buffer })
-        end)
-        local keys = require("lazyvim.plugins.lsp.keymaps").get()
-        keys[#keys + 1] = { "<leader>cc", false }
-        keys[#keys + 1] =
-          { "<leader>ccl", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "v" }, has = "codeLens" }
-      end,
-    },
     opts = {
       servers = {
         astro = {},
